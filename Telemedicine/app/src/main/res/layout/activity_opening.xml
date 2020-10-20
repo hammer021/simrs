@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Opening"
-    android:background="@color/background">
+    android:background="@drawable/bcgroundopen">
 
     <ImageView
         android:id="@+id/logo"
@@ -26,16 +26,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="425dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bcground1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/btnregis"
         android:layout_width="wrap_content"
