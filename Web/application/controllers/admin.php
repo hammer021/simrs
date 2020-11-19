@@ -19,9 +19,24 @@ class admin extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public function dashboard()
 	{
 		$this->load->view('index1');
+		$this->load->helper('url');
+	}
+	public function index()
+	{
+		$this->load->view('login');
+		$this->load->helper('url');
+	}
+	public function pemeriksaan()
+	{
+		$this->load->view('vpemeriksaan');
+		$this->load->helper('url');
+	}
+	public function datadokter()
+	{
+		$this->load->view('vdatadokter');
 		$this->load->helper('url');
 	}
 }

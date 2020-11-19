@@ -8,17 +8,25 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class="active"><a href="index.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+          <li class="
+          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/dashboard'){ echo 'active';}else { echo 'nav-item'; } ?>
+          "><a href="<?php echo base_url(); ?>admin/dashboard"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>
-          <li class=" nav-item"><a href="charts.html"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Pemeriksaan</span></a>
+          <li class="
+          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/pemeriksaan'){ echo 'active';}else { echo 'nav-item';}?>
+          "><a href="<?php echo base_url(); ?>admin/pemeriksaan"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Pemeriksaan</span></a>
           </li>
-          <li class="nav-item has-sub"><a href="#"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Data</span></a>
+          <li class="
+          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datadokter' || $_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datapasien' || $_SERVER['REQUEST_URI'] == '/simrs/Web/admin/dataklinik'){ echo 'active has-sub';}else { echo 'nav-item has-sub'; } ?>
+          "><a href="#"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Data</span></a>
             <ul class="menu-content" style="">
-              <li class=""><a class="menu-item" href="email-application.html">Data Dokter</a>
+              <li class="
+              <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datadokter'){ echo 'active';}else { }?>
+          "><a class="menu-item" href="<?php echo base_url(); ?>admin/datadokter">Data Dokter</a>
               </li>
               <li class=""><a class="menu-item" href="chat-application.html">Data Pasien</a>
               </li>
-              <li class=""><a class="menu-item" href="full-calender.html">Datar</a>
+              <li class=""><a class="menu-item" href="full-calender.html">Data Klinik</a>
               </li>
             </ul>
           </li>
