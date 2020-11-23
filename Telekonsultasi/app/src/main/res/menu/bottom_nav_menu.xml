@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/nav_profil"
+            android:icon="@drawable/pplicon"
+            android:title="Profil" />
+
+        <item android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Beranda" />
+
+        <item android:id="@+id/nav_periksa"
+            android:icon="@drawable/periksa"
+            android:title="Periksa" />
+
+        <item android:id="@+id/nav_pesan"
+            android:icon="@drawable/mail"
+            android:title="Pesan" />
+</menu>
