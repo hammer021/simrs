@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/fontabu"
                 android:fontFamily="@font/arial_narrow"
-                android:hint="Full Name"
+                android:hint="Nama Lengkap"
                 android:inputType="textPersonName"
                 android:textColor="@color/fontbiru"
                 android:textColorHint="@color/fontabu"
