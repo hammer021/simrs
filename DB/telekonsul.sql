@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2020 at 08:01 AM
+-- Generation Time: Nov 26, 2020 at 08:50 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -87,7 +87,7 @@ CREATE TABLE `tb_keluhan` (
 
 CREATE TABLE `tb_konsul` (
   `kd_konsul` varchar(255) NOT NULL,
-  `kd_keluhan` varchar(255) NOT NULL,
+  `no_rm` varchar(255) NOT NULL,
   `no_praktek` varchar(255) NOT NULL,
   `kd_resep` varchar(255) NOT NULL,
   `no_regist` varchar(255) NOT NULL
@@ -106,7 +106,7 @@ CREATE TABLE `tb_pasien` (
   `tgl_lahir` date NOT NULL,
   `umur` varchar(10) NOT NULL,
   `jenis_kelamin` enum('Laki-Laki','Perempuan','','') NOT NULL,
-  `warga_negaara` varchar(255) NOT NULL,
+  `warga_negara` varchar(255) NOT NULL,
   `status_perkawinan` varchar(255) NOT NULL,
   `pendidikan` varchar(255) NOT NULL,
   `agama` varchar(255) NOT NULL,
@@ -120,7 +120,8 @@ CREATE TABLE `tb_pasien` (
   `no_tlp` varchar(13) NOT NULL,
   `nama_ayah` varchar(255) NOT NULL,
   `nama_ibu` varchar(255) NOT NULL,
-  `foto` varchar(255) NOT NULL
+  `foto` varchar(255) NOT NULL,
+  `keterbatasan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -150,8 +151,19 @@ CREATE TABLE `tb_registrasi` (
   `password` varchar(255) NOT NULL,
   `kd_role` int(11) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
-  `date_created` int(11) NOT NULL
+  `date_created` int(11) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `no_hp` varchar(14) NOT NULL,
+  `tgl_lahir` date NOT NULL,
+  `tempat_lahir` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_registrasi`
+--
+
+INSERT INTO `tb_registrasi` (`kd_regist`, `name`, `email`, `username`, `image`, `password`, `kd_role`, `is_active`, `date_created`, `alamat`, `no_hp`, `tgl_lahir`, `tempat_lahir`) VALUES
+(1, 'hammer', 'ham@gmail.com', 'ham', 'default.jpg', 'hammer21', 1, 1, 0, '', '', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -174,6 +186,78 @@ CREATE TABLE `tb_role` (
   `kd_role` int(11) NOT NULL,
   `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_access_menu`
+--
+
+CREATE TABLE `user_access_menu` (
+  `id` int(11) NOT NULL,
+  `kd_role` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_access_menu`
+--
+
+INSERT INTO `user_access_menu` (`id`, `kd_role`, `menu_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 2, 2),
+(6, 1, 3),
+(7, 1, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_menu`
+--
+
+CREATE TABLE `user_menu` (
+  `id` int(11) NOT NULL,
+  `menu` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_menu`
+--
+
+INSERT INTO `user_menu` (`id`, `menu`) VALUES
+(1, 'Admin'),
+(2, 'User'),
+(3, 'Menu');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_sub_menu`
+--
+
+CREATE TABLE `user_sub_menu` (
+  `id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL,
+  `title` varchar(128) NOT NULL,
+  `url` varchar(128) NOT NULL,
+  `icon` varchar(128) NOT NULL,
+  `is_active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_sub_menu`
+--
+
+INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
+(1, 1, 'Dashboard', 'admin', 'fas fa-fw fa-tachometer-alt', 1),
+(2, 2, 'My Profile', 'user', 'fas fa-fw fa-user', 1),
+(3, 2, 'Edit Profile', 'user/edit', 'fas fa-fw fa-user-edit', 1),
+(4, 3, 'Menu Management', 'menu', 'fas fa-fw fa-folder', 1),
+(5, 3, 'Submenu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
+(7, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
+(8, 2, 'Change Password', 'user/changepass', 'fas fa-fw fa-key', 1),
+(9, 2, 'Barang', 'barang', 'fas fa-fw fa-folder', 1);
 
 --
 -- Indexes for dumped tables
@@ -240,6 +324,24 @@ ALTER TABLE `tb_role`
   ADD PRIMARY KEY (`kd_role`);
 
 --
+-- Indexes for table `user_access_menu`
+--
+ALTER TABLE `user_access_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_menu`
+--
+ALTER TABLE `user_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_sub_menu`
+--
+ALTER TABLE `user_sub_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -266,6 +368,24 @@ ALTER TABLE `tb_registrasi`
 --
 ALTER TABLE `tb_role`
   MODIFY `kd_role` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_access_menu`
+--
+ALTER TABLE `user_access_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `user_menu`
+--
+ALTER TABLE `user_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `user_sub_menu`
+--
+ALTER TABLE `user_sub_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
