@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2020 at 08:47 AM
+-- Generation Time: Nov 26, 2020 at 08:50 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -106,7 +106,7 @@ CREATE TABLE `tb_pasien` (
   `tgl_lahir` date NOT NULL,
   `umur` varchar(10) NOT NULL,
   `jenis_kelamin` enum('Laki-Laki','Perempuan','','') NOT NULL,
-  `warga_negaara` varchar(255) NOT NULL,
+  `warga_negara` varchar(255) NOT NULL,
   `status_perkawinan` varchar(255) NOT NULL,
   `pendidikan` varchar(255) NOT NULL,
   `agama` varchar(255) NOT NULL,
@@ -120,7 +120,8 @@ CREATE TABLE `tb_pasien` (
   `no_tlp` varchar(13) NOT NULL,
   `nama_ayah` varchar(255) NOT NULL,
   `nama_ibu` varchar(255) NOT NULL,
-  `foto` varchar(255) NOT NULL
+  `foto` varchar(255) NOT NULL,
+  `keterbatasan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
