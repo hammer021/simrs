@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2020 at 05:20 AM
+-- Generation Time: Nov 26, 2020 at 07:14 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -21,6 +21,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `telekonsul`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat_message`
+--
+
+CREATE TABLE `chat_message` (
+  `chat_message_id` int(11) NOT NULL,
+  `to_user_id` int(11) NOT NULL,
+  `from_user_id` int(11) NOT NULL,
+  `chat_message` varchar(255) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login_details`
+--
+
+CREATE TABLE `login_details` (
+  `login_details_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `last_activity` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_type` enum('no','yes','','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -72,7 +100,7 @@ CREATE TABLE `tb_konsul` (
 --
 
 CREATE TABLE `tb_pasien` (
-  `no_regist` varchar(255) NOT NULL,
+  `kd_pasien` varchar(255) NOT NULL,
   `nama_pasien` varchar(255) NOT NULL,
   `tempat_lahir` varchar(255) NOT NULL,
   `tgl_lahir` date NOT NULL,
@@ -110,6 +138,24 @@ CREATE TABLE `tb_poli` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_registrasi`
+--
+
+CREATE TABLE `tb_registrasi` (
+  `kd_regist` int(11) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `image` varchar(128) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `kd_role` int(11) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_created` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_resep`
 --
 
@@ -118,9 +164,32 @@ CREATE TABLE `tb_resep` (
   `resep` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_role`
+--
+
+CREATE TABLE `tb_role` (
+  `kd_role` int(11) NOT NULL,
+  `role` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `chat_message`
+--
+ALTER TABLE `chat_message`
+  ADD PRIMARY KEY (`chat_message_id`);
+
+--
+-- Indexes for table `login_details`
+--
+ALTER TABLE `login_details`
+  ADD PRIMARY KEY (`login_details_id`);
 
 --
 -- Indexes for table `tb_dokter`
@@ -144,7 +213,7 @@ ALTER TABLE `tb_konsul`
 -- Indexes for table `tb_pasien`
 --
 ALTER TABLE `tb_pasien`
-  ADD PRIMARY KEY (`no_regist`);
+  ADD PRIMARY KEY (`kd_pasien`);
 
 --
 -- Indexes for table `tb_poli`
@@ -153,10 +222,50 @@ ALTER TABLE `tb_poli`
   ADD PRIMARY KEY (`kd_poli`);
 
 --
+-- Indexes for table `tb_registrasi`
+--
+ALTER TABLE `tb_registrasi`
+  ADD PRIMARY KEY (`kd_regist`);
+
+--
 -- Indexes for table `tb_resep`
 --
 ALTER TABLE `tb_resep`
   ADD PRIMARY KEY (`kd_resep`);
+
+--
+-- Indexes for table `tb_role`
+--
+ALTER TABLE `tb_role`
+  ADD PRIMARY KEY (`kd_role`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `chat_message`
+--
+ALTER TABLE `chat_message`
+  MODIFY `chat_message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `login_details`
+--
+ALTER TABLE `login_details`
+  MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_registrasi`
+--
+ALTER TABLE `tb_registrasi`
+  MODIFY `kd_regist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `tb_role`
+--
+ALTER TABLE `tb_role`
+  MODIFY `kd_role` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
