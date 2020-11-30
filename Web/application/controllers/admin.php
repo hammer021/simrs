@@ -1,8 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
-	
+class Admin extends CI_Controller
+{
+
 
 	/**
 	 * Index Page for this controller.
@@ -21,7 +22,9 @@ class Admin extends CI_Controller {
 	 */
 	public function dashboard()
 	{
-		$this->load->view('index1');
+		$data['totpasien'] = $this->db->query("SELECT COUNT(tb_pasien.kd_pasien) AS jmlpasien FROM tb_pasien")->result_array();
+		$data['totdokter'] = $this->db->query("SELECT COUNT(tb_dokter.no_praktek) AS jmldokter FROM tb_dokter")->result_array();
+		$this->load->view('index1', $data);
 		$this->load->helper('url');
 	}
 	public function index()
