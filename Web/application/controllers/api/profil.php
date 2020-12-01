@@ -30,12 +30,8 @@ class Profil extends REST_Controller {
     public function index_get()
     {
         $id = $this->get('kd_regist');
-
-        $arr = array(
-            'kd_regist' => $id,
-        );
-
-        $user = $this->api->get('tb_registrasi',$arr);
+        $user = $this->api->index($id);
+ 
         if ($user) {
             $this->response([
                 'status' => TRUE,
@@ -56,8 +52,8 @@ class Profil extends REST_Controller {
             $id = $this->put('kd_regist');
             $password = md5($this->put('password'));
 
-            $reseller = $this->db->get_where('tb_registrasi', ['kd_regist' => $id])->row_array();
-            if($reseller){
+            $user = $this->db->get_where('tb_registrasi', ['kd_regist' => $id])->row_array();
+            if($user){
                     
                 if($this->put('image')){
                     $foto = $this->put('image');

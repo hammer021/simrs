@@ -28,5 +28,9 @@ class Api_model extends CI_Model
         $get = $this->db->get_where($tabel,$id);
         return $get;
     }
+
+    public function index($id){  
+        return $this->db->get_where('tb_registrasi' , ['kd_regist' => $id])->result_array();
+    }
     
 }
