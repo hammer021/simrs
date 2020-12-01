@@ -32,10 +32,10 @@ class Profil extends REST_Controller {
         $id = $this->get('kd_regist');
 
         $arr = array(
-            'kd_regist' => $id;
+            'kd_regist' => $id,
         );
 
-        $user = $this->api->get($id,$arr);
+        $user = $this->api->get('tb_registrasi',$arr);
         if ($user) {
             $this->response([
                 'status' => TRUE,
@@ -50,26 +50,31 @@ class Profil extends REST_Controller {
     }
 
     public function index_put(){
-        if($this->put('image')) {
-            $path2 = '../uploads/reseller/pas_foto/'.$config2;
-            $password = md5($this->put('password'))
-            
-            $reseller = $this->db->get_where('reseller', ['id_reseller' => $id])->row_array();
-            if($reseller){
+        if($this->put('kd_regist')) {
+            $config2 = uniqid().'.jpeg';
+            $path2 = '../uploads/user/'.$config2;
+            $id = $this->put('kd_regist');
+            $password = md5($this->put('password'));
 
+            $reseller = $this->db->get_where('tb_registrasi', ['kd_regist' => $id])->row_array();
+            if($reseller){
                     
+                if($this->put('image')){
+                    $foto = $this->put('image');
+
                 $data = array(
                     'name' => $this->put('name'),
-                    'email' => $this->put('alamat'),
-                    'image' => $this->put('no_tlp'),
+                    'email' => $this->put('email'),
+                    'image' => $config2,
                     'password' => $password,
-                    'kd_role' => $this->put('kd_role'),
-                    'is_active' => '1', 
-                    'pas_foto' => $config2
+                    'alamat'        => $this->put('alamat'),
+                    'no_hp'         => $this->put('no_hp'),
+                    'tgl_lahir'     => $this->put('tgl_lahir'),
+                    'tempat_lahir'  => $this->put('tempat_lahir')
+
                 );
-                if ($this->db->update('tb_akun', $data, ['id_reseller' => $id])) {
-                    file_put_contents($path, base64_decode($scan_ktp));
-                    file_put_contents($path2, base64_decode($pas_foto));
+                if ($this->db->update('tb_registrasi', $data, ['kd_regist' => $id])) {
+                    file_put_contents($path2, base64_decode($foto));
                     // jika berhasil
                     $this->set_response([
                         'status' => true,
@@ -84,14 +89,16 @@ class Profil extends REST_Controller {
                 }
             }else{
                 $data = array(
-                    'nama_reseller' => $this->put('nama_reseller'),
-                    'alamat' => $this->put('alamat'),
-                    'no_tlp' => $this->put('no_tlp'),
-                    'no_ktp' => $this->put('no_ktp'),
-                    'email' => $this->put('email')              
+                    'name' => $this->put('name'),
+                    'email' => $this->put('email'),
+                    'password' => $password,
+                    'alamat'        => $this->put('alamat'),
+                    'no_hp'         => $this->put('no_hp'),
+                    'tgl_lahir'     => $this->put('tgl_lahir'),
+                    'tempat_lahir'  => $this->put('tempat_lahir')         
                 );
                 
-                if ($this->db->update('reseller', $data, ['id_reseller' => $id])) {                        
+                if ($this->db->update('tb_registrasi', $data, ['kd_regist' => $id])) {                        
                     // jika berhasil
                     $this->set_response([
                         'status' => true,
@@ -104,6 +111,19 @@ class Profil extends REST_Controller {
                         'message' => 'Gagal Mengupdate Profil'
                     ], 401);
                 }
-            } 
-    }
+            }
+        }else{
+            $this->set_response([
+                'status' => false,
+                'message' => 'Gagal Mengupdate Profil'
+            ], 401);
+        }
+
+}else{
+    $this->set_response([
+        'status' => false,
+        'message' => 'User tidak di temukan'
+    ], 401);
+}
+}
 }

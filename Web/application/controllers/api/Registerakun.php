@@ -31,7 +31,7 @@ class Registerakun extends REST_Controller {
                 'kd_regist '       => '',
                 'name'          => $this->post('name'),
                 'email'         => $this->post('email'),
-                //'image'         => $this->post('image'),
+                'image'         => 'default.jpg',
                 'password'      => $password,
                 'kd_role'       => '3',
                 'is_active'     => '0',
@@ -276,6 +276,7 @@ class Registerakun extends REST_Controller {
                     'status' => true,
                     'pesan' => 'Akun anda sudah di VERIFIKASI',
                 ];
+                redirect('admin/cek');
             } else {
                 $response = [
                     'status' => false,

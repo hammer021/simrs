@@ -74,7 +74,7 @@ class Api_login extends REST_Controller {
                 // LoginError
                 $message = [
                     'status' => FALSE,
-                    'message' => "Nomor Rekam Medis tidak Valid"
+                    'message' => "Email / Password Salah"
                 ];
                 $this->response($message, REST_Controller::HTTP_NOT_FOUND);
             }
