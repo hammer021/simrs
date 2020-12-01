@@ -107,7 +107,7 @@ class Auth extends CI_Controller
 
     //         $this->db->insert('user', $data);
 
-           
+
 
 
     //         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulations! your account has been created. Please activate your account.</div>');
@@ -122,9 +122,9 @@ class Auth extends CI_Controller
         redirect('auth');
     }
 
-   
 
-    
+
+
 
     // public function resetpass()
     // {
