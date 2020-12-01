@@ -14,7 +14,7 @@ class Api_login extends REST_Controller {
     }
 
     //Menampilkan data kontak
-    function index_post() {
+    function index_get() {
         # Form Validation
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
@@ -30,21 +30,6 @@ class Api_login extends REST_Controller {
             // Load Login Function
             $output = $this->Api_model->login($this->input->post('email'), $this->input->post('password'));
             if(!empty($output) AND $output != FALSE) {
-
-                $return_data = [
-                    'kd_regist' => $output->kd_regist,
-                    'name' => $output->name,
-                    'email' => $output->email,
-                    'image' => $output->image,
-                    'password' => $output->password,
-                    'kd_role' => $output->kd_role,
-                    'is_active' => $output->is_active,
-                    'date_created' => $output->date_created,
-                    'alamat' => $output->alamat,
-                    'no_hp' => $output->no_hp,
-                    'tgl_lahir' => $output->tgl_lahir,
-                    'tempat_lahir' => $output->tempat_lahir,
-                ];
 
                 // Login Success
                 $message = [
