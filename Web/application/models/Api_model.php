@@ -24,7 +24,7 @@ class Api_model extends CI_Model
         return $cek;
         
     }
-    public function get($id,$tabel){
+    public function get($tabel,$id){
         $get = $this->db->get_where($tabel,$id);
         return $get;
     }
