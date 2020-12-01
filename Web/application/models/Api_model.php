@@ -3,10 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Api_model extends CI_Model
 {
+    protected $registrasi = 'tb_registrasi';
     public function login($email,$password){
-        $q = $this->db->where('tb_registrasi', $email)->num_rows();
+        $this->db->where('email', $email);
+        $q = $this->db->get($this->registrasi);
 
-        if($q > 0) {
+        if($q->num_rows()) {
             $akun_pass = $q->row('password');
             if(md5($password) === $akun_pass) {
                 return $q->row();
