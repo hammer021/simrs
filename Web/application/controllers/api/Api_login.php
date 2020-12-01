@@ -30,6 +30,21 @@ class Api_login extends REST_Controller {
             // Load Login Function
             $output = $this->Api_model->login($this->input->post('email'), $this->input->post('password'));
             if(!empty($output) AND $output != FALSE) {
+                $this->load->library('Authorization_Token');
+
+                $token_data['kd_regist'] = $output->kd_regist;
+                $token_data['name'] = $output->name;
+                $token_data['email'] = $output->email;
+                $token_data['image'] = $output->image;
+                $token_data['password'] = $output->password;
+                $token_data['kd_role'] = $output->kd_role;
+                $token_data['is_active'] = $output->is_active;
+                $token_data['date_created'] = $output->date_created;
+                $token_data['no_hp'] = $output->no_hp;
+                $token_data['tgl_lahir'] = $output->tgl_lahir;
+                $token_data['tempat_lahir'] = $output->tempat_lahir;
+
+                $akun_token = $this->authorization_token->generateToken($token_data);
 
                 $return_data = [
                     'kd_regist' => $output->kd_regist,
@@ -44,6 +59,8 @@ class Api_login extends REST_Controller {
                     'no_hp' => $output->no_hp,
                     'tgl_lahir' => $output->tgl_lahir,
                     'tempat_lahir' => $output->tempat_lahir,
+                    'token' => $akun_token,
+                    'pesan' => "Selamat Datang",
                 ];
 
                 // Login Success
