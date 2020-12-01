@@ -39,4 +39,5 @@ class Admin extends CI_Controller {
 		$this->load->view('vdatadokter');
 		$this->load->helper('url');
 	}
+	
 }

@@ -14,29 +14,81 @@ class Registerakun extends REST_Controller {
 
     public function index_post(){
         $password = md5($this->input->post('password'));
+        $email = $this->post('email');
         date_default_timezone_set("Asia/Jakarta");
         $time =  Date('Y-m-d h:i:s');
+        $cek = $this->db->get_where('tb_registrasi', ['email' => $email])->row_array();
 
-        $data = array(
-                    'id_user'       => '',
-                    'name'          => $this->post('no_rm'),
-                    'email'         => $this->post('first_name'),
-                    'username'      => $this->post('last_name'),
-                    'image'         => $this->post('email'),
-                    'password'      => $password,
-                    'kd_role'       => '1',
-                    'is_active'     => '0',
-                    'date_created'  => $time,
-                    'alamat'        => $this->post('alamat'),
-                    'no_hp'         => $this->post('no_hp'),
-                    'tgl_lahir'     => $this->post('tgl_lahir'),
-                    'tempat_lahir'  => $this->post('tempat_lahir'));
-        $insert = $this->db->insert('tb_akun', $data);
-        if ($insert) {
-            $this->response($data, 200);
-        } else {
-            $this->response(array('status' => 'fail', 502));
+        
+
+        if ($cek > 0){
+            $response = [
+                'status' => false,
+                'message' => 'Email Telah Digunakan',
+            ];
+        }else{
+            $data = array(
+                'kd_regist'       => '',
+                'name'          => $this->post('name'),
+                'email'         => $this->post('email'),
+                'username'      => $this->post('username'),
+                'image'         => $this->post('image'),
+                'password'      => $password,
+                'kd_role'       => '1',
+                'is_active'     => '0',
+                'date_created'  => $time,
+                'alamat'        => $this->post('alamat'),
+                'no_hp'         => $this->post('no_hp'),
+                'tgl_lahir'     => $this->post('tgl_lahir'),
+                'tempat_lahir'  => $this->post('tempat_lahir'));
+                
+                $insert = $this->db->insert('tb_registrasi', $data);
+
+                $digits = 2;
+                $num = rand(pow(10, $digits-1), pow(10, $digits)-1);
+                $tokennya = uniqid(true);
+                $user_token = [
+                    'email' => $email,
+                    'token' => $tokennya,
+                    'v_num' => $num,
+                    'date_created' => $time
+                ];
+
+                $cek2 = $this->db->insert('user_token', $user_token);
+                $this->_sendEmail($tokennya, $email, 'verify');
+
+                $response = [
+                    'status' => true,
+                    'pesan' => 'Pendaftaran Akun Berhasil',
+                ];
         }
+        $this->response($response, 200);
     }
+    private function _sendEmail($token ,$email ,$type){
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'birrilwalisyah@gmail.com',
+            'smtp_pass' => 'b4j1ng4n',
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+
+        $this->load->library('email', $config);
+        $this->email->initialize($config);
+
+        $this->email->from('birrilwalisyah@gmail.com', 'Admin Simrs');
+        $this->email->to($email);
+        $this->email->subject('Verifikasi Akun');
+		$this->email->message('asdsa');
+		
+		if ($this->email->send()){
+			return true;
+		}else{
+				echo $this->email->print_debugger();
+			}
+	}
 
 }
