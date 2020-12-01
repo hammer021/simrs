@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.telekonsultasi.configfile.authdata;
+
 public class Opening extends AppCompatActivity {
 
     Button regis;
     TextView login;
-
+    authdata authdataa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,5 +37,12 @@ public class Opening extends AppCompatActivity {
                 startActivity(b);
             }
         });
+
+        authdataa = new authdata(this);
+        if (authdataa.isLogin() == true){
+            Intent main = new Intent(Opening.this, NavFragment.class);
+            startActivity(main);
+            finish();
+        }
     }
 }

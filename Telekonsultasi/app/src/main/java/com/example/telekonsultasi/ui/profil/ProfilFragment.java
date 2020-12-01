@@ -34,8 +34,12 @@ public class ProfilFragment extends Fragment {
         authdataa = new authdata(getContext());
 
         txtnama = v.findViewById(R.id.textnamanya);
+        txtnama.setText(authdataa.getNamaUser());
         txtemail = v.findViewById(R.id.textemailnya);
+        txtemail.setText(authdataa.getEmail_user());
         txtno = v.findViewById(R.id.textnomernya);
+        txtno.setText(authdataa.getNo_user());
+
 
         mFotoProfil = ServerApi.URL_PASFOTO + authdataa.getFoto_user();
 

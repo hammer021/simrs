@@ -98,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                             datalogin.getString("is_active"),
                             datalogin.getString("kd_regist"),
                             datalogin.getString("name"),
+                            datalogin.getString("email"),
                             datalogin.getString("alamat"),
                             datalogin.getString("no_hp"),
                             datalogin.getString("token"),

@@ -18,6 +18,7 @@ public class authdata {
 
     private static final String kode_user = "kd_regist";
     private static final String nama_user = "name";
+    private static final String email_user = "email";
     private static final String alamat_user = "alamat";
     private static final String no_user = "no_hp";
     private static final String akses_data = "akses_data";
@@ -34,13 +35,14 @@ public class authdata {
         editor = sharedPreferences.edit();
     }
 
-    public void setdatauser(String xkode_user, String xnama_user, String xalamat_user, String xno_user, String xstatus,  String tokennya, String xfoto){
+    public void setdatauser(String xkode_user, String xnama_user, String xemail_user, String xalamat_user, String xno_user, String xstatus,  String tokennya, String xfoto){
 //        sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 //        editor = sharedPreferences.edit();
 
         editor.putBoolean(LOGIN_STATUS, true);
         editor.putString(kode_user, xkode_user);
         editor.putString(nama_user, xnama_user);
+        editor.putString(email_user, xemail_user);
         editor.putString(alamat_user, xalamat_user);
         editor.putString(no_user, xno_user);
         editor.putString(status_user, xstatus);
@@ -78,6 +80,9 @@ public class authdata {
     }
     public String getNamaUser() {
         return sharedPreferences.getString(nama_user, null);
+    }
+    public String getEmail_user() {
+        return sharedPreferences.getString(email_user, null);
     }
     public String getAlamat_user() {
         return sharedPreferences.getString(alamat_user, null);
