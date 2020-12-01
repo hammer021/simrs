@@ -7,17 +7,22 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.telekonsultasi.configfile.authdata;
 import com.example.telekonsultasi.ui.home.HomeFragment;
 import com.example.telekonsultasi.ui.periksa.PeriksaFragment;
 import com.example.telekonsultasi.ui.profil.ProfilFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NavFragment extends AppCompatActivity {
-
+    String mKdRegist;
+    authdata authdataa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_fragment);
+
+        authdataa = new authdata(this);
+        mKdRegist = authdataa.getKodeUser();
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
