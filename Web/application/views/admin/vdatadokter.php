@@ -1,7 +1,4 @@
-<?php 
-include 'header.php';
-include 'sidemenu.php';
-?>
+
     <div class="app-content content">
       <div class="content-wrapper">
         <div class="content-wrapper-before"></div>
@@ -15,7 +12,7 @@ include 'sidemenu.php';
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="index.html">Home</a>
                   </li>
-                  <li class="breadcrumb-item active">Pemeriksaan
+                  <li class="breadcrumb-item active">Data Dokter
                   </li>
                 </ol>
               </div>
@@ -93,8 +90,3 @@ include 'sidemenu.php';
       </div>
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-
-
-  <?php include_once 'footer.php'; ?>
-  </body>
-</html>

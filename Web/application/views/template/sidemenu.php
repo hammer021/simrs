@@ -1,7 +1,7 @@
 <div class="main-menu menu-fixed menu-dark menu-accordion    menu-shadow " data-scroll-to-active="true" id="menu" data-img="<?php echo base_url(); ?>theme-assets/images/backgrounds/04.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
-          <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html"><img class="brand-logo" alt="Chameleon admin logo" src="<?php echo base_url(); ?>theme-assets/images/logo/logo-rsj.png"/>
+          <li class="nav-item mr-auto"><a class="navbar-brand" href="<?php echo base_url(); ?>admin/dashboard">"><img class="brand-logo" alt=" admin logo" src="<?php echo base_url(); ?>theme-assets/images/logo/logo-rsj.png"/>
               <h3 class="brand-text">RSJ Lawang</h3></a></li>
           <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
         </ul>

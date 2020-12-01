@@ -24,3 +24,7 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="theme-assets/js/scripts/pages/dashboard-lite.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
+    
+</body>
+
+</html>

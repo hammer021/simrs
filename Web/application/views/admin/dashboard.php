@@ -3,8 +3,7 @@
 
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-<?php include_once 'header.php'; ?>
-<?php include_once 'sidemenu.php'; ?>
+
 
 <div class="app-content content" id="main">
     <div class="content-wrapper">
@@ -236,8 +235,3 @@
 </div>
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-
-<?php include_once 'footer.php'; ?>
-</body>
-
-</html>
