@@ -33,7 +33,7 @@ class Registerakun extends REST_Controller {
                 'email'         => $this->post('email'),
                 //'image'         => $this->post('image'),
                 'password'      => $password,
-                'kd_role'       => '1',
+                'kd_role'       => '3',
                 'is_active'     => '0',
                 'date_created'  => $time,
                 'alamat'        => $this->post('alamat'),
@@ -74,7 +74,7 @@ class Registerakun extends REST_Controller {
             'charset' => 'utf-8',
             'newline' => "\r\n"
         ];
-        $ayam = base_url('../views/auth/registrasi');
+        
 
         $this->load->library('email', $config);
         $this->email->initialize($config);
@@ -82,7 +82,7 @@ class Registerakun extends REST_Controller {
         $this->email->from('birrilwalisyah@gmail.com', 'Admin Simrs');
         $this->email->to($email);
         $this->email->subject('Verifikasi Akun');
-        $this->email->message($ayam);
+        $this->email->message();
         
        
 		
