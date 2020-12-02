@@ -9,7 +9,7 @@ class User_model extends CI_Model
         $query = $this->db->get_where('tb_registrasi', ['email' => $this->session->userdata('email')]);
         return $query->row_array();
     }
-    public function getUserDataAll()s
+    public function getUserDataAll()
     {
         $query = $this->db->get('tb_registrasi');
         return $query->result_array();
@@ -18,8 +18,7 @@ class User_model extends CI_Model
     // Login
     public function userCheckLogin($username)
     {
-        $this->db->where("email =  '$username'");
-        $query = $this->db->get('tb_registrasi');
-        return $query->row_array();
+        return $this->db->get_where('tb_registrasi', ['email' => $username])->row_array();
+       
     }
 }
