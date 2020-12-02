@@ -38,7 +38,7 @@ $config['uri_protocol'] = 'AUTO';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
