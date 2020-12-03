@@ -11,7 +11,7 @@
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="index.html">Home</a>
 							</li>
-							<li class="breadcrumb-item active">Data Dokter
+							<li class="breadcrumb-item active">Data Pemeriksaan
 							</li>
 						</ol>
 					</div>
