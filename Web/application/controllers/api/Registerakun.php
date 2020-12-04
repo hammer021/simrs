@@ -15,6 +15,7 @@ class Registerakun extends REST_Controller {
     public function index_post(){
         $password = md5($this->input->post('password'));
         $email = $this->post('email');
+        $kode = $this->Api_model->kode('kd_regist', 'tb_registrasi', 'RGS' , '3');
         date_default_timezone_set("Asia/Jakarta");
         $time =  Date('Y-m-d h:i:s');
         $cek = $this->db->get_where('tb_registrasi', ['email' => $email])->row_array();
@@ -28,7 +29,7 @@ class Registerakun extends REST_Controller {
             ];
         }else{
             $data = array(
-                'kd_regist '       => '',
+                'kd_regist '       => $kode,
                 'name'          => $this->post('name'),
                 'email'         => $this->post('email'),
                 'image'         => 'default.jpg',
