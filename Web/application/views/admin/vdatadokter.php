@@ -51,7 +51,7 @@
 						<br>
 						<div class="card-content collapse show">
 							<!-- <p><span class="text-bold-600"><button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Data Dokter</button></span></p> -->
-							<br><a href="#"><button style="float:right;margin-bottom:10px;margin-top:-20px;" type="button" data-target="#exampleModal" data-toggle="modal" class="btn btn-primary">Tambah Data Dokter</button></a>
+							<br><a href="#"><button style="float:right;margin-bottom:10px;margin-top:-20px;" type="button" data-target="#tambah" data-toggle="modal" class="btn btn-primary">Tambah Data Dokter</button></a>
 							<div class="table-responsive">
 								<table class="table">
 									<thead class="thead-dark" align="center">
@@ -167,51 +167,45 @@ foreach ($listdokter as $u) {
 <?php } ?>
 
 <!-- Modal Insert-->
-<?php
-$no = 1;
-foreach ($listdokter as $u) {
-?>
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" name="tambahmodal">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Data Dokter</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form method="post" action="<?= base_url('Admin/tambah_dokter') ?>" enctype="multipart/form-data">
-						<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php
-																									$tanggal =  date("Y-m-d");
-																									echo $tanggal ?>" name="tanggal" aria-describedby="emailHelp">
-						<label for="exampleInputEmail1">Nomor Dokter</label>
-						<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $u->no_praktek ?>" name="no_praktek" aria-describedby="emailHelp">
-						<input type="" class="form-control" id="exampleInputEmail1" value="<?php echo $u->no_praktek ?>" name="no_praktek" aria-describedby="emailHelp">
-						<div class="form-group">
-							<label for="exampleInputEmail1">Nama Dokter</label>
-							<input type="text" class="form-control" id="exampleInputEmail1" name="nama_dokter" aria-describedby="emailHelp">
-						</div>
-						<div class="form-group">
-							<label for="exampleFormControlTextarea1">Jadwal praktek </label>
-							<textarea class="form-control" name="jadwal_praktek" id="exampleFormControlTextarea1" rows="3"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleFormControlTextarea1">Nomo HP Dokter </label>
-							<textarea class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" rows="3"></textarea>
-						</div>
-						</br>
-						<div class="form-group">
-							<label for="image_input">Foto</label>
-							<input type="file" class="form-control" name="foto_dokter" id="foto_dokter">
-						</div>
 
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-danger">Add</button>
-					</form>
-				</div>
+<div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Tambah Data Dokter</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="post" action="<?= base_url('Admin/tambah_dokter') ?>" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nomor Praktek</label>
+						<input type="text" class="form-control" id="exampleInputEmail1" name="no_praktek" aria-describedby="emailHelp">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nama Dokter</label>
+						<input type="text" class="form-control" id="exampleInputEmail1" name="nama_dokter" aria-describedby="emailHelp">
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlTextarea1">Jadwal praktek </label>
+						<textarea class="form-control" name="jadwal_praktek" id="exampleFormControlTextarea1" rows="3"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlTextarea1">Nomo HP Dokter </label>
+						<textarea class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" rows="3"></textarea>
+					</div>
+					</br>
+					<div class="form-group">
+						<label for="image_input">Foto</label>
+						<input type="file" class="form-control" name="foto_dokter" id="foto_dokter">
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-danger">Add</button>
+				</form>
 			</div>
 		</div>
 	</div>
-<?php } ?>
+</div>
