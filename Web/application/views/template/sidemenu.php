@@ -24,7 +24,9 @@
               <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datadokter'){ echo 'active';}else { }?>
           "><a class="menu-item" href="<?php echo base_url(); ?>admin/datadokter">Data Dokter</a>
               </li>
-              <li class=""><a class="menu-item" href="chat-application.html">Data Pasien</a>
+              <li class="
+              <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datapasien'){ echo 'active';}else { }?>
+          "><a class=" menu-item" href="<?php echo base_url(); ?>admin/datapasien">Data Pasien</a>
               </li>
               <li class=""><a class="menu-item" href="full-calender.html">Data Klinik</a>
               </li>
