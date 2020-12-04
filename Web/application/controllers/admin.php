@@ -13,6 +13,7 @@ class Admin extends CI_Controller
 	{
 		$data['totpasien'] = $this->db->query("SELECT COUNT(tb_pasien.kd_pasien) AS jmlpasien FROM tb_pasien")->result_array();
 		$data['totdokter'] = $this->db->query("SELECT COUNT(tb_dokter.no_praktek) AS jmldokter FROM tb_dokter")->result_array();
+		$data['dokter'] = $this->db->query("SELECT * FROM tb_dokter")->result_array();
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
 		$this->load->view('admin/dashboard', $data);

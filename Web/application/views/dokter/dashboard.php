@@ -3,8 +3,6 @@
 
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-
-
 <div class="app-content content" id="main">
     <div class="content-wrapper">
         <div class="content-wrapper-before"></div>
