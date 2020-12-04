@@ -48,9 +48,8 @@ class Profil extends REST_Controller {
     public function index_put(){
         if($this->put('kd_regist')) {
             $config2 = uniqid().'.jpeg';
-            $path2 = '../uploads/user/'.$config2;
+            $path2 = './assets/images/user/'.$config2;
             $id = $this->put('kd_regist');
-            $password = md5($this->put('password'));
 
             $user = $this->db->get_where('tb_registrasi', ['kd_regist' => $id])->row_array();
             if($user){
@@ -60,13 +59,9 @@ class Profil extends REST_Controller {
 
                 $data = array(
                     'name' => $this->put('name'),
-                    'email' => $this->put('email'),
                     'image' => $config2,
-                    'password' => $password,
                     'alamat'        => $this->put('alamat'),
-                    'no_hp'         => $this->put('no_hp'),
-                    'tgl_lahir'     => $this->put('tgl_lahir'),
-                    'tempat_lahir'  => $this->put('tempat_lahir')
+                    'no_hp'         => $this->put('no_hp')
 
                 );
                 if ($this->db->update('tb_registrasi', $data, ['kd_regist' => $id])) {
@@ -86,12 +81,8 @@ class Profil extends REST_Controller {
             }else{
                 $data = array(
                     'name' => $this->put('name'),
-                    'email' => $this->put('email'),
-                    'password' => $password,
                     'alamat'        => $this->put('alamat'),
-                    'no_hp'         => $this->put('no_hp'),
-                    'tgl_lahir'     => $this->put('tgl_lahir'),
-                    'tempat_lahir'  => $this->put('tempat_lahir')         
+                    'no_hp'         => $this->put('no_hp')      
                 );
                 
                 if ($this->db->update('tb_registrasi', $data, ['kd_regist' => $id])) {                        

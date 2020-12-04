@@ -36,6 +36,7 @@ class Auth extends CI_Controller
                 $password = $user['password'];
                 if ($password == $pw) {
                     $data = [
+                        'kd_regist'=> $user['kd_regist'],
                         'email' => $user['email'],
                         'name' => $user['name'],
                         'image' => $user['image'],
@@ -44,7 +45,11 @@ class Auth extends CI_Controller
                     $this->session->set_userdata($data);
                     if ($user['kd_role'] == 1) {
                         redirect('Admin/dashboard');
-                    } else {
+                    } 
+                    else if ($user['kd_role'] == 2) {
+                        redirect('Dokter/dashboard');
+                    }
+                    else {
                         redirect('dokter');
                     }
                 } else {

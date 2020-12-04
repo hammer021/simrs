@@ -18,6 +18,7 @@ class Api_model extends CI_Model
             return FALSE;
         }
     }
+    
     public function insert($tabel, $arr)
     {
         $cek = $this->db->insert($tabel, $arr);
@@ -33,4 +34,20 @@ class Api_model extends CI_Model
         return $this->db->get_where('tb_registrasi' , ['kd_regist' => $id])->result_array();
     }
     
+    public function kode($id,$tabel,$kode,$substr)
+    {
+            // $query = $this->db->select($id)
+            //                   ->from($tabel)
+            //                   ->get();
+            $this->db->select_max($id);
+            $query = $this->db->get($tabel);
+            $row = $query->row();
+            // $row = $query->last_row();
+            if($query){
+                $idPostfix = (int)substr($row->$id,$substr)+1;
+                $nextId = $kode.STR_PAD((string)$idPostfix,5,"0",STR_PAD_LEFT);
+            }
+            else{$nextId = $kode.'00001';} // For the first time
+            return $nextId;
+    }
 }

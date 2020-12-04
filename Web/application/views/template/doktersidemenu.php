@@ -18,6 +18,10 @@
           "><a href="<?php echo base_url(); ?>dokter/resep"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Resep </span></a>
           </li>
           <li class="
+          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/dokter/datapemeriksaan'){ echo 'active';}else { echo 'nav-item';}?>
+          "><a href="<?php echo base_url(); ?>dokter/datapemeriksaan"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Data Pemeriksaan </span></a>
+          </li>
+          <li class="
           <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/dokter/tindakanmedis'){ echo 'active';}else { echo 'nav-item';}?>
           "><a href="<?php echo base_url(); ?>dokter/tindakanmedis"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Tindakan Medis </span></a>
           </li>
