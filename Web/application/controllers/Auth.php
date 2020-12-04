@@ -37,6 +37,8 @@ class Auth extends CI_Controller
                 if ($password == $pw) {
                     $data = [
                         'email' => $user['email'],
+                        'name' => $user['name'],
+                        'image' => $user['image'],
                         'kd_role' => $user['kd_role']
                     ];
                     $this->session->set_userdata($data);
@@ -61,10 +63,10 @@ class Auth extends CI_Controller
 
     public function logout()
     {
-        $this->session->unset_userdata('email');
-        $this->session->unset_userdata('kd_role');
+        
+        $this->session->sess_destroy();
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out! </div>');
-        redirect('auth');
+        redirect('Auth');
     }
 
 
