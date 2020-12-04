@@ -165,8 +165,7 @@ class Admin extends CI_Controller
 	}
 }
 public function hapusdokter($id){
-	$where = array('no_praktek' => $id);
-	$this->Dokter_model->hapus_data($where,'tb_dokter');
+	$this->Dokter_model->hapus_data($id);
 
 	redirect('admin/datadokter');
 }
