@@ -18,6 +18,7 @@ class Api_model extends CI_Model
             return FALSE;
         }
     }
+    
     public function insert($tabel, $arr)
     {
         $cek = $this->db->insert($tabel, $arr);

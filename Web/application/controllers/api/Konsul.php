@@ -15,20 +15,23 @@ class Konsul extends REST_Controller {
 
     function index_get()
     {
-        $aa = $this->input->post('no_rm');
+        $l = $this->get('no_rm');
+        $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan');    
+        $this->db->from('tb_keluhan');
+        $this->db->join('tb_pasien', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien');
+        $this->db->where('tb_keluhan.no_rm', $l);
+        $a = $this->db->get();
+        $query = $a->row();
 
-        if(!empty($aa)){
-            $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan');    
-            $this->db->from('tb_keluhan');
-            $this->db->join('tb_pasien', 'tb_keluhan.kd_pasien = tb_pasien.pasien');
-            $query = $this->db->row();
-
-            $this->load->library('Authorization_Token');
-                $token_data['no_rm'] = $output->no_rm;
-                $token_data['nama_pasien'] = $output->nama_pasien;
-                $token_data['status'] = $output->status;
-                $token_data['keluhan'] = $output->keluhan;
-                $token_data['tgl_kunjungan'] = $output->tgl_kunjungan;
+        $output = $this->db->get_where('tb_keluhan',  array('no_rm' => $l))->row_array();
+            if(!empty($output)){
+         
+                $this->load->library('Authorization_Token');
+                $token_data['no_rm'] = $query->no_rm;
+                $token_data['nama_pasien'] = $query->nama_pasien;
+                $token_data['status'] = $query->status;
+                $token_data['keluhan'] = $query->keluhan;
+                $token_data['tgl_kunjungan'] = $query->tgl_kunjungan;
                 
                 $this->authorization_token->generateToken($token_data);
 
@@ -44,7 +47,9 @@ class Konsul extends REST_Controller {
                 'status' => TRUE,
                 'data'   => $return_data,
             ];
+            $this->response($message, REST_Controller::HTTP_OK);
         }else{
+            echo 'asdasd'.$l;
             $message = [
                 'status' => FALSE,
                 'message' => "No Rm tidak ditemukan"
@@ -62,6 +67,7 @@ class Konsul extends REST_Controller {
 
         // parsing data uniqkode
         $kode = $this->Api_model->kode('kd_pasien', 'tb_pasien', 'PSN', '3');
+        $no_rm = $this->Api_model->kode('no_rm', 'tb_keluhan', 'RM', '2' );
 
         // mencari umur
         date_default_timezone_set("Asia/Jakarta");
@@ -95,8 +101,16 @@ class Konsul extends REST_Controller {
                 'umur'                  => $umur,
                 'jenis_kelamin'         => $this->post('jenis_kelamin'),
                 'keterbatasan'          => $this->post('keterbatasan'));
+
+            $data2 = array(
+                'no_rm'                 => $no_rm,
+                'kd_pasien '            => $kode,
+                'tgl_kunjungan '        => $time,
+                'keluhan '              => $this->post('keluhan'),
+                'status '               => 'Proses');    
                 
                 $insert = $this->db->insert('tb_pasien', $data);
+                $insert2 = $this->db->insert('tb_keluhan', $data2);
 
     
                 $response = [
