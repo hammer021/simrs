@@ -48,7 +48,7 @@ class Profil extends REST_Controller {
     public function index_put(){
         if($this->put('kd_regist')) {
             $config2 = uniqid().'.jpeg';
-            $path2 = '../simrs/Web/assets/images/user/'.$config2;
+            $path2 = './assets/images/user/'.$config2;
             $id = $this->put('kd_regist');
 
             $user = $this->db->get_where('tb_registrasi', ['kd_regist' => $id])->row_array();
