@@ -7,6 +7,7 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Dokter_model');
+		$this->load->model('Klinik_model');
 	}
 
 	public function dashboard()
@@ -170,4 +171,13 @@ public function hapusdokter($id){
 
 	redirect('admin/datadokter');
 }
+public function dataklinik()
+	{
+		$klinik['listklinik'] = $this->Klinik_model->tampil_dataklinik()->result();
+		$this->load->view('template/header');
+		$this->load->view('template/sidemenu');
+		$this->load->view('admin/vdataklinik', $klinik);
+		$this->load->view('template/footer');
+		$this->load->helper('url');
+	}
 }

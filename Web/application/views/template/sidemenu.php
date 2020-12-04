@@ -26,7 +26,7 @@
               </li>
               <li class=""><a class="menu-item" href="chat-application.html">Data Pasien</a>
               </li>
-              <li class=""><a class="menu-item" href="full-calender.html">Data Klinik</a>
+              <li class=""><a class="menu-item" href="<?php echo base_url(); ?>admin/dataklinik">Data Klinik</a>
               </li>
             </ul>
           </li>
