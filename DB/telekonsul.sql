@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Des 2020 pada 06.17
+-- Waktu pembuatan: 04 Des 2020 pada 12.37
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.2.34
 
@@ -71,6 +71,7 @@ CREATE TABLE `tb_dokter` (
 
 CREATE TABLE `tb_keluhan` (
   `no_rm` varchar(255) NOT NULL,
+  `kd_pasien` varchar(255) NOT NULL,
   `tgl_kunjungan` date NOT NULL,
   `kd_poli` varchar(255) NOT NULL,
   `jenis_kasus` varchar(255) NOT NULL,
@@ -88,8 +89,7 @@ CREATE TABLE `tb_konsul` (
   `kd_konsul` varchar(255) NOT NULL,
   `no_rm` varchar(255) NOT NULL,
   `no_praktek` varchar(255) NOT NULL,
-  `kd_resep` varchar(255) NOT NULL,
-  `no_regist` varchar(255) NOT NULL
+  `kd_resep` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -100,28 +100,36 @@ CREATE TABLE `tb_konsul` (
 
 CREATE TABLE `tb_pasien` (
   `kd_pasien` varchar(255) NOT NULL,
+  `kd_regist` varchar(255) NOT NULL,
   `nama_pasien` varchar(255) NOT NULL,
   `tempat_lahir` varchar(255) NOT NULL,
   `tgl_lahir` date NOT NULL,
   `umur` varchar(10) NOT NULL,
   `jenis_kelamin` enum('Laki-Laki','Perempuan','','') NOT NULL,
-  `warga_negara` varchar(255) NOT NULL,
-  `status_perkawinan` varchar(255) NOT NULL,
-  `pendidikan` varchar(255) NOT NULL,
-  `agama` varchar(255) NOT NULL,
-  `pekerjaan` varchar(255) NOT NULL,
-  `no_nik` varchar(16) NOT NULL,
-  `alamat_pasien` varchar(255) NOT NULL,
-  `provinsi` varchar(255) NOT NULL,
-  `kab_kota` varchar(255) NOT NULL,
-  `kec` varchar(255) NOT NULL,
-  `kelurahan` varchar(255) NOT NULL,
-  `no_tlp` varchar(13) NOT NULL,
-  `nama_ayah` varchar(255) NOT NULL,
-  `nama_ibu` varchar(255) NOT NULL,
-  `foto` varchar(255) NOT NULL,
+  `warga_negara` varchar(255) DEFAULT NULL,
+  `status_perkawinan` varchar(255) DEFAULT NULL,
+  `pendidikan` varchar(255) DEFAULT NULL,
+  `agama` varchar(255) DEFAULT NULL,
+  `pekerjaan` varchar(255) DEFAULT NULL,
+  `no_nik` varchar(16) DEFAULT NULL,
+  `alamat_pasien` varchar(255) DEFAULT NULL,
+  `provinsi` varchar(255) DEFAULT NULL,
+  `kab_kota` varchar(255) DEFAULT NULL,
+  `kec` varchar(255) DEFAULT NULL,
+  `kelurahan` varchar(255) DEFAULT NULL,
+  `no_tlp` varchar(13) DEFAULT NULL,
+  `nama_ayah` varchar(255) DEFAULT NULL,
+  `nama_ibu` varchar(255) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
   `keterbatasan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_pasien`
+--
+
+INSERT INTO `tb_pasien` (`kd_pasien`, `kd_regist`, `nama_pasien`, `tempat_lahir`, `tgl_lahir`, `umur`, `jenis_kelamin`, `warga_negara`, `status_perkawinan`, `pendidikan`, `agama`, `pekerjaan`, `no_nik`, `alamat_pasien`, `provinsi`, `kab_kota`, `kec`, `kelurahan`, `no_tlp`, `nama_ayah`, `nama_ibu`, `foto`, `keterbatasan`) VALUES
+('PSN00001', 'RGS00001', 'Ilhammer', 'Aceh', '0000-00-00', '21 Tahun', 'Perempuan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Bisu');
 
 -- --------------------------------------------------------
 
@@ -142,7 +150,7 @@ CREATE TABLE `tb_poli` (
 --
 
 CREATE TABLE `tb_registrasi` (
-  `kd_regist` int(11) NOT NULL,
+  `kd_regist` varchar(255) NOT NULL,
   `name` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
@@ -161,8 +169,9 @@ CREATE TABLE `tb_registrasi` (
 --
 
 INSERT INTO `tb_registrasi` (`kd_regist`, `name`, `email`, `image`, `password`, `kd_role`, `is_active`, `date_created`, `alamat`, `no_hp`, `tgl_lahir`, `tempat_lahir`) VALUES
-(1, 'hammer', 'ham@gmail.com', 'default.jpg', 'hammer21', 1, 1, '0000-00-00 00:00:00', '', '', '0000-00-00', ''),
-(30, 'asd', 'mubifaz12@gmail.com', NULL, '202cb962ac59075b964b07152d234b70', 1, 0, '2020-12-01 12:15:25', 'ayam', '123', '0000-00-00', 'asd');
+('1', 'hammer', 'ham@gmail.com', 'default.jpg', '202cb962ac59075b964b07152d234b70', 1, 1, '0000-00-00 00:00:00', '', '', '0000-00-00', ''),
+('RGS00001', 'Luqmann', 'birnn', 'default.jpg', '7815696ecbf1c96e6894b779456d330e', 3, 0, '2020-12-04 04:29:28', 'asd', '123213', '0000-00-00', 'asd'),
+('RGS00002', 'Luqmann', 'birn', 'default.jpg', '7815696ecbf1c96e6894b779456d330e', 3, 0, '2020-12-04 04:50:20', 'asd', '123213', '0000-00-00', 'asd');
 
 -- --------------------------------------------------------
 
@@ -278,7 +287,10 @@ CREATE TABLE `user_token` (
 
 INSERT INTO `user_token` (`id_token`, `email`, `token`, `v_num`, `date_created`) VALUES
 (1, 'Birril', '15fc5b9d597cbe', 82, '0000-00-00 00:00:00'),
-(10, 'mubifaz12@gmail.com', '15fc5d16e85b5f', 70, '2020-12-01 12:15:25');
+(17, 'bir', '15fca00dd21c41', 38, '2020-12-04 04:26:53'),
+(18, 'birn', '15fca0118a45c4', 71, '2020-12-04 04:27:52'),
+(19, 'birnn', '15fca01787c3b1', 86, '2020-12-04 04:29:28'),
+(20, 'birn', '15fca065c9b8fb', 54, '2020-12-04 04:50:20');
 
 --
 -- Indexes for dumped tables
@@ -385,12 +397,6 @@ ALTER TABLE `login_details`
   MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_registrasi`
---
-ALTER TABLE `tb_registrasi`
-  MODIFY `kd_regist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
 -- AUTO_INCREMENT untuk tabel `tb_role`
 --
 ALTER TABLE `tb_role`
@@ -406,7 +412,7 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT untuk tabel `user_token`
 --
 ALTER TABLE `user_token`
-  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
