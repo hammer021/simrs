@@ -95,10 +95,11 @@
 															</div>
 														</div>
 													</div>
-							</div>
+							
 
 							<button type="button" data-target="#<?php echo $u->no_praktek ?>" data-toggle="modal" class="la la-edit"></button></td>
-						<?php } ?>
+							</div>
+							<?php } ?>
 						</tr>
 						</tbody>
 						</table>

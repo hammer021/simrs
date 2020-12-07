@@ -19,4 +19,5 @@ class Admin_model extends CI_Model
         $this->db->or_like('username', $keyword);
         return $this->db->get('tb_registrasi')->result_array();
     }
+    
 }

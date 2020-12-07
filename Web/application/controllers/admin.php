@@ -8,6 +8,9 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$this->load->model('Dokter_model');
 		$this->load->model('Klinik_model');
+		$this->load->model('Admin_model');
+		$this->load->model('Konsul_model');
+		
 	}
 
 	
@@ -41,9 +44,10 @@ class Admin extends CI_Controller
 	}
 	public function pemeriksaan()
 	{
+		$data['konsul'] = $this->Konsul_model->konsul();
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
-		$this->load->view('admin/vpemeriksaan');
+		$this->load->view('admin/vpemeriksaan',$data);
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
@@ -183,6 +187,11 @@ public function hapusdokter($id){
 	$this->Dokter_model->hapus_data($id);
 
 	redirect('admin/datadokter');
+}
+public function hapuskonsul($id){
+	$this->Konsul_model->hapus_data($id);
+
+	redirect('admin/pemeriksaan');
 }
 public function dataklinik()
 	{

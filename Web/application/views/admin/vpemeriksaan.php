@@ -4,7 +4,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
           <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title" style="margin-bottom:50px;margin-top:80px">Tables</h3>
+            <h3 class="content-header-title" style="margin-bottom:50px;margin-top:80px">Konsultasi</h3>
           </div>
           <div class="content-header-right col-md-8 col-12">
             <div class="breadcrumbs-top float-md-right">
@@ -12,7 +12,7 @@
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="index.html">Home</a>
                   </li>
-                  <li class="breadcrumb-item active">Pemeriksaan
+                  <li class="breadcrumb-item active">Pemeriksaan Konsultasi
                   </li>
                 </ol>
               </div>
@@ -25,7 +25,7 @@
 	<div class="col-9">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Table head options</h4>
+				<h4 class="card-title">Pemeriksaan Konsultasi</h4>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 				<div class="heading-elements">
 					<ul class="list-inline mb-0">
@@ -41,31 +41,70 @@
 					<table class="table">
 						<thead class="thead-dark">
 							<tr>
-								<th scope="col">#</th>
-								<th scope="col">First Name</th>
-								<th scope="col">Last Name</th>
-								<th scope="col">Username</th>
+								<th scope="col">No</th>
+								<th scope="col">No Rekam Medis</th>
+								<th scope="col">Nama Pasien</th>
+								<th scope="col">Tgl Kunjungan</th>
+								<th scope="col">Nama Dokter</th>
+								<th scope="col">Keluhan</th>
+								<th scope="col">Status</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
+						<?php
+										$no = 1;
+										foreach ($konsul as $kons) {
+										?>
 							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
+								<th scope="row"><?php echo $no++ ?></th>
+								<td><?php echo $kons['no_rm'] ?></td>
+								<td><?php echo $kons['nama_pasien'] ?></td>
+								<td><?php echo $kons['tgl_kunjungan'] ?></td>
+								<td><?php echo $kons['nama_dokter'] ?></td>
+								<td><?php echo $kons['keluhan'] ?></td>
+								<td>
+									<?php $sts = $kons['status'];
+									if ($sts == 0){
+											echo "Selesai";
+									}
+									else if($sts == 1){
+										echo "Belum Bayar";
+									}
+									else if($sts == 2){
+										echo "Sudah Bayar";
+									}
+									else {
+										echo "Not Found";
+									}
+									?></td>
+							<td>
+							<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
+													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk menghapus?
+																	<?php echo $kons['nama_pasien'] ?>
+																	</h5>
+																	<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">×</span>
+																	</button>
+																</div>
+																<div class="modal-footer">
+																	<button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
+																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('Admin/hapuskonsul/' . $kons['no_rm']); ?>">Hapus</a>
+																</div>
+															</div>
+														</div>
+													</div>
+							
+													<button type="button" data-target="#<?php echo $kons['no_rm'] ?>" data-toggle="modal" class="la la-edit"></button>
+							</td>
+
 							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Larry</td>
-								<td>the Bird</td>
-								<td>@twitter</td>
-							</tr>
+							
+							<?php } ?>
 						</tbody>
 					</table>
 				</div>
