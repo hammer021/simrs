@@ -67,7 +67,7 @@ class Konsul extends REST_Controller {
         $sekarang = date_create($time);
         $lahir = date_create($tgl_lahir);
         $a = date_diff($lahir,$sekarang);
-        $umur = $a->format("%y Tahun");
+        $umur = $a->format("%y");
 
         // Query
         $query = $this->db->select('*')->from('tb_pasien')
@@ -92,6 +92,7 @@ class Konsul extends REST_Controller {
                 'tempat_lahir'          => $this->post('tempat_lahir'),
                 'tgl_lahir'             => $this->post('tgl_lahir'),
                 'umur'                  => $umur,
+                'keterbatasan'          => $this->post('keterbatasan'),
                 'jenis_kelamin'         => $this->post('jenis_kelamin'),
                 'warga_negara'          => $this->post('warga_negara'),
                 'status_perkawinan'     => $this->post('status_perkawinan'),
@@ -100,14 +101,10 @@ class Konsul extends REST_Controller {
                 'pekerjaan'             => $this->post('pekerjaan'),
                 'no_nik'                => $this->post('no_nik'),
                 'alamat_pasien'         => $this->post('alamat_pasien'),
-                'provinsi'              => $this->post('provinsi'),
-                'kab_kota'              => $this->post('kab_kota'),
-                'kec'                   => $this->post('kec'),
-                'kelurahan'             => $this->post('kelurahan'),
                 'no_tlp'                => $this->post('no_tlp'),
                 'nama_ayah'             => $this->post('nama_ayah'),
                 'nama_ibu'              => $this->post('nama_ibu'),
-                'keterbatasan'          => $this->post('keterbatasan'));
+                'hub_pasien'            => $this->post('hub_pasien'));
 
             
             }else{
@@ -118,6 +115,7 @@ class Konsul extends REST_Controller {
                     'tempat_lahir'          => $this->post('tempat_lahir'),
                     'tgl_lahir'             => $this->post('tgl_lahir'),
                     'umur'                  => $umur,
+                    'keterbatasan'          => $this->post('keterbatasan'),
                     'jenis_kelamin'         => $this->post('jenis_kelamin'),
                     'warga_negara'          => $this->post('warga_negara'),
                     'status_perkawinan'     => $this->post('status_perkawinan'),
@@ -126,23 +124,20 @@ class Konsul extends REST_Controller {
                     'pekerjaan'             => $this->post('pekerjaan'),
                     'no_nik'                => $this->post('no_nik'),
                     'alamat_pasien'         => $this->post('alamat_pasien'),
-                    'provinsi'              => $this->post('provinsi'),
-                    'kab_kota'              => $this->post('kab_kota'),
-                    'kec'                   => $this->post('kec'),
-                    'kelurahan'             => $this->post('kelurahan'),
                     'no_tlp'                => $this->post('no_tlp'),
                     'nama_ayah'             => $this->post('nama_ayah'),
                     'nama_ibu'              => $this->post('nama_ibu'),
                     'foto'                  => $this->post('foto'),
-                    'keterbatasan'          => $this->post('keterbatasan'));
+                    'hub_pasien'            => $this->post('hub_pasien'));
 
             }
             $data2 = array(
                 'no_rm'                 => $no_rm,
-                'kd_pasien '            => $kode,
                 'tgl_kunjungan '        => $time,
+                'jenis_kasus'           => '',
                 'keluhan '              => $this->post('keluhan'),
-                'status '               => '1');    
+                'status '               => '1',
+                'kd_pasien '            => $kode,);    
                 
                 $insert = $this->db->insert('tb_pasien', $data);
                 $insert2 = $this->db->insert('tb_keluhan', $data2);
@@ -179,6 +174,6 @@ class Konsul extends REST_Controller {
             ], REST_Controller::HTTP_NOT_FOUND);
         }
     }
-    
+
     
 }
