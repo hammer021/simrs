@@ -61,6 +61,10 @@ class Konsul extends REST_Controller {
         $kode = $this->Api_model->kode('kd_pasien', 'tb_pasien', 'PSN', '3');
         $no_rm = $this->Api_model->kode('no_rm', 'tb_keluhan', 'RM', '2' );
 
+        //foto
+        $config2 = uniqid().'.jpeg';
+        $path2 = './assets/images/pasien'.$config2;
+
         // mencari umur
         date_default_timezone_set("Asia/Jakarta");
         $time =  Date('Y-m-d');
@@ -108,6 +112,7 @@ class Konsul extends REST_Controller {
 
             
             }else{
+                $foto = $this->post('foto');
                 $data = array(
                     'kd_pasien '            => $kode,
                     'kd_regist'             => $id_user,
@@ -130,6 +135,8 @@ class Konsul extends REST_Controller {
                     'foto'                  => $this->post('foto'),
                     'hub_pasien'            => $this->post('hub_pasien'));
 
+                    file_put_contents($path2, base64_decode($foto));
+
             }
             $data2 = array(
                 'no_rm'                 => $no_rm,
@@ -142,11 +149,29 @@ class Konsul extends REST_Controller {
                 $insert = $this->db->insert('tb_pasien', $data);
                 $insert2 = $this->db->insert('tb_keluhan', $data2);
 
-    
-                $response = [
-                    'status' => true,
-                    'pesan' => 'Pendaftaran Akun Berhasil',
-                ];
+                if($insert){
+                    $response = [
+                        'status' => true,
+                        'pesan' => 'Pendaftaran Pasien Berhasil',
+                    ];
+                }else{
+                    $this->response([
+                        'status' => FALSE,
+                        'message' => 'Error Pada Pendaftaran Pasien'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+                }
+                if($insert2){
+                    $response = [
+                        'status' => true,
+                        'pesan' => 'Pendaftaran Pasien Berhasil',
+                    ];
+                }else{
+                    $this->response([
+                        'status' => FALSE,
+                        'message' => 'Error Pada Pendaftaran Keluhan'
+                    ], REST_Controller::HTTP_NOT_FOUND);
+                }
+                
         }
         $this->response($response, 200);
     }
