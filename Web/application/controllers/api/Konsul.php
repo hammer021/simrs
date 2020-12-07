@@ -155,6 +155,30 @@ class Konsul extends REST_Controller {
         }
         $this->response($response, 200);
     }
+
+    public function bukti_post()
+    {
+        $id = $this->input->post('no_rm');
+        $foto = $this->input->post('foto');
+
+        $data = array(
+            'bukti_pembayaran '            => $foto
+        );
+        
+        $bb = $this->db->update('tb_keluhan', $data, array('no_rm' => $id));
+
+        if($bb){
+            $this->response([
+                'status' => TRUE,
+                'message' => 'Berhasil Mengubah Akun!',
+            ], REST_Controller::HTTP_OK);
+        }else{
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Data tidak dapat ditampilkan'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
     
     
 }
