@@ -10,10 +10,23 @@ class Admin extends CI_Controller
 		$this->load->model('Klinik_model');
 	}
 
+	
 	public function dashboard()
 	{
 		$data['totpasien'] = $this->db->query("SELECT COUNT(tb_pasien.kd_pasien) AS jmlpasien FROM tb_pasien")->result_array();
 		$data['totdokter'] = $this->db->query("SELECT COUNT(tb_dokter.no_praktek) AS jmldokter FROM tb_dokter")->result_array();
+		$data['bulan1'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 1")->result_array();
+		$data['bulan2'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 2")->result_array();
+		$data['bulan3'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 3")->result_array();
+		$data['bulan4'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 4")->result_array();
+		$data['bulan5'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 5")->result_array();
+		$data['bulan6'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 6")->result_array();
+		$data['bulan7'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 7")->result_array();
+		$data['bulan8'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 8")->result_array();
+		$data['bulan9'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 9")->result_array();
+		$data['bulan10'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 10")->result_array();
+		$data['bulan11'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 11")->result_array();
+		$data['bulan12'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 12")->result_array();
 		$data['dokter'] = $this->db->query("SELECT * FROM tb_dokter")->result_array();
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');

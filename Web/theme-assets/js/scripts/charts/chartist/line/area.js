@@ -14,7 +14,7 @@ $(window).on("load", function () {
 
     var areaGradientChart = new Chartist.Line('#areaGradient', {
        
-        labels: [1, 2, 3, 4, 5, 6, 7],
+        labels: [ 2, 3, 4, 5, 6, 7],
         series: [
             [20, 180, 125, 40, 80, 50, 20],
             [75, 120, 50, 80, 130, 60, 120],
