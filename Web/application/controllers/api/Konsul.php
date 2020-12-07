@@ -15,32 +15,23 @@ class Konsul extends REST_Controller {
 
     function index_get()
     {
-        $l = $this->get('no_rm');
+        $l = $this->get('kd_regist');
         $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan');    
-        $this->db->from('tb_keluhan');
-        $this->db->join('tb_pasien', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien');
-        $this->db->where('tb_keluhan.no_rm', $l);
+        $this->db->from('tb_pasien');
+        $this->db->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien');
+        $this->db->where('kd_regist', $l);
         $a = $this->db->get();
-        $query = $a->row();
+        $query = $a->row_array();
 
-        $output = $this->db->get_where('tb_keluhan',  array('no_rm' => $l))->row_array();
+        $output = $this->db->get_where('tb_pasien',  array('kd_regist' => $l))->row_array();
             if(!empty($output)){
          
-                $this->load->library('Authorization_Token');
-                $token_data['no_rm'] = $query->no_rm;
-                $token_data['nama_pasien'] = $query->nama_pasien;
-                $token_data['status'] = $query->status;
-                $token_data['keluhan'] = $query->keluhan;
-                $token_data['tgl_kunjungan'] = $query->tgl_kunjungan;
-                
-                $this->authorization_token->generateToken($token_data);
-
                 $return_data = [
-                    'no_rm' => $query->no_rm,
-                    'nama_pasien' => $query->nama_pasien,
-                    'status'      => $query->status,
-                    'keluhan'     => $query->keluhan,
-                    'tgl_kunjungan' => $query->tgl_kunjungan
+                    'no_rm' => $query['no_rm'],
+                    'nama_pasien' => $query['nama_pasien'],
+                    'status'      => $query['status'],
+                    'keluhan'     => $query['keluhan'],
+                    'tgl_kunjungan' => $query['tgl_kunjungan']
                 ];
 
             $message = [
@@ -64,6 +55,7 @@ class Konsul extends REST_Controller {
         $id_user = $this->post('kd_regist');
         $nama_pasien = $this->post('nama_pasien');
         $tgl_lahir = $this->post('tgl_lahir');
+        $foto = $this->post('foto');
 
         // parsing data uniqkode
         $kode = $this->Api_model->kode('kd_pasien', 'tb_pasien', 'PSN', '3');
@@ -92,6 +84,7 @@ class Konsul extends REST_Controller {
                 'message' => 'Nama Pasien sudah terdaftar di akun anda',
             ];
         }else{
+            if(!empty($foto)){
             $data = array(
                 'kd_pasien '            => $kode,
                 'kd_regist'             => $id_user,
@@ -100,14 +93,56 @@ class Konsul extends REST_Controller {
                 'tgl_lahir'             => $this->post('tgl_lahir'),
                 'umur'                  => $umur,
                 'jenis_kelamin'         => $this->post('jenis_kelamin'),
+                'warga_negara'          => $this->post('warga_negara'),
+                'status_perkawinan'     => $this->post('status_perkawinan'),
+                'pendidikan'            => $this->post('pendidikan'),
+                'agama'                 => $this->post('agama'),
+                'pekerjaan'             => $this->post('pekerjaan'),
+                'no_nik'                => $this->post('no_nik'),
+                'alamat_pasien'         => $this->post('alamat_pasien'),
+                'provinsi'              => $this->post('provinsi'),
+                'kab_kota'              => $this->post('kab_kota'),
+                'kec'                   => $this->post('kec'),
+                'kelurahan'             => $this->post('kelurahan'),
+                'no_tlp'               => $this->post('no_tlp'),
+                'nama_ayah'             => $this->post('nama_ayah'),
+                'nama_ibu'              => $this->post('nama_ibu'),
                 'keterbatasan'          => $this->post('keterbatasan'));
 
+            
+            }else{
+                $data = array(
+                    'kd_pasien '            => $kode,
+                    'kd_regist'             => $id_user,
+                    'nama_pasien'           => $nama_pasien,
+                    'tempat_lahir'          => $this->post('tempat_lahir'),
+                    'tgl_lahir'             => $this->post('tgl_lahir'),
+                    'umur'                  => $umur,
+                    'jenis_kelamin'         => $this->post('jenis_kelamin'),
+                    'warga_negara'          => $this->post('warga_negara'),
+                    'status_perkawinan'     => $this->post('status_perkawinan'),
+                    'pendidikan'            => $this->post('pendidikan'),
+                    'agama'                 => $this->post('agama'),
+                    'pekerjaan'             => $this->post('pekerjaan'),
+                    'no_nik'                => $this->post('no_nik'),
+                    'alamat_pasien'         => $this->post('alamat_pasien'),
+                    'provinsi'              => $this->post('provinsi'),
+                    'kab_kota'              => $this->post('kab_kota'),
+                    'kec'                   => $this->post('kec'),
+                    'kelurahan'             => $this->post('kelurahan'),
+                    'no_tlp'                => $this->post('no_tlp'),
+                    'nama_ayah'             => $this->post('nama_ayah'),
+                    'nama_ibu'              => $this->post('nama_ibu'),
+                    'foto'                  => $this->post('foto'),
+                    'keterbatasan'          => $this->post('keterbatasan'));
+
+            }
             $data2 = array(
                 'no_rm'                 => $no_rm,
                 'kd_pasien '            => $kode,
                 'tgl_kunjungan '        => $time,
                 'keluhan '              => $this->post('keluhan'),
-                'status '               => 'Proses');    
+                'status '               => '1');    
                 
                 $insert = $this->db->insert('tb_pasien', $data);
                 $insert2 = $this->db->insert('tb_keluhan', $data2);
