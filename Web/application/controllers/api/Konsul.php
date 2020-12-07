@@ -104,7 +104,7 @@ class Konsul extends REST_Controller {
                 'kab_kota'              => $this->post('kab_kota'),
                 'kec'                   => $this->post('kec'),
                 'kelurahan'             => $this->post('kelurahan'),
-                'no_tlp'               => $this->post('no_tlp'),
+                'no_tlp'                => $this->post('no_tlp'),
                 'nama_ayah'             => $this->post('nama_ayah'),
                 'nama_ibu'              => $this->post('nama_ibu'),
                 'keterbatasan'          => $this->post('keterbatasan'));
