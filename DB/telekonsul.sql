@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2020 at 08:09 AM
+-- Generation Time: Dec 07, 2020 at 11:09 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -69,7 +69,7 @@ CREATE TABLE `tb_dokter` (
 --
 
 INSERT INTO `tb_dokter` (`no_praktek`, `nama_dokter`, `jadwal_praktek`, `no_hp_dokter`, `foto_dokter`, `kd_poli`) VALUES
-('Sknnwuu', 'ALIGUS', '838:59:59', '12312313123', 'picture-201204-e34a6efd26.jpg', '');
+('PR0001', 'ALIGUS', '838:59:59', '12312313123', 'picture-201204-e34a6efd26.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -80,11 +80,19 @@ INSERT INTO `tb_dokter` (`no_praktek`, `nama_dokter`, `jadwal_praktek`, `no_hp_d
 CREATE TABLE `tb_keluhan` (
   `no_rm` varchar(255) NOT NULL,
   `tgl_kunjungan` date NOT NULL,
-  `kd_poli` varchar(255) NOT NULL,
+  `no_praktek` varchar(255) NOT NULL,
   `jenis_kasus` varchar(255) NOT NULL,
   `keluhan` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL
+  `status` varchar(255) NOT NULL,
+  `kd_pasien` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_keluhan`
+--
+
+INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `no_praktek`, `jenis_kasus`, `keluhan`, `status`, `kd_pasien`) VALUES
+('RM0001', '2020-12-07', '', 'Gatau', 'BerakMulu', '1', 'PSN0001');
 
 -- --------------------------------------------------------
 
@@ -95,9 +103,7 @@ CREATE TABLE `tb_keluhan` (
 CREATE TABLE `tb_konsul` (
   `kd_konsul` varchar(255) NOT NULL,
   `no_rm` varchar(255) NOT NULL,
-  `no_praktek` varchar(255) NOT NULL,
-  `kd_resep` varchar(255) NOT NULL,
-  `no_regist` varchar(255) NOT NULL
+  `kd_resep` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -112,6 +118,7 @@ CREATE TABLE `tb_pasien` (
   `tempat_lahir` varchar(255) NOT NULL,
   `tgl_lahir` date NOT NULL,
   `umur` varchar(10) NOT NULL,
+  `keterbatasan` varchar(255) NOT NULL,
   `jenis_kelamin` enum('Laki-Laki','Perempuan','','') NOT NULL,
   `warga_negara` varchar(255) NOT NULL,
   `status_perkawinan` varchar(255) NOT NULL,
@@ -120,16 +127,19 @@ CREATE TABLE `tb_pasien` (
   `pekerjaan` varchar(255) NOT NULL,
   `no_nik` varchar(16) NOT NULL,
   `alamat_pasien` varchar(255) NOT NULL,
-  `provinsi` varchar(255) NOT NULL,
-  `kab_kota` varchar(255) NOT NULL,
-  `kec` varchar(255) NOT NULL,
-  `kelurahan` varchar(255) NOT NULL,
   `no_tlp` varchar(13) NOT NULL,
   `nama_ayah` varchar(255) NOT NULL,
   `nama_ibu` varchar(255) NOT NULL,
   `foto` varchar(255) NOT NULL,
-  `keterbatasan` varchar(255) NOT NULL
+  `hub_pasien` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pasien`
+--
+
+INSERT INTO `tb_pasien` (`kd_pasien`, `nama_pasien`, `tempat_lahir`, `tgl_lahir`, `umur`, `keterbatasan`, `jenis_kelamin`, `warga_negara`, `status_perkawinan`, `pendidikan`, `agama`, `pekerjaan`, `no_nik`, `alamat_pasien`, `no_tlp`, `nama_ayah`, `nama_ibu`, `foto`, `hub_pasien`) VALUES
+('PSN0001', 'Brl', 'Smp', '2020-12-01', '22', 'GILA', 'Laki-Laki', 'WNA', 'KAWIN', 'STM', 'Islam Katanya', 'Begal', '34555123123', 'Smp', '0897878787887', 'Dr. Azz', 'Gatau', 'default.jpg', 'Orang Dalam');
 
 -- --------------------------------------------------------
 
