@@ -3,7 +3,7 @@
 		<div class="content-wrapper-before"></div>
 		<div class="content-header row">
 			<div class="content-header-left col-md-4 col-12 mb-2">
-				<h3 class="content-header-title" style="margin-bottom:50px;margin-top:80px">Data Pasien</h3>
+				<h3 class="content-header-title" style="margin-bottom:50px;margin-top:80px">DATA KLINIK</h3>
 			</div>
 			<div class="content-header-right col-md-8 col-12">
 				<div class="breadcrumbs-top float-md-right">
@@ -11,7 +11,7 @@
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="index.html">Home</a>
 							</li>
-							<li class="breadcrumb-item active">
+							<li class="breadcrumb-item active">Data Klinik
 							</li>
 						</ol>
 					</div>
@@ -37,7 +37,7 @@
 					<div class="card">
 						<div class="card-header">
 							<h4 class="card-title">
-								<p><span class="text-bold-600"><button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Pasien</button></span></p>
+
 							</h4>
 							<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 							<div class="heading-elements">
@@ -50,90 +50,102 @@
 						</div>
 						<br>
 						<div class="card-content collapse show">
+							<!-- <p><span class="text-bold-600"><button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Data Dokter</button></span></p> -->
+							<br><a href="#"><button style="float:right;margin-bottom:10px;margin-top:-20px;" type="button" data-target="#exampleModal" data-toggle="modal" class="btn btn-primary">Tambah Data Klinik</button></a>
 							<div class="table-responsive">
 								<table class="table">
 									<thead class="thead-dark" align="center">
 										<tr>
-											<th>MR</th>
-											<th>Nama</th>
-											<th>Umur</th>
-											<th>JK</th>
-											<th>Alamat</th>
-											<th>Tanggal Lahir</th>
-											<th>Telepon</th>
+											<th>No</th>
+											<th>Kode Klinik</th>
+											<th>Nama Klinik</th>
+											<th>Nama Dokter</th>
+											<th>No Praktek</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php
 										$no = 1;
-										foreach ($listdokter as $u) {
+										foreach ($listklinik as $a) {
 										?>
 											<tr>
 
 												<td><?php echo $no++ ?></td>
-												<td><?php echo $u->no_praktek ?></td>
-												<td><?php echo $u->nama_dokter ?></td>
-												<td><?php echo $u->jadwal_praktek ?></td>
-												<td><?php echo $u->no_hp_dokter ?></td>
-												<td><img src="<?php base_url('assets/images/dokter/') . $u->foto_dokter; ?>" alt="Foto Dokter" class="logo-komunitas mx-auto d-block mb-5" style="width:100"></td>
-												<td><button type="button" class="la la-trash-o"></button>
-													</a>&nbsp;
-													<button type="button" data-target="#<?php echo $u->no_praktek ?>" data-toggle="modal" class="la la-edit"></button></td>
-											<?php } ?>
-											</tr>
-									</tbody>
-								</table>
+												<td><?php echo $a->kd_poli ?></td>
+												<td><?php echo $a->klinik ?></td>
+												<td><?php echo $a->nama_dokter ?></td>
+												<td><?php echo $a->no_praktek ?></td>
+											
+												<td><a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
+													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk menghapus?</h5>
+																	<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">×</span>
+																	</button>
+																</div>
+																<div class="modal-footer">
+																	<button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
+																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('admin/hapusklinik/' . $a->kd_klinik); ?>">Hapus</a>
+																</div>
+															</div>
+														</div>
+													</div>
 							</div>
+
+							<button type="button" data-target="#<?php echo $a->kd_klinik ?>" data-toggle="modal" class="la la-edit"></button></td>
+						<?php } ?>
+						</tr>
+						</tbody>
+						</table>
 						</div>
 					</div>
 				</div>
-
 			</div>
-			<!-- Table Head options start -->
+
 		</div>
+		<!-- Table Head options start -->
 	</div>
+</div>
 </div>
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 <?php
 $no = 1;
-foreach ($listdokter as $u) {
+foreach ($listklinik as $a) {
 ?>
 
 	<!-- Modal Update -->
-	<div class="modal fade" id="<?php echo $u->no_praktek ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="<?php echo $a->kd_poli ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Edit Dokter</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Edit Data Klinik</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="post" action="<?= base_url('Admin/update_dokter') ?>" enctype="multipart/form-data">
+					<form method="post" action="<?= base_url('Admin/update_klinik') ?>" enctype="multipart/form-data">
 						<div class="form-group">
-							<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $u->no_praktek ?>" name="id" aria-describedby="emailHelp">
-							<input type="" class="form-control" id="exampleInputEmail1" value="<?php echo $u->foto_dokter ?>" name="sekarang" aria-describedby="emailHelp">
-							<label for="exampleInputEmail1">Nama_Dokter</label>
-							<input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $u->title_threads ?>" name="nama_dokter" aria-describedby="emailHelp">
+							<label for="exampleInputEmail1">Kode Klinik</label>
+							<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $a->kd_poli ?>" name="kd_poli" aria-describedby="emailHelp">
+							<input type="" class="form-control" id="exampleInputEmail1" value="<?php echo $a->kd_poli ?>" name="kd_poli" aria-describedby="emailHelp">
+							<label for="exampleInputEmail1">Klinik</label>
+							<input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $a->klinik ?>" name="klinik" aria-describedby="emailHelp">
 						</div>
 						<div class="form-group">
-							<label for="foto_dokter">Foto</label><br>
-							<center><img src="<?php echo base_url("assets/images/dokter/" . $u->foto_dokter) ?>" width="100px" height="100px">
-								<center><br>
-									<input type="file" class="form-control" name="foto_dokter" id="foto_dokter">
-						</div>
-						<div class="form-group">
-							<label for="exampleFormControlTextarea1">jadwal_praktek </label>
-							<textarea class="form-control" name="jadwal_praktek" id="exampleFormControlTextarea1" rows="3"><?php echo $u->jadwal_praktek ?></textarea>
+							<label for="exampleFormControlTextarea1">Nama Dokter </label>
+							<textarea class="form-control" name="nama_dokter" id="exampleFormControlTextarea1" rows="3"><?php echo $a->nama_dokter ?></textarea>
 						</div>
 
 						<div class="form-group">
-							<label for="exampleFormControlTextarea1">No Hp Dokter </label>
-							<textarea class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" rows="3"><?php echo $u->no_hp_dokter ?></textarea>
-						</div>
+							<label for="exampleFormControlTextarea1">Nomor Praktek </label>
+							<textarea class="form-control" name="no_praktek" id="exampleFormControlTextarea1" rows="3"><?php echo $a->no_praktek?></textarea>
+						</div> 
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -148,38 +160,46 @@ foreach ($listdokter as $u) {
 <?php } ?>
 
 <!-- Modal Insert-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">New Thread</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form method="post" action="<?= base_url('Admin/tambah_threads') ?>" enctype="multipart/form-data">
-					<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php
-																								$tanggal =  date("Y-m-d");
-																								echo $tanggal ?>" name="tanggal" aria-describedby="emailHelp">
-					<div class="form-group">
-						<label for="exampleInputEmail1">Judul</label>
-						<input type="text" class="form-control" id="exampleInputEmail1" name="judul" aria-describedby="emailHelp">
-					</div>
-					</br>
-					<div class="form-group">
-						<label for="image_input">Gambar</label>
-						<input type="file" class="form-control" name="image_input" id="image_input">
-					</div>
-					<div class="form-group">
-						<label for="exampleFormControlTextarea1">Isi Thread </label>
-						<textarea class="form-control" name="isi" id="exampleFormControlTextarea1" rows="3"></textarea>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-danger">Add</button>
-				</form>
+<?php
+$no = 1;
+foreach ($lisklinik as $a) {
+?>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" name="tambahmodal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Tambah Data Klinik</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="post" action="<?= base_url('Admin/tambah_klinik') ?>" enctype="multipart/form-data">
+						<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php
+																									$tanggal =  date("Y-m-d");
+																									echo $tanggal ?>" name="tanggal" aria-describedby="emailHelp">
+						<label for="exampleInputEmail1">Kode Klinik</label>
+						<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $a->kd_klinik ?>" name="kd_klinik" aria-describedby="emailHelp">
+						<input type="" class="form-control" id="exampleInputEmail1" value="<?php echo $a->kd_klinik ?>" name="kd_klinik" aria-describedby="emailHelp">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Klinik</label>
+							<input type="text" class="form-control" id="exampleInputEmail1" name="klinik" aria-describedby="emailHelp">
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Nama Dokter </label>
+							<textarea class="form-control" name="nama_dokter" id="exampleFormControlTextarea1" rows="3"></textarea>
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Nomor Praktek </label>
+							<textarea class="form-control" name="no_praktek" id="exampleFormControlTextarea1" rows="3"></textarea>
+						</div>
+						</br>
+							<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-danger">Add</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+<?php } ?>

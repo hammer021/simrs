@@ -193,6 +193,16 @@ public function hapuskonsul($id){
 
 	redirect('admin/pemeriksaan');
 }
+public function datapasien()
+	{
+		$pasien['listpasien'] = $this->Pasien_model->tampil_datapasien()->result();
+		$this->load->view('template/header');
+		$this->load->view('template/sidemenu');
+		$this->load->view('admin/vdatapasien', $pasien);
+		$this->load->view('template/footer');
+		$this->load->helper('url');
+	}
+
 public function dataklinik()
 	{
 		$klinik['listklinik'] = $this->Klinik_model->tampil_dataklinik()->result();
@@ -202,4 +212,5 @@ public function dataklinik()
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
+
 }
