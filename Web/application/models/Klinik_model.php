@@ -51,7 +51,12 @@ class Klinik_model extends CI_Model
     function update_data($where,$data,$table){
 		$this->db->where($where);
 		$this->db->update($table,$data);
-	}	
+    }	
+    
+    public function updatedataklinik($kd_poli, $data){
+        $this->db->where('kd_poli', $kd_poli);
+        return $this->db->update('tb_poli', $data);
+    }
 	function hapus_data($id){
 		return $this->db->delete($this->_table, array("kd_poli" => $id));
     }

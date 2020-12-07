@@ -63,17 +63,17 @@
 										</tr>
 									</thead>
 									<tbody>
-									
+
 										<?php
 										$no = 1;
 										foreach ($listklinik as $a) {
 										?>
-											
-											<tr>						
+
+											<tr align="center">
 												<td><?php echo $no++ ?></td>
 												<td><?php echo $a->kd_poli ?></td>
 												<td><?php echo $a->klinik ?></td>
-											
+
 												<td><a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
 													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
@@ -93,11 +93,11 @@
 													</div>
 													<button type="button" data-target="#<?php echo $a->kd_poli ?>" data-toggle="modal" class="la la-edit"></button>
 												</td>
-						<?php } ?>
+											<?php } ?>
 											</tr>
-						</tbody>
-						</table>
-						</div>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -126,7 +126,7 @@ foreach ($listklinik as $a) {
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="post" action="<?= base_url('Admin/update_klinik') ?>" enctype="multipart/form-data">
+					<form method="post" action="<?= base_url('Klinik/updatedata') ?>" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Kode Klinik</label>
 							<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $a->kd_poli ?>" name="kd_poli" aria-describedby="emailHelp">
@@ -134,7 +134,7 @@ foreach ($listklinik as $a) {
 							<label for="exampleInputEmail1">Klinik</label>
 							<input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $a->klinik ?>" name="klinik" aria-describedby="emailHelp">
 						</div>
-						
+
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-danger">Save</button>
@@ -149,29 +149,29 @@ foreach ($listklinik as $a) {
 
 <!-- Modal Insert-->
 
-	<div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" name="tambahmodal">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Data Klinik</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form method="post" action="<?= base_url('Klinik/tambah_klinik') ?>" enctype="multipart/form-data">
-						
-						<div class="form-group">
-							<label for="exampleInputEmail1">Klinik</label>
-							<input type="text" class="form-control" id="exampleInputEmail1" name="klinik" aria-describedby="emailHelp">
-						</div>
-						
-						</br>
-							<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-danger">Add</button>
-					</form>
-				</div>
+<div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" name="tambahmodal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Tambah Data Klinik</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="post" action="<?= base_url('Klinik/tambah_klinik') ?>" enctype="multipart/form-data">
+
+					<div class="form-group">
+						<label for="exampleInputEmail1">Klinik</label>
+						<input type="text" class="form-control" id="exampleInputEmail1" name="klinik" aria-describedby="emailHelp">
+					</div>
+
+					</br>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-danger">Add</button>
+				</form>
 			</div>
 		</div>
 	</div>
+</div>

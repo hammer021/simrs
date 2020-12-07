@@ -24,17 +24,33 @@ class Klinik extends CI_Controller
         redirect(site_url("Admin/dataklinik"));
 
     }
-    public function hapusklinik($id=null){
-        
-        {
-            if (!isset($id)) show_404();
+    public function hapusklinik($id=null)
+    {        
+        if (!isset($id)) show_404();
             
-            if ($this->Klinik_model->hapus_data($id)) {
-                redirect(site_url('Admin/dataklinik'));
-            }
-        
+        if ($this->Klinik_model->hapus_data($id)) {
+            redirect(site_url('Admin/dataklinik'));
+        }
+    }   
+
+    public function updatedata(){
+
+        $kd_poli = $this->input->post('kd_poli');
+
+        $data = array(
+            'klinik' => $this->input->post('klinik')
+        );
+
+        if($this->Klinik_model->updatedataklinik($kd_poli, $data)){
+            //flash data jika berhasil
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil Update Data Klinik<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+
+            redirect('Admin/dataklinik');
+        } else {
+            //flash data jika berhasil
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Update Data Klinik<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+            
+            redirect('Admin/dataklinik');
+        }
     }
-   
 }
-}
-?>
