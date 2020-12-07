@@ -16,7 +16,7 @@ class Chat extends CI_Controller
     public function index()
     {
         $teman = $this->db->where('kd_regist !=', $this->user->kd_regist)->get('tb_registrasi');
-        $this->load->view('chat_dashboard', array(
+        $this->load->view('admin/dashboard', array(
             'teman' => $teman
         ));
     }
