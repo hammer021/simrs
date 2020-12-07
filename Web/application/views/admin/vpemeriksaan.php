@@ -61,7 +61,14 @@
 								<td><?php echo $kons['no_rm'] ?></td>
 								<td><?php echo $kons['nama_pasien'] ?></td>
 								<td><?php echo $kons['tgl_kunjungan'] ?></td>
-								<td><?php echo $kons['nama_dokter'] ?></td>
+								<td><?php $dok = $kons['nama_dokter'];
+									if ($dok== null){
+											echo "~Belum Dipilih~";
+									}
+									else {
+										echo $dok;
+									}
+									?></td>
 								<td><?php echo $kons['keluhan'] ?></td>
 								<td>
 									<?php $sts = $kons['status'];

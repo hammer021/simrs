@@ -7,7 +7,7 @@ class Konsul_model extends CI_Model
     public function konsul(){
 
         return $this->db->query("SELECT * FROM tb_keluhan JOIN tb_pasien 
-        ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien JOIN tb_dokter 
+        ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien LEFT JOIN tb_dokter 
         ON tb_keluhan.no_praktek = tb_dokter.no_praktek")->result_array();
     }
     
