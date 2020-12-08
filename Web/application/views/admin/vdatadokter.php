@@ -19,26 +19,12 @@
 			</div>
 		</div>
 		<div class="content-body">
-			<div class="col-xl-4 col-lg-3 col-lg-12">
-				<div class="card">
-					<div class="card-header">
-						<div class="card-title">
-							<form class="form-inline active-pink-4">
-								<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
-								<i class="la la-search" aria-hidden="false"></i>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
 			<!-- Table head options start -->
 			<div class="row">
-				<div class="col-12">
+				<div class="col-xl-9 col-lg-12 col-sm-12">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">
-
-							</h4>
+						<a href="#"><button style="float:left;margin-bottom:10px;" type="button" data-target="#tambah" data-toggle="modal" class="btn btn-primary">Tambah Data Dokter</button></a>
 							<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 							<div class="heading-elements">
 								<ul class="list-inline mb-0">
@@ -48,10 +34,9 @@
 								</ul>
 							</div>
 						</div>
-						<br>
 						<div class="card-content collapse show">
 							<!-- <p><span class="text-bold-600"><button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Data Dokter</button></span></p> -->
-							<br><a href="#"><button style="float:right;margin-bottom:10px;margin-top:-20px;" type="button" data-target="#tambah" data-toggle="modal" class="btn btn-primary">Tambah Data Dokter</button></a>
+							<br>
 							<div class="table-responsive">
 								<table class="table">
 									<thead class="thead-dark" align="center">
@@ -107,7 +92,18 @@
 					</div>
 				</div>
 			</div>
-
+			<div class="col-xl-3 col-lg-12 col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">
+							<form class="form-inline active-pink-4">
+								<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
+								<i class="la la-search" aria-hidden="false"></i>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- Table Head options start -->
 	</div>
@@ -209,4 +205,5 @@ foreach ($listdokter as $u) {
 			</div>
 		</div>
 	</div>
+</div>
 </div>

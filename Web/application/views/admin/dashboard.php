@@ -124,17 +124,47 @@
                         </div>
                     </div>
                 </div>
+                <?php
+                        $bulanini = Date('m');
+                        $tahun = Date('Y');
+                        $bulanlalu = Date('m', strtotime('-1 month'));
+                        $analisis1 = $this->db->query("SELECT COUNT(no_rm) as jumlah FROM `tb_keluhan` WHERE month(tgl_kunjungan) = ".$bulanini." and year(tgl_kunjungan) = ".$tahun."")->row_array();
+                        $analisis2 = $this->db->query("SELECT COUNT(no_rm) as jumlah FROM `tb_keluhan` WHERE month(tgl_kunjungan) = ".$bulanlalu." and year(tgl_kunjungan) = ".$tahun."")->row_array();
+
+                        if($analisis2['jumlah'] < $analisis1['jumlah']){
+                            $persen = ($analisis2['jumlah']-$analisis1['jumlah'])/$analisis2['jumlah']*100 ;
+                    ?>
                 <div class="col-xl-4 col-lg-6 col-md-12">
                     <div class="card pull-up height-200" style="background-image: linear-gradient(to right, #F35050, #D68B8B)">
                         <div class="card-body">
                             <h4 class="card-title" style="color:white">Analisis</h4>
-                            <p class="card-text text-center" style="color:white;margin-top:30px;font-size:40px ">-20.5%</p>
+                            <p class="card-text text-center" style="color:white;margin-top:30px;font-size:40px ">
+                                <?= $persen."%";?>
+                            </p>
                             <p class="card-text pasien">Pasien Berkurang</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <?php 
+                        }else{
+                            $persen = ($analisis1['jumlah']-$analisis2['jumlah'])/$analisis1['jumlah']*100 ;
+        ?>
+        <div class="col-xl-4 col-lg-6 col-md-12">
+                    <div class="card pull-up height-200" style="background-image: linear-gradient(to right, #2ebd28, #86e882)">
+                        <div class="card-body">
+                            <h4 class="card-title" style="color:white">Analisis</h4>
+                            <p class="card-text text-center" style="color:white;margin-top:30px;font-size:40px ">
+                                <?= $persen."%";?>
+                            </p>
+                            <p class="card-text pasien">Pasien Bertambah</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                        <?php } ?>
 
 
         <!-- Statistics -->
