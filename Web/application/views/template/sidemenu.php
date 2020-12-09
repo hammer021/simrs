@@ -28,6 +28,8 @@
               </li>
               <li class=""><a class="menu-item" href="<?php echo base_url(); ?>admin/dataklinik">Data Klinik</a>
               </li>
+              <li class=""><a class="menu-item" href="<?php echo base_url(); ?>admin/datauser">Data User</a>
+              </li>
             </ul>
           </li>
         </ul>
