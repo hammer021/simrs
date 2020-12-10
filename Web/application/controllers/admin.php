@@ -51,9 +51,14 @@ class Admin extends CI_Controller
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
-	public function datadokter()
+	public function datadokter($page = "")
 	{
-		$dokter['listdokter'] = $this->Dokter_model->tampil_datadokter()->result();
+		if($page == "dokter"){
+			$isi = $this->input->post('dokter');
+			$dokter['listdokter'] = $this->db->get_where('tb_dokter', ['nama_dokter' => $isi])->result();
+		}else{
+			$dokter['listdokter'] = $this->Dokter_model->tampil_datadokter()->result();
+		}
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
 		$this->load->view('admin/vdatadokter', $dokter);
@@ -195,18 +200,28 @@ class Admin extends CI_Controller
 		$this->load->helper('url');
 	}
 
-	public function dataklinik()
+	public function dataklinik($page = "")
 	{
-		$klinik['listklinik'] = $this->Klinik_model->tampil_dataklinik()->result();
+		if($page == "klinik"){
+			$isi = $this->input->post('klinik');
+			$klinik['listklinik'] = $this->db->get_where('tb_poli', ['klinik' => $isi])->result();
+		}else{
+			$klinik['listklinik'] = $this->Klinik_model->tampil_dataklinik()->result();
+		}
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
 		$this->load->view('admin/vdataklinik', $klinik);
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
-	public function datauser()
+	public function datauser($page = "")
 	{
-		$user['listuser'] = $this->User_model->tampil_datauser()->result();
+		if($page == "user"){
+			$isi = $this->input->post('user');
+			$user['listuser'] = $this->db->get_where('tb_registrasi', ['name' => $isi])->result();
+		}else{
+			$user['listuser'] = $this->User_model->tampil_datauser()->result();
+		}
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
 		$this->load->view('admin/vdatauser', $user);

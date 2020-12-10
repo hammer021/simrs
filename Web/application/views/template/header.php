@@ -37,14 +37,44 @@
               <li class="nav-item dropdown navbar-search"><a class="nav-link dropdown-toggle hide" data-toggle="dropdown" href="#"><i class="ficon ft-search"></i></a>
                 <ul class="dropdown-menu">
                   <li class="arrow_box">
-                    <form>
+                  <?php if (strpos($_SERVER['REQUEST_URI'], "datadokter") !== false){
+
+                    echo '<form method="post" action="'.base_url('admin/datadokter/dokter').'">
                       <div class="input-group search-box">
                         <div class="position-relative has-icon-right full-width">
-                          <input class="form-control" id="search" type="text" placeholder="Search here...">
+                          <input class="form-control" name="dokter" id="search" type="text" placeholder="Search here...">
                           <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
                         </div>
                       </div>
-                    </form>
+                    </form>';
+                    }elseif (strpos($_SERVER['REQUEST_URI'], "dataklinik") !== false){
+                      echo '<form method="post" action="'.base_url('admin/dataklinik/klinik').'">
+                      <div class="input-group search-box">
+                        <div class="position-relative has-icon-right full-width">
+                          <input class="form-control" name="klinik" id="search" type="text" placeholder="Search here...">
+                          <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
+                        </div>
+                      </div>
+                    </form>';
+                    }elseif (strpos($_SERVER['REQUEST_URI'], "datapasien") !== false){
+                      echo '<form method="post" action="'.base_url('admin/datapasien/pasien').'">
+                      <div class="input-group search-box">
+                        <div class="position-relative has-icon-right full-width">
+                          <input class="form-control" name="pasien" id="search" type="text" placeholder="Search here...">
+                          <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
+                        </div>
+                      </div>
+                    </form>';
+                    }elseif (strpos($_SERVER['REQUEST_URI'], "datauser") !== false) {
+                      echo '<form method="post" action="'.base_url('admin/datauser/user').'">
+                      <div class="input-group search-box">
+                        <div class="position-relative has-icon-right full-width">
+                          <input class="form-control" name="user" id="search" type="text" placeholder="Search here...">
+                          <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
+                        </div>
+                      </div>
+                    </form>';
+                    }?>
                   </li>
                 </ul>
               </li>

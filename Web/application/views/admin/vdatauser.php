@@ -19,18 +19,6 @@
 			</div>
 		</div>
 		<div class="content-body">
-        <div class="col-xl-4 col-lg-12 col-sm-12">
-				<div class="card">
-					<div class="card-header">
-						<div class="card-title">
-							<form class="form-inline active-pink-4">
-								<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
-								<i class="la la-search" aria-hidden="false"></i>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
 			<!-- Table head options start -->
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-sm-12">

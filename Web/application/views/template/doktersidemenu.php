@@ -13,8 +13,7 @@
           "><a href="<?php echo base_url(); ?>dokter/dashboard"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>
           <li class="
-          <li class="
-          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/dokter/resep'){ echo 'active';}else { echo 'nav-item';}?>
+          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/dokter/resep'){ echo 'active';}else { echo 'nav-item'; } ?>
           "><a href="<?php echo base_url(); ?>dokter/resep"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Resep </span></a>
           </li>
           <li class="
