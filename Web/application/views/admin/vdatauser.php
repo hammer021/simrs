@@ -88,7 +88,7 @@
 													</div>
 							
 
-							<!--<button type="button" data-target="#<?php echo $e->kd_regist ?>" data-toggle="modal" class="la la-edit"></button></td> -->
+							<!--<button type="button" data-target="#<//?php echo $e->kd_regist ?>" data-toggle="modal" class="la la-edit"></button></td> -->
 							</div>
 							<?php } ?>
 						</tr>

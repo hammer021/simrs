@@ -10,10 +10,10 @@ class Admin extends CI_Controller
 		$this->load->model('Klinik_model');
 		$this->load->model('Admin_model');
 		$this->load->model('Konsul_model');
-		
+		$this->load->model('User_model');
 	}
 
-	
+
 	public function dashboard()
 	{
 		$data['totpasien'] = $this->db->query("SELECT COUNT(tb_pasien.kd_pasien) AS jmlpasien FROM tb_pasien")->result_array();
@@ -47,7 +47,7 @@ class Admin extends CI_Controller
 		$data['konsul'] = $this->Konsul_model->konsul();
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
-		$this->load->view('admin/vpemeriksaan',$data);
+		$this->load->view('admin/vpemeriksaan', $data);
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
@@ -116,7 +116,7 @@ class Admin extends CI_Controller
 			redirect('admin/datadokter');
 		}
 	}
-	public function tambah_dokter() 
+	public function tambah_dokter()
 	{
 		$no_praktek = $this->input->post('no_praktek');
 		$nama_dokter = $this->input->post('nama_dokter');
@@ -125,75 +125,67 @@ class Admin extends CI_Controller
 		$foto_dokter = $this->input->post('foto_dokter');
 		$file_ext = pathinfo($_FILES['foto_dokter']['name'], PATHINFO_EXTENSION);
 
-			$config['upload_path']		=	'assets/images/dokter';
-             $config['allowed_types']	=	'jpg|png|jpeg|JPG|jfif';
-             $config['max_size']			=	10048;
-             $config['file_name']		=	'picture-'.date('ymd').'-'.substr(md5(rand()),0,10);
+		$config['upload_path']		=	'assets/images/dokter';
+		$config['allowed_types']	=	'jpg|png|jpeg|JPG|jfif';
+		$config['max_size']			=	10048;
+		$config['file_name']		=	'picture-' . date('ymd') . '-' . substr(md5(rand()), 0, 10);
 
-             $this->load->library('upload', $config);
+		$this->load->library('upload', $config);
 
-             if(@$_FILES['foto_dokter']['name'] != null)
-             {
-                 if($this->upload->do_upload('foto_dokter'))
-                 {
-					$data = array(
+		if (@$_FILES['foto_dokter']['name'] != null) {
+			if ($this->upload->do_upload('foto_dokter')) {
+				$data = array(
 					'no_praktek' => $no_praktek,
 					'nama_dokter' => $nama_dokter,
 					'jadwal_praktek' => $jadwal_praktek,
 					'no_hp_dokter' => $no_hp_dokter,
 					'foto_dokter' => $config['file_name'] . "." . $file_ext
-					);
-					$this->Dokter_model->input_data($data,'tb_dokter');
-				
- 
-                     if($this->db->affected_rows() > 0)
-                     {
-                         echo "<script>alert('data Dokter Berhasil Di simpan');</script>";
-                     }
-                     echo "<script>window.location='".site_url('admin/datadokter')."';</script>";
- 
-                 }
-                 else
-                 {
-					$error = array('error' => $this->upload->display_errors());
-                     echo "<script>alert(".$error.");</script>";
-                 }
-                 if($this->db->affected_rows() > 0)
-                 {
-                     echo "<script>alert('data Dokter Berhasil Di simpan');</script>";
-                 }
-                 echo "<script>window.location='".site_url('admin/datadokter')."';</script>";
-             
-             } 
-             else
-             {	$data = array(
-					'no_praktek' => $no_praktek,
-					'nama_dokter' => $nama_dokter,
-					'jadwal_praktek' => $jadwal_praktek,
-					'no_hp_dokter' => $no_hp_dokter,
-					'foto_dokter' => $config['file_name'] . "." . $file_ext
-					);
-			$this->Dokter_model->input_data($data,'tb_dokter');
-	
-     
-                 if($this->db->affected_rows() > 0)
-                 {
-                     echo "<script>alert('data Dokter Berhasil Di simpan');</script>";
-                 }
-                 echo "<script>window.location='".site_url('admin/datadokter')."';</script>";
+				);
+				$this->Dokter_model->input_data($data, 'tb_dokter');
+
+
+				if ($this->db->affected_rows() > 0) {
+					echo "<script>alert('data Dokter Berhasil Di simpan');</script>";
+				}
+				echo "<script>window.location='" . site_url('admin/datadokter') . "';</script>";
+			} else {
+				$error = array('error' => $this->upload->display_errors());
+				echo "<script>alert(" . $error . ");</script>";
+			}
+			if ($this->db->affected_rows() > 0) {
+				echo "<script>alert('data Dokter Berhasil Di simpan');</script>";
+			}
+			echo "<script>window.location='" . site_url('admin/datadokter') . "';</script>";
+		} else {
+			$data = array(
+				'no_praktek' => $no_praktek,
+				'nama_dokter' => $nama_dokter,
+				'jadwal_praktek' => $jadwal_praktek,
+				'no_hp_dokter' => $no_hp_dokter,
+				'foto_dokter' => $config['file_name'] . "." . $file_ext
+			);
+			$this->Dokter_model->input_data($data, 'tb_dokter');
+
+
+			if ($this->db->affected_rows() > 0) {
+				echo "<script>alert('data Dokter Berhasil Di simpan');</script>";
+			}
+			echo "<script>window.location='" . site_url('admin/datadokter') . "';</script>";
+		}
 	}
-}
-public function hapusdokter($id){
-	$this->Dokter_model->hapus_data($id);
+	public function hapusdokter($id)
+	{
+		$this->Dokter_model->hapus_data($id);
 
-	redirect('admin/datadokter');
-}
-public function hapuskonsul($id){
-	$this->Konsul_model->hapus_data($id);
+		redirect('admin/datadokter');
+	}
+	public function hapuskonsul($id)
+	{
+		$this->Konsul_model->hapus_data($id);
 
-	redirect('admin/pemeriksaan');
-}
-public function datapasien()
+		redirect('admin/pemeriksaan');
+	}
+	public function datapasien()
 	{
 		$pasien['listpasien'] = $this->Pasien_model->tampil_datapasien()->result();
 		$this->load->view('template/header');
@@ -203,7 +195,7 @@ public function datapasien()
 		$this->load->helper('url');
 	}
 
-public function dataklinik()
+	public function dataklinik()
 	{
 		$klinik['listklinik'] = $this->Klinik_model->tampil_dataklinik()->result();
 		$this->load->view('template/header');
@@ -212,5 +204,18 @@ public function dataklinik()
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
-
+	public function datauser()
+	{
+		$user['listuser'] = $this->User_model->tampil_datauser()->result();
+		$this->load->view('template/header');
+		$this->load->view('template/sidemenu');
+		$this->load->view('admin/vdatauser', $user);
+		$this->load->view('template/footer');
+		$this->load->helper('url');
+	}
+	public function hapususer($id)
+	{
+		$this->User_model->hapus_data($id);
+		redirect('admin/datauser');
+	}
 }
