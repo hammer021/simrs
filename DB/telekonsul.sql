@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2020 at 11:09 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: Dec 10, 2020 at 06:50 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `chat` (
   `chat_id` int(11) NOT NULL,
-  `send_to` int(11) NOT NULL,
-  `send_by` int(11) NOT NULL,
+  `send_to` varchar(255) NOT NULL,
+  `send_by` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -45,7 +44,7 @@ CREATE TABLE `chat` (
 CREATE TABLE `login_details` (
   `login_details_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `last_activity` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `last_activity` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `is_type` enum('no','yes','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -114,6 +113,7 @@ CREATE TABLE `tb_konsul` (
 
 CREATE TABLE `tb_pasien` (
   `kd_pasien` varchar(255) NOT NULL,
+  `kd_regist` varchar(255) NOT NULL,
   `nama_pasien` varchar(255) NOT NULL,
   `tempat_lahir` varchar(255) NOT NULL,
   `tgl_lahir` date NOT NULL,
@@ -138,8 +138,8 @@ CREATE TABLE `tb_pasien` (
 -- Dumping data for table `tb_pasien`
 --
 
-INSERT INTO `tb_pasien` (`kd_pasien`, `nama_pasien`, `tempat_lahir`, `tgl_lahir`, `umur`, `keterbatasan`, `jenis_kelamin`, `warga_negara`, `status_perkawinan`, `pendidikan`, `agama`, `pekerjaan`, `no_nik`, `alamat_pasien`, `no_tlp`, `nama_ayah`, `nama_ibu`, `foto`, `hub_pasien`) VALUES
-('PSN0001', 'Brl', 'Smp', '2020-12-01', '22', 'GILA', 'Laki-Laki', 'WNA', 'KAWIN', 'STM', 'Islam Katanya', 'Begal', '34555123123', 'Smp', '0897878787887', 'Dr. Azz', 'Gatau', 'default.jpg', 'Orang Dalam');
+INSERT INTO `tb_pasien` (`kd_pasien`, `kd_regist`, `nama_pasien`, `tempat_lahir`, `tgl_lahir`, `umur`, `keterbatasan`, `jenis_kelamin`, `warga_negara`, `status_perkawinan`, `pendidikan`, `agama`, `pekerjaan`, `no_nik`, `alamat_pasien`, `no_tlp`, `nama_ayah`, `nama_ibu`, `foto`, `hub_pasien`) VALUES
+('PSN0001', '', 'Brl', 'Smp', '2020-12-01', '22', 'GILA', 'Laki-Laki', 'WNA', 'KAWIN', 'STM', 'Islam Katanya', 'Begal', '34555123123', 'Smp', '0897878787887', 'Dr. Azz', 'Gatau', 'default.jpg', 'Orang Dalam');
 
 -- --------------------------------------------------------
 
@@ -159,7 +159,7 @@ CREATE TABLE `tb_poli` (
 --
 
 CREATE TABLE `tb_registrasi` (
-  `kd_regist` int(11) NOT NULL,
+  `kd_regist` varchar(255) NOT NULL,
   `name` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
@@ -178,8 +178,9 @@ CREATE TABLE `tb_registrasi` (
 --
 
 INSERT INTO `tb_registrasi` (`kd_regist`, `name`, `email`, `image`, `password`, `kd_role`, `is_active`, `date_created`, `alamat`, `no_hp`, `tgl_lahir`, `tempat_lahir`) VALUES
-(1, 'hammer', 'admin@gmail.com', 'default.jpg', '202cb962ac59075b964b07152d234b70', 1, 1, '0000-00-00 00:00:00', '', '', '0000-00-00', ''),
-(30, 'Dr.Ham', 'dokter@gmail.com', NULL, '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-01 12:15:25', 'ayam', '123', '0000-00-00', 'asd');
+('RGS00001', 'admin', 'admin@gmail.com', 'default.jpg', '202cb962ac59075b964b07152d234b70', 1, 1, '2020-12-10 11:36:34', 'BWI', '89693556052', '2020-12-10', 'Banyuwangi'),
+('RGS00002', 'Dr. Hammer', 'dokter@gmail.com', 'default.jpg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-10 12:17:29', 'Sumenep', '2345678921', '2020-12-01', 'Madura'),
+('RGS00003', 'User', 'user@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 3, 1, '2020-12-10 11:36:34', 'Jember', '896956789', '1999-07-21', 'Rumah Sakit');
 
 -- --------------------------------------------------------
 
@@ -306,7 +307,7 @@ INSERT INTO `user_token` (`id_token`, `email`, `token`, `v_num`, `date_created`)
 --
 ALTER TABLE `chat`
   ADD PRIMARY KEY (`chat_id`),
-  ADD KEY `chat` (`send_by`);
+  ADD KEY `send_by` (`send_by`);
 
 --
 -- Indexes for table `login_details`
@@ -403,12 +404,6 @@ ALTER TABLE `login_details`
   MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tb_registrasi`
---
-ALTER TABLE `tb_registrasi`
-  MODIFY `kd_regist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
 -- AUTO_INCREMENT for table `tb_role`
 --
 ALTER TABLE `tb_role`
@@ -434,7 +429,7 @@ ALTER TABLE `user_token`
 -- Constraints for table `chat`
 --
 ALTER TABLE `chat`
-  ADD CONSTRAINT `chat` FOREIGN KEY (`send_by`) REFERENCES `tb_registrasi` (`kd_regist`);
+  ADD CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`send_by`) REFERENCES `tb_registrasi` (`kd_regist`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
