@@ -11,6 +11,7 @@ class Admin extends CI_Controller
 		$this->load->model('Admin_model');
 		$this->load->model('Konsul_model');
 		$this->load->model('User_model');
+		$this->load->model('Pasien_model');
 	}
 
 
@@ -190,9 +191,14 @@ class Admin extends CI_Controller
 
 		redirect('admin/pemeriksaan');
 	}
-	public function datapasien()
+	public function datapasien($page = "")
 	{
-		$pasien['listpasien'] = $this->Pasien_model->tampil_datapasien()->result();
+		if($page == "pasien"){
+			$isi = $this->input->post('pasien');
+			$klinik['listpasien'] = $this->db->get_where('tb_pasien', ['nama_pasien' => $isi])->result();
+		}else{
+			$pasien['listpasien'] = $this->Pasien_model->tampil_datapasien()->result();
+		}
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
 		$this->load->view('admin/vdatapasien', $pasien);
