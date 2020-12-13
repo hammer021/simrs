@@ -22,11 +22,15 @@
         <div class="content-body">
 <!-- Table head options start -->
 <div class="row">
-	<div class="col-9">
+	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
 				<h4 class="card-title">Pemeriksaan Konsultasi</h4>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+				<form class="form-inline active-pink-4">
+  					<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
+  						<i class="la la-search" aria-hidden="false"></i>
+				</form>
 				<div class="heading-elements">
 					<ul class="list-inline mb-0">
 						<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -86,7 +90,12 @@
 									}
 									?></td>
 							<td>
-							<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
+							<?php $sts = $kons['status'];
+									if ($sts == 0){
+											
+									}
+									else if($sts == 1){?>
+										<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
 													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
@@ -107,6 +116,35 @@
 													</div>
 							
 													<button type="button" data-target="#<?php echo $kons['no_rm'] ?>" data-toggle="modal" class="la la-edit"></button>
+							<?php
+									}
+									else if($sts == 2){?>
+										<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
+													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk menghapus?
+																	<?php echo $kons['nama_pasien'] ?>
+																	</h5>
+																	<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">×</span>
+																	</button>
+																</div>
+																<div class="modal-footer">
+																	<button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
+																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('Admin/hapuskonsul/' . $kons['no_rm']); ?>">Hapus</a>
+																</div>
+															</div>
+														</div>
+													</div>
+							<?php
+									}
+									else {
+										echo "Not Found";
+									}
+									?>
+							
 							</td>
 
 							</tr>
@@ -118,21 +156,109 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-xl-3 col-lg-6 col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-				<form class="form-inline active-pink-4">
-  					<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
-  						<i class="la la-search" aria-hidden="false"></i>
-				</form>
-				</div>
-            </div>
-		</div>
-	</div>
+	
 </div>
 <!-- Table Head options start -->
         </div>
       </div>
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
+	<?php
+$no = 1;
+foreach ($konsul as $konn) {
+?>
+
+	<!-- Modal Update -->
+	<div class="modal fade" id="<?php echo $konn['no_rm'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Edit Data Konsultasi</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="post" action="<?= base_url('Admin/update_konsul') ?>" enctype="multipart/form-data">
+						<div class="form-group">
+							<input type="hidden" id="no_rm" name ="no_rm" value="<?php echo $konn['no_rm'] ?>"> 
+							<label for="exampleInputEmail1">Nomor Rekam Medis :<br/> <h3><?php echo $konn['no_rm'] ?></h3></label>
+						</div>
+						
+						<div class="form-group">
+							<label for="jenis_kasus">Pasien : <br><?php echo $konn['nama_pasien'] ?></label>
+						</div>
+
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Tanggal Kunjungan : <br><?php echo $konn['tgl_kunjungan'] ?></label>
+						</div>
+						<?php 
+						$praktek=$konn['no_praktek'];
+						if ($praktek==""){
+						?>
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Dokter </label>
+							<select class="form-control" name="dokter" id="dokter">
+							<?php 
+							foreach($listdokter as $dok):
+							?>
+							<option value="<?php echo $dok->no_praktek?>"> <?php echo $dok->nama_dokter?></option>
+							<?php 
+							endforeach;
+							?>
+							</select>	
+						</div>
+						<?php		
+						}
+						else{
+						?>
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">No Praktek Dokter </label>
+							<input class="form-control" name="no_praktek" id="praktek" value="<?php echo $konn['no_praktek'] ?>">
+						</div>
+						
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Nama Dokter </label>
+							<input class="form-control" name="nama_dokter" id="nama_dokter" value="<?php echo $konn['nama_dokter'] ?>">
+						</div>
+						<?php	
+						}
+						?>
+						<div class="form-group">
+							<label for="jenis_kasus">Jenis Kasus :<br> <?php echo $konn['jenis_kasus'] ?></label>
+						</div>
+						
+						<div class="form-group">
+							<label for="jenis_kasus">Keluhan : <br> <?php echo $konn['keluhan'] ?></label>
+						</div>
+
+						<div class="form-group">
+							<label for="jenis_kasus">Status : <?php $sts = $konn['status'];
+									if ($sts == 0){
+											echo "Selesai";
+									}
+									else if($sts == 1){
+										echo "Belum Bayar";
+									}
+									else if($sts == 2){
+										echo "Sudah Bayar";
+									}
+									else {
+										echo "Not Found";
+									}
+									?></label><br>
+						</div>
+
+						
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-danger">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- Model Update End -->
+<?php } ?>

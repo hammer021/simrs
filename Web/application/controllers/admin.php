@@ -46,6 +46,7 @@ class Admin extends CI_Controller
 	public function pemeriksaan()
 	{
 		$data['konsul'] = $this->Konsul_model->konsul();
+		$data['listdokter'] = $this->Dokter_model->tampil_datadokter()->result();
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
 		$this->load->view('admin/vpemeriksaan', $data);
@@ -70,6 +71,20 @@ class Admin extends CI_Controller
 	{
 		$this->load->view('auth/aktivasi');
 		$this->load->helper('url');
+	}
+	public function update_konsul(){
+		$no_rm = $this->input->post('no_rm');
+		$no_praktek = $this->input->post('dokter');
+		$where = array(
+			'no_rm' => $no_rm
+		);
+		$data = array(
+			'no_praktek' => $no_praktek,
+			'status' => "2"
+		);
+		$this->Konsul_model->update_data($where, $data, 'tb_keluhan');
+			redirect('admin/pemeriksaan');
+
 	}
 	public function update_dokter()
 	{
