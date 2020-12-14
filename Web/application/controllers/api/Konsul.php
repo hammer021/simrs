@@ -40,7 +40,6 @@ class Konsul extends REST_Controller {
             ];
             $this->response($message, REST_Controller::HTTP_OK);
         }else{
-            echo 'asdasd'.$l;
             $message = [
                 'status' => FALSE,
                 'message' => "No Rm tidak ditemukan"
@@ -68,6 +67,10 @@ class Konsul extends REST_Controller {
         $lahir = date_create($tgl_lahir);
         $a = date_diff($lahir,$sekarang);
         $umur = $a->format("%y Tahun");
+
+        //foto
+        $config2 = uniqid().'.jpeg';
+        $path2 = './assets/images/pasien/'.$config2;
 
         // Query
         $query = $this->db->select('*')->from('tb_pasien')
@@ -130,6 +133,9 @@ class Konsul extends REST_Controller {
                     'foto'                  => $this->post('foto'),
                     'hub_pasien'            => $this->post('hub_pasien'));
 
+                    
+                    
+
             }
             $data2 = array(
                 'no_rm'                 => $no_rm,
@@ -140,12 +146,21 @@ class Konsul extends REST_Controller {
                 
                 $insert = $this->db->insert('tb_pasien', $data);
                 $insert2 = $this->db->insert('tb_keluhan', $data2);
+                if($insert && $insert2){
+                    file_put_contents($path2, base64_decode($foto));
+                    $response = [
+                        'status' => true,
+                        'pesan' => 'Pendaftaran Akun Berhasil',
+                    ];
+                }else{
+                    $response = [
+                        'status' => false,
+                        'pesan' => 'Something Wrong I Can Feel It',
+                    ];
+                }
 
     
-                $response = [
-                    'status' => true,
-                    'pesan' => 'Pendaftaran Akun Berhasil',
-                ];
+                
         }
         $this->response($response, 200);
     
