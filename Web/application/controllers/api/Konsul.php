@@ -49,7 +49,7 @@ class Konsul extends REST_Controller {
         }
 
     }
-    function index_post()
+    function periksa_post()
     {
         // deklarasi untuk query
         $id_user = $this->post('kd_regist');
@@ -92,6 +92,7 @@ class Konsul extends REST_Controller {
                 'tempat_lahir'          => $this->post('tempat_lahir'),
                 'tgl_lahir'             => $this->post('tgl_lahir'),
                 'umur'                  => $umur,
+                'keterbatasan'          => $this->post('keterbatasan'),
                 'jenis_kelamin'         => $this->post('jenis_kelamin'),
                 'warga_negara'          => $this->post('warga_negara'),
                 'status_perkawinan'     => $this->post('status_perkawinan'),
@@ -103,7 +104,7 @@ class Konsul extends REST_Controller {
                 'no_tlp'                => $this->post('no_tlp'),
                 'nama_ayah'             => $this->post('nama_ayah'),
                 'nama_ibu'              => $this->post('nama_ibu'),
-                'keterbatasan'          => $this->post('keterbatasan'));
+                'hub_pasien'            => $this->post('hub_pasien'));
 
             
             }else{
@@ -114,6 +115,7 @@ class Konsul extends REST_Controller {
                     'tempat_lahir'          => $this->post('tempat_lahir'),
                     'tgl_lahir'             => $this->post('tgl_lahir'),
                     'umur'                  => $umur,
+                    'keterbatasan'          => $this->post('keterbatasan'),
                     'jenis_kelamin'         => $this->post('jenis_kelamin'),
                     'warga_negara'          => $this->post('warga_negara'),
                     'status_perkawinan'     => $this->post('status_perkawinan'),
@@ -126,15 +128,15 @@ class Konsul extends REST_Controller {
                     'nama_ayah'             => $this->post('nama_ayah'),
                     'nama_ibu'              => $this->post('nama_ibu'),
                     'foto'                  => $this->post('foto'),
-                    'keterbatasan'          => $this->post('keterbatasan'));
+                    'hub_pasien'            => $this->post('hub_pasien'));
 
             }
             $data2 = array(
                 'no_rm'                 => $no_rm,
-                'kd_pasien '            => $kode,
                 'tgl_kunjungan '        => $time,
                 'keluhan '              => $this->post('keluhan'),
-                'status '               => '1');    
+                'status '               => '1',
+                'kd_pasien '            => $kode);    
                 
                 $insert = $this->db->insert('tb_pasien', $data);
                 $insert2 = $this->db->insert('tb_keluhan', $data2);
@@ -146,6 +148,7 @@ class Konsul extends REST_Controller {
                 ];
         }
         $this->response($response, 200);
+    
     }
 
     public function bukti_post()
