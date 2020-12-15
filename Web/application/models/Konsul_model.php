@@ -17,6 +17,28 @@ class Konsul_model extends CI_Model
       }
     function update_data($where,$data,$table){
 		$this->db->where($where);
-		$this->db->update($table,$data);
-	}	
+        $this->db->update($table,$data);
+        $data = array(
+            'kd_konsul'=> $this->buat_kode(),
+            'no_rm' => $this->input->post('no_rm')
+		);
+        $this->db->insert('tb_konsul', $data);
+    }	
+    public function buat_kode(){
+        $this->db->select('RIGHT(tb_konsul.kd_konsul,2) as kode',FALSE);
+        $this->db->order_by('kd_konsul', 'DESC');
+        $this->db->limit(1);
+
+        $query=$this->db->get('tb_konsul');
+
+        if ($query->num_rows()<>0) {
+            $data=$query->row();
+            $kode=intval($data->kode)+1;
+        }else{
+            $kode=1;
+        }
+        $kode_max=str_pad($kode,2,"0",STR_PAD_LEFT);
+        $kode_jadi="KONS00".$kode_max;
+        return $kode_jadi;
+    }
 }
