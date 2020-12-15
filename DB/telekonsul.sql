@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2020 at 06:50 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.6
+-- Generation Time: Dec 15, 2020 at 06:51 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -32,7 +33,7 @@ CREATE TABLE `chat` (
   `send_to` varchar(255) NOT NULL,
   `send_by` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT current_timestamp()
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -44,7 +45,7 @@ CREATE TABLE `chat` (
 CREATE TABLE `login_details` (
   `login_details_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `last_activity` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `last_activity` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_type` enum('no','yes','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -68,7 +69,8 @@ CREATE TABLE `tb_dokter` (
 --
 
 INSERT INTO `tb_dokter` (`no_praktek`, `nama_dokter`, `jadwal_praktek`, `no_hp_dokter`, `foto_dokter`, `kd_poli`) VALUES
-('PR0001', 'ALIGUS', '838:59:59', '12312313123', 'picture-201204-e34a6efd26.jpg', '');
+('NRP0001231', 'Dr.Ham', '18:00:10', '08989841713', 'picture-201213-c37db3cbcc.jpg', ''),
+('PR0001', 'Mr. Brl', '838:59:59', '12312313123', 'picture-201204-e34a6efd26.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -91,7 +93,8 @@ CREATE TABLE `tb_keluhan` (
 --
 
 INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `no_praktek`, `jenis_kasus`, `keluhan`, `status`, `kd_pasien`) VALUES
-('RM0001', '2020-12-07', '', 'Gatau', 'BerakMulu', '1', 'PSN0001');
+('RM0001', '2020-12-07', 'NRP0001231', 'Gatau', 'BerakMulu', '2', 'PSN0001'),
+('RM0002', '2020-12-13', 'PR0001', 'gatauk', 'Mumet', '2', 'PSN0001');
 
 -- --------------------------------------------------------
 
@@ -104,6 +107,14 @@ CREATE TABLE `tb_konsul` (
   `no_rm` varchar(255) NOT NULL,
   `kd_resep` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_konsul`
+--
+
+INSERT INTO `tb_konsul` (`kd_konsul`, `no_rm`, `kd_resep`) VALUES
+('KONS0001', 'RM0001', ''),
+('KONS0002', 'RM0002', '');
 
 -- --------------------------------------------------------
 
@@ -151,6 +162,13 @@ CREATE TABLE `tb_poli` (
   `kd_poli` varchar(255) NOT NULL,
   `klinik` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_poli`
+--
+
+INSERT INTO `tb_poli` (`kd_poli`, `klinik`) VALUES
+('POL0001', 'Poli Umum');
 
 -- --------------------------------------------------------
 
@@ -203,6 +221,15 @@ CREATE TABLE `tb_role` (
   `kd_role` int(11) NOT NULL,
   `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_role`
+--
+
+INSERT INTO `tb_role` (`kd_role`, `role`) VALUES
+(1, 'admin'),
+(2, 'dokter'),
+(3, 'user');
 
 -- --------------------------------------------------------
 
@@ -407,7 +434,7 @@ ALTER TABLE `login_details`
 -- AUTO_INCREMENT for table `tb_role`
 --
 ALTER TABLE `tb_role`
-  MODIFY `kd_role` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kd_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
