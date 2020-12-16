@@ -16,27 +16,21 @@ class Konsul extends REST_Controller {
     function index_get()
     {
         $l = $this->get('kd_regist');
-        $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan');    
+        $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan, harga');    
         $this->db->from('tb_pasien');
         $this->db->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien');
         $this->db->where('kd_regist', $l);
+        $this->db->where('status', '1');
         $a = $this->db->get();
-        $query = $a->row_array();
+        $query = $a->result_array();
 
-        $output = $this->db->get_where('tb_pasien',  array('kd_regist' => $l))->row_array();
+        $output = $this->db->get_where('tb_pasien',  array('kd_regist' => $l))->result_array();
             if(!empty($output)){
-         
-                $return_data = [
-                    'no_rm' => $query['no_rm'],
-                    'nama_pasien' => $query['nama_pasien'],
-                    'status'      => $query['status'],
-                    'keluhan'     => $query['keluhan'],
-                    'tgl_kunjungan' => $query['tgl_kunjungan']
-                ];
+
 
             $message = [
                 'status' => TRUE,
-                'data'   => $return_data,
+                'data'   => $query,
             ];
             $this->response($message, REST_Controller::HTTP_OK);
         }else{
@@ -152,12 +146,12 @@ class Konsul extends REST_Controller {
                     file_put_contents($path2, base64_decode($foto));
                     $response = [
                         'status' => true,
-                        'pesan' => 'Pendaftaran Akun Berhasil',
+                        'message' => 'Pendaftaran Akun Berhasil',
                     ];
                 }else{
                     $response = [
                         'status' => false,
-                        'pesan' => 'Something Wrong I Can Feel It',
+                        'message' => 'Something Wrong I Can Feel It',
                     ];
                 }
 
