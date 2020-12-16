@@ -16,12 +16,14 @@ class Konsul extends REST_Controller {
     function index_get()
     {
         $l = $this->get('kd_regist');
-        $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan, harga');    
-        $this->db->from('tb_pasien');
-        $this->db->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien');
-        $this->db->where('kd_regist', $l);
-        $this->db->where('status', '1');
-        $a = $this->db->get();
+        $a = $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan, harga')    
+                ->from('tb_pasien')
+                    ->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
+                    ->group_start()
+                        ->where('kd_regist', $l)
+                        ->where('status = 1 OR status = 2')
+                    ->group_end()
+                ->get();
         $query = $a->result_array();
 
         $output = $this->db->get_where('tb_pasien',  array('kd_regist' => $l))->result_array();
