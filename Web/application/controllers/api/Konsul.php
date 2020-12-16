@@ -146,7 +146,9 @@ class Konsul extends REST_Controller {
                 
                 $insert = $this->db->insert('tb_pasien', $data);
                 $insert2 = $this->db->insert('tb_keluhan', $data2);
+                
                 if($insert && $insert2){
+
                     file_put_contents($path2, base64_decode($foto));
                     $response = [
                         'status' => true,

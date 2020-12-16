@@ -43,10 +43,16 @@ class Admin extends CI_Controller
 		$this->load->view('auth/login');
 		$this->load->helper('url');
 	}
-	public function pemeriksaan()
+	public function pemeriksaan($page = "")
 	{
-		$data['konsul'] = $this->Konsul_model->konsul();
-		$data['listdokter'] = $this->Dokter_model->tampil_datadokter()->result();
+		$isi = $this->input->post('konsul');
+
+		if($page == "periksa" && !empty($isi) ){
+			$data['konsul'] = $this->Konsul_model->konsuls($isi);
+		}else{
+			$data['listdokter'] = $this->Dokter_model->tampil_datadokter()->result();
+			$data['konsul'] = $this->Konsul_model->konsul();
+		}
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
 		$this->load->view('admin/vpemeriksaan', $data);
@@ -55,8 +61,9 @@ class Admin extends CI_Controller
 	}
 	public function datadokter($page = "")
 	{
-		if($page == "dokter"){
-			$isi = $this->input->post('dokter');
+		$isi = $this->input->post('dokter');
+
+		if($page == "dokter"  && !empty($isi)){
 			$dokter['listdokter'] = $this->db->get_where('tb_dokter', ['nama_dokter' => $isi])->result();
 		}else{
 			$dokter['listdokter'] = $this->Dokter_model->tampil_datadokter()->result();
@@ -208,8 +215,9 @@ class Admin extends CI_Controller
 	}
 	public function datapasien($page = "")
 	{
-		if($page == "pasien"){
-			$isi = $this->input->post('pasien');
+		$isi = $this->input->post('pasien');
+		
+		if($page == "pasien"  && !empty($isi)){
 			$pasien['listpasien'] = $this->db->get_where('tb_pasien', ['nama_pasien' => $isi])->result();
 		}else{
 			$pasien['listpasien'] = $this->Pasien_model->tampil_datapasien()->result();
@@ -223,8 +231,9 @@ class Admin extends CI_Controller
 
 	public function dataklinik($page = "")
 	{
-		if($page == "klinik"){
-			$isi = $this->input->post('klinik');
+		$isi = $this->input->post('klinik');
+
+		if($page == "klinik"  && !empty($isi)){
 			$klinik['listklinik'] = $this->db->get_where('tb_poli', ['klinik' => $isi])->result();
 		}else{
 			$klinik['listklinik'] = $this->Klinik_model->tampil_dataklinik()->result();

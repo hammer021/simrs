@@ -42,7 +42,7 @@
                     echo '<form method="post" action="'.base_url('admin/datadokter/dokter').'">
                       <div class="input-group search-box">
                         <div class="position-relative has-icon-right full-width">
-                          <input class="form-control" name="dokter" id="search" type="text" placeholder="Search here...">
+                          <input class="form-control" name="dokter" id="search" type="text" placeholder="Cari Nama Dokter">
                           <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
                         </div>
                       </div>
@@ -51,7 +51,7 @@
                       echo '<form method="post" action="'.base_url('admin/dataklinik/klinik').'">
                       <div class="input-group search-box">
                         <div class="position-relative has-icon-right full-width">
-                          <input class="form-control" name="klinik" id="search" type="text" placeholder="Search here...">
+                          <input class="form-control" name="klinik" id="search" type="text" placeholder="Cari Klinik">
                           <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
                         </div>
                       </div>
@@ -60,7 +60,7 @@
                       echo '<form method="post" action="'.base_url('admin/datapasien/pasien').'">
                       <div class="input-group search-box">
                         <div class="position-relative has-icon-right full-width">
-                          <input class="form-control" name="pasien" id="search" type="text" placeholder="Search here...">
+                          <input class="form-control" name="pasien" id="search" type="text" placeholder="Cari Nama Pasien">
                           <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
                         </div>
                       </div>
@@ -69,11 +69,20 @@
                       echo '<form method="post" action="'.base_url('admin/datauser/user').'">
                       <div class="input-group search-box">
                         <div class="position-relative has-icon-right full-width">
-                          <input class="form-control" name="user" id="search" type="text" placeholder="Search here...">
+                          <input class="form-control" name="user" id="search" type="text" placeholder="Cari Nama User">
                           <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
                         </div>
                       </div>
                     </form>';
+                  }elseif (strpos($_SERVER['REQUEST_URI'], "pemeriksaan") !== false) {
+                    echo '<form method="post" action="'.base_url('admin/pemeriksaan/periksa').'">
+                    <div class="input-group search-box">
+                      <div class="position-relative has-icon-right full-width">
+                        <input class="form-control" name="konsul" id="search" type="text" placeholder="Cari No Rm">
+                        <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
+                      </div>
+                    </div>
+                  </form>';
                     }?>
                   </li>
                 </ul>

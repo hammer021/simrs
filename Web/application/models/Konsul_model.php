@@ -41,4 +41,10 @@ class Konsul_model extends CI_Model
         $kode_jadi="KONS00".$kode_max;
         return $kode_jadi;
     }
+    public function konsuls($cari){
+
+        return $this->db->query('SELECT * FROM tb_keluhan JOIN tb_pasien 
+        ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien LEFT JOIN tb_dokter 
+        ON tb_keluhan.no_praktek = tb_dokter.no_praktek where tb_keluhan.no_rm = "'.$cari.'"')->result_array();
+    }
 }
