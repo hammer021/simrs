@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2020 at 06:51 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: Dec 16, 2020 at 10:42 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,7 +32,7 @@ CREATE TABLE `chat` (
   `send_to` varchar(255) NOT NULL,
   `send_by` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -45,7 +44,7 @@ CREATE TABLE `chat` (
 CREATE TABLE `login_details` (
   `login_details_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `last_activity` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `last_activity` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `is_type` enum('no','yes','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -84,17 +83,19 @@ CREATE TABLE `tb_keluhan` (
   `no_praktek` varchar(255) NOT NULL,
   `jenis_kasus` varchar(255) NOT NULL,
   `keluhan` varchar(255) NOT NULL,
+  `harga` int(11) NOT NULL,
   `status` varchar(255) NOT NULL,
-  `kd_pasien` varchar(255) NOT NULL
+  `kd_pasien` varchar(255) NOT NULL,
+  `buktikeluhan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_keluhan`
 --
 
-INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `no_praktek`, `jenis_kasus`, `keluhan`, `status`, `kd_pasien`) VALUES
-('RM0001', '2020-12-07', 'NRP0001231', 'Gatau', 'BerakMulu', '2', 'PSN0001'),
-('RM0002', '2020-12-13', 'PR0001', 'gatauk', 'Mumet', '2', 'PSN0001');
+INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `no_praktek`, `jenis_kasus`, `keluhan`, `harga`, `status`, `kd_pasien`, `buktikeluhan`) VALUES
+('RM0001', '2020-12-07', 'NRP0001231', 'Gatau', 'BerakMulu', 0, '2', 'PSN0001', ''),
+('RM0002', '2020-12-13', 'PR0001', 'gatauk', 'Mumet', 0, '2', 'PSN0001', '');
 
 -- --------------------------------------------------------
 
