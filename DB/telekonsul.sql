@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2020 at 10:42 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.6
+-- Generation Time: Dec 17, 2020 at 07:08 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -32,7 +33,7 @@ CREATE TABLE `chat` (
   `send_to` varchar(255) NOT NULL,
   `send_by` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT current_timestamp()
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -44,7 +45,7 @@ CREATE TABLE `chat` (
 CREATE TABLE `login_details` (
   `login_details_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `last_activity` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `last_activity` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_type` enum('no','yes','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -56,20 +57,10 @@ CREATE TABLE `login_details` (
 
 CREATE TABLE `tb_dokter` (
   `no_praktek` varchar(255) NOT NULL,
-  `nama_dokter` varchar(255) NOT NULL,
   `jadwal_praktek` time NOT NULL,
-  `no_hp_dokter` varchar(255) NOT NULL,
-  `foto_dokter` varchar(255) NOT NULL,
-  `kd_poli` varchar(255) NOT NULL
+  `kd_poli` varchar(255) NOT NULL,
+  `kd_regist` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_dokter`
---
-
-INSERT INTO `tb_dokter` (`no_praktek`, `nama_dokter`, `jadwal_praktek`, `no_hp_dokter`, `foto_dokter`, `kd_poli`) VALUES
-('NRP0001231', 'Dr.Ham', '18:00:10', '08989841713', 'picture-201213-c37db3cbcc.jpg', ''),
-('PR0001', 'Mr. Brl', '838:59:59', '12312313123', 'picture-201204-e34a6efd26.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -89,14 +80,6 @@ CREATE TABLE `tb_keluhan` (
   `buktikeluhan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_keluhan`
---
-
-INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `no_praktek`, `jenis_kasus`, `keluhan`, `harga`, `status`, `kd_pasien`, `buktikeluhan`) VALUES
-('RM0001', '2020-12-07', 'NRP0001231', 'Gatau', 'BerakMulu', 0, '2', 'PSN0001', ''),
-('RM0002', '2020-12-13', 'PR0001', 'gatauk', 'Mumet', 0, '2', 'PSN0001', '');
-
 -- --------------------------------------------------------
 
 --
@@ -108,14 +91,6 @@ CREATE TABLE `tb_konsul` (
   `no_rm` varchar(255) NOT NULL,
   `kd_resep` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_konsul`
---
-
-INSERT INTO `tb_konsul` (`kd_konsul`, `no_rm`, `kd_resep`) VALUES
-('KONS0001', 'RM0001', ''),
-('KONS0002', 'RM0002', '');
 
 -- --------------------------------------------------------
 
@@ -198,7 +173,6 @@ CREATE TABLE `tb_registrasi` (
 
 INSERT INTO `tb_registrasi` (`kd_regist`, `name`, `email`, `image`, `password`, `kd_role`, `is_active`, `date_created`, `alamat`, `no_hp`, `tgl_lahir`, `tempat_lahir`) VALUES
 ('RGS00001', 'admin', 'admin@gmail.com', 'default.jpg', '202cb962ac59075b964b07152d234b70', 1, 1, '2020-12-10 11:36:34', 'BWI', '89693556052', '2020-12-10', 'Banyuwangi'),
-('RGS00002', 'Dr. Hammer', 'dokter@gmail.com', 'default.jpg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-10 12:17:29', 'Sumenep', '2345678921', '2020-12-01', 'Madura'),
 ('RGS00003', 'User', 'user@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 3, 1, '2020-12-10 11:36:34', 'Jember', '896956789', '1999-07-21', 'Rumah Sakit');
 
 -- --------------------------------------------------------
