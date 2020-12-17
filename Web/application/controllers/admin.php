@@ -64,9 +64,9 @@ class Admin extends CI_Controller
 		$isi = $this->input->post('dokter');
 
 		if($page == "dokter"  && !empty($isi)){
-			$dokter['listdokter'] = $this->db->get_where('tb_dokter', ['nama_dokter' => $isi])->result();
+			$dokter['listdokter'] = $this->Dokter_model->tampils($isi);
 		}else{
-			$dokter['listdokter'] = $this->Dokter_model->tampil_datadokter()->result();
+			$dokter['listdokter'] = $this->Dokter_model->tampil_datadokter();
 		}
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
@@ -96,8 +96,10 @@ class Admin extends CI_Controller
 	public function update_dokter()
 	{
 		$no_praktek = $this->input->post('no_praktek');
+		$kd_regist = $this->input->post('kd_regist');
 		$nama_dokter = $this->input->post('nama_dokter');
 		$jadwal_praktek = $this->input->post('jadwal_praktek');
+		$email=$this->input->post('email');
 		$no_hp_dokter = $this->input->post('no_hp_dokter');
 		$imgtarget = $this->input->post('foto_dokter');
 		$file_ext = pathinfo($_FILES['foto_dokter']['name'], PATHINFO_EXTENSION);
@@ -117,30 +119,45 @@ class Admin extends CI_Controller
 
 					unlink($target);
 				}
+				//UPDATE tb_registrasi
 				$where = array(
-					'no_praktek' => $no_praktek
+					'kd_regist' => $kd_regist
 				);
 				$data = array(
-					'Nama_dokter' => $nama_dokter,
-					'jadwal_praktek' => $jadwal_praktek,
-					'no_hp_dokter' => $no_hp_dokter,
-					'foto_dokter' => $config['file_name'] . "." . $file_ext
+                'name'          => $nama_dokter,
+                'email'         => $email,
+                'image'         => $config['file_name'] . "." . $file_ext,
+				'no_hp'			=> $no_hp_dokter
 				);
-				$this->Dokter_model->update_data($where, $data, 'tb_dokter');
+				$this->Dokter_model->update_data($where, $data, 'tb_registrasi');
+				//UPDATE tb_dokter
+				$data2 = array(
+                'no_praktek'          => $no_praktek,
+                'jadwal_praktek'         => $jadwal_praktek
+				);
+				$this->Dokter_model->update_data($where, $data2, 'tb_dokter');
 				redirect('admin/datadokter');
 			}
 		} else {
 			$where = array(
-				'no_praktek' => $no_praktek
+				'kd_regist' => $kd_regist
 			);
 
 
 			$data = array(
-				'Nama_dokter' => $nama_dokter,
-				'jadwal_praktek' => $jadwal_praktek,
-				'no_hp_dokter' => $no_hp_dokter
+				'name'          => $nama_dokter,
+                'email'         => $email,
+				'no_hp'			=> $no_hp_dokter
 			);
-			$this->Dokter_model->update_data($where, $data, 'tb_dokter');
+			$this->Dokter_model->update_data($where, $data, 'tb_registrasi');
+			
+			$data2 = array(
+			'no_praktek'          => $no_praktek,
+			'jadwal_praktek'         => $jadwal_praktek
+			);
+			$this->Dokter_model->update_data($where, $data2, 'tb_dokter');
+
+
 			redirect('admin/datadokter');
 		}
 	}
@@ -150,7 +167,11 @@ class Admin extends CI_Controller
 		$nama_dokter = $this->input->post('nama_dokter');
 		$jadwal_praktek = $this->input->post('jadwal_praktek');
 		$no_hp_dokter = $this->input->post('no_hp_dokter');
-		$foto_dokter = $this->input->post('foto_dokter');
+		$email = $this->input->post('email');
+		$pass = md5("123");
+		$kode = $this->Dokter_model->kode('kd_regist', 'tb_registrasi', 'RGS' , '3');
+		date_default_timezone_set("Asia/Jakarta");
+        $date =  Date('Y-m-d h:i:s');
 		$file_ext = pathinfo($_FILES['foto_dokter']['name'], PATHINFO_EXTENSION);
 
 		$config['upload_path']		=	'assets/images/dokter';
@@ -163,13 +184,26 @@ class Admin extends CI_Controller
 		if (@$_FILES['foto_dokter']['name'] != null) {
 			if ($this->upload->do_upload('foto_dokter')) {
 				$data = array(
-					'no_praktek' => $no_praktek,
-					'nama_dokter' => $nama_dokter,
-					'jadwal_praktek' => $jadwal_praktek,
-					'no_hp_dokter' => $no_hp_dokter,
-					'foto_dokter' => $config['file_name'] . "." . $file_ext
+				'kd_regist '    => $kode,
+                'name'          => $nama_dokter,
+                'email'         => $email,
+                'image'         => $config['file_name'] . "." . $file_ext,
+                'password'      => $pass,
+                'kd_role'       => '2',
+                'is_active'     => '1',
+				'date_created'  => $date,
+				'no_hp'			=> $no_hp_dokter
+					
 				);
-				$this->Dokter_model->input_data($data, 'tb_dokter');
+				$this->Dokter_model->input_data($data, 'tb_registrasi');
+
+				$data2 = array(
+				'no_praktek '   		=> $no_praktek,
+                'jadwal_praktek'        => $jadwal_praktek,
+                'kd_regist'         => $kode
+					
+				);
+				$this->Dokter_model->input_data($data2, 'tb_dokter');
 
 
 				if ($this->db->affected_rows() > 0) {
@@ -186,13 +220,26 @@ class Admin extends CI_Controller
 			echo "<script>window.location='" . site_url('admin/datadokter') . "';</script>";
 		} else {
 			$data = array(
-				'no_praktek' => $no_praktek,
-				'nama_dokter' => $nama_dokter,
-				'jadwal_praktek' => $jadwal_praktek,
-				'no_hp_dokter' => $no_hp_dokter,
-				'foto_dokter' => $config['file_name'] . "." . $file_ext
-			);
-			$this->Dokter_model->input_data($data, 'tb_dokter');
+				'kd_regist '    => $kode,
+                'name'          => $nama_dokter,
+                'email'         => $email,
+                'image'         => 'default.jpeg',
+                'password'      => $pass,
+                'kd_role'       => '2',
+                'is_active'     => '1',
+				'date_created'  => $date,
+				'no_hp'			=> $no_hp_dokter
+					
+				);
+				$this->Dokter_model->input_data($data, 'tb_registrasi');
+
+				$data2 = array(
+				'no_praktek '   		=> $no_praktek,
+                'jadwal_praktek'        => $jadwal_praktek,
+                'kd_regist'         => $kode
+					
+				);
+				$this->Dokter_model->input_data($data2, 'tb_dokter');
 
 
 			if ($this->db->affected_rows() > 0) {
@@ -201,15 +248,16 @@ class Admin extends CI_Controller
 			echo "<script>window.location='" . site_url('admin/datadokter') . "';</script>";
 		}
 	}
-	public function hapusdokter($id)
+	public function hapusdokter($id,$noprktk)
 	{
 		$this->Dokter_model->hapus_data($id);
-
+		$this->Dokter_model->hapus_data2($noprktk);
 		redirect('admin/datadokter');
 	}
 	public function hapuskonsul($id)
 	{
 		$this->Konsul_model->hapus_data($id);
+		$this->Konsul_model->hapus_data2($id);
 
 		redirect('admin/pemeriksaan');
 	}

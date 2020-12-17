@@ -67,7 +67,7 @@
 									<tbody>
 										<?php
 										$no = 1;
-										foreach ($listdokter as $u) {
+										foreach ($dataperiksa as $u) {
 										?>
 											<tr>
 

@@ -59,10 +59,10 @@
 
 												<td><?php echo $no++ ?></td>
 												<td><?php echo $u->no_praktek ?></td>
-												<td><?php echo $u->nama_dokter ?></td>
+												<td><?php echo $u->name ?></td>
 												<td><?php echo $u->jadwal_praktek ?></td>
-												<td><?php echo $u->no_hp_dokter ?></td>
-												<td><img src="<?php echo base_url("assets/images/dokter/" . $u->foto_dokter) ?>" width="100px" height="100px"></td>
+												<td><?php echo $u->no_hp ?></td>
+												<td><img src="<?php echo base_url("assets/images/dokter/" . $u->image) ?>" width="100px" height="100px"></td>
 												<td><a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
 													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
@@ -75,14 +75,14 @@
 																</div>
 																<div class="modal-footer">
 																	<button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
-																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('admin/hapusdokter/' . $u->no_praktek); ?>">Hapus</a>
+																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('admin/hapusdokter/' . $u->kd_regist.'/'.$u->no_praktek); ?>">Hapus</a>
 																</div>
 															</div>
 														</div>
 													</div>
 							
 
-							<button type="button" data-target="#<?php echo $u->no_praktek ?>" data-toggle="modal" class="la la-edit"></button></td>
+							<button type="button" data-target="#<?php echo $u->kd_regist ?>" data-toggle="modal" class="la la-edit"></button></td>
 							</div>
 							<?php } ?>
 						</tr>
@@ -106,7 +106,7 @@ foreach ($listdokter as $u) {
 ?>
 
 	<!-- Modal Update -->
-	<div class="modal fade" id="<?php echo $u->no_praktek ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="<?php echo $u->kd_regist ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -118,24 +118,29 @@ foreach ($listdokter as $u) {
 				<div class="modal-body">
 					<form method="post" action="<?= base_url('Admin/update_dokter') ?>" enctype="multipart/form-data">
 						<div class="form-group">
+							<input type ="hidden" name="kd_regist" value="<?php echo $u->kd_regist ?>">
 							<label for="exampleInputEmail1">Nomor Dokter</label>
 							<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $u->no_praktek ?>" name="no_praktek" aria-describedby="emailHelp">
 							<input type="" class="form-control" id="exampleInputEmail1" value="<?php echo $u->no_praktek ?>" name="no_praktek" aria-describedby="emailHelp">
 							<label for="exampleInputEmail1">Nama Dokter</label>
-							<input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $u->nama_dokter ?>" name="nama_dokter" aria-describedby="emailHelp">
+							<input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $u->name ?>" name="nama_dokter" aria-describedby="emailHelp">
 						</div>
 						<div class="form-group">
-							<label for="exampleFormControlTextarea1">jadwal_praktek </label>
-							<textarea class="form-control" name="jadwal_praktek" id="exampleFormControlTextarea1" rows="3"><?php echo $u->jadwal_praktek ?></textarea>
+							<label for="exampleFormControlTextarea1">Email </label>
+							<input type="email" class="form-control" name="email" id="exampleFormControlTextarea1" value="<?php echo $u->email ?>">
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Jadwal Praktek </label>
+							<input type="text" class="form-control" name="jadwal_praktek" id="exampleFormControlTextarea1" value="<?php echo $u->jadwal_praktek ?>">
 						</div>
 
 						<div class="form-group">
 							<label for="exampleFormControlTextarea1">No Hp Dokter </label>
-							<textarea class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" rows="3"><?php echo $u->no_hp_dokter ?></textarea>
+							<input type="text" class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" value="<?php echo $u->no_hp ?>">
 						</div>
 						<div class="form-group">
 							<label for="foto_dokter">Foto</label><br>
-							<center><img src="<?php echo base_url("assets/images/dokter/" . $u->foto_dokter) ?>" width="100px" height="100px">
+							<center><img src="<?php echo base_url("assets/images/dokter/" . $u->image) ?>" width="100px" height="100px">
 								<center><br>
 									<input type="file" class="form-control" name="foto_dokter" id="foto_dokter">
 						</div>
@@ -173,6 +178,11 @@ foreach ($listdokter as $u) {
 						<label for="exampleInputEmail1">Nama Dokter</label>
 						<input type="text" class="form-control" id="exampleInputEmail1" name="nama_dokter" aria-describedby="emailHelp">
 					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Email</label>
+						<input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
+					</div>
+					
 					<div class="form-group">
 						<label for="exampleFormControlTextarea1">Jadwal praktek </label>
 						<textarea class="form-control" name="jadwal_praktek" id="exampleFormControlTextarea1" rows="3"></textarea>

@@ -3,6 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Konsul_model extends CI_Model
 {   private $_table = "tb_konsul";
+    private $_table2 = "tb_keluhan";
     
     public function konsul(){
 
@@ -14,6 +15,13 @@ class Konsul_model extends CI_Model
 	function hapus_data($id){
        
         return $this->db->delete($this->_table, array("no_rm" => $id));
+        
+      }
+      function hapus_data2($id){
+       
+        
+        return $this->db->delete($this->_table2, array("no_rm" => $id));
+        
       }
     function update_data($where,$data,$table){
 		$this->db->where($where);

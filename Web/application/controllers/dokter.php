@@ -33,10 +33,10 @@ class Dokter extends CI_Controller
 	}
 	public function datapemeriksaan()
 	{
-		$dokter['listdokter'] = $this->Dokter_model->tampil_datadokter()->result();
+		$periksa['dataperiksa'] = $this->Dokter_model->pemeriksaan();
 		$this->load->view('template/header');
 		$this->load->view('template/doktersidemenu');
-		$this->load->view('dokter/vdatapemeriksaan', $dokter);
+		$this->load->view('dokter/vdatapemeriksaan', $periksa);
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
