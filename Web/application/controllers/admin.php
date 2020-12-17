@@ -50,7 +50,7 @@ class Admin extends CI_Controller
 		if($page == "periksa" && !empty($isi) ){
 			$data['konsul'] = $this->Konsul_model->konsuls($isi);
 		}else{
-			$data['listdokter'] = $this->Dokter_model->tampil_datadokter()->result();
+			$data['listdokter'] = $this->Dokter_model->tampil_datadokter();
 			$data['konsul'] = $this->Konsul_model->konsul();
 		}
 		$this->load->view('template/header');
