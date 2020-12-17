@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2020 at 07:08 AM
+-- Generation Time: Dec 17, 2020 at 08:15 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -61,6 +61,13 @@ CREATE TABLE `tb_dokter` (
   `kd_poli` varchar(255) NOT NULL,
   `kd_regist` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_dokter`
+--
+
+INSERT INTO `tb_dokter` (`no_praktek`, `jadwal_praktek`, `kd_poli`, `kd_regist`) VALUES
+('NRP01010101', '18:00:00', '', 'RGS00004');
 
 -- --------------------------------------------------------
 
@@ -173,7 +180,8 @@ CREATE TABLE `tb_registrasi` (
 
 INSERT INTO `tb_registrasi` (`kd_regist`, `name`, `email`, `image`, `password`, `kd_role`, `is_active`, `date_created`, `alamat`, `no_hp`, `tgl_lahir`, `tempat_lahir`) VALUES
 ('RGS00001', 'admin', 'admin@gmail.com', 'default.jpg', '202cb962ac59075b964b07152d234b70', 1, 1, '2020-12-10 11:36:34', 'BWI', '89693556052', '2020-12-10', 'Banyuwangi'),
-('RGS00003', 'User', 'user@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 3, 1, '2020-12-10 11:36:34', 'Jember', '896956789', '1999-07-21', 'Rumah Sakit');
+('RGS00003', 'User', 'user@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 3, 1, '2020-12-10 11:36:34', 'Jember', '896956789', '1999-07-21', 'Rumah Sakit'),
+('RGS00004', 'Dr.Hammer', 'ham@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-17 01:56:04', '', '08989841713', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
