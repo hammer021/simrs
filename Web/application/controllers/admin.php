@@ -248,12 +248,14 @@ class Admin extends CI_Controller
 			echo "<script>window.location='" . site_url('admin/datadokter') . "';</script>";
 		}
 	}
-	public function hapusdokter($id,$noprktk)
+	
+	public function hapusdokter($id)
 	{
 		$this->Dokter_model->hapus_data($id);
-		$this->Dokter_model->hapus_data2($noprktk);
+		$this->Dokter_model->hapus_data2($id);
 		redirect('admin/datadokter');
 	}
+
 	public function hapuskonsul($id)
 	{
 		$this->Konsul_model->hapus_data($id);

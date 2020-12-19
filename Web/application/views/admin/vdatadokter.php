@@ -53,7 +53,7 @@
 									<tbody>
 										<?php
 										$no = 1;
-										foreach ($listdokter as $u) {
+										foreach ($listdokter as $u) :
 										?>
 											<tr>
 
@@ -68,26 +68,27 @@
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk menghapus?</h5>
+																	<h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk menghapus? <?php echo $u->name ?> </h5>
 																	<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 																		<span aria-hidden="true">×</span>
 																	</button>
 																</div>
 																<div class="modal-footer">
 																	<button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
-																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('admin/hapusdokter/' . $u->kd_regist.'/'.$u->no_praktek); ?>">Hapus</a>
+																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('Admin/hapusdokter/'. $u->kd_regist); ?>">Hapus</a>
 																</div>
 															</div>
 														</div>
 													</div>
 							
 
-							<button type="button" data-target="#<?php echo $u->kd_regist ?>" data-toggle="modal" class="la la-edit"></button></td>
+														<button type="button" data-target="#<?php echo $u->kd_regist ?>" data-toggle="modal" class="la la-edit"></button></td>
+											</tr>
+										<?php endforeach; ?>
+						
+									</tbody>
+								</table>
 							</div>
-							<?php } ?>
-						</tr>
-						</tbody>
-						</table>
 						</div>
 					</div>
 				</div>
@@ -152,7 +153,6 @@ foreach ($listdokter as $u) {
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<!-- Model Update End -->
 <?php } ?>

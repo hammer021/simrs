@@ -21,7 +21,7 @@ class Dokter_model extends CI_Model
   private $_tableR = "tb_registrasi";
   function tampil_datadokter(){
 		return $this->db->query("SELECT * FROM tb_dokter JOIN tb_registrasi
-    ON tb_dokter.kd_regist = tb_registrasi.kd_regist ")->result();
+    ON tb_dokter.kd_regist = tb_registrasi.kd_regist WHERE tb_registrasi.kd_role='2'")->result();
   }
   public function tampils($isi){
     return $this->db->query("SELECT * FROM tb_dokter JOIN tb_registrasi
@@ -39,12 +39,12 @@ class Dokter_model extends CI_Model
 		$this->db->where($where);
 		$this->db->update($table,$data);
 	}	
-	function hapus_data($id){
+	function hapus_data2($id){
     $this->_deleteImage($id);
     return $this->db->delete($this->_tableR, array("kd_regist" => $id));
   }
-  function hapus_data2($noprktk){
-    return $this->db->delete($this->_table, array("no_praktek" => $noprktk));
+  function hapus_data($id){
+    return $this->db->delete($this->_table, array("kd_regist" => $id));
   }
   public function getById($id)
     {
@@ -63,10 +63,11 @@ class Dokter_model extends CI_Model
   }
   
   public function pemeriksaan(){
-    $noprktk = $this->session->userdata("no_praktek");
+    $noprktk = $this->session->userdata("kd_regist");
     return $this->db->query("SELECT * FROM tb_keluhan JOIN tb_pasien 
-    ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien LEFT JOIN tb_dokter 
-    ON tb_keluhan.no_praktek = tb_dokter.no_praktek WHERE tb_keluhan.no_praktek = $noprktk")->result_array();
+    ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien JOIN tb_dokter 
+    ON tb_keluhan.no_praktek = tb_dokter.no_praktek  
+    WHERE tb_dokter.kd_regist = '$noprktk'")->result_array();
 
   }
 }
