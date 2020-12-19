@@ -95,19 +95,21 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject datalogin = res.getJSONObject("data");
                     Log.e("ser", datalogin.getString("token"));
                     authdataa.setdatauser(
-                            datalogin.getString("is_active"),
+
                             datalogin.getString("kd_regist"),
                             datalogin.getString("name"),
                             datalogin.getString("email"),
                             datalogin.getString("alamat"),
                             datalogin.getString("no_hp"),
                             datalogin.getString("token"),
+                            datalogin.getString("is_active"),
                             datalogin.getString("image")
                     );
                     if(datalogin.getString("is_active").equals("1")){
                         Log.e("ser", "Selamat Datang");
                         Intent intent = new Intent(LoginActivity.this, NavFragment.class);
                         startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(LoginActivity.this,"Mohon Aktifkan Email Verifikasi Anda", Toast.LENGTH_SHORT).show();
                     }

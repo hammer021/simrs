@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activitykeluhan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KeluhanActivity"
+    android:background="@drawable/bcgroundfull">
+
+    <TextView
+        android:id="@+id/kdregist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/backpage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/arial_narrow"
+        android:text="Pemeriksaan"
+        android:textColor="@color/putih"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="175dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <!-- android:layout_height="550dp" -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/edtnamapasien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Full Name"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontbiru"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/edttempatlahirpsn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Tempat Lahir"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtnamapasien" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edttgllahirpsn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="tanggal lahir (TAHUN-BULAN-HARI)"
+                    app:errorEnabled="true"
+                    android:textColor="@color/fontabu"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/arial_narrow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edttempatlahirpsn">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/arial_narrow"
+                        android:backgroundTint="@color/fontabu"
+                        app:hintTextColor="@color/fontabu"
+                        android:inputType="date"
+                        android:textSize="16dp">
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <EditText
+                    android:id="@+id/edtketerbatasan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Keterbatasan (Tunarungu, Tunawicara, Tunanetra, dll)"
+                    android:inputType="text"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edttgllahirpsn" />
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtjeniskelamin"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Jenis Kelamin (Laki-Laki / Perempuan)"
+                    android:textSize="16sp"
+                    android:layout_marginTop="5dp"
+                    app:hintTextColor="@color/fontabu"
+                    app:endIconMode="dropdown_menu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtketerbatasan">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/text_dropdown_jenis_kelamin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/fontabu"
+                        app:hintTextColor="@color/fontabu"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/arial_narrow" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <EditText
+                    android:id="@+id/edtwarganegara"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Warga Negara"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtjeniskelamin" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edtstatusperkawinan"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Status Perkawinan (Kawin / Belum Kawin)"
+                    android:textSize="16sp"
+                    android:textColor="@color/fontabu"
+                    app:endIconMode="dropdown_menu"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtwarganegara">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/text_dropdown_status_perkawinan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/fontabu"
+                        app:hintTextColor="@color/fontabu"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/arial_narrow" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <EditText
+                    android:id="@+id/edtpendidikan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Pendidikan Terakhir"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtstatusperkawinan" />
+
+                <EditText
+                    android:id="@+id/edtagama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Agama"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtpendidikan" />
+
+                <EditText
+                    android:id="@+id/edtpekerjaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Pekerjaan"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtagama" />
+
+                <EditText
+                    android:id="@+id/edtnonik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Nomor KTP (NIK)"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtpekerjaan" />
+
+                <EditText
+                    android:id="@+id/edtalamatpasien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Alamat Pasien"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtnonik" />
+
+                <EditText
+                    android:id="@+id/edtnotelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Nomor Telepon"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtalamatpasien" />
+
+                <EditText
+                    android:id="@+id/edtnamaayah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Nama Ayah"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtnotelp" />
+
+                <EditText
+                    android:id="@+id/edtnamaibu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Nama Ibu"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtnamaayah" />
+
+                <EditText
+                    android:id="@+id/edthubunganpasien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Hubungan dengan Pasien (Saudara/Teman/dll)"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtnamaibu" />
+
+                <EditText
+                    android:id="@+id/edtkeluhan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Keluhan"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edthubunganpasien" />
+
+                <TextView
+                    android:id="@+id/pathfotopasien"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint=" Foto"
+                    android:drawableTint="@color/fontabu"
+                    android:inputType="text"
+                    android:enabled="false"
+                    android:textColor="@color/fontabu"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edtkeluhan" />
+
+                <Button
+                    android:id="@+id/btnfotopasien"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/stylebutton1"
+                    android:text="Upload Foto"
+                    app:cornerRadius="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/pathfotopasien"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/pathfotopasien" />
+
+                <Button
+                    android:id="@+id/btnsimpanpemeriksaan"
+                    android:layout_width="match_parent"
+                    style="@style/Widget.MaterialComponents.Button"
+                    app:cornerRadius="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/stylebutton1"
+                    android:fontFamily="@font/clemente_light"
+                    android:text="Simpan"
+                    android:textAllCaps="false"
+                    android:textColor="@color/putih"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pathfotopasien" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:background="@drawable/bcgroundfull"
     android:layout_height="match_parent"
-    tools:context=".NavFragment">
+    tools:context=".NavFragment"
+    android:id="@+id/navfragment">
 
     <FrameLayout
         android:id="@+id/fragment_container"

@@ -5,12 +5,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.telekonsultasi.EditPasswordActivity;
+import com.example.telekonsultasi.EditProfilActivity;
 import com.example.telekonsultasi.R;
 import com.example.telekonsultasi.configfile.ServerApi;
 import com.example.telekonsultasi.configfile.authdata;
@@ -22,7 +25,7 @@ public class ProfilFragment extends Fragment {
     private String mFotoProfil;
 
     CircleImageView profile;
-    TextView txtnama, txtno, txtemail;
+    TextView txtnama, txtidregis, txtedit, txtlogout, txtgantipw;
 
     authdata authdataa;
 
@@ -33,13 +36,37 @@ public class ProfilFragment extends Fragment {
         //        return super.onCreateView(inflater, container, savedInstanceState);
         authdataa = new authdata(getContext());
 
+        txtidregis = v.findViewById(R.id.textidregist);
+        txtidregis.setText(authdataa.getKodeUser());
+
         txtnama = v.findViewById(R.id.textnamanya);
         txtnama.setText(authdataa.getNamaUser());
-        txtemail = v.findViewById(R.id.textemailnya);
-        txtemail.setText(authdataa.getEmail_user());
-        txtno = v.findViewById(R.id.textnomernya);
-        txtno.setText(authdataa.getNo_user());
 
+        txtedit = v.findViewById(R.id.texteditprofil);
+        txtedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(getActivity(), EditProfilActivity.class);
+                startActivity(edit);
+            }
+        });
+
+        txtgantipw = v.findViewById(R.id.textgantipass);
+        txtgantipw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent pw = new Intent(getActivity(), EditPasswordActivity.class);
+                startActivity(pw);
+            }
+        });
+
+        txtlogout = v.findViewById(R.id.textlogout);
+        txtlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                authdataa.logout();
+            }
+        });
 
         mFotoProfil = ServerApi.URL_PASFOTO + authdataa.getFoto_user();
 

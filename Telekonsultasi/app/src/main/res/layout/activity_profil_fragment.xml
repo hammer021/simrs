@@ -11,17 +11,17 @@
         android:id="@+id/FotoProfil"
         android:layout_width="85dp"
         android:layout_height="85dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginTop="88dp"
         android:src="@drawable/unnamed"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="375dp"
+        android:layout_width="match_parent"
         android:layout_height="375dp"
         android:layout_marginTop="228dp"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -40,71 +40,105 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/settingakun"
+        <TextView
+            android:id="@+id/textidregist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/setting"
-            app:layout_constraintBottom_toBottomOf="@+id/textnamanya"
-            app:layout_constraintStart_toEndOf="@+id/textnamanya"
-            app:layout_constraintTop_toTopOf="@+id/textnamanya"
-            android:layout_marginLeft="20dp"/>
+            android:fontFamily="@font/arial_narrow"
+            android:gravity="center"
+            android:text="R123456789"
+            android:textColor="@color/putih"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textnamanya" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="90dp"
             android:background="@drawable/line"
+            android:backgroundTint="@color/putih"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textnamanya" />
+            app:layout_constraintTop_toBottomOf="@+id/textidregist" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="21dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="105dp"
-            android:layout_marginLeft="105dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/mail"
+        <TextView
+            android:id="@+id/texteditprofil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arial_narrow"
+            android:gravity="left"
+            android:text=" Edit Profil"
+            android:layout_marginTop="40dp"
+            android:drawableEnd="@drawable/right"
+            android:textColor="@color/putih"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-        <TextView
-            android:id="@+id/textemailnya"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="tes@gmail.com"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/texteditprofil" />
+
+        <TextView
+            android:id="@+id/textgantipass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arial_narrow"
+            android:gravity="left"
+            android:text=" Ganti Password"
+            android:layout_marginTop="20dp"
+            android:drawableEnd="@drawable/right"
             android:textColor="@color/putih"
-            android:textSize="16sp"
-            android:layout_marginLeft="14dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="105dp"
-            android:layout_marginLeft="105dp"
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textgantipass" />
+
+        <TextView
+            android:id="@+id/textlogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arial_narrow"
+            android:gravity="left"
+            android:text=" Logout"
             android:layout_marginTop="20dp"
-            android:background="@drawable/phone"
+            android:drawableEnd="@drawable/right"
+            android:textColor="@color/putih"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-        <TextView
-            android:id="@+id/textnomernya"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="089693556052"
-            android:textColor="@color/putih"
-            android:textSize="16sp"
-            android:layout_marginLeft="14dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="@+id/imageView4" />
+            android:layout_marginTop="5dp"
+            android:background="@drawable/line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textlogout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

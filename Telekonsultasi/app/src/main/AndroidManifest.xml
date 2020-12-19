@@ -14,26 +14,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PemeriksaanActivity"
+        <activity android:name=".KeluhanActivity"/>
+        <activity android:name=".NotificationActivity" />
+        <activity android:name=".EditPasswordActivity" />
+        <activity
+            android:name=".EditProfilActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar"/>
-        <activity android:name=".PasienTerdaftarActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".PasienTerdaftarActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar"/>
-        <activity android:name=".NavFragment"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".NavFragment"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar"/>
-        <activity android:name=".LoginActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar"/>
-        <activity android:name=".RegisterActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".RegisterActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar"/>
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".Opening"
             android:configChanges="orientation|keyboardHidden"

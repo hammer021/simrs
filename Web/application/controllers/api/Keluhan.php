@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
 use Restserver\Libraries\REST_Controller;
 
-class Konsul extends REST_Controller {
+class Keluhan extends REST_Controller {
 
     function __construct($config = 'rest') {
         parent::__construct($config);
@@ -13,38 +13,24 @@ class Konsul extends REST_Controller {
         $this->load->model('Api_model');
     }
 
-    function index_get()
+    public function index_get()
     {
-        $l = $this->get('kd_regist');
-        $a = $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan, harga')    
-                ->from('tb_pasien')
-                    ->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
-                    ->group_start()
-                        ->where('kd_regist', $l)
-                        ->where('status = 1 OR status = 2')
-                    ->group_end()
-                ->get();
-        $query = $a->result_array();
-
-        $output = $this->db->get_where('tb_pasien',  array('kd_regist' => $l))->result_array();
-            if(!empty($output)){
-
-
-            $message = [
-                'status' => TRUE,
-                'data'   => $query,
-            ];
-            $this->response($message, REST_Controller::HTTP_OK);
-        }else{
-            $message = [
+        $id = $this->get('kd_regist');
+        if ($id === null || $id === ''){
+            $this->response([
                 'status' => FALSE,
-                'message' => "No Rm tidak ditemukan"
-            ];
-            $this->response($message, REST_Controller::HTTP_NOT_FOUND);
+                'message' => 'Masukkan Email Anda'
+            ], REST_Controller::HTTP_NOT_FOUND);
+        }else{
+            $riwayat = $this->a->getDataTrans($id);
+            $this->response([
+                'status' => TRUE,
+                'data' => $riwayat
+            ], REST_Controller::HTTP_OK);
         }
     }
     
-    function periksa_post()
+    function index_post()
     {
         // deklarasi untuk query
         $id_user = $this->post('kd_regist');
@@ -63,10 +49,6 @@ class Konsul extends REST_Controller {
         $lahir = date_create($tgl_lahir);
         $a = date_diff($lahir,$sekarang);
         $umur = $a->format("%y Tahun");
-
-        //foto
-        $config2 = uniqid().'.jpeg';
-        $path2 = './assets/images/pasien/'.$config2;
 
         // Query
         $query = $this->db->select('*')->from('tb_pasien')
@@ -129,9 +111,6 @@ class Konsul extends REST_Controller {
                     'foto'                  => $this->post('foto'),
                     'hub_pasien'            => $this->post('hub_pasien'));
 
-                    
-                    
-
             }
             $data2 = array(
                 'no_rm'                 => $no_rm,
@@ -142,23 +121,12 @@ class Konsul extends REST_Controller {
                 
                 $insert = $this->db->insert('tb_pasien', $data);
                 $insert2 = $this->db->insert('tb_keluhan', $data2);
-                
-                if($insert && $insert2){
-
-                    file_put_contents($path2, base64_decode($foto));
-                    $response = [
-                        'status' => true,
-                        'message' => 'Pendaftaran Akun Berhasil',
-                    ];
-                }else{
-                    $response = [
-                        'status' => false,
-                        'message' => 'Something Wrong I Can Feel It',
-                    ];
-                }
 
     
-                
+                $response = [
+                    'status' => true,
+                    'pesan' => 'Pendaftaran Akun Berhasil',
+                ];
         }
         $this->response($response, 200);
     

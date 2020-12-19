@@ -129,6 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void run() {
                                         Intent intent2 = new Intent(RegisterActivity.this, LoginActivity.class);
                                         startActivity(intent2);
+                                        finish();
                                     }
                                 }, 1500);
                             } else {
@@ -142,6 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Intent intent3 = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent3);
                             Toast.makeText(RegisterActivity.this, "Registrasi Berhasil, silahkan Aktivasi email anda!", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
                 },
