@@ -32,7 +32,7 @@ class Registerakun extends REST_Controller {
                 'kd_regist '       => $kode,
                 'name'          => $this->post('name'),
                 'email'         => $this->post('email'),
-                'image'         => 'default.jpg',
+                'image'         => 'default.jpeg',
                 'password'      => $password,
                 'kd_role'       => '3',
                 'is_active'     => '0',
@@ -67,20 +67,20 @@ class Registerakun extends REST_Controller {
     private function _sendEmail($token ,$email ,$type){
         $config = [
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'birrilwalisyah@gmail.com',
-            'smtp_pass' => 'b4j1ng4n',
-            'smtp_port' => 465,
+            'smtp_host' => 'smtp.sendgrid.net',
+            'smtp_port' => 587,
+            'smtp_user' => 'apikey',
+            'smtp_pass' => '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',
             'mailtype' => 'html',
             'charset' => 'utf-8',
-            'newline' => "\r\n"
+            'newline' => '\r\n'
         ];
         
 
         $this->load->library('email', $config);
         $this->email->initialize($config);
 
-        $this->email->from('birrilwalisyah@gmail.com', 'Admin Simrs');
+        $this->email->from('admin@rsjlawang.com', 'Admin Simrs');
         $this->email->to($email);
         $this->email->subject('Verifikasi Akun');
         $this->email->message('
