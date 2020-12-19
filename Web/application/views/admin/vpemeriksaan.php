@@ -61,7 +61,7 @@
 								<td><?php echo $kons['no_rm'] ?></td>
 								<td><?php echo $kons['nama_pasien'] ?></td>
 								<td><?php echo $kons['tgl_kunjungan'] ?></td>
-								<td><?php $dok = $kons['nama_dokter'];
+								<td><?php $dok = $kons['name'];
 									if ($dok== null){
 											echo "~Belum Dipilih~";
 									}
@@ -224,7 +224,7 @@ foreach ($konsul as $konn) {
 						
 						<div class="form-group">
 							<label for="exampleFormControlTextarea1">Nama Dokter </label>
-							<input class="form-control" name="nama_dokter" id="nama_dokter" value="<?php echo $konn['nama_dokter'] ?>">
+							<input class="form-control" name="nama_dokter" id="nama_dokter" value="<?php echo $konn['name'] ?>">
 						</div>
 						<?php	
 						}
@@ -312,7 +312,7 @@ foreach ($konsul as $konn) {
 						</div>
 						
 						<div class="form-group">
-							<label for="exampleFormControlTextarea1">Nama Dokter : <br> <?php echo $konn['nama_dokter'] ?> </label>
+							<label for="exampleFormControlTextarea1">Nama Dokter : <br> <?php echo $konn['name'] ?> </label>
 						</div>
 						
 						<div class="form-group">

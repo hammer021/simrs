@@ -18,19 +18,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="content-body">
-			<div class="col-xl-4 col-lg-3 col-lg-12">
-				<div class="card">
-					<div class="card-header">
-						<div class="card-title">
-							<form class="form-inline active-pink-4">
-								<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
-								<i class="la la-search" aria-hidden="false"></i>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
+		
 			<!-- Table head options start -->
 			<div class="row">
 				<div class="col-12">
@@ -38,6 +26,10 @@
 						<div class="card-header">
 							<h4 class="card-title">
 								<p><span class="text-bold-600"><button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Pasien</button></span></p>
+								<form class="form-inline active-pink-4">
+									<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
+									<i class="la la-search" aria-hidden="false"></i>
+								</form>
 							</h4>
 							<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 							<div class="heading-elements">
@@ -48,7 +40,6 @@
 								</ul>
 							</div>
 						</div>
-						<br>
 						<div class="card-content collapse show">
 							<div class="table-responsive">
 								<table class="table">
@@ -76,9 +67,9 @@
 												<td><?php echo $u['jenis_kasus'] ?></td>
 												<td><?php echo $u['keluhan'] ?></td>
 												<td><?php echo $u['nama_pasien'] ?></td>
-												<td><button type="button" class="la la-trash-o"></button>
+												<td><button type="button" class="la la-close"></button>
 													</a>&nbsp;
-													<button type="button" data-target="#<?php echo $u['no_rm'] ?>" data-toggle="modal" class="la la-edit"></button></td>
+													<button type="button" data-target="#<?php echo $u['no_rm'] ?>" data-toggle="modal" class="la la-check-square-o"></button></td>
 											<?php } ?>
 											</tr>
 									</tbody>

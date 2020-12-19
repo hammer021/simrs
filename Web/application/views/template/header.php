@@ -105,7 +105,7 @@
                 <span class="avatar avatar-online"><img src="../assets/images/<?php echo $this->session->userdata("image"); ?>" alt="avatar"><i></i></span></a>
                 <div class="dropdown-menu dropdown-menu-right">
                   <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="avatar avatar-online"><img src="../assets/images/<?php echo $this->session->userdata("image"); ?>" alt="avatar"><span class="user-name text-bold-700 ml-1"><?php echo $this->session->userdata("name"); ?></span></span></a>
-                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a><a class="dropdown-item" href="#"><i class="ft-check-square"></i> Task</a><a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
+                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a><a class="dropdown-item" href="#"><i class="ft-settings"></i> Setting</a><a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
                     <div class="dropdown-divider"></div><a class="dropdown-item" href="<?php echo base_url('Auth/logout')?>"><i class="ft-power"></i> Logout</a>
                   </div>
                 </div>
