@@ -113,4 +113,36 @@ class Profil extends REST_Controller {
     ], 401);
 }
 }
+public function changepassword_put(){
+    $email = $this->put('email');
+    $password1 = $this->put('password1');
+    $password2 = $this->put('password2');
+    
+
+    if($password1==$password2){
+        $pwchanging=md5($password1);
+        $data = array(
+            'password' => $pwchanging
+    );
+    $b = $this->db->update('tb_registrasi', $data, ['email' => $email]);
+  //  $b=$this->db->where('email', $email)->update('tb_registrasi', $data);
+        if(!$b){
+            $this->set_response([
+                'status' => false,
+                'message' => 'DATA GAK UPDET'
+            ], 401);}
+        else{
+            $this->set_response([
+                'status' => true,
+                'message' => 'Password berhasil diubah'
+            ], 401);} 
+        
+    }
+    else{
+        $this->set_response([
+            'status' => false,
+            'message' => 'Password belum berubah'
+        ], 401);
+    }
+}
 }
