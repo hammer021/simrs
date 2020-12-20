@@ -43,7 +43,38 @@ class Konsul extends REST_Controller {
             $this->response($message, REST_Controller::HTTP_NOT_FOUND);
         }
     }
-    
+
+    function pasienselesai_get()
+    {
+        $l = $this->get('kd_regist');
+        $a = $this->db->select('no_rm, nama_pasien, tgl_kunjungan')    
+                ->from('tb_pasien')
+                    ->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
+                    ->group_start()
+                        ->where('kd_regist', $l)
+                        ->where('status = 0')
+                    ->group_end()
+                ->get();
+        $query = $a->result_array();
+
+        $output = $this->db->get_where('tb_pasien',  array('kd_regist' => $l))->result_array();
+            if(!empty($output)){
+
+
+            $message = [
+                'status' => TRUE,
+                'data'   => $query,
+            ];
+            $this->response($message, REST_Controller::HTTP_OK);
+        }else{
+            $message = [
+                'status' => FALSE,
+                'message' => "No Rm tidak ditemukan"
+            ];
+            $this->response($message, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
     function periksa_post()
     {
         // deklarasi untuk query
