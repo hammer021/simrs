@@ -134,6 +134,7 @@ class Konsul extends REST_Controller {
                 'no_tlp'                => $this->post('no_tlp'),
                 'nama_ayah'             => $this->post('nama_ayah'),
                 'nama_ibu'              => $this->post('nama_ibu'),
+                'foto'                  => 'default.jpeg',
                 'hub_pasien'            => $this->post('hub_pasien'));
 
             
