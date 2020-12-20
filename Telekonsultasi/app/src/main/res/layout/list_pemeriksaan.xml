@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="386dp"
+        android:layout_width="360dp"
         android:layout_marginTop="8dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
@@ -40,10 +40,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvdokter"
+                android:id="@+id/txtnamapasien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="nama dokter"
+                android:text="nama pasien"
                 android:inputType="textPersonName"
                 android:layout_marginStart="18dp"
                 android:textColor="@color/putih"
@@ -52,7 +52,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvkodekonsul"
+                android:id="@+id/txtkodepasien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
@@ -62,10 +62,10 @@
                 android:textSize="12sp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvdokter" />
+                app:layout_constraintTop_toBottomOf="@+id/txtnamapasien" />
 
             <TextView
-                android:id="@+id/tvtglkonsul"
+                android:id="@+id/txttglkunjungan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
@@ -75,16 +75,14 @@
                 android:textSize="12sp"
                 android:layout_marginTop="1dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvkodekonsul" />
+                app:layout_constraintTop_toBottomOf="@+id/txtkodepasien" />
 
             <TextView
-                android:id="@+id/tvstatuspembayaran"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Status Pembayaran"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvtglkonsul" />
+                android:layout_marginTop="6dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtkodepasien"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,7 +3,9 @@ package com.example.telekonsultasi;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +40,7 @@ import com.example.telekonsultasi.configfile.authdata;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -46,42 +51,26 @@ import java.util.Map;
 
 public class KeluhanActivity extends AppCompatActivity {
 
-    String[] JK = new String[]{"Laki-Laki", "Perempuan"};
-    ArrayAdapter<String> adapter;
-    AutoCompleteTextView jenisKelaminDropdown;
-
-    String[] SK = new String[]{"Kawin", "Belum Kawin"};
-    ArrayAdapter<String> adapter2;
-    AutoCompleteTextView statusKawinDropdown;
+//    String[] JK = new String[]{"Laki-Laki", "Perempuan"};
+//    ArrayAdapter<String> adapter;
+//    AutoCompleteTextView jenisKelaminDropdown;
+//
+//    String[] SK = new String[]{"Kawin", "Belum Kawin"};
+//    ArrayAdapter<String> adapter2;
+//    AutoCompleteTextView statusKawinDropdown;
 
     private final int IMG_REQUEST = 1;
     boolean statusImage = false, doubleBackToExit;
 
     ProgressDialog progressDialog;
     authdata authdataa;
-    RequestQueue queue;
+    RequestQueue requestQueue;
+    ProgressBar progressBar;
 
     String mKdRegist;
-//    String mNama;
-//    String mTempatLahir;
-//    String mTglLahir;
-//    String mUmur;
-//    String mKeterbatasan;
-//    String mJenisKelamin;
-//    String mWarga;
-//    String mStatusKawin;
-//    String mPendidikan;
-//    String mAgama;
-//    String mPekerjaan;
-//    String mNik;
-//    String mAlamat;
-//    String mNoTelepom;
-//    String mAyah;
-//    String mIbu;
-//    String mHubPasien;
 
-    TextInputLayout txttanggal, txtjeniskelamin, txtstatuskawin;
-    EditText txtnama, txttempatlahir, txtumur, txtketerbatasan,
+    ImageView imageView7;
+    EditText txtnama, txttempatlahir, txttanggal, txtjeniskelamin, txtstatuskawin, txtketerbatasan,
             txtwarga, txtpendidikan, txtagama, txtpekerjaan,
             txtnik, txtalamat, txtnotelpon, txtayah, txtibu, txthubpasien, txtkeluhan;
     TextView txtkoderegist, txtpathfoto;
@@ -104,14 +93,11 @@ public class KeluhanActivity extends AppCompatActivity {
 
     progressDialog = new ProgressDialog(this);
     authdataa = new authdata(this);
-    queue = Volley.newRequestQueue(this);
+    requestQueue = Volley.newRequestQueue(this);
+    progressBar = new ProgressBar(KeluhanActivity.this);
 
-    adapter = new ArrayAdapter<>(this, R.layout.dropdown_item, JK);
-        jenisKelaminDropdown.setAdapter(adapter);
-    adapter2 = new ArrayAdapter<>(this, R.layout.dropdown_item, SK);
-        statusKawinDropdown.setAdapter(adapter2);
 
-        uploadfoto.setOnClickListener(new View.OnClickListener() {
+    uploadfoto.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             selectImage();
@@ -121,37 +107,60 @@ public class KeluhanActivity extends AppCompatActivity {
         simpanperiksa.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (validateTextInput(txtnama, "Nama harus diisi!") &
-                    validateTextInput(txttempatlahir, "Tempat Lahir harus diisi!") &
-                    validateTextInput(txttanggal, "Tempat Lahir harus diisi!") &
-//                    validateTextInput(txtumur, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtketerbatasan, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtjeniskelamin, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtwarga, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtstatuskawin, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtpendidikan, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtagama, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtpekerjaan, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtnik, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtnotelpon, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtayah, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtibu, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txthubpasien, "Tanggal Lahir harus diisi!") &
-                    validateTextInput(txtkeluhan, "Tanggal Lahir harus diisi!")){
-
-                periksa();
-
-                Intent main = new Intent(KeluhanActivity.this, NavFragment.class);
-                startActivity(main);
-                finish();
-
-                Toast.makeText(getApplicationContext(), "Berhasil mendaftarkan Pasien.",Toast.LENGTH_LONG).show();
-
-            } else {
-                Snackbar.make(findViewById(R.id.activitykeluhan), "Data belum terpenuhi", Snackbar.LENGTH_SHORT).show();
-            }
+            periksa();
         }
     });
+
+        txtjeniskelamin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(KeluhanActivity.this);
+                builder.setTitle("Pilih Jenis Kelamin");
+
+                // buat array list
+                final String[] options = {"Laki-Laki", "Perempuan"};
+
+                //Pass array list di Alert dialog
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        txtjeniskelamin.setText(options[which]);
+                    }
+                });
+                // buat dan tampilkan alert dialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+//        txtstatuskawin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(KeluhanActivity.this);
+//                builder.setTitle("Pilih Status Perkawinan");
+//
+//                // buat array list
+//                final String[] options2 = {"Belum Kawin", "Kawin"};
+//
+//                //Pass array list di Alert dialog
+//                builder.setItems(options2, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        txtjeniskelamin.setText(options2[which]);
+//                    }
+//                });
+//                // buat dan tampilkan alert dialog
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+//            }
+//        });
+
+        imageView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 }
 
     private void selectImage() {
@@ -169,15 +178,13 @@ public class KeluhanActivity extends AppCompatActivity {
 //        txtumur = findViewById(R.id.edtumur);
         txtketerbatasan = findViewById(R.id.edtketerbatasan);
         txtjeniskelamin = findViewById(R.id.edtjeniskelamin);
-        txtjeniskelamin = findViewById(R.id.edtjeniskelamin);
-        jenisKelaminDropdown = findViewById(R.id.text_dropdown_jenis_kelamin);
         txtwarga = findViewById(R.id.edtwarganegara);
         txtstatuskawin = findViewById(R.id.edtstatusperkawinan);
-        statusKawinDropdown = findViewById(R.id.text_dropdown_status_perkawinan);
         txtpendidikan = findViewById(R.id.edtpendidikan);
         txtagama = findViewById(R.id.edtagama);
         txtpekerjaan = findViewById(R.id.edtpekerjaan);
         txtnik = findViewById(R.id.edtnonik);
+        imageView7 = findViewById(R.id.imageView7);
         txtalamat = findViewById(R.id.edtalamatpasien);
         txtnotelpon = findViewById(R.id.edtnotelp);
         txtayah = findViewById(R.id.edtnamaayah);
@@ -189,30 +196,6 @@ public class KeluhanActivity extends AppCompatActivity {
         simpanperiksa = findViewById(R.id.btnsimpanpemeriksaan);
     }
 
-    private boolean validateTextInput(EditText editText, String errorMessage) {
-        Log.d("pesan", errorMessage);
-        String input = editText.getText().toString().trim();
-
-        if (input.isEmpty()) {
-            editText.setError(errorMessage);
-            return false;
-        } else {
-            editText.setError(null);
-            return true;
-        }
-    }
-
-    private boolean validateTextInput(TextInputLayout textInputLayout, String errorMessage) {
-        String input = textInputLayout.getEditText().getText().toString().trim();
-
-        if (input.isEmpty()) {
-            textInputLayout.setError(errorMessage);
-            return false;
-        } else {
-            textInputLayout.setError(null);
-            return true;
-        }
-    }
 
     private String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -266,98 +249,181 @@ public class KeluhanActivity extends AppCompatActivity {
         }, 2000);
     }
 
-    private void periksa(){
-        progressDialog.setMessage("Sedang Memperbarui Data...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+    private void periksa() {
+        final String kd_regist = this.txtkoderegist.getText().toString().trim();
+        final String nama_pasien = this.txtnama.getText().toString().trim();
+        final String tempat_lahir = this.txttempatlahir.getText().toString().trim();
+        final String tgl_lahir = this.txttanggal.getText().toString().trim();
+        final String keterbatasan = this.txtketerbatasan.getText().toString().trim();
+        final String jenis_kelamin = this.txtjeniskelamin.getText().toString().trim();
+        final String warga_negara = this.txtwarga.getText().toString().trim();
+        final String status_perkawinan = this.txtstatuskawin.getText().toString().trim();
+        final String pendidikan = this.txtpendidikan.getText().toString().trim();
+        final String agama = this.txtagama.getText().toString().trim();
+        final String pekerjaan = this.txtpekerjaan.getText().toString().trim();
+        final String no_nik = this.txtnik.getText().toString().trim();
+        final String alamat_pasien = this.txtalamat.getText().toString().trim();
+        final String no_tlp = this.txtnotelpon.getText().toString().trim();
+        final String nama_ayah = this.txtayah.getText().toString().trim();
+        final String nama_ibu = this.txtibu.getText().toString().trim();
+        final String hub_pasien = this.txthubpasien.getText().toString().trim();
+        final String keluhan = this.txtkeluhan.getText().toString().trim();
 
-        String url = ServerApi.URL_PERIKSA;
+        if (nama_pasien.matches("")){
+            Toast.makeText(this, "Masukkan Nama Lengkap Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (tempat_lahir.matches("")){
+            Toast.makeText(this, "Masukkan tempat lahir Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (tgl_lahir.matches("")){
+            Toast.makeText(this, "Masukkan tanggal lahir Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (jenis_kelamin.matches("")){
+            Toast.makeText(this, "Masukkan jenis kelamin Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (warga_negara.matches("")){
+            Toast.makeText(this, "Masukkan warga negara Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (status_perkawinan.matches("")){
+            Toast.makeText(this, "Masukkan status perkawinan Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (pendidikan.matches("")){
+            Toast.makeText(this, "Masukkan pendidikan Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (agama.matches("")){
+            Toast.makeText(this, "Masukkan agama Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (pekerjaan.matches("")){
+            Toast.makeText(this, "Masukkan pekerjaan Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (no_nik.matches("")){
+            Toast.makeText(this, "Masukkan no nik Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (alamat_pasien.matches("")){
+            Toast.makeText(this, "Masukkan alamat pasien Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (no_tlp.matches("")){
+            Toast.makeText(this, "Masukkan No Telpon Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (nama_ayah.matches("")){
+            Toast.makeText(this, "Masukkan nama ayah Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (nama_ibu.matches("")){
+            Toast.makeText(this, "Masukkan nama ibu Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (keterbatasan.matches("")){
+            Toast.makeText(this, "Masukkan keterbatasan Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (keluhan.matches("")){
+            Toast.makeText(this, "Masukkan keluhan Anda", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        progressBar.setVisibility(View.GONE);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest periksanya = new StringRequest(Request.Method.POST, ServerApi.URL_PERIKSA, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progressDialog.dismiss();
-
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    String message = jsonObject.getString("pesan");
+                    Log.e("json" , "ff" + jsonObject);
+                    String status = jsonObject.getString("status");
+                    String error = jsonObject.getString("error");
+                    String message = jsonObject.getString("message");
 
-                    Snackbar.make(findViewById(R.id.activitykeluhan), message, Snackbar.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                    if (status.equals("200") && error.equals("false")){
+                        Toast.makeText(KeluhanActivity.this, message, Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent pindah = new Intent(KeluhanActivity.this, NavFragment.class);
+                                startActivity(pindah);
+                            }
+                        }, 1500);
+                    } else {
+                        Toast.makeText(KeluhanActivity.this, message, Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
+                    Intent periksa = new Intent(KeluhanActivity.this, NavFragment.class);
+                    startActivity(periksa);
+                    Toast.makeText(KeluhanActivity.this, "Registrasi Berhasil, silahkan Aktivasi email anda!", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                String message = "Terjadi error. Coba beberapa saat lagi.";
-
-                if (error instanceof NetworkError) {
-                    message = "Tidak dapat terhubung ke internet. Harap periksa koneksi anda.";
-                } else if (error instanceof AuthFailureError) {
-                    message = "Gagal login. Harap periksa email dan password anda.";
-                } else if (error instanceof ClientError) {
-                    message = "Gagal login. Harap periksa email dan password anda.";
-                } else if (error instanceof NoConnectionError) {
-                    message = "Tidak ada koneksi internet. Harap periksa koneksi anda.";
-                } else if (error instanceof TimeoutError) {
-                    message = "Connection Time Out. Harap periksa koneksi anda.";
-                }
-
-                Snackbar.make(findViewById(R.id.activitykeluhan), message, Snackbar.LENGTH_LONG).show();
+                Toast.makeText(KeluhanActivity.this, "Error! " + error.toString(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         })
         {
-            protected Map<String, String> getParams() {
+            protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<>();
-
                 String fotonya = txtpathfoto.getText().toString().trim();
 
-                if (fotonya.matches("")) {
-                    params.put("kd_regist", txtkoderegist.getText().toString().trim());
-                    params.put("nama_pasien", txtnama.getText().toString().trim());
-                    params.put("tempat_lahir", txttempatlahir.getText().toString().trim());
-                    params.put("tgl_lahir", txttanggal.getEditText().toString().trim());
-                    params.put("jenis_kelamin", txtjeniskelamin.getEditText().toString().trim());
-                    params.put("warga_negara", txtwarga.getText().toString().trim());
-                    params.put("status_perkawinan", txtstatuskawin.getEditText().toString().trim());
-                    params.put("pendidikan", txtpendidikan.getText().toString().trim());
-                    params.put("agama", txtagama.getText().toString().trim());
-                    params.put("pekerjaan", txtpekerjaan.getText().toString().trim());
-                    params.put("no_nik", txtnik.getText().toString().trim());
-                    params.put("alamat_pasien", txtalamat.getText().toString().trim());
-                    params.put("no_tlp", txtnotelpon.getText().toString().trim());
-                    params.put("nama_ayah", txtayah.getText().toString().trim());
-                    params.put("nama_ibu", txtibu.getText().toString().trim());
-                    params.put("keterbatasan", txtketerbatasan.getText().toString().trim());
-                    params.put("keluhan", txtkeluhan.getText().toString().trim());
-
+                    if (fotonya.matches("")) {
+                    params.put("kd_regist", kd_regist);
+                    params.put("nama_pasien", nama_pasien);
+                    params.put("tempat_lahir", tempat_lahir);
+                    params.put("tgl_lahir", tgl_lahir);
+                    params.put("keterbatasan", keterbatasan);
+                    params.put("jenis_kelamin", jenis_kelamin);
+                    params.put("warga_negara", warga_negara);
+                    params.put("status_perkawinan", status_perkawinan);
+                    params.put("pendidikan", pendidikan);
+                    params.put("agama", agama);
+                    params.put("pekerjaan", pekerjaan);
+                    params.put("no_nik", no_nik);
+                    params.put("alamat_pasien", alamat_pasien);
+                    params.put("no_tlp", no_tlp);
+                    params.put("nama_ayah", nama_ayah);
+                    params.put("nama_ibu", nama_ibu);
+                    params.put("hub_pasien", hub_pasien);
+                    params.put("keluhan", keluhan);
                     return params;
                 } else {
-                    params.put("kd_regist", txtkoderegist.getText().toString().trim());
-                    params.put("nama_pasien", txtnama.getText().toString().trim());
-                    params.put("tempat_lahir", txttempatlahir.getText().toString().trim());
-                    params.put("tgl_lahir", txttanggal.getEditText().toString().trim());
-                    params.put("jenis_kelamin", txtjeniskelamin.getEditText().toString().trim());
-                    params.put("warga_negara", txtwarga.getText().toString().trim());
-                    params.put("status_perkawinan", txtstatuskawin.getEditText().toString().trim());
-                    params.put("pendidikan", txtpendidikan.getText().toString().trim());
-                    params.put("agama", txtagama.getText().toString().trim());
-                    params.put("pekerjaan", txtpekerjaan.getText().toString().trim());
-                    params.put("no_nik", txtnik.getText().toString().trim());
-                    params.put("alamat_pasien", txtalamat.getText().toString().trim());
-                    params.put("no_tlp", txtnotelpon.getText().toString().trim());
-                    params.put("nama_ayah", txtayah.getText().toString().trim());
-                    params.put("nama_ibu", txtibu.getText().toString().trim());
-                    params.put("keterbatasan", txtketerbatasan.getText().toString().trim());
+                    params.put("kd_regist", kd_regist);
+                    params.put("nama_pasien", nama_pasien);
+                    params.put("tempat_lahir", tempat_lahir);
+                    params.put("tgl_lahir", tgl_lahir);
+                    params.put("keterbatasan", keterbatasan);
+                    params.put("jenis_kelamin", jenis_kelamin);
+                    params.put("warga_negara", warga_negara);
+                    params.put("status_perkawinan", status_perkawinan);
+                    params.put("pendidikan", pendidikan);
+                    params.put("agama", agama);
+                    params.put("pekerjaan", pekerjaan);
+                    params.put("no_nik", no_nik);
+                    params.put("alamat_pasien", alamat_pasien);
+                    params.put("no_tlp", no_tlp);
+                    params.put("nama_ayah", nama_ayah);
+                    params.put("nama_ibu", nama_ibu);
                     params.put("foto", imageToString(bitmapFoto));
-                    params.put("keluhan", txtkeluhan.getText().toString().trim());
-
+                    params.put("hub_pasien", hub_pasien);
+                    params.put("keluhan", keluhan);
+                    Log.e("params" , "params" + params);
                     return params;
                 }
             }
         };
-        queue.add(stringRequest);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(periksanya);
     }
 }

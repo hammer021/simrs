@@ -1,26 +1,13 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/background1</item>
         <item name="colorPrimaryDark">@color/background2</item>
         <item name="colorAccent">@color/background3</item>
     </style>
 
-    <style name="Theme2.App.Base" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorControlNormal">#2A4FC3</item>
-        <item name="colorControlActivated">#4968C7</item>
-        <item name="colorControlHighlight">#7F8FC0</item>
-    </style>
-
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/background1</item>
-        <item name="colorPrimaryDark">@color/background2</item>
-        <item name="colorAccent">@color/background3</item>
-    </style>
-
-    <style name="Theme.App.Base" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.App.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlNormal">#2A4FC3</item>
         <item name="colorControlActivated">#4968C7</item>
         <item name="colorControlHighlight">#7F8FC0</item>
