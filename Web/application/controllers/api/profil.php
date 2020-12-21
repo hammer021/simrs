@@ -105,44 +105,64 @@ class Profil extends REST_Controller {
                 'message' => 'Gagal Mengupdate Profil'
             ], 401);
         }
-
-}else{
-    $this->set_response([
-        'status' => false,
-        'message' => 'User tidak di temukan'
-    ], 401);
-}
-}
-public function changepassword_put(){
-    $email = $this->put('email');
-    $password1 = $this->put('password1');
-    $password2 = $this->put('password2');
-    
-
-    if($password1==$password2){
-        $pwchanging=md5($password1);
-        $data = array(
-            'password' => $pwchanging
-    );
-    $b = $this->db->update('tb_registrasi', $data, ['email' => $email]);
-  //  $b=$this->db->where('email', $email)->update('tb_registrasi', $data);
-        if(!$b){
-            $this->set_response([
-                'status' => false,
-                'message' => 'DATA GAK UPDET'
-            ], 401);}
-        else{
-            $this->set_response([
-                'status' => true,
-                'message' => 'Password berhasil diubah'
-            ], 401);} 
-        
-    }
-    else{
+    }else{
         $this->set_response([
             'status' => false,
-            'message' => 'Password belum berubah'
+            'message' => 'User tidak di temukan'
         ], 401);
     }
 }
+    public function password_put() {
+        if ($this->put('kd_regist')) {
+            $kd_regist = $this->put('kd_regist');
+            $password_lama = $this->put('password_lama');
+            $password_new = $this->put('password_new');
+            $password_hash = md5($password_new);
+
+            $regist = $this->db->get_where('tb_registrasi ', ['kd_regist' => $kd_regist])->row_array();
+
+            if ($regist) {
+
+                if (md5($password_lama) == $regist['password']) {
+
+                    $this->db->set('password', $password_hash);
+                    $this->db->where('kd_regist', $kd_regist);
+
+                    if( $this->db->update('tb_registrasi') ) {
+                        // jika berhasil update
+                        $this->set_response([
+                            'status' => true,
+                            'message' => 'Berhasil mengganti password'
+                        ], 200);
+                    } else {
+                        // jika gagal update
+                        $this->set_response([
+                            'status' => false,
+                            'message' => 'Gagal mengganti password'
+                        ], 401);
+                    }
+
+                } else {
+                    // jika password lama salah
+                    $this->set_response([
+                        'status' => false,
+                        'message' => 'Password lama tidak sesuai'
+                    ], 200);
+                }
+
+            } else {
+                // jika tidak ada user dengan id 
+                $this->set_response([
+                    'status' => false,
+                    'message' => 'User could not be found'
+                ], 404);
+            }
+        } else {
+            // jika tidak ada parameter id
+            $this->set_response([
+                'status' => false,
+                'message' => 'User could not be found'
+            ], 404);
+        }
+    }
 }
