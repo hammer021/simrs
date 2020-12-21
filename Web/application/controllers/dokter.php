@@ -19,6 +19,10 @@ class Dokter extends CI_Controller
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
+	public function profiledok()
+	{
+		redirect('Profile/tampildok');
+	}
 	public function index()
 	{
 		$this->dashboard();

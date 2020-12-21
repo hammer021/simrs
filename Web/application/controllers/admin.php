@@ -43,6 +43,11 @@ class Admin extends CI_Controller
 		$this->load->view('auth/login');
 		$this->load->helper('url');
 	}
+	public function profileadm()
+	{
+		redirect('Profile/tampiladm');
+	}
+	
 	public function pemeriksaan($page = "")
 	{
 		$isi = $this->input->post('konsul');

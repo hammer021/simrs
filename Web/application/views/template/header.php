@@ -101,11 +101,55 @@
                   <div class="arrow_box_right"><a class="dropdown-item" href="#"><i class="ft-book"></i> Read Mail</a><a class="dropdown-item" href="#"><i class="ft-bookmark"></i> Read Later</a><a class="dropdown-item" href="#"><i class="ft-check-square"></i> Mark all Read       </a></div>
                 </div>
               </li>
-              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             
-                <span class="avatar avatar-online"><img src="../assets/images/<?php echo $this->session->userdata("image"); ?>" alt="avatar"><i></i></span></a>
+              <li class="dropdown dropdown-user nav-item">
+              <?php
+                    $sess = $this->session->userdata("kd_role");
+                    if ($sess=="1"){
+                      ?> <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             
+                      <span class="avatar avatar-online">
+                      <img src="../assets/images/<?php echo $this->session->userdata("image"); ?>" alt="avatar">
+                      <i></i></span></a>
+                   <?php } 
+                   else if ($sess=="2"){
+                      ?><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             
+                      <span class="avatar avatar-online">
+                      <img src="../assets/images/dokter/<?php echo $this->session->userdata("image"); ?>" alt="avatar">
+                      <i></i></span></a>
+                   <?php } ?>
+                
+
                 <div class="dropdown-menu dropdown-menu-right">
-                  <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="avatar avatar-online"><img src="../assets/images/<?php echo $this->session->userdata("image"); ?>" alt="avatar"><span class="user-name text-bold-700 ml-1"><?php echo $this->session->userdata("name"); ?></span></span></a>
-                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a><a class="dropdown-item" href="#"><i class="ft-settings"></i> Setting</a><a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
+                  <div class="arrow_box_right">
+                  <?php
+                    $sess = $this->session->userdata("kd_role");
+                    if ($sess=="1"){
+                      ?> <a class="dropdown-item" href="#">
+                      <span class="avatar avatar-online">
+                        <img src="../assets/images/<?php echo $this->session->userdata("image"); ?>" 
+                        alt="avatar"><span class="user-name text-bold-700 ml-1">
+                          <?php echo $this->session->userdata("name"); ?></span></span></a>
+                   <?php } 
+                   else if ($sess=="2"){
+                      ?><a class="dropdown-item" href="#">
+                      <span class="avatar avatar-online">
+                        <img src="../assets/images/dokter/<?php echo $this->session->userdata("image"); ?>" 
+                        alt="avatar"><span class="user-name text-bold-700 ml-1">
+                          <?php echo $this->session->userdata("name"); ?></span></span></a>
+                   <?php } ?>
+                
+                    
+
+                    <div class="dropdown-divider"></div>
+                    <?php
+                    $sess = $this->session->userdata("kd_role");
+                    if ($sess=="1"){
+                      ?> <a class="dropdown-item" href="<?php echo base_url('Admin/profileadm')?>">
+                   <?php } 
+                   else if ($sess=="2"){
+                      ?> <a class="dropdown-item" href="<?php echo base_url('Dokter/profiledok')?>">
+                   <?php } ?>
+                   
+                    <i class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a><a class="dropdown-item" href="#"><i class="ft-settings"></i> Setting</a><a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
                     <div class="dropdown-divider"></div><a class="dropdown-item" href="<?php echo base_url('Auth/logout')?>"><i class="ft-power"></i> Logout</a>
                   </div>
                 </div>
