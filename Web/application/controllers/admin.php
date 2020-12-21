@@ -31,7 +31,7 @@ class Admin extends CI_Controller
 		$data['bulan10'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 10")->result_array();
 		$data['bulan11'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 11")->result_array();
 		$data['bulan12'] = $this->db->query("SELECT COUNT(EXTRACT(MONTH FROM tgl_kunjungan)) as aaa FROM tb_keluhan WHERE EXTRACT(MONTH FROM tgl_kunjungan) = 12")->result_array();
-		$data['dokter'] = $this->db->query("SELECT * FROM tb_dokter")->result_array();
+		$data['dokter'] = $this->Dokter_model->tampil_datadokter();
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
 		$this->load->view('admin/dashboard', $data);

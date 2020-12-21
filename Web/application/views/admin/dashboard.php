@@ -59,19 +59,19 @@
                                     <div class="media-left pr-1">
                                         <span class="avatar avatar-md avatar-online">
                                             <img class="media-object rounded-circle" 
-                                            src="<?php echo base_url(); ?>./assets/images/dokter/<?php echo $dok['foto_dokter'] ?>" 
+                                            src="<?php echo base_url(); ?>./assets/images/dokter/<?php echo $dok->image ?>" 
                                             alt="Generic placeholder image">
                                             <i></i>
                                         </span>
                                     </div>
                                     <div class="media-body w-100">
                                         <span class="list-group-item-heading">
-                                        <?= $dok['nama_dokter'] ?>
+                                        <?= $dok->name ?>
                                         </span>
                                         
                                         <ul class="list-unstyled users-list m-0 float-right">
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="<?= $dok['nama_dokter'] ?>" class="avatar avatar-sm pull-up">
-                                                <img href="javascript:;" data-friend="<?= $dok['no_praktek'] ?>"
+                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="<?= $dok->name; ?>" class="avatar avatar-sm pull-up">
+                                                <img href="javascript:;" data-friend="<?= $dok->no_praktek ?>"
                                                 class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" 
                                                 src="<?php echo base_url(); ?>./assets/images/dokter/default.jpg" alt="Avatar">
                                             </li>
@@ -79,7 +79,7 @@
                                             
                                         </ul>
                                         <p class="list-group-item-text mb-0">
-                                            <span class="blue-grey lighten-2 font-small-3"><?= $dok['no_hp_dokter'] ?> </span>
+                                            <span class="blue-grey lighten-2 font-small-3"><?= $dok->no_hp ;?> </span>
                                         </p>
                                     </div>
                                 </a>
