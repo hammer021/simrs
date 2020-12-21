@@ -188,40 +188,30 @@
                         } ?> 
 
                     <!-- Modal -->
-                    <?php 
-                    $no =1;
-                    foreach ($dokter as $dok) {  ?>
-                    <div class="modal fade " id="chat<?= $no ?>" tabindex="-1" aria-labelledby="chat1" aria-hidden="true">
-                            <div class="modal-dialog modal-xl">
+                    <div class="modal fade " id="chat" tabindex="-1" aria-labelledby="chat1" aria-hidden="true">
+                            <div class="modal-dialog  h-100 d-flex flex-column justify-content-center my-0 modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Chat</h5>
                                     </div>
                                 <div class="modal-body">
-                                    <div class="col-md-4">
-                                    <ul class="friend-list">
-                                        <li class="active bounceInDown">
-                                            <a href="#" class="clearfix">
-                                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
-                                                <div class="friend-name">	
-                                                    <strong>John Doe</strong>
-                                                </div>
-                                                <div class="last-message text-muted">Hello, Are you there?</div>
-                                                <small class="time text-muted">Just now</small>
-                                                <small class="chat-alert label label-danger">1</small>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="clearfix">
-                                                <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
-                                                <div class="friend-name">	
-                                                    <strong>Jane Doe</strong>
-                                                </div>
-                                                <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
-                                                <small class="time text-muted">5 mins ago</small>
-                                            <small class="chat-alert text-muted"><i class="fa fa-check"></i></small>
-                                            </a>
-                                        </li> 
+                                    <div class="row">
+                                        <div class="col-md-4" style="border-right: 1px solid #d9d9d9!important; ">
+                                        <ul class="friend-list" id="list">
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-8 ">
+                                        <div class="chat-message">
+                                            <ul id="isi" class="chat">
+                                            </ul>
+                                                <form>  
+                                                    <div class="searchbar" style="padding-top:10px;padding-right:60px">
+                                                    <input class="search_input col-12" style="color:black:margin-top20px" type="text" name="" id="pesan" placeholder="Search...">
+                                                    <input type="hidden" id="kd" value="<?= $this->session->userdata('kd_regist') ?>">
+                                                    <button type="button"  value="kirim" onclick="insertData()" >
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                     <div class="modal-footer">
@@ -231,9 +221,7 @@
                                 </div>
                             </div>
                     </div>
-                    <?php 
-                    $no ++;
-                    } ?>
+                    </div>
                     <!--/modal-->
         
 </div>
@@ -253,11 +241,12 @@ function openNav() {
   document.getElementById("nav").removeAttribute('style');
   $(".navbar-header").show();
 }
+
 			function insertData(){
-				if ($("#nama").val().trim()=='' || $("#pesan").val()==''){
+				if ($("#kd").val().trim()=='' || $("#pesan").val()==''){
 					$("#isiw").html('Lengkapi..');
 				}else{
-					var datainput = {'nama':$("#nama").val(),'pesan':$("#pesan").val()};
+					var datainput = {'kode':$("#kd").val(),'pesan':$("#pesan").val(),'send_to':global1};
 					$.ajax({
 						type:'POST',
 						data:datainput,
@@ -279,22 +268,42 @@ function openNav() {
 					});
 				}				
 			}
-		$(document).ready(function(){
-			function tampilPesan(){			    	
+            var global1 = "";
+
+            function setGlobal(gg) {
+                global1= gg;
+            }
+            function tampilPesan(id){
+                
+                if(global1== null){
+                    var url1 = '<?php echo base_url();?>chat/tampil_pesan'; 
+                }else{
+                    var url1 = '<?php echo base_url();?>chat/tampil_pesan/'+global1; 
+                }
 				$.ajax({
 					type:'POST',
-					url:'<?php echo base_url();?>/index.php/chat/tampil_pesan',
+					url:url1,
 					success:function(rs){
 						$("#isi").html(rs);
 					}
 				});
-			}		
+			}
+            function tampilList(){		    	
+				$.ajax({
+					type:'POST',
+					url:'<?php echo base_url();?>chat/tampilList',
+					success:function(rs){
+						$("#list").html(rs);
+					}
+				});
+            }		
+		$(document).ready(function(){
 			setInterval(function(){
-				tampilPesan();
+                tampilList();
+				tampilPesan(global1);
 				$('#isiw').empty();	
-			},1000);	
+			},500);	
 		});
-		
         </script>
     
 <!-- ////////////////////////////////////////////////////////////////////////////-->

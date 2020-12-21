@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/pages/dashboard-ecommerce.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/chat.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/custom.css">
     <!-- END Custom CSS-->
   </head>
@@ -96,10 +97,7 @@
               </li>
             </ul>
             <ul class="nav navbar-nav float-right">
-              <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-mail">             </i></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <div class="arrow_box_right"><a class="dropdown-item" href="#"><i class="ft-book"></i> Read Mail</a><a class="dropdown-item" href="#"><i class="ft-bookmark"></i> Read Later</a><a class="dropdown-item" href="#"><i class="ft-check-square"></i> Mark all Read       </a></div>
-                </div>
+            <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" onclick="closeNav()"  data-bs-toggle="modal" id="cht" data-bs-target="#chat"  data-toggle="dropdown"><i class="ficon ft-mail">             </i></a>
               </li>
               <li class="dropdown dropdown-user nav-item">
               <?php
