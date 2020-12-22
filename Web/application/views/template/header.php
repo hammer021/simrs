@@ -22,7 +22,8 @@
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/chat.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/custom1.css">
+    <script src="https://kit.fontawesome.com/d0d4d04864.js" crossorigin="anonymous"></script>
     <!-- END Custom CSS-->
   </head>
   <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">
@@ -97,7 +98,7 @@
               </li>
             </ul>
             <ul class="nav navbar-nav float-right">
-            <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"  data-bs-toggle="modal" id="cht" data-bs-target="#chat"  data-toggle="dropdown"><i class="ficon ft-mail">             </i></a>
+            <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"  data-bs-toggle="modal" id="cht" data-bs-target="#chat"  data-toggle="dropdown"><i class="ficon ft-mail" id="notip"></i></a>
               </li>
               <li class="dropdown dropdown-user nav-item">
               <?php

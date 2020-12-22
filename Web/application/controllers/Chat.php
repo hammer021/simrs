@@ -6,6 +6,7 @@ class Chat extends CI_Controller
     public $user;
     public function __construct()
     {
+        date_default_timezone_set("Asia/Jakarta");
         parent::__construct();
         $this->load->library('session');
         $this->load->database();
@@ -58,7 +59,8 @@ class Chat extends CI_Controller
         $data = array(
 			'send_by'=>$_POST['kode'],
             'message'=>$_POST['pesan'],
-            'send_to'=>$_POST['send_to']  
+            'send_to'=>$_POST['send_to'],
+            'status' => 1  
             );
             $this->db->insert('chat',$data);
     }
@@ -74,7 +76,17 @@ class Chat extends CI_Controller
 			foreach($pesan as $key) {
                 $keluar = $this->Chat_m->pesanKeluar($this->session->userdata("kd_regist"));
                 $datang = $this->Chat_m->pesanDatang($this->session->userdata("kd_regist"));
-
+                $waktu = date('Y-m-d H:i:s');
+                $date1=date_create($waktu);
+                $date2=date_create($key['time']);
+                $diff=date_diff($date1,$date2);
+                if($diff->format("%h") >= "1"){
+                    $time = date('H:i');
+                }elseif($diff->format("%i") == "0"){
+                    $time = "Baru Saja";
+                }else{
+                    $time = $diff->format('%i menit lalu');
+                }
                     $nama = $this->Chat_m->getNama($key['send_by']);
 
                 if($key['send_by'] == $this->session->userdata("kd_regist")){
@@ -90,7 +102,7 @@ class Chat extends CI_Controller
                                     <strong class="primary-font">'
                                     .$nama->name.
                                     '</strong>
-                                    <small class="pull-right text-muted"> 13 mins ago</small>
+                                    <small class="pull-right text-muted">'.$time.'</small>
                                 </div>
                                 <p style="color:black;">
                                     '.$key['message'].'
@@ -111,7 +123,7 @@ class Chat extends CI_Controller
                                     <strong class="primary-font">'
                                     .$nama->name.
                                     '</strong>
-                                    <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
+                                    <small class="pull-right text-muted"></i> '.$time.'</small>
                                 </div>
                                 <p style="color:black;">
                                     '.$key['message'].'
@@ -123,30 +135,88 @@ class Chat extends CI_Controller
             }
         }
             
-    function tampilList(){
+    function tampilList($rgs = ""){
         $listpesan = $this->Chat_m->listPesan();
 
         foreach($listpesan as $list){
+
+            //deklarasi waktu
+            $notif = $this->db->query('select count(status) as banyak from chat where (send_by ="'.$this->session->userdata("kd_regist").'" or send_to ="'.$this->session->userdata("kd_regist").'") and (send_by ="'.$list['kd_regist'].'" or send_to ="'.$list['kd_regist'].'") and (status=0)');
+            $notip = $notif->row();
+            $data = $this->db->query('select message, time from chat where (send_by ="'.$this->session->userdata("kd_regist").'" or send_to ="'.$this->session->userdata("kd_regist").'") and (send_by ="'.$list['kd_regist'].'" or send_to ="'.$list['kd_regist'].'") order by time desc limit 1');
+            $res = $data->row();
+            $waktu = date('Y-m-d H:i:s');
+            $date1=date_create($waktu);
+            $date2=date_create($res->time);
+            $diff=date_diff($date1,$date2);
+
+            //decision untuk waktu
+                if($diff->format("%h") >= "1"){
+                    $time = date('H:i');
+                }elseif($diff->format("%i") == "0"){
+                    $time = "Baru Saja";
+                }else{
+                    $time = $diff->format('%i menit lalu');
+                }
             
+            if($list['kd_regist'] == $rgs){
             ?>
+            <li class="active bounceInDown">
+                <a href="javascript:void(0);" id="set" onclick="setGlobal('<?= $list['kd_regist'] ?>')" class="clearfix">
+                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+                    <div class="friend-name">	
+                        <strong><?= $list['name'] ?></strong>
+                    </div>
+                    <div class="last-message text-muted"><?= $res->message ?></div>
+                        <small class="time text-muted"><?= $time?></small>
+                        <small class="chat-alert label label-danger"><?php if($notip->banyak == 0){ echo''; }else{ echo $notip->banyak; } ?></small>
+                </a>
+            </li>
+            <?php
+            }else{ ?>
+
             <li class="bounceInDown">
                 <a href="javascript:void(0);" id="set" onclick="setGlobal('<?= $list['kd_regist'] ?>')" class="clearfix">
                 <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
                     <div class="friend-name">	
                         <strong><?= $list['name'] ?></strong>
                     </div>
-                    <?php $lastpesan = $this->Chat_m->lastMessage($list['kd_regist']) ?>
-                    <div class="last-message text-muted">pesan</div>
-                        <small class="time text-muted">Just now</small>
-                        <small class="chat-alert label label-danger">1</small>
+                    <?php 
+                        $data = $this->db->query('select message from chat where (send_by ="'.$this->session->userdata("kd_regist").'" or send_to ="'.$this->session->userdata("kd_regist").'") and (send_by ="'.$list['kd_regist'].'" or send_to ="'.$list['kd_regist'].'") order by time desc limit 1');
+                        $res = $data->row();
+                    ?>
+                    <div class="last-message text-muted"><?= $res->message ?></div>
+                        <small class="time text-muted"><?= $time ?></small>
+                        <small class="chat-alert label label-danger"><?php if($notip->banyak == 0){ echo''; }else{ echo $notip->banyak; } ?></small>
                 </a>
             </li>
-            <?php
+
+            <?php }
             
             $this->session->set_userdata('chatkd', $list['kd_regist']);
         }
-       
-       
     }
+
+        function update_status(){
+            $teman = $_POST['dia'];
+            $saia = $this->session->userdata("kd_regist");
+            $query = $this->db->query('UPDATE chat SET status=1 where (send_by ="'.$saia.'" or send_to ="'.$saia.'") and (send_by ="'.$teman.'" or send_to ="'.$teman.'") order by time asc');
+        }
+
+        function notifikasi(){
+            $saia = $this->session->userdata("kd_regist");
+            
+                $query = $this->db->query('select count(chat_id) as banyak from chat where (send_by ="'.$saia.'" or send_to ="'.$saia.'") and status = 0');
+                $query1 = $query->row();
+                if($query1->banyak > 0){
+                    echo '<span class="text-center notif"><div style="margin-top:4px;" class="hai align-middle">'.$query1->banyak.'</div></span>';
+                }else{
+                    
+                }              
+                
+        }
+       
+       
+    
 
 }

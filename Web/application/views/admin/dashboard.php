@@ -207,21 +207,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <form>  
-                                        <div class="searchbar col-md-8 offset-md-4" style="posisition:fixed;padding-top:10px;padding-left:20px;padding-right:60px">
+                                    <form id="formpesan">  
+                                        <div class="searchbar col-md-8 offset-md-4" style="padding: 10px 60px 10px 10px;">
+                                        <input type="hidden" id="kd" value="<?= $this->session->userdata('kd_regist') ?>">
                                             <div class="row">
                                                 <div class="col-md-11">
-                                                    <input class="search_input col-12" style="padding:0 20px;color:black:margin-top20px" type="text" name="" id="pesan" placeholder="Tulis Pesan Anda">
+                                                <input class="search_input col-12" style="color:black;margin-top20px" type="text" name="" id="pesan" placeholder="Search...">
                                                 </div>
-                                                <div class="col-md-1">
-                                                    <button type="button" onclick="insertData()" >asdsa</button>
+                                                <div class="col-md-1 justify-content-center">
+                                                <button class="btn btn-primary" type="button"  value="kirim" onclick="insertData()" ><i class="fas fa-paper-plane"></i></button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                     <div class="modal-footer" >
-                                        <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -264,6 +264,9 @@ function openNav() {
 						success:function(rs){
 							$("#isiw").html(rs);
 							$("#loader").hide();
+                            $( '#formpesan' ).each(function(){
+                                this.reset();
+                        });
 							$("#btn").removeClass("disabled");
 
 						},
@@ -278,6 +281,15 @@ function openNav() {
 
             function setGlobal(gg) {
                 global1= gg;
+
+                $.ajax({
+					type:'POST',
+                    data:{'dia':global1},
+					url:'<?php echo base_url();?>chat/update_status',
+					success:function(rs){
+						$("#isi").html(rs);
+					}
+				});
             }
             function tampilPesan(id){
                 
@@ -294,12 +306,26 @@ function openNav() {
 					}
 				});
 			}
-            function tampilList(){		    	
+            function tampilList(){	
+                if(global1== null){
+                    var url1 = '<?php echo base_url();?>chat/tampilList'; 
+                }else{
+                    var url1 = '<?php echo base_url();?>chat/tampilList/'+global1; 
+                }	    	
 				$.ajax({
 					type:'POST',
-					url:'<?php echo base_url();?>chat/tampilList',
+					url:url1,
 					success:function(rs){
 						$("#list").html(rs);
+					}
+				});
+            }
+            function notifikasi(){		    	
+				$.ajax({
+					type:'POST',
+                    url:'<?php echo base_url();?>chat/notifikasi',
+					success:function(rs){
+						$("#notip").html(rs);
 					}
 				});
             }
@@ -313,7 +339,8 @@ function openNav() {
                 openNav();
             });
 			setInterval(function(){
-                tampilList();
+                notifikasi();
+                tampilList(global1);
 				tampilPesan(global1);
 				$('#isiw').empty();	
 			},500);	

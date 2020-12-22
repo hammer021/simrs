@@ -35,7 +35,7 @@ class Chat_m extends CI_Model {
 
     public function getPesan($par,$per)
 	{
-		$data = $this->db->query('select * from chat where (send_by ="'.$par.'" or send_to ="'.$par.'") and (send_by ="'.$per.'" or send_to ="'.$per.'")');
+		$data = $this->db->query('select * from chat where (send_by ="'.$par.'" or send_to ="'.$par.'") and (send_by ="'.$per.'" or send_to ="'.$per.'") order by time asc');
 		$res = $data->result_array();
 		$count = $data->num_rows();
 		return $res;	
@@ -81,10 +81,10 @@ class Chat_m extends CI_Model {
 		}
 	}
 
-	public function lastMessage($bb){
-		$data = $this->db->query('select * from chat where send_by ="'.$bb.'" OR send_to="'.$bb.'"');
-		$res = $data->row();
-		return $res;
+	public function lastMessage($bb,$cc){
+		$data = $this->db->query('select * from chat where (send_by ="'.$bb.'" or send_to ="'.$bb.'") and (send_by ="'.$cc.'" or send_to ="'.$cc.'") order by time desc limit 1');
+		$ras = $data->row();
+		return $ras;
 	}
 		
 		public function listnama($kita,$dia){
