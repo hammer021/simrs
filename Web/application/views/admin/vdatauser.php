@@ -1,4 +1,4 @@
-<div class="app-content content">
+<div class="app-content content" id="main">
 	<div class="content-wrapper">
 		<div class="content-wrapper-before"></div>
 		<div class="content-header row">

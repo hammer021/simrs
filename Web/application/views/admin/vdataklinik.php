@@ -1,4 +1,4 @@
-<div class="app-content content">
+<div class="app-content content" id="main">
 	<div class="content-wrapper">
 		<div class="content-wrapper-before"></div>
 		<div class="content-header row">
@@ -155,7 +155,10 @@ foreach ($listklinik as $a) {
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-danger">Add</button>
 				</form>
+					</div>
 			</div>
 		</div>
 	</div>
+</div>
+</div>
 </div>
