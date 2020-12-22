@@ -25,7 +25,7 @@
 					<div class="card">
 						<div class="card-header">
 							<h4 class="card-title">
-								<p><span class="text-bold-600"><button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Pasien</button></span></p>
+								
 								<form class="form-inline active-pink-4">
 									<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
 									<i class="la la-search" aria-hidden="false"></i>
