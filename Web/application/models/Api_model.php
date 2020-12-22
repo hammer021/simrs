@@ -50,4 +50,14 @@ class Api_model extends CI_Model
             else{$nextId = $kode.'00001';} // For the first time
             return $nextId;
     }
+
+    public function getKeluhan($no_rm = null)
+    {
+        $this->db->select('tb_keluhan.*');
+        $this->db->from('tb_keluhan');
+        $this->db->join('tb_pasien','tb_pasien.kd_pasien = tb_keluhan.kd_pasien');
+        $this->db->where('tb_keluhan.no_rm', $no_rm);
+        $income = $this->db->get()->result_array();
+        return $income;
+    }
 }

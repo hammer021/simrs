@@ -28,8 +28,6 @@ class Konsul extends REST_Controller {
 
         $output = $this->db->get_where('tb_pasien',  array('kd_regist' => $l))->result_array();
             if(!empty($output)){
-
-
             $message = [
                 'status' => TRUE,
                 'data'   => $query,
@@ -59,8 +57,6 @@ class Konsul extends REST_Controller {
 
         $output = $this->db->get_where('tb_pasien',  array('kd_regist' => $l))->result_array();
             if(!empty($output)){
-
-
             $message = [
                 'status' => TRUE,
                 'data'   => $query,
@@ -134,10 +130,7 @@ class Konsul extends REST_Controller {
                 'no_tlp'                => $this->post('no_tlp'),
                 'nama_ayah'             => $this->post('nama_ayah'),
                 'nama_ibu'              => $this->post('nama_ibu'),
-                'foto'                  => 'default.jpeg',
                 'hub_pasien'            => $this->post('hub_pasien'));
-
-            
             }else{
                 $data = array(
                     'kd_pasien '            => $kode,
@@ -160,10 +153,6 @@ class Konsul extends REST_Controller {
                     'nama_ibu'              => $this->post('nama_ibu'),
                     'foto'                  => $this->post('foto'),
                     'hub_pasien'            => $this->post('hub_pasien'));
-
-                    
-                    
-
             }
             $data2 = array(
                 'no_rm'                 => $no_rm,
@@ -188,37 +177,95 @@ class Konsul extends REST_Controller {
                         'message' => 'Something Wrong I Can Feel It',
                     ];
                 }
-
-    
-                
         }
         $this->response($response, 200);
-    
     }
 
     public function bukti_post()
     {
-        $id = $this->input->post('no_rm');
-        $foto = $this->input->post('foto');
+        if ($this->post('no_rm')) {
+            $no_rm = $this->input->post('no_rm');
 
-        $data = array(
-            'bukti_pembayaran '            => $foto
-        );
-        
-        $bb = $this->db->update('tb_keluhan', $data, array('no_rm' => $id));
-
-        if($bb){
-            $this->response([
-                'status' => TRUE,
-                'message' => 'Berhasil Mengubah Akun!',
-            ], REST_Controller::HTTP_OK);
-        }else{
+            $detailRiwayat = $this->Api_model->getKeluhan($no_rm);
+            if ($detailRiwayat) {
+                $this->response([
+                    'status' => TRUE,
+                    'data' => $detailRiwayat
+                ], REST_Controller::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'No Rekam medis tidak ditemukan'.$no_rm
+                ], REST_Controller::HTTP_OK);
+            }
+        } else {
             $this->response([
                 'status' => FALSE,
-                'message' => 'Data tidak dapat ditampilkan'
-            ], REST_Controller::HTTP_NOT_FOUND);
+                'message' => 'id_surat tidak ditemukan'
+            ], REST_Controller::HTTP_OK);
         }
     }
-    
-    
+
+    public function bukti_put()
+    {
+        if ($this->put('no_rm'))
+        {
+            $no_rm = $this->put('no_rm');
+
+            $config = uniqid().'.jpeg';
+            $path = './assets/images/bukti_keluhan/'.$config;
+
+            $transaksi = $this->Api_model->getKeluhan($no_rm);
+
+            
+            if($transaksi) {
+                if($this->put('buktikeluhan')) {
+                    $buktikeluhan = $this->put('buktikeluhan');
+
+                    $data = array(
+                        'buktikeluhan' => $config,
+                        'status' => "2"
+                        
+                    );
+                        if ($this->db->update('tb_keluhan', $data, ['no_rm' => $no_rm])) {
+                            file_put_contents($path, base64_decode($buktikeluhan));
+                            // jika berhasil
+                            $this->set_response([
+                                'status' => true,
+                                'message' => 'Berhasil '
+                            ], 200);
+                        } else {
+                            // jika gagal
+                            $this->set_response([
+                                'status' => false,
+                                'message' => 'Gagal'
+                            ], 401);
+                        }
+
+                    } else {
+                        
+                            // jika gagal
+                            $this->set_response([
+                                'status' => false,
+                                'message' => 'Gagal Upload Bukti Pembayaran'
+                            ], 401);
+                        
+                    }
+                    
+                } else {
+                    // jika data pengguna tidak ada
+                    $this->set_response([
+                        'status' => false,
+                        'message' => 'User could not be found'
+                    ], 404);
+                }
+
+        } else {
+            // jika tidak ada parameter id
+            $this->set_response([
+                'status' => false,
+                'message' => 'User could not be found'
+            ], 404);
+        }
+    }
 }
