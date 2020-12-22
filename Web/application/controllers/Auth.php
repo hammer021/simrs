@@ -37,6 +37,7 @@ class Auth extends CI_Controller
                 if ($password == $pw) {
                     $data = [
                         'kd_regist'=> $user['kd_regist'],
+                        'password'=> $user['password'],
                         'email' => $user['email'],
                         'name' => $user['name'],
                         'image' => $user['image'],

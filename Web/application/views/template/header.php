@@ -142,12 +142,31 @@
                     $sess = $this->session->userdata("kd_role");
                     if ($sess=="1"){
                       ?> <a class="dropdown-item" href="<?php echo base_url('Admin/profileadm')?>">
+                      
                    <?php } 
                    else if ($sess=="2"){
                       ?> <a class="dropdown-item" href="<?php echo base_url('Dokter/profiledok')?>">
                    <?php } ?>
                    
-                    <i class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a><a class="dropdown-item" href="#"><i class="ft-settings"></i> Setting</a><a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
+                    <i class="ft-user"></i> Edit Profile</a>
+                    <a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a>
+
+                    <?php
+                    $sess = $this->session->userdata("kd_role");
+                    if ($sess=="1"){
+                      ?> <a class="dropdown-item" href="<?php echo base_url('Profile/changepassadm')?>">
+                      
+                   <?php } 
+                   else if ($sess=="2"){
+                      ?> <a class="dropdown-item" href="<?php echo base_url('Profile/changepassdok')?>">
+                   <?php } ?>
+                   
+                   <i class="ft-settings"></i> Setting</a>
+                    
+                    
+                    
+                    
+                    <a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
                     <div class="dropdown-divider"></div><a class="dropdown-item" href="<?php echo base_url('Auth/logout')?>"><i class="ft-power"></i> Logout</a>
                   </div>
                 </div>
