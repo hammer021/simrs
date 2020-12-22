@@ -33,28 +33,8 @@ class Profile extends CI_Controller
 		$this->load->view('admin/vubahpassword',$data);
 		$this->load->view('template/footer');
 		$this->load->helper('url');
-    }
-	//DOKTER
-    public function tampildok()
-    {
-        $data['profile'] = $this->Profile_model->get_datadok();
-        $this->load->view('template/header');
-		$this->load->view('template/doktersidemenu');
-		$this->load->view('admin/veditprofiledok', $data);
-		$this->load->view('template/footer');
-		$this->load->helper('url');
 	}
-	public function changepassdok()
-    {
-        $data['pass'] = $this->Profile_model->get_datadok();
-        $this->load->view('template/header');
-		$this->load->view('template/sidemenu');
-		$this->load->view('admin/vubahpassword',$data);
-		$this->load->view('template/footer');
-		$this->load->helper('url');
-    }
-	//--------------------------------------------------------------------------->
-    public function update_pass()
+	public function update_pass()
 	{
 		$kd_regist = $this->input->post('kd_regist');
 		$pass_lama = md5($this->input->post('passlama'));
@@ -151,8 +131,61 @@ class Profile extends CI_Controller
             redirect('admin/dashboard');
             
 		}
-    }
+	}
+	
+	//DOKTER
+    public function tampildok()
+    {
+        $data['profile'] = $this->Profile_model->get_datadok();
+        $this->load->view('template/header');
+		$this->load->view('template/doktersidemenu');
+		$this->load->view('admin/veditprofiledok', $data);
+		$this->load->view('template/footer');
+		$this->load->helper('url');
+	}
+	public function changepassdok()
+    {
+        $data['pass'] = $this->Profile_model->get_datadok();
+        $this->load->view('template/header');
+		$this->load->view('template/sidemenu');
+		$this->load->view('admin/vubahpassword',$data);
+		$this->load->view('template/footer');
+		$this->load->helper('url');
+	}
+	public function update_passdok()
+	{
+		$kd_regist = $this->input->post('kd_regist');
+		$pass_lama = md5($this->input->post('passlama'));
+		$pass_baru = $this->input->post('passbaru');
+		$pass_baruRpt = $this->input->post('rptpassbaru');
+		$passsess = $this->session->userdata('password');
+		if($pass_lama == $passsess){
+			if($pass_baru == $pass_baruRpt  ){
+				$passbaruMD5=md5($pass_baruRpt);
+				//UPDATE tb_registrasi
+				$where = array(
+					'kd_regist' => $kd_regist
+				);
+				$data = array(
+				'password'			=> $passbaruMD5
+				);
+				$this->Dokter_model->update_data($where, $data, 'tb_registrasi');
+				
+				redirect('dokter/dashboard');
+			}
+			else{
+				redirect(base_url('Profile/changepassdok?pesan=gakcocok'));
+			//echo "Pengulangan Password tidak cocok!" ;
+			}
+		}
+		else{
+			redirect(base_url('Profile/changepassdok?pesan=gakcocoklama'));
 
+		}
+		
+		
+	}
+	
     public function update_profiledok()
     {
         $kd_regist = $this->input->post('kd_regist');
@@ -229,6 +262,9 @@ class Profile extends CI_Controller
             redirect('Dokter/dashboard');
             
 		}
-    }
+	}
+	//--------------------------------------------------------------------------->
+   
+
 }
 ?>
