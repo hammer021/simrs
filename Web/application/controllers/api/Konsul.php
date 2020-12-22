@@ -130,6 +130,7 @@ class Konsul extends REST_Controller {
                 'no_tlp'                => $this->post('no_tlp'),
                 'nama_ayah'             => $this->post('nama_ayah'),
                 'nama_ibu'              => $this->post('nama_ibu'),
+                'foto'                  => 'default.jpeg',
                 'hub_pasien'            => $this->post('hub_pasien'));
             }else{
                 $data = array(
@@ -151,7 +152,7 @@ class Konsul extends REST_Controller {
                     'no_tlp'                => $this->post('no_tlp'),
                     'nama_ayah'             => $this->post('nama_ayah'),
                     'nama_ibu'              => $this->post('nama_ibu'),
-                    'foto'                  => $this->post('foto'),
+                    'foto'                  => $config2,
                     'hub_pasien'            => $this->post('hub_pasien'));
             }
             $data2 = array(
@@ -159,6 +160,7 @@ class Konsul extends REST_Controller {
                 'tgl_kunjungan '        => $time,
                 'keluhan '              => $this->post('keluhan'),
                 'status '               => '1',
+                'harga'                 => '0',     
                 'kd_pasien '            => $kode);    
                 
                 $insert = $this->db->insert('tb_pasien', $data);

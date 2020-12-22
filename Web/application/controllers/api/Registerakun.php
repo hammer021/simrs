@@ -55,7 +55,8 @@ class Registerakun extends REST_Controller {
                 ];
 
                 $cek2 = $this->db->insert('user_token', $user_token);
-                $this->_sendEmail($tokennya, $email, 'verify');
+                $kirim = $this->_sendEmail($tokennya, $email, 'verify');
+                
 
                 $response = [
                     'status' => true,
@@ -70,7 +71,7 @@ class Registerakun extends REST_Controller {
             'smtp_host' => 'smtp.sendgrid.net',
             'smtp_port' => 587,
             'smtp_user' => 'apikey',
-            'smtp_pass' => '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',
+            'smtp_pass' => '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',
             'mailtype' => 'html',
             'charset' => 'utf-8',
             'newline' => '\r\n'
@@ -80,7 +81,7 @@ class Registerakun extends REST_Controller {
         $this->load->library('email', $config);
         $this->email->initialize($config);
 
-        $this->email->from('admin@rsjlawang.com', 'Admin Simrs');
+        $this->email->from('adminsimrs@simrs.com', 'Admin Simrs');
         $this->email->to($email);
         $this->email->subject('Verifikasi Akun');
         $this->email->message('

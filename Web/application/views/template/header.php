@@ -97,7 +97,7 @@
               </li>
             </ul>
             <ul class="nav navbar-nav float-right">
-            <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" onclick="closeNav()"  data-bs-toggle="modal" id="cht" data-bs-target="#chat"  data-toggle="dropdown"><i class="ficon ft-mail">             </i></a>
+            <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"  data-bs-toggle="modal" id="cht" data-bs-target="#chat"  data-toggle="dropdown"><i class="ficon ft-mail">             </i></a>
               </li>
               <li class="dropdown dropdown-user nav-item">
               <?php

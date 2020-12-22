@@ -129,7 +129,7 @@ class Chat extends CI_Controller
         foreach($listpesan as $list){
             
             ?>
-            <li class="active bounceInDown">
+            <li class="bounceInDown">
                 <a href="javascript:void(0);" id="set" onclick="setGlobal('<?= $list['kd_regist'] ?>')" class="clearfix">
                 <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
                     <div class="friend-name">	

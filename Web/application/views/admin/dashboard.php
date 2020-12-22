@@ -194,29 +194,34 @@
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Chat</h5>
                                     </div>
-                                <div class="modal-body">
+                                <div class="modal-body" style="height:50vh;">
                                     <div class="row">
-                                        <div class="col-md-4" style="border-right: 1px solid #d9d9d9!important; ">
+                                        <div class="col-md-4" style="overflow-y:auto;height:40vh;border-right: 1px solid #d9d9d9!important; ">
                                         <ul class="friend-list" id="list">
                                         </ul>
                                     </div>
-                                    <div class="col-md-8 ">
+                                    <div class="col-md-8 " style="overflow-y:auto;height:40vh;">
                                         <div class="chat-message">
                                             <ul id="isi" class="chat">
                                             </ul>
-                                                <form>  
-                                                    <div class="searchbar" style="padding-top:10px;padding-right:60px">
-                                                    <input class="search_input col-12" style="color:black:margin-top20px" type="text" name="" id="pesan" placeholder="Search...">
-                                                    <input type="hidden" id="kd" value="<?= $this->session->userdata('kd_regist') ?>">
-                                                    <button type="button"  value="kirim" onclick="insertData()" >
-                                                </form>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="modal-footer">
-                                        <button type="button" id="close" class="btn btn-secondary" onclick="openNav()" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    <form>  
+                                        <div class="searchbar col-md-8 offset-md-4" style="posisition:fixed;padding-top:10px;padding-left:20px;padding-right:60px">
+                                            <div class="row">
+                                                <div class="col-md-11">
+                                                    <input class="search_input col-12" style="padding:0 20px;color:black:margin-top20px" type="text" name="" id="pesan" placeholder="Tulis Pesan Anda">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <button type="button" onclick="insertData()" >asdsa</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                    <div class="modal-footer" >
+                                        <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -233,6 +238,7 @@ function closeNav() {
   document.getElementById("main").style.marginLeft= "0";
   document.getElementById("nav").style.marginLeft= "0";
   $(".navbar-header").hide();
+  $("#close").show();
 }
 
 function openNav() {
@@ -296,8 +302,16 @@ function openNav() {
 						$("#list").html(rs);
 					}
 				});
-            }		
+            }
+            
+        	
 		$(document).ready(function(){
+            $('#chat').on('shown.bs.modal', function () {
+                closeNav();
+            });
+            $('#chat').on('hidden.bs.modal', function () {
+                openNav();
+            });
 			setInterval(function(){
                 tampilList();
 				tampilPesan(global1);
