@@ -46,7 +46,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="card-content collapse show">
+			<div class="card-contentaa container collapse show">
 				<div class="body">
 					<?php 
 					foreach ($pass as $prof):
@@ -97,6 +97,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 	
 </div>
 <!-- Table Head options start -->

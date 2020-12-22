@@ -36,7 +36,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="card-content collapse show">
+			<div class="card-content container collapse show">
 				<div class="body">
 					<?php 
 					foreach ($profile as $prof):
@@ -89,6 +89,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 	
 </div>
 <!-- Table Head options start -->
