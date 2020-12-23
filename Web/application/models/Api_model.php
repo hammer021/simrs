@@ -51,13 +51,14 @@ class Api_model extends CI_Model
             return $nextId;
     }
 
-    public function getKeluhan($no_rm = null)
+    public function getKeluhan($no_rm)
     {
-        $this->db->select('tb_keluhan.*');
-        $this->db->from('tb_keluhan');
-        $this->db->join('tb_pasien','tb_pasien.kd_pasien = tb_keluhan.kd_pasien');
-        $this->db->where('tb_keluhan.no_rm', $no_rm);
-        $income = $this->db->get()->result_array();
-        return $income;
+        $a = $this->db->select('*')    
+            ->from('tb_keluhan')
+                ->join('tb_pasien', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
+                    ->where('no_rm', $no_rm)
+            ->get();
+        $query = $a->result_array();
+        return $query;
     }
 }
