@@ -12,7 +12,7 @@ public class ModalPeriksa {
     }
 
     public void setNo_rm(String no_rm) {
-        this.no_rm = "Nomor Periksa : " + no_rm;
+        this.no_rm = no_rm;
     }
 
     public String getNama_pasien() {

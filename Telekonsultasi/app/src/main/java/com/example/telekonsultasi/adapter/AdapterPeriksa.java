@@ -17,16 +17,29 @@ import java.util.List;
 public class AdapterPeriksa extends RecyclerView.Adapter<AdapterPeriksa.MyViewHolder> {
     private List<ModalPeriksa> item;
     private Context context;
+    private OnHistoryClickListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView no_rm, nama_pasien, tgl_kunjungan, harga, status;
-        public MyViewHolder(View itemView){
+        public MyViewHolder(View itemView, final OnHistoryClickListener listener){
             super(itemView);
             no_rm = itemView.findViewById(R.id.no_rmperiksa);
             nama_pasien = itemView.findViewById(R.id.namapasienperiksa);
             tgl_kunjungan = itemView.findViewById(R.id.tanggalperiksa);
             harga = itemView.findViewById(R.id.biayaperiksa);
             status = itemView.findViewById(R.id.statusperiksa);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener!= null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.onClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -39,7 +52,7 @@ public class AdapterPeriksa extends RecyclerView.Adapter<AdapterPeriksa.MyViewHo
     @Override
     public AdapterPeriksa.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_pembayaran_periksa, parent, false);
-        MyViewHolder myViewHolder = new AdapterPeriksa.MyViewHolder(layout);
+        AdapterPeriksa.MyViewHolder myViewHolder = new AdapterPeriksa.MyViewHolder(layout, listener);
         return myViewHolder;
     }
 
@@ -54,5 +67,13 @@ public class AdapterPeriksa extends RecyclerView.Adapter<AdapterPeriksa.MyViewHo
 
     public int getItemCount() {
         return item.size();
+    }
+
+    public interface OnHistoryClickListener{
+        public void onClick(int position);
+    }
+
+    public void setListener(OnHistoryClickListener listener) {
+        this.listener = listener;
     }
 }
