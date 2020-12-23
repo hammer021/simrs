@@ -149,7 +149,6 @@
                     android:backgroundTint="@color/fontabu"
                     android:fontFamily="@font/arial_narrow"
                     android:hint=" Foto (default.jpeg)"
-                    android:inputType="text"
                     android:enabled="false"
                     android:textColor="@color/putih"
                     android:textColorHint="@color/fontabu"

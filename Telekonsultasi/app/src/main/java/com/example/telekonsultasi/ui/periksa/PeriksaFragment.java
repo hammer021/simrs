@@ -2,7 +2,6 @@ package com.example.telekonsultasi.ui.periksa;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,11 +25,9 @@ import com.example.telekonsultasi.KeluhanActivity;
 import com.example.telekonsultasi.NotificationActivity;
 import com.example.telekonsultasi.R;
 import com.example.telekonsultasi.adapter.AdapterPemeriksaan;
-import com.example.telekonsultasi.adapter.AdapterPeriksa;
 import com.example.telekonsultasi.configfile.ServerApi;
 import com.example.telekonsultasi.configfile.authdata;
 import com.example.telekonsultasi.model.ModalPemeriksaan;
-import com.example.telekonsultasi.model.ModalPeriksa;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,6 +70,7 @@ public class PeriksaFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), KeluhanActivity.class);
+//                i.putExtra("kd_regist", authdataa.getKodeUser());
                 startActivity(i);
             }
         });

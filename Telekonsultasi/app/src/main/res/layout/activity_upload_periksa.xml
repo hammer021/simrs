@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bcgroundfull"
+    tools:context=".UploadPeriksaActivity"
+    android:id="@+id/uploadperiksaactivity">
+
+    <TextView
+        android:id="@+id/normuploadperiksa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/arial_narrow"
+        android:text="No RM"
+        android:textColor="@color/putih"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="175dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/normuploadperiksa">
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <!-- android:layout_height="550dp" -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+                <TextView
+                    android:id="@+id/namauploadperiksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="5dp"
+                    android:text="Nama Pasien"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tanggaluploadperiksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="5dp"
+                    android:text="Tanggal Kunjungan"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/namauploadperiksa" />
+
+                <TextView
+                    android:id="@+id/keluhanuploadperiksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="5dp"
+                    android:text="Keluhan Pasien"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tanggaluploadperiksa" />
+
+                <TextView
+                    android:id="@+id/hargauploadperiksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="5dp"
+                    android:text="Harga Biaya Periksa"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/keluhanuploadperiksa" />
+
+                <TextView
+                    android:id="@+id/textviewbiasa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="65dp"
+                    android:layout_marginStart="5dp"
+                    android:text="Silahkan tranfser pada rekening berikut :"
+                    android:textColor="@color/fontbiru"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hargauploadperiksa" />
+
+                <TextView
+                    android:id="@+id/textviewbiasa2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="5dp"
+                    android:text="2000123456 (BCA) - a.n RSJ LAWANG"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textviewbiasa" />
+
+                <TextView
+                    android:id="@+id/textviewbiasa3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="5dp"
+                    android:text="Upload Bukti Pembayaran"
+                    android:textColor="@color/fontabu"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textviewbiasa2" />
+
+                <TextView
+                    android:id="@+id/pathfotouploadperiksa"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textviewbiasa3" />
+
+                <Button
+                    android:id="@+id/btnuploadperiksa"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/stylebutton1"
+                    android:layout_marginEnd="5dp"
+                    android:text="Upload Bukti"
+                    app:layout_constraintBottom_toBottomOf="@+id/pathfotouploadperiksa"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textviewbiasa3" />
+
+                <Button
+                    android:id="@+id/btnsimpanuploadperiksa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lanjutkan Pembayaran"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/stylebutton1"
+                    android:fontFamily="@font/clemente_light"
+                    android:textColor="@color/putih"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pathfotouploadperiksa" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

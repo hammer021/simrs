@@ -67,13 +67,13 @@ public class KeluhanActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     ProgressBar progressBar;
 
-    String mKdRegist;
+    String kodenya;
 
     ImageView imageView7;
     EditText txtnama, txttempatlahir, txttanggal, txtjeniskelamin, txtstatuskawin, txtketerbatasan,
             txtwarga, txtpendidikan, txtagama, txtpekerjaan,
             txtnik, txtalamat, txtnotelpon, txtayah, txtibu, txthubpasien, txtkeluhan;
-    TextView txtkoderegist, txtpathfoto;
+    TextView  txtpathfoto, txtkoderegist;
     Button uploadfoto, simpanperiksa;
     Bitmap bitmapFoto;
 
@@ -86,17 +86,15 @@ public class KeluhanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_keluhan);
 
         initWidgetId();
-        Bundle extras = getIntent().getExtras();
-        nama = extras.getString(kdregistnya);
-        txtkoderegist.setText(nama);
-//    mKdRegist = authdataa.getKodeUser();
+//        Intent intent = getIntent();
+//        kodenya = intent.getStringExtra("no_rm");
 
     progressDialog = new ProgressDialog(this);
     authdataa = new authdata(this);
     requestQueue = Volley.newRequestQueue(this);
     progressBar = new ProgressBar(KeluhanActivity.this);
 
-
+        txtkoderegist.setText(authdataa.getKodeUser());
     uploadfoto.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -171,7 +169,7 @@ public class KeluhanActivity extends AppCompatActivity {
     }
 
     private void initWidgetId() {
-        txtkoderegist = findViewById(R.id.kdregist);
+        txtkoderegist = findViewById(R.id.kdregistgawean);
         txtnama = findViewById(R.id.edtnamapasien);
         txttempatlahir = findViewById(R.id.edttempatlahirpsn);
         txttanggal = findViewById(R.id.edttgllahirpsn);
@@ -266,6 +264,7 @@ public class KeluhanActivity extends AppCompatActivity {
         final String no_tlp = this.txtnotelpon.getText().toString().trim();
         final String nama_ayah = this.txtayah.getText().toString().trim();
         final String nama_ibu = this.txtibu.getText().toString().trim();
+        final String foto = this.txtpathfoto.getText().toString().trim();
         final String hub_pasien = this.txthubpasien.getText().toString().trim();
         final String keluhan = this.txtkeluhan.getText().toString().trim();
 
@@ -369,16 +368,15 @@ public class KeluhanActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(KeluhanActivity.this, "Error! " + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(KeluhanActivity.this, "Silahkan masukkan data dengan benar dan sesuai Format yang sudah di tentukan!", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
         })
         {
             protected Map<String, String> getParams(){
                 Map<String, String> params = new HashMap<>();
-                String fotonya = txtpathfoto.getText().toString().trim();
 
-                    if (fotonya.matches("")) {
+                    if (foto.matches("")) {
                     params.put("kd_regist", kd_regist);
                     params.put("nama_pasien", nama_pasien);
                     params.put("tempat_lahir", tempat_lahir);
@@ -397,6 +395,8 @@ public class KeluhanActivity extends AppCompatActivity {
                     params.put("nama_ibu", nama_ibu);
                     params.put("hub_pasien", hub_pasien);
                     params.put("keluhan", keluhan);
+
+                    Log.e("params" , "params" + params);
                     return params;
                 } else {
                     params.put("kd_regist", kd_regist);
@@ -418,7 +418,6 @@ public class KeluhanActivity extends AppCompatActivity {
                     params.put("foto", imageToString(bitmapFoto));
                     params.put("hub_pasien", hub_pasien);
                     params.put("keluhan", keluhan);
-                    Log.e("params" , "params" + params);
                     return params;
                 }
             }
