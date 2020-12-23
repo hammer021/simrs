@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -64,17 +65,14 @@ public class NotificationActivity extends AppCompatActivity {
                         ModalPeriksa modalPeriksa = new ModalPeriksa();
                         JSONObject datanya = data.getJSONObject(i);
                         modalPeriksa.setNama_pasien(datanya.getString("nama_pasien"));
-                        modalPeriksa.setNo_rm(datanya.getString("no_rm"));
+                        modalPeriksa.setNo_rm("Nomor Rekam Medis : " + datanya.getString("no_rm"));
                         modalPeriksa.setTgl_kunjungan(datanya.getString("tgl_kunjungan"));
                         modalPeriksa.setHarga(datanya.getString("harga"));
                         modalPeriksa.setStatus(datanya.getString("status"));
 
                         item.add(modalPeriksa);
                     }
-                    adapterPeriksa = new AdapterPeriksa(NotificationActivity.this, item);
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-                    recyclerViewPeriksa.setLayoutManager(layoutManager);
-                    recyclerViewPeriksa.setAdapter(adapterPeriksa);
+                    setupListView();
                 } catch (Exception e) {
                     Toast.makeText(NotificationActivity.this, e.toString(), Toast.LENGTH_LONG).show();
                 }
@@ -86,5 +84,25 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
         queue.add(stringRequest);
+    }
+
+    private void setupListView() {
+        adapterPeriksa = new AdapterPeriksa(this, item);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerViewPeriksa.setLayoutManager(layoutManager);
+        recyclerViewPeriksa.setAdapter(adapterPeriksa);
+
+        adapterPeriksa.setListener(new AdapterPeriksa.OnHistoryClickListener() {
+            @Override
+            public void onClick(int position) {
+                ModalPeriksa modalPeriksa = item.get(position);
+                Toast.makeText(NotificationActivity.this, modalPeriksa.getNo_rm(), Toast.LENGTH_LONG).show();
+//                if (modalPeriksa.getStatus() == "1") {
+                    Intent detail = new Intent(NotificationActivity.this, UploadPeriksaActivity.class);
+                    detail.putExtra("no_rm", modalPeriksa.getNo_rm());
+                    startActivity(detail);
+//                }
+            }
+        });
     }
 }
