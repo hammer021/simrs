@@ -146,11 +146,19 @@ public class EditPasswordActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
+
+                    String status = jsonObject.getString("status");
                     String message = jsonObject.getString("message");
 
-                    Snackbar.make(findViewById(R.id.editpasswordactivity), message, Snackbar.LENGTH_LONG).show();
+                    if (status.equals("true")) {
+                        Intent a = new Intent(EditPasswordActivity.this, NavFragment.class);
+                        startActivity(a);
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    } else {
+                        Snackbar.make(findViewById(R.id.editpasswordactivity), message, Snackbar.LENGTH_LONG).show();
+                    }
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(R.id.editpasswordactivity), e.toString(), Snackbar.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -175,7 +183,8 @@ public class EditPasswordActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("kd_regist", mKdRegist);
-                params.put("password", mPasswordbaru);
+                params.put("password_lama", mPasswordlama);
+                params.put("password_new", mPasswordbaru);
 
                 return params;
             }
