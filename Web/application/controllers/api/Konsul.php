@@ -13,6 +13,16 @@ class Konsul extends REST_Controller {
         $this->load->model('Api_model');
     }
 
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------- //
+
+    // Status :
+    // Selesai = 0
+    // Belum Bayar = 1
+    // Sudah Bayar = 2 (Untuk admin)
+    // Terverifikasi = 3
+
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------- //
+
     function index_get()
     {
         $l = $this->get('kd_regist');
@@ -21,7 +31,7 @@ class Konsul extends REST_Controller {
                     ->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
                     ->group_start()
                         ->where('kd_regist', $l)
-                        ->where('status = 1 OR status = 2')
+                        ->where('status = Belum Bayar OR status = Terverifikasi')
                     ->group_end()
                 ->get();
         $query = $a->result_array();
@@ -50,7 +60,7 @@ class Konsul extends REST_Controller {
                     ->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
                     ->group_start()
                         ->where('kd_regist', $l)
-                        ->where('status = 0')
+                        ->where('status = Selesai')
                     ->group_end()
                 ->get();
         $query = $a->result_array();
@@ -159,7 +169,7 @@ class Konsul extends REST_Controller {
                 'no_rm'                 => $no_rm,
                 'tgl_kunjungan '        => $time,
                 'keluhan '              => $this->post('keluhan'),
-                'status '               => '1',
+                'status '               => 'Belum Bayar',
                 'harga'                 => '0',     
                 'kd_pasien '            => $kode);    
                 
@@ -226,7 +236,7 @@ class Konsul extends REST_Controller {
 
                     $data = array(
                         'buktikeluhan' => $config,
-                        'status' => "2"
+                        'status' => "Sudah Bayar"
                         
                     );
                         if ($this->db->update('tb_keluhan', $data, ['no_rm' => $no_rm])) {
@@ -234,7 +244,7 @@ class Konsul extends REST_Controller {
                             // jika berhasil
                             $this->set_response([
                                 'status' => true,
-                                'message' => 'Berhasil '
+                                'message' => 'Berhasil Upload Bukti pembayaran, Silahkan tunggu konfirmasi dari Admin untuk tahap selanjutnya.'
                             ], 200);
                         } else {
                             // jika gagal
