@@ -193,6 +193,61 @@ class Konsul extends REST_Controller {
         $this->response($response, 200);
     }
 
+    public function riwayatPasien_post()
+    {
+        $id_user = $this->post('kd_regist');
+        $kd_pasien = $this->post('kd_pasien');
+
+        //query cek pasien
+        $query = $this->db->select('*')->from('tb_pasien')
+            ->group_start()
+                ->where('kd_regist', $id_user)
+                ->where('kd_pasien', $kd_pasien)
+            ->group_end()
+        ->get(); 
+        $cek = $query->num_rows(); 
+        
+        //date now
+        date_default_timezone_set("Asia/Jakarta");
+        $time =  Date('Y-m-d');
+
+        // parsing data uniqkode
+        $no_rm = $this->Api_model->kode('no_rm', 'tb_keluhan', 'RM', '2' );
+
+        if($cek > 0){
+            $data2 = array(
+                'no_rm'                 => $no_rm,
+                'tgl_kunjungan '        => $time,
+                'keluhan '              => $this->post('keluhan'),
+                'status '               => 'Belum Bayar',
+                'harga'                 => '0',     
+                'kd_pasien '            => $kd_pasien
+            );    
+                $insert = $this->db->insert('tb_keluhan', $data2);
+                
+                if($insert){
+
+                    $response = [
+                        'status' => true,
+                        'message' => 'Pendaftaran Pasien Berhasil',
+                    ];
+                }else{
+                    $response = [
+                        'status' => false,
+                        'message' => 'Something Wrong I Can Feel It',
+                    ];
+                }
+        }else{
+
+            $response = [
+                'status' => false,
+                'message' => 'Something Wrong I Can Feel It',
+            ];
+        }
+                
+        $this->response($response, 200);
+    }
+
     public function bukti_post()
     {
         if ($this->post('no_rm')) {

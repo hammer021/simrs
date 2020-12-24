@@ -71,9 +71,39 @@
         </div>
       </div> -->
     </div>
+
+  <?php 
+  if(isset($_GET['pesan'])){
+  ?>
+    <div class="modal fade" id="error" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog  h-100 d-flex flex-column justify-content-center my-0 modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+          <img src="<?php echo base_url(); ?>assets/images/logo.png" width="200px">
+          </div>
+          <div class="modal-body">
+            <p>Harap Login Terlebih Dahulu</p>
+          </div>
+          <div class="modal-footer" style="border-top:#fff">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php } ?>
+   
+
   </main>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+        $(document).ready(function () {
+
+        $('#error').modal('show');
+
+});
+</script>
 </body>
 </html>
