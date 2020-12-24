@@ -31,7 +31,7 @@ class Konsul extends REST_Controller {
                     ->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
                     ->group_start()
                         ->where('kd_regist', $l)
-                        ->where('status = Belum Bayar OR status = Terverifikasi')
+                        ->where('status = 1 OR status = 3')
                     ->group_end()
                 ->get();
         $query = $a->result_array();
@@ -60,7 +60,7 @@ class Konsul extends REST_Controller {
                     ->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
                     ->group_start()
                         ->where('kd_regist', $l)
-                        ->where('status = Selesai')
+                        ->where('status = 0')
                     ->group_end()
                 ->get();
         $query = $a->result_array();
@@ -169,7 +169,7 @@ class Konsul extends REST_Controller {
                 'no_rm'                 => $no_rm,
                 'tgl_kunjungan '        => $time,
                 'keluhan '              => $this->post('keluhan'),
-                'status '               => 'Belum Bayar',
+                'status '               => '1',
                 'harga'                 => '0',     
                 'kd_pasien '            => $kode);    
                 
@@ -219,7 +219,7 @@ class Konsul extends REST_Controller {
                 'no_rm'                 => $no_rm,
                 'tgl_kunjungan '        => $time,
                 'keluhan '              => $this->post('keluhan'),
-                'status '               => 'Belum Bayar',
+                'status '               => '1',
                 'harga'                 => '0',     
                 'kd_pasien '            => $kd_pasien
             );    
@@ -291,7 +291,7 @@ class Konsul extends REST_Controller {
 
                     $data = array(
                         'buktikeluhan' => $config,
-                        'status' => "Sudah Bayar"
+                        'status' => "2"
                         
                     );
                         if ($this->db->update('tb_keluhan', $data, ['no_rm' => $no_rm])) {
