@@ -26,6 +26,7 @@
               <p class="login-card-description">Silahkan Login</p>
               <form class="user" action="<?= base_url('Auth'); ?>" method="post" enctype="multipart/form-data">
                   <div class="form-group">
+                  <?= $this->session->flashdata('message')?>
                     <label for="username" class="sr-only">Username</label>
                     <input type="text"  name="username" id="username" class="form-control" placeholder="Username">
                                             
@@ -100,8 +101,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript">
         $(document).ready(function () {
-
-        $('#error').modal('show');
+          $('#error').modal('show');
 
 });
 </script>

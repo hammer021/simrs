@@ -19,6 +19,7 @@ class Auth extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $this->load->view('auth/login');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" id="salah" role="alert">Please fill in completely</div>');
         } else {
             $this->_login();
         }
@@ -54,15 +55,15 @@ class Auth extends CI_Controller
                         redirect('dokter');
                     }
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" id="salah" role="alert">Wrong password!</div>');
                     redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This email has not been activated!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" id="salah" role="alert">This email has not been activated!</div>');
                     redirect('auth');
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not registered!</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" id="salah" role="alert">Email is not registered!</div>');
             redirect('auth');
         }
     }
@@ -71,7 +72,7 @@ class Auth extends CI_Controller
     {
         
         $this->session->sess_destroy();
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out! </div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" id="salah" role="alert">You have been logged out! </div>');
         redirect('Auth');
     }
 

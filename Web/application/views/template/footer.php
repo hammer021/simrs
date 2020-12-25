@@ -11,8 +11,8 @@
                                         <ul class="friend-list" id="list">
                                         </ul>
                                     </div>
-                                    <div class="col-md-8 " style="overflow-y:auto;height:40vh;">
-                                        <div class="chat-message">
+                                    <div class="col-md-8 " style="overflow-y:auto;height:40vh;display: flex;flex-direction: column-reverse;">
+                                        <div class="chat-message" style="padding-bottom:5px">
                                             <ul id="isi" class="chat">
                                             </ul>
                                         </div>
@@ -155,7 +155,7 @@ function openNav() {
                 tampilList(global1);
 				tampilPesan(global1);
 				$('#isiw').empty();	
-			},500);	
+			},1000);	
 		});
         </script>
 

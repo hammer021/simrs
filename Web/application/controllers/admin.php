@@ -12,6 +12,13 @@ class Admin extends CI_Controller
 		$this->load->model('Konsul_model');
 		$this->load->model('User_model');
 		$this->load->model('Pasien_model');
+		
+	$params = $this->session->userdata("kd_regist");
+
+	if(!empty($params)){
+	}else{
+			redirect('auth?pesan=0005');
+		}
 	}
 
 
