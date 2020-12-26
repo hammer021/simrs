@@ -66,10 +66,12 @@ class Profil extends REST_Controller {
                 );
                 if ($this->db->update('tb_registrasi', $data, ['kd_regist' => $id])) {
                     file_put_contents($path2, base64_decode($foto));
+                    $user = $this->db->get_where('tb_registrasi', ['kd_regist' => $id])->row_array();
                     // jika berhasil
                     $this->set_response([
                         'status' => true,
-                        'message' => 'Berhasil Mengupdate Profil'
+                        'message' => 'Berhasil Mengupdate Profil',
+                        'update' => $user
                     ], 200);
                 } else {
                     // jika gagal
@@ -85,11 +87,13 @@ class Profil extends REST_Controller {
                     'no_hp'         => $this->put('no_hp')      
                 );
                 
-                if ($this->db->update('tb_registrasi', $data, ['kd_regist' => $id])) {                        
+                if ($this->db->update('tb_registrasi', $data, ['kd_regist' => $id])) {
+                    $user = $this->db->get_where('tb_registrasi', ['kd_regist' => $id])->row_array();  
                     // jika berhasil
                     $this->set_response([
                         'status' => true,
-                        'message' => 'Berhasil Mengupdate Profil'
+                        'message' => 'Berhasil Mengupdate Profil',
+                        'update' => $user
                     ], 200);
                 } else {
                     // jika gagal
