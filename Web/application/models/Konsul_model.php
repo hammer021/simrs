@@ -24,6 +24,9 @@ class Konsul_model extends CI_Model
         return $this->db->delete($this->_table2, array("no_rm" => $id));
         
       }
+      function input_data($data, $table){
+		$this->db->insert($table, $data);
+	}
     function update_data($where,$data,$table){
 		$this->db->where($where);
         $this->db->update($table,$data);

@@ -103,15 +103,13 @@ class Admin extends CI_Controller
 				'no_praktek' => $no_praktek,
 				'status' => "2"
 			);
-			$where2 = array(
-				'send_to' => $no_rm
-			);
 			$link = array(
+				'send_to' => $no_rm,
 				'message' => $link,
 				'status'=>"0"
 			);
 			$this->Konsul_model->update_data($where, $data, 'tb_keluhan');
-			$this->Konsul_model->update_data($where2, $link, 'chat');
+			$this->Konsul_model->update_data($link, 'chat');
 				redirect('admin/pemeriksaan');
 		}else{
 			redirect('admin/pemeriksaan?error=001');

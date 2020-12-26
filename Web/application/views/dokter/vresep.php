@@ -25,7 +25,11 @@
 	<div class="col-9">
 		<div class="card">
 			<div class="card-header">
-				<!-- <h4 class="card-title">Table head options</h4>
+				<h4 class="card-title">Resep</h4>
+				<form class="form-inline active-pink-4">
+  					<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
+  						<i class="la la-search" aria-hidden="false"></i>
+				</form>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 				<div class="heading-elements">
 					<ul class="list-inline mb-0">
@@ -41,10 +45,11 @@
 					<table class="table">
 						<thead class="thead-dark">
 							<tr>
-								<th scope="col">#</th>
-								<th scope="col">First Name</th>
-								<th scope="col">Last Name</th>
-								<th scope="col">Username</th>
+								<th scope="col">No</th>
+								<th scope="col">Kode Resep</th>
+								<th scope="col">Resep</th>
+								<th scope="col">Harga</th>
+								<th scope="col">Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -53,37 +58,16 @@
 								<td>Mark</td>
 								<td>Otto</td>
 								<td>@mdo</td>
+								<td>@mdo</td>
 							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Larry</td>
-								<td>the Bird</td>
-								<td>@twitter</td>
-							</tr>
+							
 						</tbody>
 					</table>
-				</div> -->
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-xl-3 col-lg-6 col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-				<form class="form-inline active-pink-4">
-  					<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
-  						<i class="la la-search" aria-hidden="false"></i>
-				</form>
-				</div>
-            </div>
-		</div>
-	</div>
+	
 </div>
 <!-- Table Head options start -->
         </div>
