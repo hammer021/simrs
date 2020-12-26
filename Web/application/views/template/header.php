@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/pages/dashboard-ecommerce.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/chat.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/custom1.css">
     <script src="https://kit.fontawesome.com/d0d4d04864.js" crossorigin="anonymous"></script>

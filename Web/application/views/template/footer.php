@@ -150,6 +150,7 @@ function openNav() {
             $('#chat').on('hidden.bs.modal', function () {
                 openNav();
             });
+            $('#er001').modal('show');
 			setInterval(function(){
                 notifikasi();
                 tampilList(global1);

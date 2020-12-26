@@ -37,7 +37,6 @@ class Chat_m extends CI_Model {
 	{
 		$data = $this->db->query('select * from chat where (send_by ="'.$par.'" or send_to ="'.$par.'") and (send_by ="'.$per.'" or send_to ="'.$per.'") order by time asc');
 		$res = $data->result_array();
-		$count = $data->num_rows();
 		return $res;	
 		
 

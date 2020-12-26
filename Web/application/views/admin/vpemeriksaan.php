@@ -357,3 +357,24 @@ foreach ($konsul as $konn) {
 	</div>
 	<!-- Model View End -->
 <?php } ?>
+<?php 
+  if(isset($_GET['error'])=='001'){
+  ?>
+   <div id="er001" class="modal fade">
+	<div class="modal-dialog h-100 d-flex flex-column justify-content-center my-0 modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box">
+					<i class="material-icons" style="margin-top:6px">&#33;</i>
+				</div>						
+				<h4 class="modal-title w-100">Error!</h4>
+			</div>
+			<div class="modal-body">
+				<p>Link kosong , Harap isi dengan benar!</p>
+			</div>
+			<div class="modal-footer justify-content-center">
+			</div>
+		</div>
+	</div>
+</div>     
+    <?php } ?>

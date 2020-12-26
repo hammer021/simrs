@@ -114,7 +114,7 @@ class Admin extends CI_Controller
 			$this->Konsul_model->update_data($where2, $link, 'chat');
 				redirect('admin/pemeriksaan');
 		}else{
-			
+			redirect('admin/pemeriksaan?error=001');
 			}
 		}
 	

@@ -60,7 +60,7 @@ class Chat extends CI_Controller
 			'send_by'=>$_POST['kode'],
             'message'=>$_POST['pesan'],
             'send_to'=>$_POST['send_to'],
-            'status' => 1  
+            'status' => 0  
             );
             $this->db->insert('chat',$data);
     }
@@ -141,7 +141,7 @@ class Chat extends CI_Controller
         foreach($listpesan as $list){
 
             //deklarasi waktu
-            $notif = $this->db->query('select count(status) as banyak from chat where (send_by ="'.$this->session->userdata("kd_regist").'" or send_to ="'.$this->session->userdata("kd_regist").'") and (send_by ="'.$list['kd_regist'].'" or send_to ="'.$list['kd_regist'].'") and (status=0)');
+            $notif = $this->db->query('select count(status) as banyak from chat where (send_by ="'.$this->session->userdata("kd_regist").'" or send_to ="'.$this->session->userdata("kd_regist").'") and (send_by ="'.$list['kd_regist'].'" or send_to ="'.$list['kd_regist'].'") and (status=1)');
             $notip = $notif->row();
             $data = $this->db->query('select message, time from chat where (send_by ="'.$this->session->userdata("kd_regist").'" or send_to ="'.$this->session->userdata("kd_regist").'") and (send_by ="'.$list['kd_regist'].'" or send_to ="'.$list['kd_regist'].'") order by time desc limit 1');
             $res = $data->row();

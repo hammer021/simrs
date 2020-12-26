@@ -19,7 +19,8 @@ class Auth extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $this->load->view('auth/login');
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" id="salah" role="alert">Please fill in completely</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" id="salah" role="alert">P
+            lease fill in completely</div>');
         } else {
             $this->_login();
         }
