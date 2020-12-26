@@ -95,15 +95,17 @@ class Admin extends CI_Controller
 		$no_rm = $this->input->post('no_rm');
 		$no_praktek = $this->input->post('dokter');
 		$link=$this->input->post('link');
+		$sendby = $this->session->userdata("kd_regist");
 		if(!empty($link)){
 			$where = array(
 				'no_rm' => $no_rm
 			);
 			$data = array(
 				'no_praktek' => $no_praktek,
-				'status' => "2"
+				'status' => "3"
 			);
 			$link = array(
+				'send_by' => $sendby,
 				'send_to' => $no_rm,
 				'message' => $link,
 				'status'=>"0"
