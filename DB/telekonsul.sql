@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2020 at 08:15 AM
+-- Generation Time: Dec 26, 2020 at 02:08 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -33,8 +33,18 @@ CREATE TABLE `chat` (
   `send_to` varchar(255) NOT NULL,
   `send_by` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `chat`
+--
+
+INSERT INTO `chat` (`chat_id`, `send_to`, `send_by`, `message`, `time`, `status`) VALUES
+(1, 'RGS00008', 'RGS00001', 'test', '2020-12-22 10:59:53', 1),
+(2, 'RGS00007', 'RGS00001', 'cek', '2020-12-22 11:00:25', 1),
+(3, 'KONS0001', 'RGS00001', 'WA', '2020-12-26 08:43:37', 0);
 
 -- --------------------------------------------------------
 
@@ -67,7 +77,8 @@ CREATE TABLE `tb_dokter` (
 --
 
 INSERT INTO `tb_dokter` (`no_praktek`, `jadwal_praktek`, `kd_poli`, `kd_regist`) VALUES
-('NRP01010101', '18:00:00', '', 'RGS00004');
+('SK00121', '10:30:00', '', 'RGS00008'),
+('Sknnwuu', '00:00:00', '', 'RGS00007');
 
 -- --------------------------------------------------------
 
@@ -78,14 +89,22 @@ INSERT INTO `tb_dokter` (`no_praktek`, `jadwal_praktek`, `kd_poli`, `kd_regist`)
 CREATE TABLE `tb_keluhan` (
   `no_rm` varchar(255) NOT NULL,
   `tgl_kunjungan` date NOT NULL,
-  `no_praktek` varchar(255) NOT NULL,
+  `no_praktek` varchar(255) DEFAULT NULL,
   `jenis_kasus` varchar(255) NOT NULL,
   `keluhan` varchar(255) NOT NULL,
   `harga` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL,
+  `status` int(1) NOT NULL,
   `kd_pasien` varchar(255) NOT NULL,
-  `buktikeluhan` varchar(255) NOT NULL
+  `buktikeluhan` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_keluhan`
+--
+
+INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `no_praktek`, `jenis_kasus`, `keluhan`, `harga`, `status`, `kd_pasien`, `buktikeluhan`) VALUES
+('KONS0001', '2020-12-02', 'Sknnwuu', 'aaa', 'aa', 10000, 3, 'PSN0001', 'default.jpeg'),
+('KONS0002', '2020-12-01', '', 'aa', 'aa', 10000, 1, 'PSN0001', 'default.jpeg');
 
 -- --------------------------------------------------------
 
@@ -96,8 +115,19 @@ CREATE TABLE `tb_keluhan` (
 CREATE TABLE `tb_konsul` (
   `kd_konsul` varchar(255) NOT NULL,
   `no_rm` varchar(255) NOT NULL,
-  `kd_resep` varchar(255) NOT NULL
+  `kd_resep` varchar(255) NOT NULL,
+  `harga_kirim` int(11) NOT NULL,
+  `grand_total` int(11) NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_konsul`
+--
+
+INSERT INTO `tb_konsul` (`kd_konsul`, `no_rm`, `kd_resep`, `harga_kirim`, `grand_total`, `status`) VALUES
+('KONS0001', 'KONS0002', '', 0, 0, 0),
+('KONS0002', 'KONS0001', '', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -113,7 +143,7 @@ CREATE TABLE `tb_pasien` (
   `tgl_lahir` date NOT NULL,
   `umur` varchar(10) NOT NULL,
   `keterbatasan` varchar(255) NOT NULL,
-  `jenis_kelamin` enum('Laki-Laki','Perempuan','','') NOT NULL,
+  `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
   `warga_negara` varchar(255) NOT NULL,
   `status_perkawinan` varchar(255) NOT NULL,
   `pendidikan` varchar(255) NOT NULL,
@@ -124,7 +154,7 @@ CREATE TABLE `tb_pasien` (
   `no_tlp` varchar(13) NOT NULL,
   `nama_ayah` varchar(255) NOT NULL,
   `nama_ibu` varchar(255) NOT NULL,
-  `foto` varchar(255) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL,
   `hub_pasien` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -151,7 +181,8 @@ CREATE TABLE `tb_poli` (
 --
 
 INSERT INTO `tb_poli` (`kd_poli`, `klinik`) VALUES
-('POL0001', 'Poli Umum');
+('POL0001', 'Poli Umum'),
+('POL0002', 'Poli Dalam');
 
 -- --------------------------------------------------------
 
@@ -179,9 +210,10 @@ CREATE TABLE `tb_registrasi` (
 --
 
 INSERT INTO `tb_registrasi` (`kd_regist`, `name`, `email`, `image`, `password`, `kd_role`, `is_active`, `date_created`, `alamat`, `no_hp`, `tgl_lahir`, `tempat_lahir`) VALUES
-('RGS00001', 'admin', 'admin@gmail.com', 'default.jpg', '202cb962ac59075b964b07152d234b70', 1, 1, '2020-12-10 11:36:34', 'BWI', '89693556052', '2020-12-10', 'Banyuwangi'),
+('RGS00001', 'HamAdm', 'admin@gmail.com', 'picture-201221-e832699b80.jpg', '202cb962ac59075b964b07152d234b70', 1, 1, '2020-12-10 11:36:34', 'BWI', '89693556052', '2020-12-10', 'Banyuwangi'),
 ('RGS00003', 'User', 'user@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 3, 1, '2020-12-10 11:36:34', 'Jember', '896956789', '1999-07-21', 'Rumah Sakit'),
-('RGS00004', 'Dr.Hammer', 'ham@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-17 01:56:04', '', '08989841713', '0000-00-00', '');
+('RGS00007', 'Birril x Azz', 'hammerpmc021@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-17 02:22:40', '', '', '0000-00-00', ''),
+('RGS00008', 'Dr.Ham', 'dokter@gmail.com', 'picture-201221-1f41b0d861.jpg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-17 02:32:05', 'bwi', '08989841713', '2020-12-23', 'BWI');
 
 -- --------------------------------------------------------
 
@@ -191,7 +223,8 @@ INSERT INTO `tb_registrasi` (`kd_regist`, `name`, `email`, `image`, `password`, 
 
 CREATE TABLE `tb_resep` (
   `kd_resep` varchar(255) NOT NULL,
-  `resep` varchar(255) NOT NULL
+  `resep` varchar(255) NOT NULL,
+  `harga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -405,7 +438,7 @@ ALTER TABLE `user_token`
 -- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `login_details`
