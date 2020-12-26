@@ -109,7 +109,7 @@ class Admin extends CI_Controller
 				'status'=>"0"
 			);
 			$this->Konsul_model->update_data($where, $data, 'tb_keluhan');
-			$this->Konsul_model->update_data($link, 'chat');
+			$this->Konsul_model->input_data($link, 'chat');
 				redirect('admin/pemeriksaan');
 		}else{
 			redirect('admin/pemeriksaan?error=001');
