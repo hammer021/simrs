@@ -8,8 +8,8 @@ class Konsul_model extends CI_Model
     public function konsul(){
 
         return $this->db->query("SELECT * FROM tb_keluhan JOIN tb_pasien 
-        ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien JOIN tb_dokter 
-        ON tb_keluhan.no_praktek = tb_dokter.no_praktek JOIN 
+        ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien LEFT JOIN tb_dokter 
+        ON tb_keluhan.no_praktek = tb_dokter.no_praktek LEFT JOIN 
         tb_registrasi ON tb_dokter.kd_regist=tb_registrasi.kd_regist")->result_array();
     }
     

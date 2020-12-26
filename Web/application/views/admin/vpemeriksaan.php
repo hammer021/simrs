@@ -207,7 +207,7 @@ foreach ($konsul as $konn) {
 							<?php 
 							foreach($listdokter as $dok):
 							?>
-							<option value="<?php echo $dok->no_praktek?>"> <?php echo $dok->nama_dokter?></option>
+							<option value="<?php echo $dok->no_praktek?>"> <?php echo $dok->name?></option>
 							<?php 
 							endforeach;
 							?>
@@ -253,12 +253,18 @@ foreach ($konsul as $konn) {
 									}
 									?></label><br>
 						</div>
-
+						<div class="form-group">
+							<label for="link">Link Konsultasi : </label>
+							<input class="form-control" name="link" id="link" placeholder="isikan link konsultasi.....">
+							
+						</div>
 						
-
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-danger">Save</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-danger">Save</button>
+						</div>
+						
+						
 					</form>
 				</div>
 			</div>
@@ -266,10 +272,8 @@ foreach ($konsul as $konn) {
 	</div>
 	</div>
 	<!-- Model Update End -->
-<?php } ?>
+<?php } 
 
-
-<?php
 $no = 1;
 foreach ($konsul as $konn) {
 ?>

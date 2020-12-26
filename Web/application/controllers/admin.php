@@ -94,17 +94,30 @@ class Admin extends CI_Controller
 	public function update_konsul(){
 		$no_rm = $this->input->post('no_rm');
 		$no_praktek = $this->input->post('dokter');
-		$where = array(
-			'no_rm' => $no_rm
-		);
-		$data = array(
-			'no_praktek' => $no_praktek,
-			'status' => "2"
-		);
-		$this->Konsul_model->update_data($where, $data, 'tb_keluhan');
-			redirect('admin/pemeriksaan');
-
-	}
+		$link=$this->input->post('link');
+		if(!empty($link)){
+			$where = array(
+				'no_rm' => $no_rm
+			);
+			$data = array(
+				'no_praktek' => $no_praktek,
+				'status' => "2"
+			);
+			$where2 = array(
+				'send_to' => $no_rm
+			);
+			$link = array(
+				'message' => $link,
+				'status'=>"0"
+			);
+			$this->Konsul_model->update_data($where, $data, 'tb_keluhan');
+			$this->Konsul_model->update_data($where2, $link, 'chat');
+				redirect('admin/pemeriksaan');
+		}else{
+			
+			}
+		}
+	
 	public function update_dokter()
 	{
 		$no_praktek = $this->input->post('no_praktek');
