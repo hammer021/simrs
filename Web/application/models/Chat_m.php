@@ -40,9 +40,17 @@ class Chat_m extends CI_Model {
 		return $res;	
 		
 
+	}
+	public function getDataPasien($per)
+	{
+		$data = $this->db->query('select tb_keluhan.no_rm,tb_keluhan.tgl_kunjungan,tb_keluhan.jenis_kasus,tb_keluhan.keluhan,tb_keluhan.harga,tb_keluhan.status,tb_keluhan.kd_pasien,tb_keluhan.buktikeluhan FROM chat JOIN tb_keluhan ON chat.send_to = tb_keluhan.no_rm  where tb_keluhan.status = 3 and tb_keluhan.no_rm = "'.$per.'"');
+		$res = $data->result_array();
+		return $res;	
+		
+
     }
-    public function listPesan(){
-		$data = $this->db->query('select * from tb_registrasi where kd_role ="2"');
+    public function listPesan($role){
+		$data = $this->db->query('select * from tb_registrasi where kd_role !="'.$role.'" and kd_role !="3"');
 		$res = $data->result_array();
 		$count = $data->num_rows();
 		if($count>=1){
