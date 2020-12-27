@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2020 at 07:41 AM
+-- Generation Time: Dec 27, 2020 at 10:30 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -69,7 +69,6 @@ CREATE TABLE `login_details` (
 
 CREATE TABLE `tb_dokter` (
   `no_praktek` varchar(255) NOT NULL,
-  `jadwal_praktek` time NOT NULL,
   `kd_poli` varchar(255) NOT NULL,
   `kd_regist` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -78,9 +77,28 @@ CREATE TABLE `tb_dokter` (
 -- Dumping data for table `tb_dokter`
 --
 
-INSERT INTO `tb_dokter` (`no_praktek`, `jadwal_praktek`, `kd_poli`, `kd_regist`) VALUES
-('SK00121', '10:30:00', '', 'RGS00008'),
-('Sknnwuu', '00:00:00', '', 'RGS00007');
+INSERT INTO `tb_dokter` (`no_praktek`, `kd_poli`, `kd_regist`) VALUES
+('SK00121', '', 'RGS00008'),
+('Sknnwuu', '', 'RGS00007');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_dokter_poli`
+--
+
+CREATE TABLE `tb_dokter_poli` (
+  `kd_dok_pol` int(11) NOT NULL,
+  `no_praktek` varchar(255) NOT NULL,
+  `kd_poli` varchar(255) NOT NULL,
+  `senin` int(1) NOT NULL,
+  `selasa` int(1) NOT NULL,
+  `rabu` int(1) NOT NULL,
+  `kamis` int(1) NOT NULL,
+  `jumat` int(1) NOT NULL,
+  `sabtu` int(1) NOT NULL,
+  `minggu` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -131,7 +149,7 @@ CREATE TABLE `tb_konsul` (
 INSERT INTO `tb_konsul` (`kd_konsul`, `no_rm`, `kd_resep`, `harga_kirim`, `grand_total`, `status`) VALUES
 ('KONS0001', 'KONS0002', '', 0, 0, 0),
 ('KONS0002', 'KONS0001', 'RES0002', 0, 0, 0),
-('KONS0003', 'KONS0004', '', 0, 0, 0);
+('KONS0003', 'KONS0004', 'RES0003', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -236,7 +254,8 @@ CREATE TABLE `tb_resep` (
 --
 
 INSERT INTO `tb_resep` (`kd_resep`, `resep`, `harga_resep`) VALUES
-('RES0002', 'beli diapotek', NULL);
+('RES0002', 'beli diapotek', NULL),
+('RES0003', 'resep A1', NULL);
 
 -- --------------------------------------------------------
 
@@ -376,6 +395,12 @@ ALTER TABLE `tb_dokter`
   ADD PRIMARY KEY (`no_praktek`);
 
 --
+-- Indexes for table `tb_dokter_poli`
+--
+ALTER TABLE `tb_dokter_poli`
+  ADD PRIMARY KEY (`kd_dok_pol`);
+
+--
 -- Indexes for table `tb_keluhan`
 --
 ALTER TABLE `tb_keluhan`
@@ -456,6 +481,12 @@ ALTER TABLE `chat`
 --
 ALTER TABLE `login_details`
   MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_dokter_poli`
+--
+ALTER TABLE `tb_dokter_poli`
+  MODIFY `kd_dok_pol` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_role`
