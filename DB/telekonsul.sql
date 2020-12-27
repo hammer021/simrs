@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2020 at 10:30 AM
+-- Generation Time: Dec 27, 2020 at 01:09 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -91,6 +91,7 @@ CREATE TABLE `tb_dokter_poli` (
   `kd_dok_pol` int(11) NOT NULL,
   `no_praktek` varchar(255) NOT NULL,
   `kd_poli` varchar(255) NOT NULL,
+  `waktu` time NOT NULL,
   `senin` int(1) NOT NULL,
   `selasa` int(1) NOT NULL,
   `rabu` int(1) NOT NULL,
@@ -109,7 +110,7 @@ CREATE TABLE `tb_dokter_poli` (
 CREATE TABLE `tb_keluhan` (
   `no_rm` varchar(255) NOT NULL,
   `tgl_kunjungan` date NOT NULL,
-  `no_praktek` varchar(255) DEFAULT NULL,
+  `kd_dok_pol` int(11) DEFAULT NULL,
   `jenis_kasus` varchar(255) NOT NULL,
   `keluhan` varchar(255) NOT NULL,
   `harga` int(11) NOT NULL,
@@ -117,15 +118,6 @@ CREATE TABLE `tb_keluhan` (
   `kd_pasien` varchar(255) NOT NULL,
   `buktikeluhan` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_keluhan`
---
-
-INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `no_praktek`, `jenis_kasus`, `keluhan`, `harga`, `status`, `kd_pasien`, `buktikeluhan`) VALUES
-('KONS0001', '2020-12-02', 'SK00121', 'aaa', 'aa', 10000, 3, 'PSN0001', 'default.jpeg'),
-('KONS0002', '2020-12-01', '', 'aa', 'aa', 10000, 1, 'PSN0001', 'default.jpeg'),
-('KONS0004', '2020-12-16', 'SK00121', 'asas', 'asas', 10000, 3, 'PSN0001', 'default.jpeg');
 
 -- --------------------------------------------------------
 
@@ -141,15 +133,6 @@ CREATE TABLE `tb_konsul` (
   `grand_total` int(11) NOT NULL,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_konsul`
---
-
-INSERT INTO `tb_konsul` (`kd_konsul`, `no_rm`, `kd_resep`, `harga_kirim`, `grand_total`, `status`) VALUES
-('KONS0001', 'KONS0002', '', 0, 0, 0),
-('KONS0002', 'KONS0001', 'RES0002', 0, 0, 0),
-('KONS0003', 'KONS0004', 'RES0003', 0, 0, 0);
 
 -- --------------------------------------------------------
 
