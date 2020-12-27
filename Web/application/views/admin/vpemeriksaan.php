@@ -81,6 +81,9 @@
 									else if($sts == 2){
 										echo "Sudah Bayar";
 									}
+									else if($sts == 3){
+										echo "Sudah di Verifikasi";
+									}
 									else {
 										echo "Not Found";
 									}
@@ -110,11 +113,35 @@
 															</div>
 														</div>
 													</div>
-							
-													<button type="button" data-target="#<?php echo $kons['no_rm'] ?>" data-toggle="modal" class="la la-edit"></button>
+													<button type="button" data-target="#view<?php echo $kons['no_rm'] ?>" data-toggle="modal" class="la la-eye"></button>
+													
 							<?php
 									}
 									else if($sts == 2){?>
+										<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
+													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk menghapus?
+																	<?php echo $kons['nama_pasien'] ?>
+																	</h5>
+																	<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">×</span>
+																	</button>
+																</div>
+																<div class="modal-footer">
+																	<button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
+																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('Admin/hapuskonsul/' . $kons['no_rm']); ?>">Hapus</a>
+																</div>
+															</div>
+														</div>
+													</div>
+													
+													<button type="button" data-target="#<?php echo $kons['no_rm'] ?>" data-toggle="modal" class="la la-edit"></button>
+							<?php
+									}
+									else if($sts == 3){?>
 										<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
 													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
@@ -328,6 +355,10 @@ foreach ($konsul as $konn) {
 						</div>
 
 						<div class="form-group">
+							<label for="jenis_kasus">Link : <br> <?php echo $konn['keluhan'] ?></label>
+						</div>
+
+						<div class="form-group">
 							<label for="jenis_kasus">Status : <?php $sts = $konn['status'];
 									if ($sts == 0){
 											echo "Selesai";
@@ -337,6 +368,9 @@ foreach ($konsul as $konn) {
 									}
 									else if($sts == 2){
 										echo "Sudah Bayar";
+									}
+									else if($sts == 3){
+										echo "Sudah di Verifikasi";
 									}
 									else {
 										echo "Not Found";

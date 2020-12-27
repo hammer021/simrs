@@ -64,10 +64,25 @@ class Dokter_model extends CI_Model
   
   public function pemeriksaan(){
     $noprktk = $this->session->userdata("kd_regist");
-    return $this->db->query("SELECT * FROM tb_keluhan JOIN tb_pasien 
-    ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien JOIN tb_dokter 
-    ON tb_keluhan.no_praktek = tb_dokter.no_praktek  
-    WHERE tb_dokter.kd_regist = '$noprktk'")->result_array();
+    return $this->db->query("SELECT * FROM tb_konsul 
+    LEFT JOIN tb_resep ON tb_konsul.kd_resep = tb_resep.kd_resep 
+    JOIN tb_keluhan ON tb_keluhan.no_rm = tb_konsul.no_rm 
+    LEFT JOIN tb_dokter ON tb_keluhan.no_praktek = tb_dokter.no_praktek
+    JOIN tb_pasien ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien 
+    WHERE tb_konsul.kd_resep='' AND tb_keluhan.status = '3' AND tb_dokter.kd_regist = '$noprktk'")->result_array();
+
+  }
+
+  public function LapPemeriksaan()
+  {
+    $noprktk = $this->session->userdata("kd_regist");
+    return $this->db->query("SELECT * FROM tb_konsul 
+    JOIN tb_resep ON tb_konsul.kd_resep = tb_resep.kd_resep 
+    JOIN tb_keluhan ON tb_keluhan.no_rm = tb_konsul.no_rm 
+    LEFT JOIN tb_dokter ON tb_keluhan.no_praktek = tb_dokter.no_praktek  
+    JOIN tb_pasien ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien 
+    JOIN tb_registrasi ON tb_dokter.kd_regist = tb_registrasi.kd_regist
+    WHERE tb_keluhan.status = '3' AND tb_dokter.kd_regist = '$noprktk'")->result_array();
 
   }
 }

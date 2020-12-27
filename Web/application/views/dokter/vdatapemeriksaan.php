@@ -85,3 +85,37 @@
 	</div>
 </div>
 <!-- ////////////////////////////////////////////////////////////////////////////-->
+<?php
+$no = 1;
+foreach ($dataperiksa as $u) {
+?>
+
+	<!-- Modal Update -->
+	<div class="modal fade" id="<?php echo $u['no_rm'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Masukkan Resep</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="post" action="<?= base_url('Resep/tambahresep') ?>" enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Resep</label>
+							<input type="hidden" class="form-control" id="no_rm" value="<?php echo $u['no_rm'] ?>" name="no_rm">
+							<input type="text" id="resep" placeholder="Isikan Resep disini !!!" class="form-control" value="" name="resep" >
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-danger">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- Model Update End -->
+<?php } ?>
