@@ -25,7 +25,7 @@
 	<div class="col-9">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Resep</h4>
+				<h4 class="card-title"></h4>
 				<form class="form-inline active-pink-4">
   					<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
   						<i class="la la-search" aria-hidden="false"></i>
@@ -38,6 +38,7 @@
 						<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
 						<li><a data-action="close"><i class="ft-x"></i></a></li>
 					</ul>
+					
 				</div>
 			</div>
 			<div class="card-content collapse show">
@@ -53,14 +54,17 @@
 							</tr>
 						</thead>
 						<tbody>
+							<?php 
+							$no=1;
+							foreach($resep as $r):?>
 							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-								<td>@mdo</td>
+								<th><?php echo $no++ ?></th>
+								<td><?php echo $r->kd_resep ?></td>
+								<td><?php echo $r->resep ?></td>
+								<td>Rp. <?php echo $r->harga_resep ?></td>
+								<td>-</td>
 							</tr>
-							
+							<?php endforeach;?>
 						</tbody>
 					</table>
 				</div>
