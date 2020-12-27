@@ -143,7 +143,7 @@ class Chat extends CI_Controller
         foreach($listpesan as $list){
 
             //deklarasi waktu
-            $notif = $this->db->query('select count(status) as banyak from chat where (send_by ="'.$this->session->userdata("kd_regist").'" or send_to ="'.$this->session->userdata("kd_regist").'") and (send_by ="'.$list['kd_regist'].'" or send_to ="'.$list['kd_regist'].'") and (status=1)');
+            $notif = $this->db->query('select count(status) as banyak from chat where (send_by ="'.$this->session->userdata("kd_regist").'" or send_to ="'.$this->session->userdata("kd_regist").'") and (send_by ="'.$list['kd_regist'].'" or send_to ="'.$list['kd_regist'].'") and (status=0)');
             $notip = $notif->row();
             $data = $this->db->query('select message, time from chat where (send_by ="'.$this->session->userdata("kd_regist").'" or send_to ="'.$this->session->userdata("kd_regist").'") and (send_by ="'.$list['kd_regist'].'" or send_to ="'.$list['kd_regist'].'") order by time desc limit 1');
             $res = $data->row();
@@ -212,13 +212,13 @@ class Chat extends CI_Controller
         function update_status(){
             $teman = $_POST['dia'];
             $saia = $this->session->userdata("kd_regist");
-            $query = $this->db->query('UPDATE chat SET status=0 where (send_by ="'.$saia.'" or send_to ="'.$saia.'") and (send_by ="'.$teman.'" or send_to ="'.$teman.'") order by time asc');
+            $query = $this->db->query('UPDATE chat SET status=1 where (send_by ="'.$saia.'" or send_to ="'.$saia.'") and (send_by ="'.$teman.'" or send_to ="'.$teman.'") order by time asc');
         }
 
         function notifikasi(){
             $saia = $this->session->userdata("kd_regist");
             
-                $query = $this->db->query('select count(chat_id) as banyak from chat where (send_by ="'.$saia.'" or send_to ="'.$saia.'") and status = 1');
+                $query = $this->db->query('select count(chat_id) as banyak from chat where (send_by ="'.$saia.'" or send_to ="'.$saia.'") and status = 0');
                 $query1 = $query->row();
                 if($query1->banyak > 0){
                     echo '<span class="text-center notif"><div style="margin-top:4px;" class="hai align-middle">'.$query1->banyak.'</div></span>';
