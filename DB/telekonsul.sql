@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2020 at 02:08 PM
+-- Generation Time: Dec 27, 2020 at 07:41 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -42,9 +42,11 @@ CREATE TABLE `chat` (
 --
 
 INSERT INTO `chat` (`chat_id`, `send_to`, `send_by`, `message`, `time`, `status`) VALUES
-(1, 'RGS00008', 'RGS00001', 'test', '2020-12-22 10:59:53', 1),
-(2, 'RGS00007', 'RGS00001', 'cek', '2020-12-22 11:00:25', 1),
-(3, 'KONS0001', 'RGS00001', 'WA', '2020-12-26 08:43:37', 0);
+(1, 'RGS00008', 'RGS00001', 'test', '2020-12-22 10:59:53', 0),
+(2, 'RGS00007', 'RGS00001', 'cek', '2020-12-22 11:00:25', 0),
+(3, 'KONS0001', 'RGS00001', 'WA', '2020-12-26 08:43:37', 0),
+(4, 'KONS0004', 'RGS00001', 'WA2314', '2020-12-26 17:01:36', 0),
+(5, 'RGS00001', 'RGS00008', 'uyy', '2020-12-27 04:40:20', 0);
 
 -- --------------------------------------------------------
 
@@ -103,8 +105,9 @@ CREATE TABLE `tb_keluhan` (
 --
 
 INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `no_praktek`, `jenis_kasus`, `keluhan`, `harga`, `status`, `kd_pasien`, `buktikeluhan`) VALUES
-('KONS0001', '2020-12-02', 'Sknnwuu', 'aaa', 'aa', 10000, 3, 'PSN0001', 'default.jpeg'),
-('KONS0002', '2020-12-01', '', 'aa', 'aa', 10000, 1, 'PSN0001', 'default.jpeg');
+('KONS0001', '2020-12-02', 'SK00121', 'aaa', 'aa', 10000, 3, 'PSN0001', 'default.jpeg'),
+('KONS0002', '2020-12-01', '', 'aa', 'aa', 10000, 1, 'PSN0001', 'default.jpeg'),
+('KONS0004', '2020-12-16', 'SK00121', 'asas', 'asas', 10000, 3, 'PSN0001', 'default.jpeg');
 
 -- --------------------------------------------------------
 
@@ -115,7 +118,7 @@ INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `no_praktek`, `jenis_kasus`,
 CREATE TABLE `tb_konsul` (
   `kd_konsul` varchar(255) NOT NULL,
   `no_rm` varchar(255) NOT NULL,
-  `kd_resep` varchar(255) NOT NULL,
+  `kd_resep` varchar(255) DEFAULT NULL,
   `harga_kirim` int(11) NOT NULL,
   `grand_total` int(11) NOT NULL,
   `status` int(1) NOT NULL
@@ -127,7 +130,8 @@ CREATE TABLE `tb_konsul` (
 
 INSERT INTO `tb_konsul` (`kd_konsul`, `no_rm`, `kd_resep`, `harga_kirim`, `grand_total`, `status`) VALUES
 ('KONS0001', 'KONS0002', '', 0, 0, 0),
-('KONS0002', 'KONS0001', '', 0, 0, 0);
+('KONS0002', 'KONS0001', 'RES0002', 0, 0, 0),
+('KONS0003', 'KONS0004', '', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -224,8 +228,15 @@ INSERT INTO `tb_registrasi` (`kd_regist`, `name`, `email`, `image`, `password`, 
 CREATE TABLE `tb_resep` (
   `kd_resep` varchar(255) NOT NULL,
   `resep` varchar(255) NOT NULL,
-  `harga` int(11) DEFAULT NULL
+  `harga_resep` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_resep`
+--
+
+INSERT INTO `tb_resep` (`kd_resep`, `resep`, `harga_resep`) VALUES
+('RES0002', 'beli diapotek', NULL);
 
 -- --------------------------------------------------------
 
@@ -438,7 +449,7 @@ ALTER TABLE `user_token`
 -- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `login_details`
