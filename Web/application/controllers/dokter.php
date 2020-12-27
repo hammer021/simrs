@@ -7,6 +7,7 @@ class Dokter extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Dokter_model');
+		$this->load->model('Resep_model');
 	}
 
 	public function dashboard()
@@ -46,17 +47,19 @@ class Dokter extends CI_Controller
 	}
 	public function resep()
 	{
+		$data['resep'] = $this->Resep_model->tampil_resep();
 		$this->load->view('template/header');
 		$this->load->view('template/doktersidemenu');
-		$this->load->view('dokter/vresep');
+		$this->load->view('dokter/vresep', $data);
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
-	public function tindakanmedis()
+	public function laporanpemeriksaan()
 	{
+		$data['dataperiksa'] = $this->Dokter_model->LapPemeriksaan();
 		$this->load->view('template/header');
 		$this->load->view('template/doktersidemenu');
-		$this->load->view('dokter/vtindakanmedis');
+		$this->load->view('dokter/vlaporanpemeriksaan',$data);
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}

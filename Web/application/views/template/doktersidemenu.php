@@ -21,8 +21,8 @@
           "><a href="<?php echo base_url(); ?>dokter/datapemeriksaan"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Data Pemeriksaan </span></a>
           </li>
           <li class="
-          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/dokter/tindakanmedis'){ echo 'active';}else { echo 'nav-item';}?>
-          "><a href="<?php echo base_url(); ?>dokter/tindakanmedis"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Tindakan Medis </span></a>
+          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/dokter/laporanpemeriksaan'){ echo 'active';}else { echo 'nav-item';}?>
+          "><a href="<?php echo base_url(); ?>dokter/laporanpemeriksaan"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Laporan Pemeriksaan </span></a>
           </li>
           <li class="
           
