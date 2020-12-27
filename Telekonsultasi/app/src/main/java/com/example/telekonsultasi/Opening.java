@@ -30,6 +30,7 @@ public class Opening extends AppCompatActivity {
             public void onClick(View v) {
                 Intent a = new Intent(Opening.this, RegisterActivity.class);
                 startActivity(a);
+                finish();
             }
         });
 
@@ -39,6 +40,7 @@ public class Opening extends AppCompatActivity {
             public void onClick(View view) {
                 Intent b = new Intent(Opening.this, LoginActivity.class);
                 startActivity(b);
+                finish();
             }
         });
 

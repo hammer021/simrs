@@ -17,14 +17,27 @@ import java.util.List;
 public class AdapterPemeriksaan extends RecyclerView.Adapter<AdapterPemeriksaan.MyViewHolder> {
     private List<ModalPemeriksaan> item;
     private Context context;
+    private AdapterPeriksa.OnHistoryClickListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView no_rm, nama_pasien, tgl_kunjungan;
-        public MyViewHolder(View itemView){
+        public MyViewHolder(View itemView, final AdapterPeriksa.OnHistoryClickListener listener){
             super(itemView);
             no_rm = itemView.findViewById(R.id.txtkodepasien);
             nama_pasien = itemView.findViewById(R.id.txtnamapasien);
             tgl_kunjungan = itemView.findViewById(R.id.txttglkunjungan);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener!= null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.onClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -37,7 +50,7 @@ public class AdapterPemeriksaan extends RecyclerView.Adapter<AdapterPemeriksaan.
     @Override
     public AdapterPemeriksaan.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_pemeriksaan, parent, false);
-        AdapterPemeriksaan.MyViewHolder myViewHolder = new AdapterPemeriksaan.MyViewHolder(layout);
+        AdapterPemeriksaan.MyViewHolder myViewHolder = new AdapterPemeriksaan.MyViewHolder(layout, listener);
         return myViewHolder;
     }
 
@@ -50,5 +63,13 @@ public class AdapterPemeriksaan extends RecyclerView.Adapter<AdapterPemeriksaan.
 
     public int getItemCount() {
         return item.size();
+    }
+
+    public interface OnHistoryClickListener{
+        public void onClick(int position);
+    }
+
+    public void setListener(AdapterPeriksa.OnHistoryClickListener listener) {
+        this.listener = listener;
     }
 }

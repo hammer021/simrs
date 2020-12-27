@@ -19,9 +19,10 @@ public class AdapterPeriksa extends RecyclerView.Adapter<AdapterPeriksa.MyViewHo
     private Context context;
     private OnHistoryClickListener listener;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView no_rm, nama_pasien, tgl_kunjungan, harga, status;
-        public MyViewHolder(View itemView, final OnHistoryClickListener listener){
+
+        public MyViewHolder(View itemView, final OnHistoryClickListener listener) {
             super(itemView);
             no_rm = itemView.findViewById(R.id.no_rmperiksa);
             nama_pasien = itemView.findViewById(R.id.namapasienperiksa);
@@ -32,9 +33,9 @@ public class AdapterPeriksa extends RecyclerView.Adapter<AdapterPeriksa.MyViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (listener!= null){
+                    if (listener != null) {
                         int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
+                        if (position != RecyclerView.NO_POSITION) {
                             listener.onClick(position);
                         }
                     }
@@ -43,7 +44,7 @@ public class AdapterPeriksa extends RecyclerView.Adapter<AdapterPeriksa.MyViewHo
         }
     }
 
-    public AdapterPeriksa(Context context, List<ModalPeriksa> item){
+    public AdapterPeriksa(Context context, List<ModalPeriksa> item) {
         this.context = context;
         this.item = item;
     }
@@ -62,14 +63,18 @@ public class AdapterPeriksa extends RecyclerView.Adapter<AdapterPeriksa.MyViewHo
         holder.nama_pasien.setText(me.getNama_pasien());
         holder.tgl_kunjungan.setText(me.getTgl_kunjungan());
         holder.harga.setText(me.getHarga());
-        holder.status.setText(me.getStatus());
+        if (me.getStatus().equals("1")) {
+            holder.status.setText("Belum Bayar");
+        } else {
+            holder.status.setText("Terverifikasi");
+        }
     }
 
     public int getItemCount() {
         return item.size();
     }
 
-    public interface OnHistoryClickListener{
+    public interface OnHistoryClickListener {
         public void onClick(int position);
     }
 

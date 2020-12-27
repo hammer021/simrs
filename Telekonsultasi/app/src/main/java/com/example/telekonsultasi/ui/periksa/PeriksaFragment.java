@@ -23,11 +23,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.telekonsultasi.KeluhanActivity;
 import com.example.telekonsultasi.NotificationActivity;
+import com.example.telekonsultasi.PeriksaLagiActivity;
 import com.example.telekonsultasi.R;
+import com.example.telekonsultasi.UploadPeriksaActivity;
 import com.example.telekonsultasi.adapter.AdapterPemeriksaan;
+import com.example.telekonsultasi.adapter.AdapterPeriksa;
 import com.example.telekonsultasi.configfile.ServerApi;
 import com.example.telekonsultasi.configfile.authdata;
 import com.example.telekonsultasi.model.ModalPemeriksaan;
+import com.example.telekonsultasi.model.ModalPeriksa;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -110,6 +114,19 @@ public class PeriksaFragment extends Fragment {
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                     recyclerViewPemeriksaan.setLayoutManager(layoutManager);
                     recyclerViewPemeriksaan.setAdapter(adapterPemeriksaan);
+
+                    adapterPemeriksaan.setListener(new AdapterPeriksa.OnHistoryClickListener() {
+                        @Override
+                        public void onClick(int position) {
+                            ModalPemeriksaan modalPemeriksaan = item.get(position);
+                            Toast.makeText(getActivity(), modalPemeriksaan.getNo_rm(), Toast.LENGTH_LONG).show();
+//                if (modalPeriksa.getStatus() == "1") {
+                            Intent detail = new Intent(getActivity(), PeriksaLagiActivity.class);
+                            detail.putExtra("no_rm", modalPemeriksaan.getNo_rm());
+                            startActivity(detail);
+//                }
+                        }
+                    });
 
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();

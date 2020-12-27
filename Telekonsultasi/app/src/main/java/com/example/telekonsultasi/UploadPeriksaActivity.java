@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +50,7 @@ public class UploadPeriksaActivity extends AppCompatActivity {
 
     private final int IMG_REQUEST = 1;
     boolean statusImage = false;
+    boolean doubleBackToExit;
 
     Bitmap bitmapBuktiBayar;
 
@@ -64,7 +66,6 @@ public class UploadPeriksaActivity extends AppCompatActivity {
         Intent intent = getIntent();
         no_rm_intent = intent.getStringExtra("no_rm");
         loadDeatil();
-        Toast.makeText(this, no_rm_intent, Toast.LENGTH_LONG).show();
 
         txtnomer = findViewById(R.id.normuploadperiksa);
         txtnama = findViewById(R.id.namauploadperiksa);
@@ -95,7 +96,7 @@ public class UploadPeriksaActivity extends AppCompatActivity {
     }
 
     private void loadDeatil() {
-        Log.e("no_rm", no_rm_intent);
+//        Log.e("no_rm", no_rm_intent);
         progressDialog.show();
 
         StringRequest bayarget = new StringRequest(Request.Method.POST, ServerApi.URL_BUKTI, new Response.Listener<String>() {
@@ -111,13 +112,13 @@ public class UploadPeriksaActivity extends AppCompatActivity {
                         String no_rm = utama.getString("no_rm");
                         String nama_pasien = utama.getString("nama_pasien");
                         String tgl_kunjungan = utama.getString("tgl_kunjungan");
+                        String keluhan = utama.getString("keluhan");
                         String harga = utama.getString("harga");
-
-                        Log.e("utamas", "utamas" + utama);
 
                         txtnomer.setText(no_rm);
                         txtnama.setText(nama_pasien);
                         txttanggal.setText(tgl_kunjungan);
+                        txtkeluhan.setText(keluhan);
                         txtharga.setText(harga);
                     } else {
                         Toast.makeText(UploadPeriksaActivity.this, "Gagal upload bukti pembayaran", Toast.LENGTH_LONG).show();
@@ -137,7 +138,7 @@ public class UploadPeriksaActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("no_rm", no_rm_intent);
+                params.put("no_rm", no_rm_intent.toString().split(" : ")[1]);
                 return params;
             }
         };
@@ -145,14 +146,14 @@ public class UploadPeriksaActivity extends AppCompatActivity {
     }
 
     private void updateBuktiBayar() {
-        StringRequest bayarbosque = new StringRequest(Request.Method.PUT, ServerApi.URL_UPLOAD_BUKTI, new Response.Listener<String>() {
+        StringRequest bayarbosque = new StringRequest(Request.Method.PUT, ServerApi.URL_BUKTI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String message = jsonObject.getString("message");
-                    Snackbar.make(findViewById(R.id.uploadperiksaactivity), message, Snackbar.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
@@ -161,14 +162,14 @@ public class UploadPeriksaActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Gagal upload bukti pembayaran", Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("no_rm", no_rm_intent);
-//                params.put("no_rm", no_rm_intent.toString().split(" : ")[1]);
+//                params.put("no_rm", no_rm_intent);
+                params.put("no_rm", no_rm_intent.toString().split(" : ")[1]);
                 params.put("buktikeluhan", imageToString(bitmapBuktiBayar));
                 return params;
             }
@@ -213,5 +214,24 @@ public class UploadPeriksaActivity extends AppCompatActivity {
 
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExit) {
+            Intent abc = new Intent(UploadPeriksaActivity.this, NotificationActivity.class);
+            startActivity(abc);
+            finish();
+        }
+
+        this.doubleBackToExit = true;
+        Snackbar.make(findViewById(R.id.uploadperiksaactivity), "Tekan kembali sekali lagi untuk batalkan upload bukti pembayaran", Snackbar.LENGTH_LONG).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExit=false;
+            }
+        }, 2000);
     }
 }

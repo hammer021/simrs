@@ -65,11 +65,10 @@ public class NotificationActivity extends AppCompatActivity {
                         ModalPeriksa modalPeriksa = new ModalPeriksa();
                         JSONObject datanya = data.getJSONObject(i);
                         modalPeriksa.setNama_pasien(datanya.getString("nama_pasien"));
-                        modalPeriksa.setNo_rm("Nomor Rekam Medis : " + datanya.getString("no_rm"));
+                        modalPeriksa.setNo_rm(datanya.getString("no_rm"));
                         modalPeriksa.setTgl_kunjungan(datanya.getString("tgl_kunjungan"));
                         modalPeriksa.setHarga(datanya.getString("harga"));
                         modalPeriksa.setStatus(datanya.getString("status"));
-
                         item.add(modalPeriksa);
                     }
                     setupListView();
@@ -97,11 +96,17 @@ public class NotificationActivity extends AppCompatActivity {
             public void onClick(int position) {
                 ModalPeriksa modalPeriksa = item.get(position);
                 Toast.makeText(NotificationActivity.this, modalPeriksa.getNo_rm(), Toast.LENGTH_LONG).show();
-//                if (modalPeriksa.getStatus() == "1") {
+                if (modalPeriksa.getStatus().equals("1")) {
                     Intent detail = new Intent(NotificationActivity.this, UploadPeriksaActivity.class);
                     detail.putExtra("no_rm", modalPeriksa.getNo_rm());
                     startActivity(detail);
-//                }
+                    finish();
+                } else if (modalPeriksa.getStatus().equals("3")) {
+                    Intent detail = new Intent(NotificationActivity.this, ChatActivity.class);
+                    detail.putExtra("no_rm", modalPeriksa.getNo_rm());
+                    startActivity(detail);
+                    finish();
+                }
             }
         });
     }

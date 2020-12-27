@@ -97,10 +97,6 @@ public class EditProfilActivity extends AppCompatActivity {
 
                     updateProfil();
 
-                    Intent main = new Intent(EditProfilActivity.this, NavFragment.class);
-                    startActivity(main);
-                    finish();
-
                     Toast.makeText(getApplicationContext(), "Berhasil mengubah profil",Toast.LENGTH_LONG).show();
 
                 } else {
@@ -229,8 +225,17 @@ public class EditProfilActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String message = jsonObject.getString("message");
+                    JSONObject update = jsonObject.getJSONObject("update");
+
+                    authdataa.setNamaUser(update.getString("name"));
+                    authdataa.setFotoUser(update.getString("image"));
 
                     Snackbar.make(findViewById(R.id.editprofilactivity), message, Snackbar.LENGTH_LONG).show();
+
+
+                    Intent main = new Intent(EditProfilActivity.this, NavFragment.class);
+                    startActivity(main);
+                    finish();
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }

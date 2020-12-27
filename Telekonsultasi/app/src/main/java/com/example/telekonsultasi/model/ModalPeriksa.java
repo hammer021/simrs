@@ -12,7 +12,7 @@ public class ModalPeriksa {
     }
 
     public void setNo_rm(String no_rm) {
-        this.no_rm = no_rm;
+        this.no_rm = "Nomor Rekam Medis : " + no_rm;
     }
 
     public String getNama_pasien() {
@@ -44,6 +44,12 @@ public class ModalPeriksa {
     }
 
     public void setStatus(String status) {
+//        }
+//        if (this.status == "1") {
+//            status = "Belum Bayar";
+//        } else if (this.status == "3") {
+//            status = "Terverifikasi";
+//        }
         this.status = status;
     }
 }

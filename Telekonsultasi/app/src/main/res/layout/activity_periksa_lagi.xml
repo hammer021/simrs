@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bcgroundfull"
+    tools:context=".PeriksaLagiActivity"
+    android:id="@+id/periksalagiactivity">
+
+    <TextView
+        android:id="@+id/normnya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="0sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tulisanfotonya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="0sp"
+        app:layout_constraintEnd_toStartOf="@+id/foto_periksa"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nama_pasien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/arial_narrow"
+        android:text="Nama Pasien"
+        android:textColor="@color/putih"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/foto_periksa_periksa"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/uploadputih"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="175dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nama_pasien">
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <!-- android:layout_height="550dp" -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+                <TextView
+                    android:id="@+id/tanggal_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="20dp"
+                    android:enabled="false"
+                    android:layout_marginStart="20dp"
+                    android:text="Tanggal Periksa"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tempat_lahir_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:enabled="false"
+                    android:layout_marginStart="20dp"
+                    android:text="Tempat Lahir"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tanggal_periksa" />
+
+                <TextView
+                    android:id="@+id/tanggal_lahir_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:enabled="false"
+                    android:text="Tanggal Lahir"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tempat_lahir_periksa" />
+
+                <TextView
+                    android:id="@+id/umur_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Umur"
+                    android:enabled="false"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tanggal_lahir_periksa" />
+
+                <TextView
+                    android:id="@+id/keterbatasan_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Keterbatasan"
+                    android:textColor="@color/putih"
+                    android:enabled="false"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/umur_periksa" />
+
+                <TextView
+                    android:id="@+id/jeniskelamin_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:enabled="false"
+                    android:text="Jenis Kelamin"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/keterbatasan_periksa" />
+
+                <TextView
+                    android:id="@+id/warga_negara_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:enabled="false"
+                    android:layout_marginStart="20dp"
+                    android:text="Warga Negara"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/jeniskelamin_periksa" />
+
+                <TextView
+                    android:id="@+id/status_perkawinan_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:enabled="false"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Status Perkawinan"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/warga_negara_periksa" />
+
+                <TextView
+                    android:id="@+id/pendidikan_periksa"
+                    android:layout_width="wrap_content"
+                    android:enabled="false"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Pendidikan"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/status_perkawinan_periksa" />
+
+                <TextView
+                    android:id="@+id/agama_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:enabled="false"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Agama"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pendidikan_periksa" />
+
+                <TextView
+                    android:id="@+id/pekerjaan_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:enabled="false"
+                    android:layout_marginStart="20dp"
+                    android:text="Pekerjaan"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/agama_periksa" />
+
+                <TextView
+                    android:id="@+id/no_nik_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="No NIK"
+                    android:enabled="false"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pekerjaan_periksa" />
+
+                <TextView
+                    android:id="@+id/alamat_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Alamat"
+                    android:enabled="false"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/no_nik_periksa" />
+
+                <TextView
+                    android:id="@+id/no_tlp_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="No Telepon"
+                    android:enabled="false"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/alamat_periksa" />
+
+                <TextView
+                    android:id="@+id/ayah_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Nama Ayah"
+                    android:enabled="false"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/no_tlp_periksa" />
+
+                <TextView
+                    android:id="@+id/ibu_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Nama Ibu"
+                    android:enabled="false"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ayah_periksa" />
+
+                <TextView
+                    android:id="@+id/hub_pasien_periksa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arial_narrow"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Hubungan Pasien"
+                    android:enabled="false"
+                    android:textColor="@color/putih"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ibu_periksa" />
+
+                <EditText
+                    android:id="@+id/keluhan_periksa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/fontabu"
+                    android:fontFamily="@font/arial_narrow"
+                    android:hint="Keluhan"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="16dp"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/putih"
+                    android:textColorHint="@color/fontabu"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hub_pasien_periksa" />
+
+                <Button
+                    android:id="@+id/btnperiksalagi_periksa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lanjutkan Pemeriksaan"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/stylebutton1"
+                    android:fontFamily="@font/clemente_light"
+                    android:textColor="@color/putih"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/keluhan_periksa" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

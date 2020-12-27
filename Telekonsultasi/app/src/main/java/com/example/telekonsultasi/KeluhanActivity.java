@@ -102,13 +102,6 @@ public class KeluhanActivity extends AppCompatActivity {
         }
     });
 
-        simpanperiksa.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            periksa();
-        }
-    });
-
         txtjeniskelamin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +123,13 @@ public class KeluhanActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+        simpanperiksa.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            periksa();
+        }
+    });
 
 //        txtstatuskawin.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -351,6 +351,7 @@ public class KeluhanActivity extends AppCompatActivity {
                             public void run() {
                                 Intent pindah = new Intent(KeluhanActivity.this, NavFragment.class);
                                 startActivity(pindah);
+                                finish();
                             }
                         }, 1500);
                     } else {
@@ -362,7 +363,8 @@ public class KeluhanActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     Intent periksa = new Intent(KeluhanActivity.this, NavFragment.class);
                     startActivity(periksa);
-                    Toast.makeText(KeluhanActivity.this, "Registrasi Berhasil, silahkan Aktivasi email anda!", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Toast.makeText(KeluhanActivity.this, "Berhasil ! Silahkan lanjutkan pembayaran anda.", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

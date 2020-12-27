@@ -8,7 +8,7 @@ import com.example.telekonsultasi.LoginActivity;
 import com.example.telekonsultasi.NavFragment;
 
 public class authdata {
-//    private static authdata mInstance;
+    //    private static authdata mInstance;
     SharedPreferences sharedPreferences;
     public Context mCtx;
 
@@ -28,14 +28,13 @@ public class authdata {
     public static final String LOGIN_STATUS = "LOGIN_STATUS";
 
 
-
-    public authdata(Context context){
+    public authdata(Context context) {
         this.mCtx = context;
         sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
 
-    public void setdatauser(String xkode_user, String xnama_user, String xemail_user, String xalamat_user, String xno_user, String xstatus,  String tokennya, String xfoto){
+    public void setdatauser(String xkode_user, String xnama_user, String xemail_user, String xalamat_user, String xno_user, String xstatus, String tokennya, String xfoto) {
 //        sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 //        editor = sharedPreferences.edit();
 
@@ -53,24 +52,23 @@ public class authdata {
     }
 
 
-
-
-    public boolean isLogin(){
+    public boolean isLogin() {
         return sharedPreferences.getBoolean(LOGIN_STATUS, false);
     }
 
-    public void logout(){
+    public void logout() {
         editor.clear();
         editor.commit();
 
         Intent login = new Intent(mCtx, LoginActivity.class);
         mCtx.startActivity(login);
-        ((NavFragment)mCtx).finish();
+        ((NavFragment) mCtx).finish();
     }
 
     public String getToken() {
         return sharedPreferences.getString(token, null);
     }
+
     public String getAksesData() {
         return sharedPreferences.getString(akses_data, null);
     }
@@ -78,20 +76,35 @@ public class authdata {
     public String getKodeUser() {
         return sharedPreferences.getString(kode_user, null);
     }
+
     public String getNamaUser() {
         return sharedPreferences.getString(nama_user, null);
     }
+
     public String getEmail_user() {
         return sharedPreferences.getString(email_user, null);
     }
+
     public String getAlamat_user() {
         return sharedPreferences.getString(alamat_user, null);
     }
+
     public String getNo_user() {
         return sharedPreferences.getString(no_user, null);
     }
+
     public String getFoto_user() {
         return sharedPreferences.getString(foto_user, null);
+    }
+
+    public void setNamaUser(String nama) {
+        editor.putString(nama_user, nama);
+        editor.apply();
+    }
+
+    public void setFotoUser(String foto) {
+        editor.putString(foto_user, foto);
+        editor.apply();
     }
 
 }
