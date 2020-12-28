@@ -78,7 +78,8 @@ class Admin extends CI_Controller
 		if($page == "dokter"  && !empty($isi)){
 			$dokter['listdokter'] = $this->Dokter_model->tampils($isi);
 		}else{
-			$dokter['listdokter'] = $this->Dokter_model->tampil_datadokter();
+			$dokter['listdokter'] = $this->Dokter_model->tampil_datadokter1();
+			$dokter['listklinik'] = $this->Klinik_model->tampil_dataklinik()->result();
 		}
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
@@ -86,6 +87,68 @@ class Admin extends CI_Controller
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
+	public function jadwalDokter($page = "")
+	{
+		$isi = $this->input->post('dokter');
+
+		if($page == "dokter"  && !empty($isi)){
+			$dokter['listdokter'] = $this->Dokter_model->tampils($isi);
+		}else{
+			$dokter['listdokter'] = $this->Dokter_model->tampil_datadokter();
+			$dokter['listdokter1'] = $this->Dokter_model->tampil_datadokter1();
+			$dokter['listklinik'] = $this->Klinik_model->tampil_dataklinik()->result();
+		}
+		$this->load->view('template/header');
+		$this->load->view('template/sidemenu');
+		$this->load->view('admin/vjadwalDokter', $dokter);
+		$this->load->view('template/footer');
+		$this->load->helper('url');
+	}
+
+	public function tambah_jadwal_dokter()
+	{
+		$no_praktek = $this->input->post('no_praktek');
+		$kd_poli = $this->input->post('poli');
+		$buka = $this->input->post('jadwal_praktek_buka');
+		$tutup = $this->input->post('jadwal_praktek_tutup');
+		$senin = $this->input->post('senin');
+		$selasa = $this->input->post('selasa');
+		$rabu = $this->input->post('rabu');
+		$kamis = $this->input->post('kamis');
+		$jumat = $this->input->post('jumat');
+		$sabtu = $this->input->post('sabtu');
+		$minggu = $this->input->post('minggu');
+		
+			if ($no_praktek!==null) {
+				$data = array(
+					'no_praktek '    		=> $no_praktek,
+					'kd_poli'          		=> $kd_poli,
+					'startwaktu'         	=> $buka,
+					'endwaktu'         		=> $buka,
+					'senin'         		=> $senin,
+					'selasa'         		=> $selasa,
+					'rabu'         			=> $rabu,
+					'kamis'         		=> $kamis,
+					'jumat'         		=> $jumat,
+					'sabtu'         		=> $sabtu,
+					'minggu'         		=> $minggu
+					
+				);
+				$this->Dokter_model->input_data($data, 'tb_dokter_poli');
+
+				if ($this->db->affected_rows() > 0) {
+					echo "<script>alert('data Berhasil Di simpan');</script>";
+				}
+				echo "<script>window.location='" . site_url('admin/jadwalDokter') . "';</script>";
+			} else {
+				$error = array('error' => $this->upload->display_errors());
+				echo "<script>alert(" . $error . ");</script>";
+			}
+			
+			echo "<script>window.location='" . site_url('admin/jadwalDokter') . "';</script>";
+		
+	}
+
 	public function cek()
 	{
 		$this->load->view('auth/aktivasi');
@@ -120,10 +183,10 @@ class Admin extends CI_Controller
 	
 	public function update_dokter()
 	{
-		$no_praktek = $this->input->post('no_praktek');
+		$no_praktek = $this->input->post('no_praktek1');
+		$no_praktek1 = $this->input->post('no_praktek');
 		$kd_regist = $this->input->post('kd_regist');
 		$nama_dokter = $this->input->post('nama_dokter');
-		$jadwal_praktek = $this->input->post('jadwal_praktek');
 		$email=$this->input->post('email');
 		$no_hp_dokter = $this->input->post('no_hp_dokter');
 		$imgtarget = $this->input->post('foto_dokter');
@@ -155,12 +218,19 @@ class Admin extends CI_Controller
 				'no_hp'			=> $no_hp_dokter
 				);
 				$this->Dokter_model->update_data($where, $data, 'tb_registrasi');
+				$where2 = array(
+					'no_praktek'          => $no_praktek1
+					);
+				$data3 = array(
+					'no_praktek'          => $no_praktek
+					);
+				$this->Dokter_model->update_data($where2, $data3, 'tb_dokter_poli');
 				//UPDATE tb_dokter
 				$data2 = array(
-                'no_praktek'          => $no_praktek,
-                'jadwal_praktek'         => $jadwal_praktek
+                'no_praktek'          => $no_praktek
 				);
 				$this->Dokter_model->update_data($where, $data2, 'tb_dokter');
+				
 				redirect('admin/datadokter');
 			}
 		} else {
@@ -175,14 +245,19 @@ class Admin extends CI_Controller
 				'no_hp'			=> $no_hp_dokter
 			);
 			$this->Dokter_model->update_data($where, $data, 'tb_registrasi');
-			
+			$where2 = array(
+				'no_praktek'          => $no_praktek1
+				);
+			$data3 = array(
+				'no_praktek'          => $no_praktek
+				);
+			$this->Dokter_model->update_data($where2, $data3, 'tb_dokter_poli');
+
 			$data2 = array(
-			'no_praktek'          => $no_praktek,
-			'jadwal_praktek'         => $jadwal_praktek
+			'no_praktek'          => $no_praktek
 			);
 			$this->Dokter_model->update_data($where, $data2, 'tb_dokter');
-
-
+			
 			redirect('admin/datadokter');
 		}
 	}
@@ -193,6 +268,16 @@ class Admin extends CI_Controller
 		$jadwal_praktek = $this->input->post('jadwal_praktek');
 		$no_hp_dokter = $this->input->post('no_hp_dokter');
 		$email = $this->input->post('email');
+		$kd_poli = $this->input->post('poli');
+		$buka = $this->input->post('jadwal_praktek_buka');
+		$tutup = $this->input->post('jadwal_praktek_tutup');
+		$senin = $this->input->post('senin');
+		$selasa = $this->input->post('selasa');
+		$rabu = $this->input->post('rabu');
+		$kamis = $this->input->post('kamis');
+		$jumat = $this->input->post('jumat');
+		$sabtu = $this->input->post('sabtu');
+		$minggu = $this->input->post('minggu');
 		$pass = md5("123");
 		$kode = $this->Dokter_model->kode('kd_regist', 'tb_registrasi', 'RGS' , '3');
 		date_default_timezone_set("Asia/Jakarta");
@@ -224,11 +309,25 @@ class Admin extends CI_Controller
 
 				$data2 = array(
 				'no_praktek '   		=> $no_praktek,
-                'jadwal_praktek'        => $jadwal_praktek,
                 'kd_regist'         => $kode
 					
 				);
 				$this->Dokter_model->input_data($data2, 'tb_dokter');
+				$data3 = array(
+					'no_praktek '   		=> $no_praktek,
+					'kd_poli'         		=> $kd_poli,
+					'startwaktu'        	=> $buka,
+					'endwaktu'         		=> $tutup,
+					'senin'         		=> $senin,
+					'selasa'         		=> $selasa,
+					'rabu'         			=> $rabu,
+					'kamis'         		=> $kamis,
+					'jumat'         		=> $jumat,
+					'sabtu'         		=> $sabtu,
+					'minggu'         		=> $minggu
+						
+					);
+					$this->Dokter_model->input_data($data3, 'tb_dokter_poli');
 
 
 				if ($this->db->affected_rows() > 0) {
@@ -265,7 +364,21 @@ class Admin extends CI_Controller
 					
 				);
 				$this->Dokter_model->input_data($data2, 'tb_dokter');
-
+				$data3 = array(
+					'no_praktek '   		=> $no_praktek,
+					'kd_poli'         		=> $kd_poli,
+					'startwaktu'        	=> $buka,
+					'endwaktu'         		=> $tutup,
+					'senin'         		=> $senin,
+					'selasa'         		=> $selasa,
+					'rabu'         			=> $rabu,
+					'kamis'         		=> $kamis,
+					'jumat'         		=> $jumat,
+					'sabtu'         		=> $sabtu,
+					'minggu'         		=> $minggu
+						
+					);
+					$this->Dokter_model->input_data($data3, 'tb_dokter_poli');
 
 			if ($this->db->affected_rows() > 0) {
 				echo "<script>alert('data Dokter Berhasil Di simpan');</script>";

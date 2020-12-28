@@ -20,15 +20,23 @@ class Dokter_model extends CI_Model
   private $_table = "tb_dokter";
   private $_tableR = "tb_registrasi";
   function tampil_datadokter(){
-		return $this->db->query("SELECT * FROM tb_dokter JOIN tb_registrasi
-    ON tb_dokter.kd_regist = tb_registrasi.kd_regist WHERE tb_registrasi.kd_role='2'")->result();
+		return $this->db->query("SELECT * FROM tb_dokter_poli LEFT JOIN tb_dokter 
+    ON tb_dokter_poli.no_praktek = tb_dokter.no_praktek LEFT JOIN tb_poli
+    ON tb_dokter_poli.kd_poli = tb_poli.kd_poli LEFT JOIN tb_registrasi 
+    ON tb_dokter.kd_regist=tb_registrasi.kd_regist WHERE tb_registrasi.kd_role='2'")->result();
+  }
+  function tampil_datadokter1(){
+		return $this->db->query("SELECT * FROM tb_dokter LEFT JOIN tb_registrasi 
+    ON tb_dokter.kd_regist=tb_registrasi.kd_regist WHERE tb_registrasi.kd_role='2'")->result();
   }
   public function tampils($isi){
-    return $this->db->query("SELECT * FROM tb_dokter JOIN tb_registrasi
-    ON tb_dokter.kd_regist = tb_registrasi.kd_regist WHERE tb_registrasi.name = $isi")->result();
+    return $this->db->query("SELECT * FROM tb_dokter_poli LEFT JOIN tb_dokter 
+    ON tb_dokter_poli.no_praktek = tb_dokter.no_praktek LEFT JOIN tb_poli
+    ON tb_dokter_poli.kd_poli = tb_poli.kd_poli LEFT JOIN tb_registrasi 
+    ON tb_dokter.kd_regist=tb_registrasi.kd_regist WHERE tb_registrasi.name = $isi")->result();
 
   }
-
+ 
   function input_data($data, $table){
 		$this->db->insert($table, $data);
 	}
@@ -38,7 +46,8 @@ class Dokter_model extends CI_Model
     function update_data($where,$data,$table){
 		$this->db->where($where);
 		$this->db->update($table,$data);
-	}	
+  }	
+  
 	function hapus_data2($id){
     $this->_deleteImage($id);
     return $this->db->delete($this->_tableR, array("kd_regist" => $id));

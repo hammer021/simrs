@@ -3,7 +3,7 @@
 		<div class="content-wrapper-before"></div>
 		<div class="content-header row">
 			<div class="content-header-left col-md-4 col-12 mb-2">
-				<h3 class="content-header-title" style="margin-bottom:50px;margin-top:80px">DATA DOKTER</h3>
+				<h3 class="content-header-title" style="margin-bottom:50px;margin-top:80px">JADWAL POLI DOKTER</h3>
 			</div>
 			<div class="content-header-right col-md-8 col-12">
 				<div class="breadcrumbs-top float-md-right">
@@ -11,7 +11,7 @@
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="index.html">Home</a>
 							</li>
-							<li class="breadcrumb-item active">Data Dokter
+							<li class="breadcrumb-item active">Poli Dokter
 							</li>
 						</ol>
 					</div>
@@ -24,7 +24,7 @@
 				<div class="col-xl-12 col-lg-12 col-sm-12">
 					<div class="card">
 						<div class="card-header">
-						<a href="#"><button style="float:left;margin-bottom:10px;" type="button" data-target="#tambah" data-toggle="modal" class="btn btn-primary">Tambah Data Dokter</button></a>
+						<a href="#"><button style="float:left;margin-bottom:10px;" type="button" data-target="#tambah" data-toggle="modal" class="btn btn-primary">Tambah Jadwal Dokter</button></a>
 							<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 							<div class="heading-elements">
 								<ul class="list-inline mb-0">
@@ -44,8 +44,9 @@
 											<th>No</th>
 											<th>No Praktek</th>
 											<th>Nama Dokter</th>
-											<th>Nomor HP Dokter</th>
-											<th>Foto</th>
+											<th>Jam Praktek</th>
+											<th>Hari Praktek</th>
+											<th>Poli</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
@@ -53,14 +54,62 @@
 										<?php
 										$no = 1;
 										foreach ($listdokter as $u) :
+											// $senin="";$selasa="";$rabu="";
+											// $kamis="";$jumat="";$sabtu="";
+											// $minggu="";
+											if($u->senin =="1"){
+												$senin = "Senin,";
+											}
+											elseif($u->senin =="0"){
+												$senin="";
+											}	
+
+											if($u->selasa =="1"){
+												$selasa = "Selasa,";
+											}
+											elseif($u->selasa =="0"){
+												$selasa="";
+											}
+
+											if($u->rabu =="1"){
+												$rabu = "Rabu,";
+											}
+											elseif($u->rabu =="0"){
+												$rabu="";
+											}
+											if($u->kamis =="1"){
+												$kamis = "Kamis,";
+											}
+											elseif($u->kamis =="0"){
+												$kamis="";
+											}
+											if($u->jumat =="1"){
+												$jumat = "Jum'at,";
+											}
+											elseif($u->jumat =="0"){
+												$jumat="";
+											}
+											if($u->sabtu =="1"){
+												$sabtu = "Sabtu,";
+											}
+											elseif($u->sabtu =="0"){
+												$sabtu="";
+											}
+											if($u->minggu =="1"){
+												$minggu = "Minggu";
+											}
+											elseif($u->minggu =="0"){
+												$minggu="";
+											}
 										?>
 											<tr>
 
 												<td><?php echo $no++ ?></td>
 												<td><?php echo $u->no_praktek ?></td>
 												<td><?php echo $u->name ?></td>
-												<td><?php echo $u->no_hp ?></td>
-												<td><img src="<?php echo base_url("assets/images/dokter/" . $u->image) ?>" width="100px" height="100px"></td>
+												<td><?php echo $u->startwaktu.'-'. $u->endwaktu ?></td>
+												<td><?php echo $senin.' '.$selasa.' '.$rabu.' '.$kamis.' '.$jumat.' '.$sabtu.' '.$minggu ?></td>
+												<td><?php echo $u->klinik?></td>
 												<td><a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
 													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
@@ -158,24 +207,25 @@ foreach ($listdokter as $u) {
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Tambah Data Dokter</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Tambah Jadwal Dokter</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<form method="post" action="<?= base_url('Admin/tambah_dokter') ?>" enctype="multipart/form-data">
+				<form method="post" action="<?= base_url('Admin/tambah_jadwal_dokter') ?>" enctype="multipart/form-data">
+					
 					<div class="form-group">
-						<label for="exampleInputEmail1">Nomor Praktek</label>
-						<input type="text" class="form-control" id="exampleInputEmail1" name="no_praktek" aria-describedby="emailHelp">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputEmail1">Nama Dokter</label>
-						<input type="text" class="form-control" id="exampleInputEmail1" name="nama_dokter" aria-describedby="emailHelp">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputEmail1">Email</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
+					<label for="poli">Pilih Dokter</label>
+						<select class="form-control" name="no_praktek" id="no_praktek">
+							<?php 
+							foreach($listdokter1 as $dok):
+							?>
+							<option value="<?php echo $dok->no_praktek?>"> <?php echo $dok->no_praktek.'-'.$dok->name?></option>
+							<?php 
+							endforeach;
+							?>
+							</select>
 					</div>
 					
 					<div class="form-group">
@@ -186,10 +236,7 @@ foreach ($listdokter as $u) {
 						<label for="exampleFormControlTextarea1">Jadwal praktek Tutup</label>
 						<input type ="time" class="form-control" name="jadwal_praktek_tutup" id="exampleFormControlTextarea1" rows="3">
 					</div>
-					<div class="form-group">
-						<label for="exampleFormControlTextarea1">Nomo HP Dokter </label>
-						<input class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" rows="3">
-					</div>
+					
 					<div class="form-group">
 						<label for="poli">Pilih Poli</label>
 						<select class="form-control" name="poli" id="poli">
@@ -263,10 +310,7 @@ foreach ($listdokter as $u) {
 						</table>
 					</div>
 					
-					<div class="form-group">
-						<label for="image_input">Foto</label>
-						<input type="file" class="form-control" name="foto_dokter" id="foto_dokter">
-					</div>
+					
 					
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

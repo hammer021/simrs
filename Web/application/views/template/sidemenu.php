@@ -17,6 +17,10 @@
           "><a href="<?php echo base_url(); ?>admin/pemeriksaan"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Pemeriksaan</span></a>
           </li>
           <li class="
+          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/jadwalDokter'){ echo 'active';}else { echo 'nav-item';}?>
+          "><a href="<?php echo base_url(); ?>admin/jadwalDokter"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Jadwal Dokter</span></a>
+          </li>
+          <li class="
           <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datadokter' || $_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datapasien' || $_SERVER['REQUEST_URI'] == '/simrs/Web/admin/dataklinik'){ echo 'active has-sub';}else { echo 'nav-item has-sub'; } ?>
           "><a href="#"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Data</span></a>
             <ul class="menu-content" style="">
