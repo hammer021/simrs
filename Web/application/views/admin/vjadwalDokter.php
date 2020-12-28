@@ -54,9 +54,6 @@
 										<?php
 										$no = 1;
 										foreach ($listdokter as $u) :
-											// $senin="";$selasa="";$rabu="";
-											// $kamis="";$jumat="";$sabtu="";
-											// $minggu="";
 											if($u->senin =="1"){
 												$senin = "Senin,";
 											}
@@ -115,14 +112,14 @@
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk menghapus? <?php echo $u->name ?> </h5>
+																	<h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk menghapus? <?php echo $u->name.'-'.$u->klinik ?> </h5>
 																	<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 																		<span aria-hidden="true">×</span>
 																	</button>
 																</div>
 																<div class="modal-footer">
 																	<button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
-																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('Admin/hapusdokter/'. $u->kd_regist); ?>">Hapus</a>
+																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('Admin/hapusjadwaldokter/'. $u->kd_dok_pol); ?>">Hapus</a>
 																</div>
 															</div>
 														</div>
@@ -159,40 +156,96 @@ foreach ($listdokter as $u) {
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Edit Data Dokter</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Edit Jadwal Dokter</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="post" action="<?= base_url('Admin/update_dokter') ?>" enctype="multipart/form-data">
+					<form method="post" action="<?= base_url('Admin/update_jadwal_dokter') ?>" enctype="multipart/form-data">
 						<div class="form-group">
-							<input type ="hidden" name="kd_regist" value="<?php echo $u->kd_regist ?>">
-							<label for="exampleInputEmail1">Nomor Dokter</label>
+							<input type ="hidden" name="kd_dok_pol" value="<?php echo $u->kd_dok_pol ?>">
+							<label for="exampleInputEmail1">Nomor Praktek : <?php echo $u->no_praktek ?></label>
 							<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $u->no_praktek ?>" name="no_praktek" aria-describedby="emailHelp">
-							<input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $u->no_praktek ?>" name="no_praktek1" aria-describedby="emailHelp">
-							<label for="exampleInputEmail1">Nama Dokter</label>
-							<input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $u->name ?>" name="nama_dokter" aria-describedby="emailHelp">
+								</br>
+							<label for="exampleInputEmail1">Nama Dokter : <?php echo $u->name ?></label>
 						</div>
 						<div class="form-group">
-							<label for="exampleFormControlTextarea1">Email </label>
-							<input type="email" class="form-control" name="email" id="exampleFormControlTextarea1" value="<?php echo $u->email ?>">
+							<label for="exampleFormControlTextarea1">Poli : <?php echo $u->klinik ?>  </label>
+							
 						</div>
 						<div class="form-group">
-							<label for="exampleFormControlTextarea1">No Hp Dokter </label>
-							<input type="text" class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" value="<?php echo $u->no_hp ?>">
+							<label for="exampleFormControlTextarea1">Jam Buka : </label>
+							<input type="time" class="form-control" name="startwaktu" id="startwaktu" value="<?php echo $u->startwaktu ?>">
 						</div>
 						<div class="form-group">
-							<label for="foto_dokter">Foto</label><br>
-							<center><img src="<?php echo base_url("assets/images/dokter/" . $u->image) ?>" width="100px" height="100px">
-								<center><br>
-									<input type="file" class="form-control" name="foto_dokter" id="foto_dokter">
+							<label for="exampleFormControlTextarea1">Jam Tutup : </label>
+							<input type="time" class="form-control" name="endwaktu" id="endwaktu" value="<?php echo $u->endwaktu ?>">
 						</div>
-
+						<div class="form-group">
+						<label for="exampleFormControlTextarea1">Silahkan Melilih Hari Lagi !!! </label>
+						
+						<table>
+							<tr>
+								<td> 
+									<label for="exampleFormControlTextarea1">Senin </label>
+									<select class="form-control"style="width:100px;" name="senin" id="senin">
+									<option value="1"> Ya</option>
+									<option value="0"> Tidak</option>
+									</select>
+								</td>
+								<td>
+									<label for="exampleFormControlTextarea1">Selasa </label>
+									<select class="form-control" style="width:100px;" name="selasa" id="selasa">
+									<option value="1"> Ya</option>
+									<option value="0"> Tidak</option>
+									</select> 
+								</td>
+								<td>
+									<label for="exampleFormControlTextarea1">Rabu </label>
+									<select class="form-control" style="width:100px;" name="rabu" id="rabu">
+									<option value="1"> Ya</option>
+									<option value="0"> Tidak</option>
+									</select>
+								</td>
+								<td>
+									<label for="exampleFormControlTextarea1">Kamis </label>
+									<select class="form-control" style="width:100px;" name="kamis" id="kamis">
+									<option value="1"> Ya</option>
+									<option value="0"> Tidak</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="exampleFormControlTextarea1">Jum'at </label>
+									<select class="form-control" style="width:100px;" name="jumat" id="jumat">
+									<option value="1"> Ya</option>
+									<option value="0"> Tidak</option>
+									</select>
+								</td>
+								<td>
+									<label for="exampleFormControlTextarea1">Sabtu </label>
+									<select class="form-control" style="width:100px;" name="sabtu" id="sabtu">
+									<option value="1"> Ya</option>
+									<option value="0"> Tidak</option>
+									</select>
+								</td>
+								<td>
+									<label for="exampleFormControlTextarea1">Minggu </label>
+									<select class="form-control" style="width:100px;" name="minggu" id="minggu">
+									<option value="1"> Ya</option>
+									<option value="0"> Tidak</option>
+									</select>
+								</td>
+							</tr>
+						</table>
+					</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-danger">Save</button>
 						</div>
+						
 					</form>
 				</div>
 			</div>

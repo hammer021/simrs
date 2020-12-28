@@ -14,6 +14,15 @@ class Konsul_model extends CI_Model
         ON tb_dokter_poli.kd_poli = tb_poli.kd_poli LEFT JOIN tb_registrasi 
         ON tb_dokter.kd_regist=tb_registrasi.kd_regist")->result_array();
     }
+    public function linkkonsul(){
+
+        return $this->db->query("SELECT * FROM chat JOIN tb_keluhan ON chat.send_to = tb_keluhan.no_rm
+        JOIN tb_pasien ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien 
+        LEFT JOIN tb_dokter_poli ON tb_keluhan.kd_dok_pol = tb_dokter_poli.kd_dok_pol 
+        LEFT JOIN tb_dokter ON tb_dokter_poli.no_praktek = tb_dokter.no_praktek 
+        LEFT JOIN tb_poli ON tb_dokter_poli.kd_poli = tb_poli.kd_poli 
+        LEFT JOIN tb_registrasi ON tb_dokter.kd_regist=tb_registrasi.kd_regist ")->result_array();
+    }
     
 	function hapus_data($id){
        
@@ -58,7 +67,10 @@ class Konsul_model extends CI_Model
     public function konsuls($cari){
 
         return $this->db->query('SELECT * FROM tb_keluhan JOIN tb_pasien 
-        ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien LEFT JOIN tb_dokter 
-        ON tb_keluhan.no_praktek = tb_dokter.no_praktek where tb_keluhan.no_rm = "'.$cari.'"')->result_array();
+        ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien LEFT JOIN tb_dokter_poli 
+        ON tb_keluhan.kd_dok_pol = tb_dokter_poli.kd_dok_pol LEFT JOIN tb_dokter 
+        ON tb_dokter_poli.no_praktek = tb_dokter.no_praktek LEFT JOIN tb_poli
+        ON tb_dokter_poli.kd_poli = tb_poli.kd_poli LEFT JOIN tb_registrasi 
+        ON tb_dokter.kd_regist=tb_registrasi.kd_regist WHERE tb_keluhan.no_rm = "'.$cari.'"')->result_array();
     }
 }

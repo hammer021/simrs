@@ -64,6 +64,7 @@ class Admin extends CI_Controller
 		}else{
 			$data['listdokter'] = $this->Dokter_model->tampil_datadokter();
 			$data['konsul'] = $this->Konsul_model->konsul();
+			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
 		}
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
@@ -124,7 +125,7 @@ class Admin extends CI_Controller
 					'no_praktek '    		=> $no_praktek,
 					'kd_poli'          		=> $kd_poli,
 					'startwaktu'         	=> $buka,
-					'endwaktu'         		=> $buka,
+					'endwaktu'         		=> $tutup,
 					'senin'         		=> $senin,
 					'selasa'         		=> $selasa,
 					'rabu'         			=> $rabu,
@@ -148,7 +149,57 @@ class Admin extends CI_Controller
 			echo "<script>window.location='" . site_url('admin/jadwalDokter') . "';</script>";
 		
 	}
+	public function update_jadwal_dokter()
+	{
+		$no_praktek = $this->input->post('no_praktek');
+		$kd_dok_pol = $this->input->post('kd_dok_pol');
+		$startwaktu = $this->input->post('startwaktu');
+		$endwaktu = $this->input->post('endwaktu');
+		$senin = $this->input->post('senin');
+		$selasa = $this->input->post('selasa');
+		$rabu = $this->input->post('rabu');
+		$kamis = $this->input->post('kamis');
+		$jumat = $this->input->post('jumat');
+		$sabtu = $this->input->post('sabtu');
+		$minggu = $this->input->post('minggu');
+		if ($no_praktek!==null) {
+			$where = array(
+				'no_praktek'          		=> $no_praktek,
+				'kd_dok_pol'          		=> $kd_dok_pol
+			);
+			$data = array(
+				
+				
+				'startwaktu'         	=> $startwaktu,
+				'endwaktu'         		=> $endwaktu,
+				'senin'         		=> $senin,
+				'selasa'         		=> $selasa,
+				'rabu'         			=> $rabu,
+				'kamis'         		=> $kamis,
+				'jumat'         		=> $jumat,
+				'sabtu'         		=> $sabtu,
+				'minggu'         		=> $minggu
+				
+			);
+			$this->Dokter_model->update_data($where,$data, 'tb_dokter_poli');
 
+			if ($this->db->affected_rows() > 0) {
+				echo "<script>alert('data Berhasil Di simpan');</script>";
+			}
+			echo "<script>window.location='" . site_url('admin/jadwalDokter') . "';</script>";
+		} else {
+			$error = array('error' => $this->upload->display_errors());
+			echo "<script>alert(" . $error . ");</script>";
+		}
+		
+		echo "<script>window.location='" . site_url('admin/jadwalDokter') . "';</script>";
+
+	}
+	public function hapusjadwaldokter($kd_dok_pol)
+	{
+		$this->Dokter_model->hapus_data($kd_dok_pol);
+		redirect('admin/jadwalDokter');
+	}
 	public function cek()
 	{
 		$this->load->view('auth/aktivasi');
@@ -156,7 +207,8 @@ class Admin extends CI_Controller
 	}
 	public function update_konsul(){
 		$no_rm = $this->input->post('no_rm');
-		$no_praktek = $this->input->post('dokter');
+		$kd_dok_pol = $this->input->post('dokter');
+		$tgl_konsul = $this->input->post('tgl_konsul');
 		$link=$this->input->post('link');
 		$sendby = $this->session->userdata("kd_regist");
 		if(!empty($link)){
@@ -164,14 +216,15 @@ class Admin extends CI_Controller
 				'no_rm' => $no_rm
 			);
 			$data = array(
-				'no_praktek' => $no_praktek,
+				'kd_dok_pol' => $kd_dok_pol,
+				'jadwal_konsul' => $tgl_konsul,
 				'status' => "3"
 			);
 			$link = array(
 				'send_by' => $sendby,
 				'send_to' => $no_rm,
 				'message' => $link,
-				'status'=>"0"
+				'status'  =>"0"
 			);
 			$this->Konsul_model->update_data($where, $data, 'tb_keluhan');
 			$this->Konsul_model->input_data($link, 'chat');

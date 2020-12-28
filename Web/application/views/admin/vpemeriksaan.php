@@ -197,7 +197,7 @@ foreach ($konsul as $konn) {
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Edit Data Konsultasi</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Verifikasi Konsultasi</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -224,38 +224,8 @@ foreach ($konsul as $konn) {
 						<div class="form-group">
 							<label for="exampleFormControlTextarea1">Tanggal Kunjungan : <br><?php echo $konn['tgl_kunjungan'] ?></label>
 						</div>
-						<?php 
-						$praktek=$konn['no_praktek'];
-						if ($praktek==""){
-						?>
-						<div class="form-group">
-							<label for="exampleFormControlTextarea1">Dokter </label>
-							<select class="form-control" name="dokter" id="dokter">
-							<?php 
-							foreach($listdokter as $dok):
-							?>
-							<option value="<?php echo $dok->no_praktek?>"> <?php echo $dok->name?></option>
-							<?php 
-							endforeach;
-							?>
-							</select>	
-						</div>
-						<?php		
-						}
-						else{
-						?>
-						<div class="form-group">
-							<label for="exampleFormControlTextarea1">No Praktek Dokter </label>
-							<input class="form-control" name="no_praktek" id="praktek" value="<?php echo $konn['no_praktek'] ?>">
-						</div>
 						
-						<div class="form-group">
-							<label for="exampleFormControlTextarea1">Nama Dokter </label>
-							<input class="form-control" name="nama_dokter" id="nama_dokter" value="<?php echo $konn['name'] ?>">
-						</div>
-						<?php	
-						}
-						?>
+						
 						<div class="form-group">
 							<label for="jenis_kasus">Jenis Kasus :<br> <?php echo $konn['jenis_kasus'] ?></label>
 						</div>
@@ -263,7 +233,24 @@ foreach ($konsul as $konn) {
 						<div class="form-group">
 							<label for="jenis_kasus">Keluhan : <br> <?php echo $konn['keluhan'] ?></label>
 						</div>
-
+						
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Dokter </label>
+							<select class="form-control" name="dokter" id="dokter">
+							<?php 
+							foreach($listdokter as $dok):
+							?>
+							<option value="<?php echo $dok->kd_dok_pol?>"> <?php echo  '('.$dok->klinik.') '.$dok->name?>, Jam :
+							 <?php echo $dok->startwaktu.'-'.$dok->endwaktu?> </option>
+							<?php 
+							endforeach;
+							?>
+							</select>	
+						</div>
+						<div class="form-group">
+							<label for="tgl_konsul">Tanggal Konsultasi : </label>
+							<input class="form-control" type="date" id="tgl_konsul" name="tgl_konsul">
+						</div>
 						<div class="form-group">
 							<label for="jenis_kasus">Status : <?php $sts = $konn['status'];
 									if ($sts == 0){
@@ -302,7 +289,7 @@ foreach ($konsul as $konn) {
 <?php } 
 
 $no = 1;
-foreach ($konsul as $konn) {
+foreach ($linkkonsul as $konn) {
 ?>
 
 	<!-- Modal View -->
@@ -345,6 +332,13 @@ foreach ($konsul as $konn) {
 						<div class="form-group">
 							<label for="exampleFormControlTextarea1">Nama Dokter : <br> <?php echo $konn['name'] ?> </label>
 						</div>
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Poli : <br> <?php echo $konn['klinik'] ?> </label>
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Jadwal Konsul : <br>
+							 <?php echo $konn['jadwal_konsul'].', Jam :'.$konn['startwaktu'].'-'.$konn['endwaktu'] ?> </label>
+						</div>
 						
 						<div class="form-group">
 							<label for="jenis_kasus">Jenis Kasus :<br> <?php echo $konn['jenis_kasus'] ?></label>
@@ -355,7 +349,7 @@ foreach ($konsul as $konn) {
 						</div>
 
 						<div class="form-group">
-							<label for="jenis_kasus">Link : <br> <?php echo $konn['keluhan'] ?></label>
+							<label for="jenis_kasus">Link : <br> <?php echo $konn['message'] ?></label>
 						</div>
 
 						<div class="form-group">

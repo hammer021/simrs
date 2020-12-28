@@ -19,11 +19,12 @@ class Dokter_model extends CI_Model
 
   private $_table = "tb_dokter";
   private $_tableR = "tb_registrasi";
+  private $_tableJadwal = "tb_dokter_poli";
   function tampil_datadokter(){
 		return $this->db->query("SELECT * FROM tb_dokter_poli LEFT JOIN tb_dokter 
     ON tb_dokter_poli.no_praktek = tb_dokter.no_praktek LEFT JOIN tb_poli
     ON tb_dokter_poli.kd_poli = tb_poli.kd_poli LEFT JOIN tb_registrasi 
-    ON tb_dokter.kd_regist=tb_registrasi.kd_regist WHERE tb_registrasi.kd_role='2'")->result();
+    ON tb_dokter.kd_regist=tb_registrasi.kd_regist WHERE tb_registrasi.kd_role='2' ORDER BY tb_dokter_poli.kd_poli")->result();
   }
   function tampil_datadokter1(){
 		return $this->db->query("SELECT * FROM tb_dokter LEFT JOIN tb_registrasi 
@@ -52,6 +53,9 @@ class Dokter_model extends CI_Model
   }
   function hapus_data($id){
     return $this->db->delete($this->_table, array("kd_regist" => $id));
+  }
+  function hapus_data_jadwal($id){
+    return $this->db->delete($this->_tableJadwal, array("kd_dok_pol" => $id));
   }
   public function getById($id)
     {
