@@ -19,7 +19,7 @@ class Api_chat extends REST_Controller
         $hari = $this->Chat_m->getHari();
         $query = $this->Chat_m->getDataPasien($sana,$hari);
 
-        $pesan = $this->Chat_m->getPesanApi($sana,$sini);
+        $pesan = $this->Chat_m->getPesanApi($sana);
         $data = array_merge($pesan, $query);    
 
         if(!empty($query)){
