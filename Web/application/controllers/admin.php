@@ -281,6 +281,23 @@ class Admin extends CI_Controller
 				redirect('admin/hasilkonsul?error=001');
 				}
 			}
+			public function update_acc_konsul(){
+				$kd_konsul = $this->input->post('kd_konsul');
+				if(!empty($kd_konsul)){
+					$where = array(
+						'kd_konsul' => $kd_konsul
+					);
+					$data = array(
+						'status_kons' => "3"
+					);
+					
+					$this->Konsul_model->update_data1($where, $data, 'tb_konsul');
+					
+						redirect('admin/hasilkonsul');
+				}else{
+					redirect('admin/hasilkonsul?error=001');
+					}
+				}
 	public function update_dokter()
 	{
 		$no_praktek = $this->input->post('no_praktek1');

@@ -135,7 +135,7 @@
 															</div>
 														</div>
 													</div>
-													<button type="button" data-target="#view<?php echo $kons['no_rm'] ?>" data-toggle="modal" class="la la-eye"></button>
+													<button type="button" data-target="#view<?php echo $kons['kd_konsul'] ?>" data-toggle="modal" class="la la-eye"></button>
 													
 							<?php
 									}
@@ -160,7 +160,7 @@
 														</div>
 													</div>
 													
-													<button type="button" data-target="#<?php echo $kons['no_rm'] ?>" data-toggle="modal" class="la la-edit"></button>
+													<button type="button" data-target="#acc<?php echo $kons['kd_konsul'] ?>" data-toggle="modal" class="la la-edit"></button>
 							<?php
 									}
 									else if($sts == 3){?>
@@ -183,7 +183,7 @@
 															</div>
 														</div>
 													</div>
-													<button type="button" data-target="#view<?php echo $kons['no_rm'] ?>" data-toggle="modal" class="la la-eye"></button>
+													<button type="button" data-target="#view<?php echo $kons['kd_konsul'] ?>" data-toggle="modal" class="la la-eye"></button>
 							<?php
 									}
 									else {
@@ -214,12 +214,84 @@ $no = 1;
 foreach ($konsul as $konn) {
 ?>
 
+	<!-- Modal Update ACC -->
+	<div class="modal fade" id="acc<?php echo $konn['kd_konsul'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Verifikasi Konsultasi</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="post" action="<?= base_url('Admin/update_acc_konsul') ?>" enctype="multipart/form-data">
+					<div class="form-group">
+							<label for="biaya">Kode Konsultasi : <br> <h3><?php echo $konn['kd_konsul'] ?></h3></label>
+							<input type="hidden" id="kd_konsul" name ="kd_konsul" value="<?php echo $konn['kd_konsul'] ?>"> 
+							<input type="hidden" id="no_rm" name ="no_rm" value="<?php echo $konn['no_rm'] ?>">
+							<input type="hidden" id="kd_resep" name ="kd_resep" value="<?php echo $konn['kd_resep'] ?>"> 
+						</div>
+						<div class="form-group">
+							
+							<label for="exampleInputEmail1">Nomor Rekam Medis :<br/> <h3><?php echo $konn['no_rm'] ?></h3></label>
+						</div>
+						
+						<div class="form-group">
+							<label for="jenis_kasus">Pasien : <br><?php echo $konn['nama_pasien'] ?></label>
+						</div>
+
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Tanggal Konsultasi : <br><?php echo $konn['jadwal_konsul'] ?></label>
+						</div>
+						<div class="form-group">
+							<label for="biaya">Resep : <br> <?php echo $konn['resep'] ?></label>
+						</div>
+						<div class="form-group">
+							<label for="tgl_konsul">Biaya Resep :<br>Rp.  <?php echo $konn['harga_resep'] ?> </label>
+							
+						</div>
+						<div class="form-group">
+							<label for="tgl_konsul">Biaya Kirim :<br> Rp. <?php echo $konn['harga_kirim'] ?> </label>
+							
+						</div>
+						<div class="form-group">
+							<label for="tgl_konsul">Total Biaya :  <br> <b>Rp. <?php echo $konn['grand_total'] ?></b> </label>
+							
+						</div>
+						<div class="form-group">
+							<label for="foto_dokter">Bukti Pembayaran Total</label><br>
+							<center><img src="<?php echo base_url("assets/images/bukti_konsul/" . $konn['buktikonsul']) ?>" width="100px" height="100px">
+								<center><br>
+									
+						</div>
+						
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-danger">Konfirmasi</button>
+						</div>
+						
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- Model Update End -->
+<?php } 
+	
+	
+$no = 1;
+foreach ($konsul as $konn) {
+?>
+
 	<!-- Modal Update -->
 	<div class="modal fade" id="<?php echo $konn['kd_konsul'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Verifikasi Konsultasi</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Tambah Biaya Resep </h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -274,11 +346,11 @@ foreach ($konsul as $konn) {
 <?php } 
 
 $no = 1;
-foreach ($linkkonsul as $konn) {
+foreach ($konsul as $konn) {
 ?>
 
 	<!-- Modal View -->
-	<div class="modal fade" id="view<?php echo $konn['no_rm'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="view<?php echo $konn['kd_konsul'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -291,23 +363,32 @@ foreach ($linkkonsul as $konn) {
 					<form method="post" action="#" enctype="multipart/form-data">
 						<div class="form-group">
 							<input type="hidden" id="no_rm" name ="no_rm" value="<?php echo $konn['no_rm'] ?>"> 
+							<label for="exampleInputEmail1">Nomor Konsultasi :<br/> <h3><?php echo $konn['kd_konsul'] ?></h3></label></br>
 							<label for="exampleInputEmail1">Nomor Rekam Medis :<br/> <h3><?php echo $konn['no_rm'] ?></h3></label>
-						</div>
-						
-						<div class="form-group">
-							<label for="biaya">Biaya Konsultasi : <br>Rp. <?php echo $konn['harga'] ?></label>
-						</div>
-						<div class="form-group">
-							<label for="buktikeluhan">Bukti Pembayaran</label><br>
-							<center><img src="<?php echo base_url("assets/images/bukti_keluhan/" .$konn['buktikeluhan']) ?>" width="200px" height="200px">
-								<center>
 						</div>
 						<div class="form-group">
 							<label for="jenis_kasus">Pasien : <br><?php echo $konn['nama_pasien'] ?></label>
 						</div>
-
 						<div class="form-group">
-							<label for="exampleFormControlTextarea1">Tanggal Kunjungan : <br><?php echo $konn['tgl_kunjungan'] ?></label>
+							<label for="biaya">Resep : <br> <?php echo $konn['resep'] ?></label>
+						</div>
+						<div class="form-group">
+							<label for="biaya">Biaya Resep : <br>Rp. <?php echo $konn['harga_resep'] ?></label>
+						</div>
+						<div class="form-group">
+							<label for="biaya">Biaya Kirim : <br>Rp. <?php echo $konn['harga_kirim'] ?></label>
+						</div>
+						<div class="form-group">
+							<label for="biaya"><b>Total Biaya : <br>Rp. <?php echo $konn['grand_total'] ?></b></label>
+						</div>
+						<div class="form-group">
+							<label for="foto_dokter">Bukti Pembayaran Total</label><br>
+							<center><img src="<?php echo base_url("assets/images/bukti_konsul/" . $konn['buktikonsul']) ?>" width="100px" height="100px">
+								<center><br>
+									
+						</div>
+						<div class="form-group">
+							<label for="exampleFormControlTextarea1">Tanggal Konsultasi : <br><?php echo $konn['jadwal_konsul'] ?></label>
 						</div>
 						
 						<div class="form-group">
@@ -320,10 +401,6 @@ foreach ($linkkonsul as $konn) {
 						<div class="form-group">
 							<label for="exampleFormControlTextarea1">Poli : <br> <?php echo $konn['klinik'] ?> </label>
 						</div>
-						<div class="form-group">
-							<label for="exampleFormControlTextarea1">Jadwal Konsul : <br>
-							 <?php echo $konn['jadwal_konsul'].', Jam :'.$konn['startwaktu'].'-'.$konn['endwaktu'] ?> </label>
-						</div>
 						
 						<div class="form-group">
 							<label for="jenis_kasus">Jenis Kasus :<br> <?php echo $konn['jenis_kasus'] ?></label>
@@ -333,14 +410,12 @@ foreach ($linkkonsul as $konn) {
 							<label for="jenis_kasus">Keluhan : <br> <?php echo $konn['keluhan'] ?></label>
 						</div>
 
-						<div class="form-group">
-							<label for="jenis_kasus">Link : <br> <?php echo $konn['message'] ?></label>
-						</div>
+						
 
 						<div class="form-group">
-							<label for="jenis_kasus">Status : <?php $sts = $konn['status'];
+							<label for="jenis_kasus">Status : <?php $sts = $konn['status_kons'];
 									if ($sts == 0){
-											echo "Selesai";
+											echo "Resep Masuk";
 									}
 									else if($sts == 1){
 										echo "Belum Bayar";
