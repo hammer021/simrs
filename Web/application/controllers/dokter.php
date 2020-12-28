@@ -12,6 +12,7 @@ class Dokter extends CI_Controller
 
 	public function dashboard()
 	{
+		$data['riwayatp'] = $this->Dokter_model->pasien_terakhir();
 		$data['totpasien'] = $this->db->query("SELECT COUNT(tb_pasien.kd_pasien) AS jmlpasien FROM tb_pasien")->result_array();
 		$data['totdokter'] = $this->db->query("SELECT COUNT(tb_dokter.no_praktek) AS jmldokter FROM tb_dokter")->result_array();
 		$this->load->view('template/header');

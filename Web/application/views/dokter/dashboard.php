@@ -34,7 +34,7 @@
                 <div class="col-xl-3 col-lg-6 col-lg-12">
                     <div class="card pull-up ">
                         <div class="card-header">
-                            <h4 class="card-title">Best Doctor</h4>
+                            <h4 class="card-title">Riwayat Pasien</h4>
                             <a class="heading-elements-toggle">
                                 <i class="fa fa-ellipsis-v font-medium-3"></i>
                             </a>
@@ -50,127 +50,21 @@
                         </div>
                         <div class="card-content">
                             <div id="recent-buyers" class="media-list">
+                            <?php 
+                            foreach ($riwayatp as $rwyt){
+                            ?>
                                 <a href="#" class="media border-0">
-                                    <div class="media-left pr-1">
-                                        <span class="avatar avatar-md avatar-online">
-                                            <img class="media-object rounded-circle" src="<?php echo base_url(); ?>theme-assets/images/portrait/small/avatar-s-7.png" alt="Generic placeholder image">
-                                            <i></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body w-100">
-                                        <span class="list-group-item-heading">Kristopher Candy
+                                        <span class="list-group-item-heading"><?= $rwyt['nama_pasien'] ?>
 
                                         </span>
-                                        <ul class="list-unstyled users-list m-0 float-right">
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 1" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="<?php echo base_url(); ?>theme-assets/images/portfolio/portfolio-1.jpg" alt="Avatar">
-                                            </li>
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 2" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="<?php echo base_url(); ?>theme-assets/images/portfolio/portfolio-2.jpg" alt="Avatar">
-                                            </li>
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 3" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="<?php echo base_url(); ?>theme-assets/images/portfolio/portfolio-4.jpg" alt="Avatar">
-                                            </li>
-                                        </ul>
                                         <p class="list-group-item-text mb-0">
-                                            <span class="blue-grey lighten-2 font-small-3"> #INV-12332 </span>
+                                            <span class="blue-grey lighten-2 font-small-3" style="margin-left:30px;"> <?= $rwyt['no_rm'] ?> </span>
                                         </p>
                                     </div>
                                 </a>
-                                <a href="#" class="media border-0">
-                                    <div class="media-left pr-1">
-                                        <span class="avatar avatar-md avatar-away">
-                                            <img class="media-object rounded-circle" src="<?php echo base_url(); ?>theme-assets/images/portrait/small/avatar-s-8.png" alt="Generic placeholder image">
-                                            <i></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body w-100">
-                                        <span class="list-group-item-heading">Lawrence Fowler
-
-                                        </span>
-                                        <ul class="list-unstyled users-list m-0 float-right">
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 1" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="<?php echo base_url(); ?>theme-assets/images/portfolio/portfolio-5.jpg" alt="Avatar">
-                                            </li>
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 2" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="<?php echo base_url(); ?>theme-assets/images/portfolio/portfolio-6.jpg" alt="Avatar">
-                                            </li>
-                                        </ul>
-                                        <p class="list-group-item-text mb-0">
-                                            <span class="blue-grey lighten-2 font-small-3"> #INV-12333 </span>
-                                        </p>
-                                    </div>
-                                </a>
-                                <a href="#" class="media border-0">
-                                    <div class="media-left pr-1">
-                                        <span class="avatar avatar-md avatar-busy">
-                                            <img class="media-object rounded-circle" src="<?php echo base_url(); ?>theme-assets/images/portrait/small/avatar-s-9.png" alt="Generic placeholder image">
-                                            <i></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body w-100">
-                                        <span class="list-group-item-heading">Linda Olson
-
-                                        </span>
-                                        <ul class="list-unstyled users-list m-0 float-right">
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 1" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="<?php echo base_url(); ?>theme-assets/images/portfolio/portfolio-2.jpg" alt="Avatar">
-                                            </li>
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 2" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="<?php echo base_url(); ?>theme-assets/images/portfolio/portfolio-5.jpg" alt="Avatar">
-                                            </li>
-                                        </ul>
-                                        <p class="list-group-item-text mb-0">
-                                            <span class="blue-grey lighten-2 font-small-3"> #INV-12334 </span>
-                                        </p>
-                                    </div>
-                                </a>
-                                <a href="#" class="media border-0">
-                                    <div class="media-left pr-1">
-                                        <span class="avatar avatar-md avatar-online">
-                                            <img class="media-object rounded-circle" src="<?php echo base_url(); ?>theme-assets/images/portrait/small/avatar-s-10.png" alt="Generic placeholder image">
-                                            <i></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body w-100">
-                                        <span class="list-group-item-heading">Roy Clark
-
-                                        </span>
-                                        <ul class="list-unstyled users-list m-0 float-right">
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 1" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="<?php echo base_url(); ?>theme-assets/images/portfolio/portfolio-6.jpg" alt="Avatar">
-                                            </li>
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 2" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="<?php echo base_url(); ?>theme-assets/images/portfolio/portfolio-1.jpg" alt="Avatar">
-                                            </li>
-                                        </ul>
-                                        <p class="list-group-item-text mb-0">
-                                            <span class="blue-grey lighten-2 font-small-3"> #INV-12335 </span>
-                                        </p>
-                                    </div>
-                                </a>
-                                <a href="#" class="media border-0">
-                                    <div class="media-left pr-1">
-                                        <span class="avatar avatar-md avatar-online">
-                                            <img class="media-object rounded-circle" src="<?php echo base_url(); ?>theme-assets/images/portrait/small/avatar-s-11.png" alt="Generic placeholder image">
-                                            <i></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body w-100">
-                                        <span class="list-group-item-heading">Kristopher Candy
-
-                                        </span>
-                                        <ul class="list-unstyled users-list m-0 float-right">
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Product 1" class="avatar avatar-sm pull-up">
-                                                <img class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" src="<?php echo base_url(); ?>theme-assets/images/portfolio/portfolio-5.jpg" alt="Avatar">
-                                            </li>
-                                        </ul>
-                                        <p class="list-group-item-text mb-0">
-                                            <span class="blue-grey lighten-2 font-small-3"> #INV-12336 </span>
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
+                            <?php 
+                            }    
+                            ?>
                         </div>
                     </div>
                 </div>

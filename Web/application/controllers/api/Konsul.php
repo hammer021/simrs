@@ -457,4 +457,22 @@ class Konsul extends REST_Controller {
             $this->response($message, REST_Controller::HTTP_NOT_FOUND);
         }
     }
+
+    function dashboard_get(){
+        
+    $query = $this->db->query("SELECT COUNT(tb_pasien.kd_pasien) as jumlah_pasien, (select COUNT(tb_keluhan.no_rm) from tb_keluhan where tb_keluhan.status ='1') as jumlah_periksa_1, (select COUNT(tb_konsul.no_rm) from tb_konsul where tb_konsul.status ='1') as jumlah_obat_1 FROM `tb_pasien` JOIN tb_keluhan ON tb_pasien.kd_pasien = tb_keluhan.kd_pasien join tb_konsul on tb_keluhan.no_rm = tb_konsul.no_rm")->result_array();    
+        if(!empty($query)){
+            $message = [
+                'status' => TRUE,
+                'data'   => $query,
+            ];
+            $this->response($message, REST_Controller::HTTP_OK);
+        }else{
+            $message = [
+                'status' => FALSE,
+                'message' => "No Rm tidak ditemukan"
+            ];
+            $this->response($message, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
 }
