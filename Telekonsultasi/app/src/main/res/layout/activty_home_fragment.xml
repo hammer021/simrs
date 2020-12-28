@@ -123,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:text="Jumlah pembayaran Konsultasi dengan Status Belum Bayar"
                         android:layout_marginTop="20dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@android:color/white"
                         android:gravity="center"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"

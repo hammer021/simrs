@@ -1,10 +1,19 @@
 package com.example.telekonsultasi.model;
 
 public class ModalObat {
+    private String no_rm;
     private String nama_pasien;
     private String tgl_kunjungan;
     private String harga;
     private String status;
+
+    public String getNo_rm() {
+        return no_rm;
+    }
+
+    public void setNo_rm(String no_rm) {
+        this.no_rm = "Nomor Rekam Medis : " + no_rm;
+    }
 
     public String getNama_pasien() {
         return nama_pasien;

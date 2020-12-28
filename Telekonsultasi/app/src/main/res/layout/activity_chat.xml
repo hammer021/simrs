@@ -8,13 +8,13 @@
     android:id="@+id/chatactivity"
     android:background="@drawable/background_chat_full">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/fotodokter"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/profiladmin"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,23 +22,25 @@
         android:id="@+id/namadokterchat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="Dr."
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/fotodokter"
-        app:layout_constraintStart_toEndOf="@+id/fotodokter"
-        app:layout_constraintTop_toTopOf="@+id/fotodokter" />
+        android:text="Dr. Aziz"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/putih"
+        app:layout_constraintEnd_toEndOf="@+id/fotodokter"
+        app:layout_constraintStart_toStartOf="@+id/fotodokter"
+        app:layout_constraintTop_toBottomOf="@+id/fotodokter" />
 
     <TextView
-        android:id="@+id/namapolichat"
+        android:id="@+id/nopraktekdokter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Poli"
-        android:layout_marginTop="1dp"
-        android:textSize="12sp"
-        android:layout_marginStart="15dp"
-        app:layout_constraintStart_toEndOf="@+id/fotodokter"
+        android:text="NRP021232942"
+        android:textSize="14sp"
+        android:textColor="@color/putih"
+        app:layout_constraintEnd_toEndOf="@+id/namadokterchat"
+        app:layout_constraintStart_toStartOf="@+id/namadokterchat"
         app:layout_constraintTop_toBottomOf="@+id/namadokterchat" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
@@ -62,45 +64,87 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="375dp"
+                    android:id="@+id/namapolichat"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:fontFamily="@font/clemente_light"
-                    android:gravity="center"
-                    android:textColor="@android:color/black"
-                    android:text="Silahkan Klink Button di bawah untuk melakukan Video Conference sesuai waktu yang sudah di tentukan."
+                    android:layout_marginTop="20dp"
+                    android:text="Poli Umum"
                     android:textSize="16sp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/background1"
                     android:textStyle="bold"
+                    android:gravity="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/txthari"
+                <ImageView
+                    android:id="@+id/imagelogonyatele"
                     android:layout_width="wrap_content"
+                    android:layout_marginTop="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/arial_narrow"
+                    android:background="@drawable/logotele"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/namapolichat"/>
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="375dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/clemente_light"
                     android:gravity="center"
-                    android:text="Hari"
-                    android:textSize="20sp"
+                    android:text="Silahkan Klink tombol di bawah"
+                    android:textColor="@color/fontabu"
+                    android:textSize="14sp"
+                    android:layout_marginTop="17dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imagelogonyatele" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="375dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/clemente_light"
+                    android:gravity="center"
+                    android:text="untuk melakukan Konsultasi, sesuai waktu yang tertera."
+                    android:textColor="@color/fontabu"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
                 <TextView
+                    android:id="@+id/txthari"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="125dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/arial_narrow"
+                    android:gravity="center"
+                    android:textColor="@color/background1"
+                    android:text="SENIN, "
+                    android:textAllCaps="true"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+                <TextView
                     android:id="@+id/txtwaktu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/arial_narrow"
                     android:gravity="center"
-                    android:text="Waktu"
+                    android:text="17:20 - 20:20"
+                    android:textColor="@color/background1"
+                    android:layout_marginStart="5dp"
                     android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txthari" />
+                    app:layout_constraintBottom_toBottomOf="@+id/txthari"
+                    app:layout_constraintStart_toEndOf="@+id/txthari"
+                    app:layout_constraintTop_toTopOf="@+id/txthari" />
 
                 <Button
                     android:id="@+id/btnlink"
@@ -108,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/stylebutton1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="15dp"
                     android:text="Video Conference"
                     android:textAllCaps="false"
                     android:textColor="@color/putih"

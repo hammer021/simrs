@@ -22,6 +22,7 @@ import com.example.telekonsultasi.model.ModalObat;
 import com.example.telekonsultasi.model.ModalPeriksa;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class NotificationActivity extends AppCompatActivity {
         mKdRegist = authdataa.getKodeUser();
 
         loadPeriksa();
+        loadResep();
     }
 
     private void loadPeriksa() {
@@ -107,6 +109,58 @@ public class NotificationActivity extends AppCompatActivity {
                     startActivity(detail);
                     finish();
                 }
+            }
+        });
+    }
+
+    private void loadResep(){
+        StringRequest resep = new StringRequest(Request.Method.GET, ServerApi.URL_GETPERIKSA, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray data = jsonObject.getJSONArray("data");
+
+                    item2 = new ArrayList<>();
+                    for (int i = 0; i < data.length(); i++) {
+                        ModalObat modalObat = new ModalObat();
+                        JSONObject datanya = data.getJSONObject(i);
+                        modalObat.setNama_pasien(datanya.getString("nama_pasien"));
+                        modalObat.setNo_rm(datanya.getString("no_rm"));
+                        modalObat.setTgl_kunjungan(datanya.getString("tgl_kunjungan"));
+                        modalObat.setHarga(datanya.getString("harga"));
+                        modalObat.setStatus(datanya.getString("status"));
+                        item2.add(modalObat);
+                    }
+                    setupListView2();
+                } catch (JSONException e) {
+                    Toast.makeText(NotificationActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(NotificationActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(resep);
+    }
+
+    private void setupListView2() {
+        adapterObat = new AdapterObat(this, item2);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerViewObat.setLayoutManager(layoutManager);
+        recyclerViewObat.setAdapter(adapterObat);
+
+        adapterObat.setListener(new AdapterPeriksa.OnHistoryClickListener() {
+            @Override
+            public void onClick(int position) {
+                ModalObat modalObat = item2.get(position);
+                Toast.makeText(NotificationActivity.this, modalObat.getNo_rm(), Toast.LENGTH_LONG).show();
+                    Intent detail = new Intent(NotificationActivity.this, UploadPeriksaActivity.class);
+                    detail.putExtra("no_rm", modalObat.getNo_rm());
+                    startActivity(detail);
+                    finish();
             }
         });
     }
