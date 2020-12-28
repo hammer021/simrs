@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/chat.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>theme-assets/css/custom1.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/d0d4d04864.js" crossorigin="anonymous"></script>
     <!-- END Custom CSS-->
   </head>
@@ -36,7 +38,7 @@
           <div class="collapse navbar-collapse show" id="navbar-mobile">
             <ul class="nav navbar-nav mr-auto float-left">
               <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
-              <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
+              <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#" id="maximize"><i onclick="closeNav()" class="ficon ft-maximize"></i></a></li>
               <?php 
               if(strpos($_SERVER['REQUEST_URI'], "dashboard") !== false){
               }else{

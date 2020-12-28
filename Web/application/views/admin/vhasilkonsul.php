@@ -26,19 +26,35 @@
 		<div class="card">
 			<div class="card-header">
 				<h4 class="card-title">Hasil Konsultasi</h4>
-				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Pilih Status
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" name="status" id="status">
+						
+						<a class="dropdown-item" href="<?= base_url('Admin/filterhasilkonsul/0') ?>">Resep Masuk</a>
+						<a class="dropdown-item" href="<?= base_url('Admin/filterhasilkonsul/1') ?>">Belum Bayar</a>
+						<a class="dropdown-item" href="<?= base_url('Admin/filterhasilkonsul/2') ?>">Sudah Bayar</a>
+						<a class="dropdown-item" href="<?= base_url('Admin/filterhasilkonsul/3') ?>">Sudah di Verifikasi</a>
+					</div>
+					
+				</div>
 				<div class="heading-elements">
 					<ul class="list-inline mb-0">
 						<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-						<li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+						<li><a data-action="reload" id="reload"><i class="ft-rotate-cw"></i></a></li>
 						<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-						<li><a data-action="close"><i class="ft-x"></i></a></li>
 					</ul>
 				</div>
 			</div>
+			<script>
+				$('#reload').click(function(event){ 
+					$("#table").load(location.href + " #table");
+				}); 
+			</script>
 			<div class="card-content collapse show">
 				<div class="table-responsive">
-					<table class="table">
+					<table class="table" id="table">
 						<thead class="thead-dark">
 							<tr>
 								<th scope="col">No</th>

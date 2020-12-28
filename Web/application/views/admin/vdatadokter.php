@@ -25,20 +25,24 @@
 					<div class="card">
 						<div class="card-header">
 						<a href="#"><button style="float:left;margin-bottom:10px;" type="button" data-target="#tambah" data-toggle="modal" class="btn btn-primary">Tambah Data Dokter</button></a>
-							<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 							<div class="heading-elements">
 								<ul class="list-inline mb-0">
 									<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-									<li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+									<li><a data-action="reload" id="reload"><i class="ft-rotate-cw"></i></a></li>
 									<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
 								</ul>
+								<script>
+									$('#reload').click(function(event){ 
+										$("#table").load(location.href + " #table");
+									}); 
+								</script>
 							</div>
 						</div>
 						<div class="card-content collapse show">
 							<!-- <p><span class="text-bold-600"><button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Data Dokter</button></span></p> -->
 							<br>
 							<div class="table-responsive">
-								<table class="table">
+								<table class="table" id="table">
 									<thead class="thead-dark" align="center">
 										<tr>
 											<th>No</th>

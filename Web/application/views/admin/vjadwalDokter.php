@@ -29,16 +29,21 @@
 							<div class="heading-elements">
 								<ul class="list-inline mb-0">
 									<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-									<li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+									<li><a data-action="reload" id="reload"><i class="ft-rotate-cw"></i></a></li>
 									<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
 								</ul>
 							</div>
 						</div>
+						<script>
+							$('#reload').click(function(event){ 
+								$("#table").load(location.href + " #table");
+							}); 
+						</script>
 						<div class="card-content collapse show">
 							<!-- <p><span class="text-bold-600"><button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Data Dokter</button></span></p> -->
 							<br>
 							<div class="table-responsive">
-								<table class="table">
+								<table class="table" id="table">
 									<thead class="thead-dark" align="center">
 										<tr>
 											<th>No</th>

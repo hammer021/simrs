@@ -32,13 +32,17 @@
 						<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
 						<li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
 						<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-						<li><a data-action="close"><i class="ft-x"></i></a></li>
 					</ul>
 				</div>
 			</div>
+			<script>
+				$('#reload').click(function(event){ 
+					$("#table").load(location.href + " #table");
+				}); 
+			</script>
 			<div class="card-content collapse show">
 				<div class="table-responsive">
-					<table class="table">
+					<table class="table" id="table">
 						<thead class="thead-dark">
 							<tr>
 								<th scope="col">No</th>

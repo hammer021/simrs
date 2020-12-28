@@ -44,7 +44,7 @@
                                 <ul class="list-inline mb-0">
                                     <li>
                                         <a data-action="reload">
-                                            <i class="ft-rotate-cw"></i>
+                                            <i class id="reload" ="ft-rotate-cw"></i>
                                         </a>
                                     </li>
                                 </ul>
@@ -55,7 +55,7 @@
                             <?php 
                             $no = 1;
                             foreach ($dokter as $dok) {  ?>
-                                <a href="#"  onclick="closeNav()"  data-bs-toggle="modal" id="cht<?=$no?>" data-bs-target="#chat<?= $no ?>" class="media border-0">
+                                <a href="#" class="media border-0">
                                     <div class="media-left pr-1">
                                         <span class="avatar avatar-md avatar-online">
                                             <img class="media-object rounded-circle" 
@@ -88,6 +88,11 @@
                             }?>
                             </div>
                         </div>
+                        <script>
+						$('#reload').click(function(event){ 
+							$("#doctors").load(location.href + " #doctors");
+						}); 
+					</script>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-3 col-md-6">
