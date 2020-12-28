@@ -122,23 +122,17 @@ foreach ($dataperiksa as $x) {
 						</div>
 						
 						<div class="form-group">
-							<label for="exampleFormControlTextarea1">No Praktek Dokter : <br> <?php echo $x['no_praktek'] ?> </label>
-						</div>
-						
-						<div class="form-group">
-							<label for="exampleFormControlTextarea1">Nama Dokter : <br> <?php echo $x['name'] ?> </label>
-						</div>
-						
-						<div class="form-group">
 							<label for="jenis_kasus">Jenis Kasus :<br> <?php echo $x['jenis_kasus'] ?></label>
 						</div>
 						
 						<div class="form-group">
 							<label for="jenis_kasus">Keluhan : <br> <?php echo $x['keluhan'] ?></label>
 						</div>
-
 						<div class="form-group">
-							<label for="jenis_kasus">Link : <br> <?php echo $x['keluhan'] ?></label>
+							<label for="jenis_kasus">Resep : <br> <?php echo $x['resep'] ?></label>
+						</div>
+						<div class="form-group">
+							<label for="jenis_kasus">Link : <br> <?php echo $x['message'] ?></label>
 						</div>
 
 						<div class="form-group">
