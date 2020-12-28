@@ -26,7 +26,19 @@
 		<div class="card">
 			<div class="card-header">
 				<h4 class="card-title">Pemeriksaan Konsultasi</h4>
-				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Pilih Status
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" name="status" id="status">
+						
+						<a class="dropdown-item" href="<?= base_url('Admin/filterpemeriksaan/4') ?>">Selesai</a>
+						<a class="dropdown-item" href="<?= base_url('Admin/filterpemeriksaan/1') ?>">Belum Bayar</a>
+						<a class="dropdown-item" href="<?= base_url('Admin/filterpemeriksaan/2') ?>">Sudah Bayar</a>
+						<a class="dropdown-item" href="<?= base_url('Admin/filterpemeriksaan/3') ?>">Sudah di Verifikasi</a>
+					</div>
+					
+				</div>
 				<div class="heading-elements">
 					<ul class="list-inline mb-0">
 						<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
