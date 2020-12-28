@@ -427,4 +427,34 @@ class Konsul extends REST_Controller {
             ], 404);
         }
     }
+
+    function selesai_post()
+    {
+        $no_rm = $this->post('no_rm');
+        $a = $this->db->select('tb_pasien.nama_pasien,tb_konsul.kd_konsul,tb_keluhan.tgl_kunjungan,tb_konsul.grand_total,tb_konsul.status,tb_konsul.grand_total,tb_resep.resep,tb_resep.kd_resep,tb_konsul.harga_kirim,tb_resep.harga_resep')    
+                ->from('tb_konsul')
+                    ->join('tb_keluhan', 'tb_konsul.no_rm = tb_keluhan.no_rm', 'left' )
+                    ->join('tb_pasien', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien' )
+                    ->join('tb_resep', 'tb_konsul.kd_resep = tb_resep.kd_resep' )
+                    ->group_start()
+                        ->where('tb_konsul.status = 1')
+                        ->where('tb_keluhan.no_rm = "'.$no_rm.'"')
+                    ->group_end()
+                ->get();
+        $query = $a->result_array();
+
+        if(!empty($query)){
+            $message = [
+                'status' => TRUE,
+                'data'   => $query,
+            ];
+            $this->response($message, REST_Controller::HTTP_OK);
+        }else{
+            $message = [
+                'status' => FALSE,
+                'message' => "No Rm tidak ditemukan"
+            ];
+            $this->response($message, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
 }
