@@ -531,7 +531,6 @@ class Admin extends CI_Controller
 
 				$data2 = array(
 				'no_praktek '   		=> $no_praktek,
-                'jadwal_praktek'        => $jadwal_praktek,
                 'kd_regist'         => $kode
 					
 				);
