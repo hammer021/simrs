@@ -65,6 +65,13 @@ class Chat_m extends CI_Model {
 		tb_keluhan.status,
 		tb_keluhan.kd_pasien, 
 		tb_dokter.no_praktek,
+		tb_dokter_poli.senin,
+		tb_dokter_poli.selasa,
+		tb_dokter_poli.rabu,
+		tb_dokter_poli.kamis,
+		tb_dokter_poli.jumat,
+		tb_dokter_poli.sabtu,
+		tb_dokter_poli.minggu,
 		tb_registrasi.kd_regist,
 		tb_registrasi.name, 
 		tb_registrasi.image,
@@ -92,7 +99,7 @@ class Chat_m extends CI_Model {
 		
 		WHERE tb_keluhan.no_rm ="'.$per.'" AND tb_dokter.no_praktek=
         (select no_praktek from tb_keluhan join tb_dokter_poli on tb_dokter_poli.kd_dok_pol = tb_keluhan.kd_dok_pol where tb_keluhan.no_rm="'.$per.'")
-		AND tb_dokter_poli.'.$har.' = 1 AND TIME("'.$date_now.'") BETWEEN tb_dokter_poli.startwaktu AND tb_dokter_poli.endwaktu');
+		AND, tb_dokter_poli.'.$har.' = 1 AND TIME("'.$date_now.'") BETWEEN tb_dokter_poli.startwaktu AND tb_dokter_poli.endwaktu');
 		$res = $data->result_array();
 		
 		if(empty($res)){
@@ -105,6 +112,13 @@ class Chat_m extends CI_Model {
 			tb_keluhan.status,
 			tb_keluhan.kd_pasien, 
 			tb_dokter.no_praktek,
+			tb_dokter_poli.senin,
+			tb_dokter_poli.selasa,
+			tb_dokter_poli.rabu,
+			tb_dokter_poli.kamis,
+			tb_dokter_poli.jumat,
+			tb_dokter_poli.sabtu,
+			tb_dokter_poli.minggu,
 			tb_registrasi.kd_regist,
 			tb_registrasi.name, 
 			tb_registrasi.image,

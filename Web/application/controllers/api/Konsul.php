@@ -331,7 +331,99 @@ class Konsul extends REST_Controller {
             // jika tidak ada parameter id
             $this->set_response([
                 'status' => false,
-                'message' => 'User could not be found'
+                'message' => 'Kode RM tidak terinput'
+            ], 404);
+        }
+    }
+
+    function selesai_get()
+    {
+        $no_rm = $this->get('no_rm');
+        $a = $this->db->select('tb_pasien.nama_pasien,tb_konsul.kd_konsul,tb_keluhan.tgl_kunjungan,tb_konsul.grand_total,tb_konsul.status')    
+                ->from('tb_konsul')
+                    ->join('tb_keluhan', 'tb_konsul.no_rm = tb_keluhan.no_rm', 'left' )
+                    ->join('tb_pasien', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien' )
+                    ->group_start()
+                        ->where('tb_konsul.status = 1')
+                        ->where('tb_keluhan.no_rm = "'.$no_rm.'"')
+                    ->group_end()
+                ->get();
+        $query = $a->result_array();
+
+        if(!empty($query)){
+            $message = [
+                'status' => TRUE,
+                'data'   => $query,
+            ];
+            $this->response($message, REST_Controller::HTTP_OK);
+        }else{
+            $message = [
+                'status' => FALSE,
+                'message' => "No Rm tidak ditemukan"
+            ];
+            $this->response($message, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function selesai_put()
+    {
+        if ($this->put('no_rm'))
+        {   
+            $no_rm = $this->put('no_rm');
+            
+            $config = uniqid().'.jpeg';
+            $path = './assets/images/bukti_konsul/'.$config;
+
+            $transaksi = $this->Api_model->getKonsul($no_rm);
+
+            
+            if($transaksi) {
+                if($this->put('buktikonsul')) {
+                    $buktikonsul = $this->put('buktikonsul');
+
+                    $data = array(
+                        'buktikonsul' => $config,
+                        'status' => "2"
+                        
+                    );
+                        if ($this->db->update('tb_konsul', $data, ['no_rm' => $no_rm])) {
+                            file_put_contents($path, base64_decode($buktikonsul));
+                            // jika berhasil
+                            $this->set_response([
+                                'status' => true,
+                                'message' => 'Berhasil Upload Bukti pembayaran, Silahkan tunggu konfirmasi dari Admin untuk tahap selanjutnya.'
+                            ], 200);
+                        } else {
+                            // jika gagal
+                            $this->set_response([
+                                'status' => false,
+                                'message' => 'Gagal'
+                            ], 401);
+                        }
+
+                    } else {
+                        
+                            // jika gagal
+                            $this->set_response([
+                                'status' => false,
+                                'message' => 'Gagal Upload Bukti Pembayaran'
+                            ], 401);
+                        
+                    }
+                    
+                } else {
+                    // jika data pengguna tidak ada
+                    $this->set_response([
+                        'status' => false,
+                        'message' => $no_rm
+                    ], 404);
+                }
+
+        } else {
+            // jika tidak ada parameter id
+            $this->set_response([
+                'status' => false,
+                'message' => 'Kode RM tidak terinput'
             ], 404);
         }
     }
