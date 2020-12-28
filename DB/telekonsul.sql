@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Des 2020 pada 15.39
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.2.34
+-- Generation Time: Dec 28, 2020 at 10:33 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `chat`
+-- Table structure for table `chat`
 --
 
 CREATE TABLE `chat` (
@@ -32,58 +33,59 @@ CREATE TABLE `chat` (
   `send_to` varchar(255) NOT NULL,
   `send_by` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` int(11) NOT NULL COMMENT '0 = belom dibaca, 1= sudah dibaca'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `chat`
+-- Dumping data for table `chat`
 --
 
 INSERT INTO `chat` (`chat_id`, `send_to`, `send_by`, `message`, `time`, `status`) VALUES
-(1, 'RGS00008', 'RGS00001', 'test', '2020-12-22 10:59:53', 0),
-(2, 'RGS00007', 'RGS00001', 'cek', '2020-12-22 11:00:25', 0),
+(1, 'RGS00008', 'RGS00001', 'test', '2020-12-22 10:59:53', 1),
+(2, 'RGS00007', 'RGS00001', 'cek', '2020-12-22 11:00:25', 1),
 (3, 'KONS0001', 'RGS00008', 'WA', '2020-12-26 08:43:37', 1),
 (4, 'KONS0004', 'RGS00001', 'WA2314', '2020-12-26 17:01:36', 0),
-(5, 'RGS00001', 'RGS00008', 'uyy', '2020-12-27 04:40:20', 0);
+(5, 'RGS00001', 'RGS00008', 'uyy', '2020-12-27 04:40:20', 1),
+(6, 'KONS0002', 'RGS00001', 'Link Zoom', '2020-12-28 16:37:45', 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `login_details`
+-- Table structure for table `login_details`
 --
 
 CREATE TABLE `login_details` (
   `login_details_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `last_activity` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `last_activity` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_type` enum('no','yes','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_dokter`
+-- Table structure for table `tb_dokter`
 --
 
 CREATE TABLE `tb_dokter` (
   `no_praktek` varchar(255) NOT NULL,
-  `kd_poli` varchar(255) NOT NULL,
   `kd_regist` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_dokter`
+-- Dumping data for table `tb_dokter`
 --
 
-INSERT INTO `tb_dokter` (`no_praktek`, `kd_poli`, `kd_regist`) VALUES
-('SK00121', '', 'RGS00008'),
-('Sknnwuu', '', 'RGS00007');
+INSERT INTO `tb_dokter` (`no_praktek`, `kd_regist`) VALUES
+('NRP111122', 'RGS00009'),
+('SK00121', 'RGS00008'),
+('Sknnwuu', 'RGS00007');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_dokter_poli`
+-- Table structure for table `tb_dokter_poli`
 --
 
 CREATE TABLE `tb_dokter_poli` (
@@ -102,16 +104,18 @@ CREATE TABLE `tb_dokter_poli` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_dokter_poli`
+-- Dumping data for table `tb_dokter_poli`
 --
 
 INSERT INTO `tb_dokter_poli` (`kd_dok_pol`, `no_praktek`, `kd_poli`, `startwaktu`, `endwaktu`, `senin`, `selasa`, `rabu`, `kamis`, `jumat`, `sabtu`, `minggu`) VALUES
-(1, 'SK00121', 'POL0001', '15:30:00', '19:30:00', 1, 0, 1, 0, 1, 0, 1);
+(1, 'SK00121', 'POL0001', '16:30:00', '20:30:00', 1, 1, 1, 1, 0, 0, 0),
+(2, 'NRP111122', 'POL0002', '17:00:00', '19:00:00', 0, 1, 0, 1, 1, 1, 0),
+(3, 'SK00121', 'POL0002', '13:01:00', '13:01:00', 1, 1, 1, 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_keluhan`
+-- Table structure for table `tb_keluhan`
 --
 
 CREATE TABLE `tb_keluhan` (
@@ -123,35 +127,46 @@ CREATE TABLE `tb_keluhan` (
   `harga` int(11) NOT NULL,
   `status` int(1) NOT NULL,
   `kd_pasien` varchar(255) NOT NULL,
-  `buktikeluhan` varchar(255) DEFAULT NULL
+  `buktikeluhan` varchar(255) DEFAULT NULL,
+  `jadwal_konsul` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_keluhan`
+-- Dumping data for table `tb_keluhan`
 --
 
-INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `kd_dok_pol`, `jenis_kasus`, `keluhan`, `harga`, `status`, `kd_pasien`, `buktikeluhan`) VALUES
-('KONS0001', '2020-12-05', 1, 'gatau', 'gatau', 231423, 3, 'PSN0001', 'bukti.jprg');
+INSERT INTO `tb_keluhan` (`no_rm`, `tgl_kunjungan`, `kd_dok_pol`, `jenis_kasus`, `keluhan`, `harga`, `status`, `kd_pasien`, `buktikeluhan`, `jadwal_konsul`) VALUES
+('KONS0001', '2020-12-05', 1, 'gatau', 'gatau', 231423, 3, 'PSN0001', 'bukti.jpeg', '0000-00-00'),
+('KONS0002', '2020-12-07', 3, 'gatau', 'gatau', 231423, 3, 'PSN0001', 'bukti.jpeg', '2020-12-29');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_konsul`
+-- Table structure for table `tb_konsul`
 --
 
 CREATE TABLE `tb_konsul` (
   `kd_konsul` varchar(255) NOT NULL,
   `no_rm` varchar(255) NOT NULL,
   `kd_resep` varchar(255) DEFAULT NULL,
-  `harga_kirim` int(11) NOT NULL,
-  `grand_total` int(11) NOT NULL,
-  `status` int(1) NOT NULL
+  `harga_kirim` int(11) DEFAULT NULL,
+  `grand_total` int(11) DEFAULT NULL,
+  `status_kons` int(1) NOT NULL,
+  `buktikonsul` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_konsul`
+--
+
+INSERT INTO `tb_konsul` (`kd_konsul`, `no_rm`, `kd_resep`, `harga_kirim`, `grand_total`, `status_kons`, `buktikonsul`) VALUES
+('KONS0001', 'KONS0002', 'RES0004', 2000, 22000, 3, 'default.jpeg'),
+('KONS0002', 'KONS0001', 'RES0005', 2000, 23000, 1, 'default.jpeg');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pasien`
+-- Table structure for table `tb_pasien`
 --
 
 CREATE TABLE `tb_pasien` (
@@ -178,7 +193,7 @@ CREATE TABLE `tb_pasien` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_pasien`
+-- Dumping data for table `tb_pasien`
 --
 
 INSERT INTO `tb_pasien` (`kd_pasien`, `kd_regist`, `nama_pasien`, `tempat_lahir`, `tgl_lahir`, `umur`, `keterbatasan`, `jenis_kelamin`, `warga_negara`, `status_perkawinan`, `pendidikan`, `agama`, `pekerjaan`, `no_nik`, `alamat_pasien`, `no_tlp`, `nama_ayah`, `nama_ibu`, `foto`, `hub_pasien`) VALUES
@@ -187,7 +202,7 @@ INSERT INTO `tb_pasien` (`kd_pasien`, `kd_regist`, `nama_pasien`, `tempat_lahir`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_poli`
+-- Table structure for table `tb_poli`
 --
 
 CREATE TABLE `tb_poli` (
@@ -196,7 +211,7 @@ CREATE TABLE `tb_poli` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_poli`
+-- Dumping data for table `tb_poli`
 --
 
 INSERT INTO `tb_poli` (`kd_poli`, `klinik`) VALUES
@@ -206,7 +221,7 @@ INSERT INTO `tb_poli` (`kd_poli`, `klinik`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_registrasi`
+-- Table structure for table `tb_registrasi`
 --
 
 CREATE TABLE `tb_registrasi` (
@@ -225,19 +240,20 @@ CREATE TABLE `tb_registrasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_registrasi`
+-- Dumping data for table `tb_registrasi`
 --
 
 INSERT INTO `tb_registrasi` (`kd_regist`, `name`, `email`, `image`, `password`, `kd_role`, `is_active`, `date_created`, `alamat`, `no_hp`, `tgl_lahir`, `tempat_lahir`) VALUES
 ('RGS00001', 'HamAdm', 'admin@gmail.com', 'picture-201221-e832699b80.jpg', '202cb962ac59075b964b07152d234b70', 1, 1, '2020-12-10 11:36:34', 'BWI', '89693556052', '2020-12-10', 'Banyuwangi'),
 ('RGS00003', 'User', 'user@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 3, 1, '2020-12-10 11:36:34', 'Jember', '896956789', '1999-07-21', 'Rumah Sakit'),
 ('RGS00007', 'Birril x Azz', 'hammerpmc021@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-17 02:22:40', '', '', '0000-00-00', ''),
-('RGS00008', 'Dr.Ham', 'dokter@gmail.com', 'picture-201221-1f41b0d861.jpg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-17 02:32:05', 'bwi', '08989841713', '2020-12-23', 'BWI');
+('RGS00008', 'Dr.Ham', 'dokter@gmail.com', 'picture-201221-1f41b0d861.jpg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-17 02:32:05', 'bwi', '08989841713', '2020-12-23', 'BWI'),
+('RGS00009', 'ALIGUS', 'dokter@gmail.com', 'picture-201228-3c501a272e.jpg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-28 02:09:14', '', '12121212', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_resep`
+-- Table structure for table `tb_resep`
 --
 
 CREATE TABLE `tb_resep` (
@@ -247,17 +263,17 @@ CREATE TABLE `tb_resep` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_resep`
+-- Dumping data for table `tb_resep`
 --
 
 INSERT INTO `tb_resep` (`kd_resep`, `resep`, `harga_resep`) VALUES
-('RES0002', 'beli diapotek', NULL),
-('RES0003', 'resep A1', NULL);
+('RES0004', 'Caviplex 10 biji', 20000),
+('RES0005', 'Caviplex 100 biji, ISOPLUUS', 21000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_role`
+-- Table structure for table `tb_role`
 --
 
 CREATE TABLE `tb_role` (
@@ -266,10 +282,11 @@ CREATE TABLE `tb_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_role`
+-- Dumping data for table `tb_role`
 --
 
 INSERT INTO `tb_role` (`kd_role`, `role`) VALUES
+(0, 'superadmin'),
 (1, 'admin'),
 (2, 'dokter'),
 (3, 'user');
@@ -277,7 +294,7 @@ INSERT INTO `tb_role` (`kd_role`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_access_menu`
+-- Table structure for table `user_access_menu`
 --
 
 CREATE TABLE `user_access_menu` (
@@ -287,7 +304,7 @@ CREATE TABLE `user_access_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user_access_menu`
+-- Dumping data for table `user_access_menu`
 --
 
 INSERT INTO `user_access_menu` (`id`, `kd_role`, `menu_id`) VALUES
@@ -300,7 +317,7 @@ INSERT INTO `user_access_menu` (`id`, `kd_role`, `menu_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_menu`
+-- Table structure for table `user_menu`
 --
 
 CREATE TABLE `user_menu` (
@@ -309,7 +326,7 @@ CREATE TABLE `user_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user_menu`
+-- Dumping data for table `user_menu`
 --
 
 INSERT INTO `user_menu` (`id`, `menu`) VALUES
@@ -320,7 +337,7 @@ INSERT INTO `user_menu` (`id`, `menu`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_sub_menu`
+-- Table structure for table `user_sub_menu`
 --
 
 CREATE TABLE `user_sub_menu` (
@@ -333,7 +350,7 @@ CREATE TABLE `user_sub_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user_sub_menu`
+-- Dumping data for table `user_sub_menu`
 --
 
 INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
@@ -349,7 +366,7 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_token`
+-- Table structure for table `user_token`
 --
 
 CREATE TABLE `user_token` (
@@ -361,7 +378,7 @@ CREATE TABLE `user_token` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user_token`
+-- Dumping data for table `user_token`
 --
 
 INSERT INTO `user_token` (`id_token`, `email`, `token`, `v_num`, `date_created`) VALUES
@@ -373,142 +390,142 @@ INSERT INTO `user_token` (`id_token`, `email`, `token`, `v_num`, `date_created`)
 --
 
 --
--- Indeks untuk tabel `chat`
+-- Indexes for table `chat`
 --
 ALTER TABLE `chat`
   ADD PRIMARY KEY (`chat_id`),
   ADD KEY `send_by` (`send_by`);
 
 --
--- Indeks untuk tabel `login_details`
+-- Indexes for table `login_details`
 --
 ALTER TABLE `login_details`
   ADD PRIMARY KEY (`login_details_id`);
 
 --
--- Indeks untuk tabel `tb_dokter`
+-- Indexes for table `tb_dokter`
 --
 ALTER TABLE `tb_dokter`
   ADD PRIMARY KEY (`no_praktek`);
 
 --
--- Indeks untuk tabel `tb_dokter_poli`
+-- Indexes for table `tb_dokter_poli`
 --
 ALTER TABLE `tb_dokter_poli`
   ADD PRIMARY KEY (`kd_dok_pol`);
 
 --
--- Indeks untuk tabel `tb_keluhan`
+-- Indexes for table `tb_keluhan`
 --
 ALTER TABLE `tb_keluhan`
   ADD PRIMARY KEY (`no_rm`);
 
 --
--- Indeks untuk tabel `tb_konsul`
+-- Indexes for table `tb_konsul`
 --
 ALTER TABLE `tb_konsul`
   ADD PRIMARY KEY (`kd_konsul`);
 
 --
--- Indeks untuk tabel `tb_pasien`
+-- Indexes for table `tb_pasien`
 --
 ALTER TABLE `tb_pasien`
   ADD PRIMARY KEY (`kd_pasien`);
 
 --
--- Indeks untuk tabel `tb_poli`
+-- Indexes for table `tb_poli`
 --
 ALTER TABLE `tb_poli`
   ADD PRIMARY KEY (`kd_poli`);
 
 --
--- Indeks untuk tabel `tb_registrasi`
+-- Indexes for table `tb_registrasi`
 --
 ALTER TABLE `tb_registrasi`
   ADD PRIMARY KEY (`kd_regist`);
 
 --
--- Indeks untuk tabel `tb_resep`
+-- Indexes for table `tb_resep`
 --
 ALTER TABLE `tb_resep`
   ADD PRIMARY KEY (`kd_resep`);
 
 --
--- Indeks untuk tabel `tb_role`
+-- Indexes for table `tb_role`
 --
 ALTER TABLE `tb_role`
   ADD PRIMARY KEY (`kd_role`);
 
 --
--- Indeks untuk tabel `user_access_menu`
+-- Indexes for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user_menu`
+-- Indexes for table `user_menu`
 --
 ALTER TABLE `user_menu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user_sub_menu`
+-- Indexes for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user_token`
+-- Indexes for table `user_token`
 --
 ALTER TABLE `user_token`
   ADD PRIMARY KEY (`id_token`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `chat`
+-- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `login_details`
+-- AUTO_INCREMENT for table `login_details`
 --
 ALTER TABLE `login_details`
   MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_dokter_poli`
+-- AUTO_INCREMENT for table `tb_dokter_poli`
 --
 ALTER TABLE `tb_dokter_poli`
-  MODIFY `kd_dok_pol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `kd_dok_pol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_role`
+-- AUTO_INCREMENT for table `tb_role`
 --
 ALTER TABLE `tb_role`
-  MODIFY `kd_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `kd_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `user_access_menu`
+-- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `user_token`
+-- AUTO_INCREMENT for table `user_token`
 --
 ALTER TABLE `user_token`
   MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `chat`
+-- Constraints for table `chat`
 --
 ALTER TABLE `chat`
   ADD CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`send_by`) REFERENCES `tb_registrasi` (`kd_regist`);
