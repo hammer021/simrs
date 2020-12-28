@@ -17,6 +17,10 @@
           "><a href="<?php echo base_url(); ?>admin/pemeriksaan"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Pemeriksaan</span></a>
           </li>
           <li class="
+          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/hasilkonsul'){ echo 'active';}else { echo 'nav-item';}?>
+          "><a href="<?php echo base_url(); ?>admin/hasilkonsul"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Hasil Konsultasi</span></a>
+          </li>
+          <li class="
           <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/jadwalDokter'){ echo 'active';}else { echo 'nav-item';}?>
           "><a href="<?php echo base_url(); ?>admin/jadwalDokter"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Jadwal Dokter</span></a>
           </li>

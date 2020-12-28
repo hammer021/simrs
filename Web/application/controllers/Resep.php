@@ -44,7 +44,7 @@ class Resep extends CI_Controller
                     );
             $data2 = array(
                     'kd_resep'             => $kd_resep,
-                    'status'             => "0"
+                    'status_kons'             => "0"
                         
                     );
                 $this->Resep_model->input_data($data, 'tb_resep');

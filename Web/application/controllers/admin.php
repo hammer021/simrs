@@ -72,6 +72,23 @@ class Admin extends CI_Controller
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
+	public function hasilkonsul($page = "")
+	{
+		$isi = $this->input->post('konsul');
+
+		if($page == "periksa" && !empty($isi) ){
+			$data['konsul'] = $this->Konsul_model->konsuls($isi);
+		}else{
+			$data['listdokter'] = $this->Dokter_model->tampil_datadokter();
+			$data['konsul'] = $this->Konsul_model->konsul0();
+			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
+		}
+		$this->load->view('template/header');
+		$this->load->view('template/sidemenu');
+		$this->load->view('admin/vhasilkonsul', $data);
+		$this->load->view('template/footer');
+		$this->load->helper('url');
+	}
 	public function datadokter($page = "")
 	{
 		$isi = $this->input->post('dokter');
@@ -233,7 +250,37 @@ class Admin extends CI_Controller
 			redirect('admin/pemeriksaan?error=001');
 			}
 		}
-	
+		public function update_hasil_konsul(){
+			$kd_konsul = $this->input->post('kd_konsul');
+			$no_rm = $this->input->post('no_rm');
+			$kd_resep = $this->input->post('kd_resep');
+			$harga_resep = $this->input->post('harga_resep');
+			$harga_kirim = $this->input->post('harga_kirim');
+			$grand_total = $harga_resep + $harga_kirim;
+			if(!empty($kd_konsul)){
+				$where = array(
+					'kd_konsul' => $kd_konsul,
+					'no_rm' => $no_rm
+				);
+				$data = array(
+					'harga_kirim' => $harga_kirim,
+					'grand_total' => $grand_total,
+					'status_kons' => "1"
+				);
+				$whereresep = array(
+					'kd_resep' => $kd_resep
+				);
+				$dataresep = array(
+					'harga_resep' => $harga_resep
+				);
+				$this->Konsul_model->update_data1($where, $data, 'tb_konsul');
+				$this->Konsul_model->update_data1($whereresep, $dataresep, 'tb_resep');
+				
+					redirect('admin/hasilkonsul');
+			}else{
+				redirect('admin/hasilkonsul?error=001');
+				}
+			}
 	public function update_dokter()
 	{
 		$no_praktek = $this->input->post('no_praktek1');
