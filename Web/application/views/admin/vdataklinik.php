@@ -62,8 +62,8 @@
 												<td><?php echo $a->kd_poli ?></td>
 												<td><?php echo $a->klinik ?></td>
 
-												<td><a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
-													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<td><a href="" data-toggle="modal" data-target="#hapusModal<?= $a->kd_poli ?>"><button type="button" class="la la-trash-o"></button></a>&nbsp;
+													<div class="modal fade" id="hapusModal<?= $a->kd_poli ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">

@@ -73,12 +73,12 @@
                                                 <td><?php echo $e->tempat_lahir ?></td>
                                                 <td><?php echo $e->tgl_lahir?></td>
 												<td><img src="<?php echo base_url("assets/images/user/" . $e->image) ?>" width="100px" height="100px"></td>
-												<td><a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
-													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<td><a href="" data-toggle="modal" data-target="#hapusModal<?= $e->kd_regist ?>"><button type="button" class="la la-trash-o"></button></a>&nbsp;
+													<div class="modal fade" id="hapusModal<?= $e->kd_regist ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
-																	<h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk menghapus?</h5>
+																	<h5 class="modal-title" id="exampleModalLabel">Apakah Anda yakin untuk menghapus?<?= $e->name ?></h5>
 																	<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 																		<span aria-hidden="true">×</span>
 																	</button>
