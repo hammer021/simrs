@@ -61,4 +61,13 @@ class Api_model extends CI_Model
         $query = $a->result_array();
         return $query;
     }
+    public function getKonsul($no_rm)
+    {
+        $a = $this->db->select('*')    
+            ->from('tb_konsul')
+                    ->where('no_rm', $no_rm)
+            ->get();
+        $query = $a->result_array();
+        return $query;
+    }
 }
