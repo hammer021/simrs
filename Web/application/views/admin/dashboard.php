@@ -44,18 +44,18 @@
                                 <ul class="list-inline mb-0">
                                     <li>
                                         <a data-action="reload">
-                                            <i id="reload" class="ft-rotate-cw"></i>
+                                            <i class="ft-rotate-cw"></i>
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="card-content">
-                            <div id="doctors" class="media-list">
+                            <div id="recent-buyers" class="media-list">
                             <?php 
                             $no = 1;
                             foreach ($dokter as $dok) {  ?>
-                                <a href="#"   data-bs-toggle="modal" id="cht<?=$no?>" data-bs-target="#chat<?= $no ?>" class="media border-0">
+                                <a href="#"  onclick="closeNav()"  data-bs-toggle="modal" id="cht<?=$no?>" data-bs-target="#chat<?= $no ?>" class="media border-0">
                                     <div class="media-left pr-1">
                                         <span class="avatar avatar-md avatar-online">
                                             <img class="media-object rounded-circle" 
@@ -75,6 +75,8 @@
                                                 class="media-object rounded-circle no-border-top-radius no-border-bottom-radius" 
                                                 src="<?php echo base_url(); ?>./assets/images/dokter/default.jpg" alt="Avatar">
                                             </li>
+                                            
+                                            
                                         </ul>
                                         <p class="list-group-item-text mb-0">
                                             <span class="blue-grey lighten-2 font-small-3"><?= $dok->no_hp ;?> </span>
@@ -86,11 +88,6 @@
                             }?>
                             </div>
                         </div>
-                        <script>
-						$('#reload').click(function(event){ 
-							$("#doctors").load(location.href + " #doctors");
-						}); 
-					</script>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-3 col-md-6">

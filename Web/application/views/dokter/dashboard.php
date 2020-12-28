@@ -42,30 +42,23 @@
                                 <ul class="list-inline mb-0">
                                     <li>
                                         <a data-action="reload">
-                                            <i id="reload" class="ft-rotate-cw"></i>
+                                            <i class="ft-rotate-cw"></i>
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="card-content">
-                            <div id="recent-pasien" class="media-list">
-                                <?php foreach ($riwayatp as $rwyt){?>
-                                    <a href="#" class="media border-0">
-                                <div class="media-left pr-1">
-                                    <span class="avatar avatar-md avatar-online">
-                                        <img class="media-object rounded-circle" src="<?= base_url()?>assets/images/pasien/<?= $rwyt['foto'] ?>" alt="Generic placeholder image">
-                                        <i></i>
+                            <div id="recent-buyers" class="media-list">
+                            <?php 
+                            foreach ($riwayatp as $rwyt){
+                            ?>
+                                <a href="#" class="media border-0">
+                                        <span class="list-group-item-heading"><?= $rwyt['nama_pasien'] ?>
+
                                         </span>
-                                    </div>
-                                    <div class="media-body w-100">
-                                        <span class="list-group-item-heading"><?= $rwyt['nama_pasien'] ?> <span class="blue-grey font-small-2 lighten-2">( <?= $rwyt['no_rm'] ?> )</span></span>
-                                        <ul class="list-unstyled users-list m-0 float-right">
-                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="" class="avatar avatar-sm pull-up">
-                                            </li>
-                                        </ul>
                                         <p class="list-group-item-text mb-0">
-                                            <span class="blue-grey lighten-2 font-small-3"> <?= $rwyt['no_tlp'] ?> </span>
+                                            <span class="blue-grey lighten-2 font-small-3" style="margin-left:30px;"> <?= $rwyt['no_rm'] ?> </span>
                                         </p>
                                     </div>
                                 </a>
@@ -74,12 +67,6 @@
                             ?>
                         </div>
                     </div>
-                    <script>
-						$('#reload').click(function(event){ 
-							$("#recent-pasien").load(location.href + " #recent-pasien");
-						}); 
-					</script>
-                </div>
                 </div>
                 <div class="col-xl-4 col-lg-3 col-md-6">
                     <div class="card pull-up ecom-card-1 bg-white">
@@ -87,7 +74,7 @@
                             <h5 class="text-muted danger position-absolute p-1">Progress Stats</h5>
                             <div class="card">
                                 <center>
-                                    <img src="<?= base_url("assets/images/pasien.jpg") ?>" style="width: 16%" class="card-img-top">
+                                    <img src="<?= base_url("assets/images/pasien.jpg") ?>" style="width: 30%" class="card-img-top">
                                     <div class="card-body">
                                         <?php foreach ($totpasien as $row) {  ?>
                                             <h5 class="card-title font-weight-bold"><?= $row['jmlpasien'] ?></h5>
@@ -106,7 +93,7 @@
                             <h5 class="text-muted danger position-absolute p-1">Progress Stats</h5>
                             <div class="card">
                                 <center>
-                                    <img src="<?= base_url("assets/images/dokter.jpg") ?>" style="width: 20%" class="card-img-top">
+                                    <img src="<?= base_url("assets/images/dokter.jpg") ?>" style="width: 38%" class="card-img-top">
                                     <div class="card-body">
                                         <?php foreach ($totdokter as $row) {  ?>
                                             <h5 class="card-title font-weight-bold"><?= $row['jmldokter'] ?></h5>
@@ -179,5 +166,11 @@
                         } ?> 
 
 
+        <!-- Statistics -->
+
+        <!--/ Statistics -->
+    </div>
+</div>
+</div>
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 

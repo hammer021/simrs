@@ -29,20 +29,15 @@
 							<div class="heading-elements">
 								<ul class="list-inline mb-0">
 									<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-									<li><a data-action="reload" id="reload"><i class="ft-rotate-cw"></i></a></li>
+									<li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
 									<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
 								</ul>
-								<script>
-									$('#reload').click(function(event){ 
-										$("#table").load(location.href + " #table");
-									}); 
-								</script>
 							</div>
 						</div>
 						<br>
 						<div class="card-content collapse show">
 							<div class="table-responsive">
-								<table class="table" id="table">
+								<table class="table">
 									<thead class="thead-dark" align="center">
 										<tr>
 											<th>No</th>

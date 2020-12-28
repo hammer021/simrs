@@ -41,7 +41,8 @@
                     <!--/modal-->
         
 </div>
-
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 function closeNav() {
   document.getElementById("menu").style.width = "0";
@@ -49,7 +50,6 @@ function closeNav() {
   document.getElementById("nav").style.marginLeft= "0";
   document.getElementById("footer").style.marginLeft= "0";
   $(".navbar-header").hide();
-  $('#maximize').html('<i onclick="openNav()" class="ficon ft-maximize"></i>');
 }
 
 function openNav() {
@@ -58,7 +58,6 @@ function openNav() {
   document.getElementById("nav").removeAttribute('style');
   document.getElementById("footer").removeAttribute('style');
   $(".navbar-header").show();
-  $('#maximize').html('<i onclick="closeNav()" class="ficon ft-maximize"></i>');
 }
 
 			function insertData(){
