@@ -22,14 +22,10 @@
         <div class="content-body">
 <!-- Table head options start -->
 <div class="row">
-	<div class="col-9">
+	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
 				<h4 class="card-title"></h4>
-				<form class="form-inline active-pink-4">
-  					<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
-  						<i class="la la-search" aria-hidden="false"></i>
-				</form>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 				<div class="heading-elements">
 					<ul class="list-inline mb-0">

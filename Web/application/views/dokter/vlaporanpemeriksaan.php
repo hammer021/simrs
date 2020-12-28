@@ -26,11 +26,6 @@
 					<div class="card">
 						<div class="card-header">
 							<h4 class="card-title">
-								
-								<form class="form-inline active-pink-4">
-									<input class="form-control form-control-sm" type="text" placeholder="Search" aria-label="Search">
-									<i class="la la-search" aria-hidden="false"></i>
-								</form>
 							</h4>
 							<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 							<div class="heading-elements">
@@ -62,13 +57,13 @@
 										?>
 											<tr>
 
-												<td><?php echo $no++ ?></td>
-												<td><?php echo $u['no_rm'] ?></td>
-												<td><?php echo $u['tgl_kunjungan'] ?></td>
-												<td><?php echo $u['jenis_kasus'] ?></td>
-												<td><?php echo $u['keluhan'] ?></td>
-												<td><?php echo $u['nama_pasien'] ?></td>
-												<td><button type="button" data-target="#view<?php echo $u['no_rm'] ?>" data-toggle="modal" class="la la-eye"></button></td>
+												<td class="text-center"><?php echo $no++ ?></td>
+												<td class="text-center"><?php echo $u['no_rm'] ?></td>
+												<td class="text-center"><?php echo $u['tgl_kunjungan'] ?></td>
+												<td class="text-center"><?php echo $u['jenis_kasus'] ?></td>
+												<td class="text-center"><?php echo $u['keluhan'] ?></td>
+												<td class="text-center"><?php echo $u['nama_pasien'] ?></td>
+												<td class="text-center"><button type="button" data-target="#view<?php echo $u['no_rm'] ?>" data-toggle="modal" class="la la-eye"></button></td>
 											<?php } ?>
 											</tr>
 									</tbody>

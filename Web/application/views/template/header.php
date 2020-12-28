@@ -37,10 +37,14 @@
             <ul class="nav navbar-nav mr-auto float-left">
               <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
               <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
+              <?php 
+              if(strpos($_SERVER['REQUEST_URI'], "dashboard") !== false){
+              }else{
+              ?>
               <li class="nav-item dropdown navbar-search"><a class="nav-link dropdown-toggle hide" data-toggle="dropdown" href="#"><i class="ficon ft-search"></i></a>
                 <ul class="dropdown-menu">
                   <li class="arrow_box">
-                  <?php if (strpos($_SERVER['REQUEST_URI'], "datadokter") !== false){
+                  <?php if (strpos($_SERVER['REQUEST_URI'], "admin/datadokter") !== false){
 
                     echo '<form method="post" action="'.base_url('admin/datadokter/dokter').'">
                       <div class="input-group search-box">
@@ -50,7 +54,7 @@
                         </div>
                       </div>
                     </form>';
-                    }elseif (strpos($_SERVER['REQUEST_URI'], "dataklinik") !== false){
+                    }elseif (strpos($_SERVER['REQUEST_URI'], "admin/dataklinik") !== false){
                       echo '<form method="post" action="'.base_url('admin/dataklinik/klinik').'">
                       <div class="input-group search-box">
                         <div class="position-relative has-icon-right full-width">
@@ -59,7 +63,7 @@
                         </div>
                       </div>
                     </form>';
-                    }elseif (strpos($_SERVER['REQUEST_URI'], "datapasien") !== false){
+                    }elseif (strpos($_SERVER['REQUEST_URI'], "admin/datapasien") !== false){
                       echo '<form method="post" action="'.base_url('admin/datapasien/pasien').'">
                       <div class="input-group search-box">
                         <div class="position-relative has-icon-right full-width">
@@ -68,7 +72,7 @@
                         </div>
                       </div>
                     </form>';
-                    }elseif (strpos($_SERVER['REQUEST_URI'], "datauser") !== false) {
+                    }elseif (strpos($_SERVER['REQUEST_URI'], "admin/datauser") !== false) {
                       echo '<form method="post" action="'.base_url('admin/datauser/user').'">
                       <div class="input-group search-box">
                         <div class="position-relative has-icon-right full-width">
@@ -77,7 +81,7 @@
                         </div>
                       </div>
                     </form>';
-                  }elseif (strpos($_SERVER['REQUEST_URI'], "pemeriksaan") !== false) {
+                  }elseif (strpos($_SERVER['REQUEST_URI'], "admin/pemeriksaan") !== false) {
                     echo '<form method="post" action="'.base_url('admin/pemeriksaan/periksa').'">
                     <div class="input-group search-box">
                       <div class="position-relative has-icon-right full-width">
@@ -86,7 +90,36 @@
                       </div>
                     </div>
                   </form>';
-                    }?>
+                  //dokter search
+                  }elseif (strpos($_SERVER['REQUEST_URI'], "dokter/resep") !== false) {
+                    echo '<form method="post" action="'.base_url('dokter/resep/resep').'">
+                    <div class="input-group search-box">
+                      <div class="position-relative has-icon-right full-width">
+                        <input class="form-control" name="resep" id="search" type="text" placeholder="Cari Kode Resep">
+                        <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
+                      </div>
+                    </div>
+                  </form>';
+                  }elseif (strpos($_SERVER['REQUEST_URI'], "dokter/datapemeriksaan") !== false) {
+                    echo '<form method="post" action="'.base_url('dokter/datapemeriksaan/dperiksa').'">
+                    <div class="input-group search-box">
+                      <div class="position-relative has-icon-right full-width">
+                        <input class="form-control" name="konsul" id="search" type="text" placeholder="Cari No Rm">
+                        <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
+                      </div>
+                    </div>
+                  </form>';
+                  }elseif (strpos($_SERVER['REQUEST_URI'], "dokter/laporanpemeriksaan") !== false) {
+                    echo '<form method="post" action="'.base_url('dokter/laporanpemeriksaan/lperiksa').'">
+                    <div class="input-group search-box">
+                      <div class="position-relative has-icon-right full-width">
+                        <input class="form-control" name="konsul" id="search" type="text" placeholder="Cari No Rm">
+                        <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
+                      </div>
+                    </div>
+                  </form>';
+                    }
+                  }?>
                   </li>
                 </ul>
               </li>
