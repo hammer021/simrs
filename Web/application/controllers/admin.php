@@ -78,9 +78,36 @@ class Admin extends CI_Controller
 
 		if($page == "periksa" && !empty($isi) ){
 			$data['konsul'] = $this->Konsul_model->konsuls($isi);
+			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
+			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
 		}else{
 			$data['listdokter'] = $this->Dokter_model->tampil_datadokter();
 			$data['konsul'] = $this->Konsul_model->konsul0();
+			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
+		}
+		$this->load->view('template/header');
+		$this->load->view('template/sidemenu');
+		$this->load->view('admin/vhasilkonsul', $data);
+		$this->load->view('template/footer');
+		$this->load->helper('url');
+	}
+	public function filterhasilkonsul($page = "")
+	{
+		if(empty($page) ){
+			$data['listdokter'] = $this->Dokter_model->tampil_datadokter();
+			$data['konsul'] = $this->Konsul_model->konsul0();
+			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
+		}
+		else if ($page== "4"){
+			$page = "0";
+			$data['konsul'] = $this->Konsul_model->konsulfilter($page);
+			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
+			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
+		}
+		else{
+			
+			$data['konsul'] = $this->Konsul_model->konsulfilter($page);
+			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
 			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
 		}
 		$this->load->view('template/header');

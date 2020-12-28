@@ -32,7 +32,7 @@
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" name="status" id="status">
 						
-						<a class="dropdown-item" href="<?= base_url('Admin/filterhasilkonsul/0') ?>">Resep Masuk</a>
+						<a class="dropdown-item" href="<?= base_url('Admin/filterhasilkonsul/4') ?>">Resep Masuk</a>
 						<a class="dropdown-item" href="<?= base_url('Admin/filterhasilkonsul/1') ?>">Belum Bayar</a>
 						<a class="dropdown-item" href="<?= base_url('Admin/filterhasilkonsul/2') ?>">Sudah Bayar</a>
 						<a class="dropdown-item" href="<?= base_url('Admin/filterhasilkonsul/3') ?>">Sudah di Verifikasi</a>
