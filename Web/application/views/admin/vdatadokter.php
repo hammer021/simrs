@@ -135,7 +135,7 @@ foreach ($listdokter as $u) {
 						</div>
 						<div class="form-group">
 							<label for="exampleFormControlTextarea1">No Hp Dokter </label>
-							<input type="text" class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" value="<?php echo $u->no_hp ?>">
+							<input type="number" class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" value="<?php echo $u->no_hp ?>">
 						</div>
 						<div class="form-group">
 							<label for="foto_dokter">Foto</label><br>
@@ -192,7 +192,7 @@ foreach ($listdokter as $u) {
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlTextarea1">Nomo HP Dokter </label>
-						<input class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" rows="3">
+						<input type="number" class="form-control" name="no_hp_dokter" id="exampleFormControlTextarea1" rows="3">
 					</div>
 					<div class="form-group">
 						<label for="poli">Pilih Poli</label>
