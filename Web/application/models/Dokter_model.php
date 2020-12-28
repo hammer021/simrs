@@ -114,7 +114,7 @@ class Dokter_model extends CI_Model
   
   public function pasien_terakhir(){
     $noprktk = $this->session->userdata("kd_regist");
-    return  $this->db->query('SELECT tb_pasien.nama_pasien, tb_keluhan.no_rm 
+    return  $this->db->query('SELECT tb_pasien.nama_pasien, tb_keluhan.no_rm , tb_pasien.foto, tb_pasien.no_tlp
     FROM `tb_dokter_poli` 
     JOIN tb_dokter ON tb_dokter_poli.no_praktek = tb_dokter.no_praktek 
     JOIN tb_keluhan ON tb_dokter_poli.kd_dok_pol =tb_keluhan.kd_dok_pol 

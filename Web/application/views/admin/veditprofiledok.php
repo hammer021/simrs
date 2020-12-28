@@ -28,16 +28,11 @@
 				<h4 class="card-title">MY Profile</h4>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 				<div class="heading-elements">
-					<ul class="list-inline mb-0">
-						<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-						<li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-						<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-						<li><a data-action="close"><i class="ft-x"></i></a></li>
-					</ul>
 				</div>
 			</div>
 			<div class="card-content collapse show">
 				<div class="body">
+				<div class="container">
 					<?php 
 					foreach ($profile as $prof):
 					?>
@@ -55,11 +50,6 @@
 						<div class="form-group">
 						<label for="no_praktek">No Praktek :</label><br>
 							<input class="form-control" type="text" id="no_praktek" name = "no_praktek" value="<?php echo $prof->no_praktek ?>">
-						</div>
-
-						<div class="form-group">
-						<label for="jadwal_praktek">Jadwal Praktek :</label><br>
-							<input class="form-control" type="text" id="jadwal_praktek" name = "jadwal_praktek" value="<?php echo $prof->jadwal_praktek ?>">
 						</div>
 
 						<div class="form-group">
@@ -95,6 +85,7 @@
 							<button type="submit" class="btn btn-danger">Save</button>
 					</form>
 					<?php endforeach;?>
+					</div>
 				</div>
 			</div>
 		</div>
