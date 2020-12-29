@@ -48,7 +48,7 @@
 								<th scope="col">No</th>
 								<th scope="col">Kode Resep</th>
 								<th scope="col">Resep</th>
-								<th scope="col">Harga</th>
+								<th scope="col">Biaya</th>
 								<th scope="col">Action</th>
 							</tr>
 						</thead>
