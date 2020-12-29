@@ -23,10 +23,11 @@ class Api_chat extends REST_Controller
 
         if(!empty($query)){
             foreach($query as $q){ $indo_h = $q['hari'] = $this->Chat_m->getHari($q['hari']); }
+            $b[] = $q;
             if(!empty($pesan)){
                 $message = [
                     'status' => true,
-                    'data_chat' => $q
+                    'data_chat' => $b
                 ];
                 //$this->db->query('UPDATE chat SET status=1 where (send_by ="'.$sini.'" or send_to ="'.$sini.'") and (send_by ="'.$sana.'" or send_to ="'.$sana.'") order by time asc');
             }else{
@@ -49,7 +50,7 @@ class Api_chat extends REST_Controller
         $chat_id = $this->put('chat_id');
         $no_rm = $this->put('no_rm');
         $update_c = $this->db->query('UPDATE chat SET status=1 where chat_id = '.$chat.' order by time asc');
-        $update_k = $this->db->query('UPDATE tb_konsul SET status_kons=0 where no_rm = '.$no_rm.' order by time asc');
+        $update_k = $this->db->query('UPDATE tb_keluhan SET status=0 where no_rm = '.$no_rm.' order by time asc');
         if($update_c && $update_k){
             $message = [
                 'status' => true,
@@ -59,7 +60,7 @@ class Api_chat extends REST_Controller
             $message = [
                 'status' => false,
                 'pesan' => "Yha Error!"
-            ]
+            ];
         }
         $this->response($message, 200);
     }
