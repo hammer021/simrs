@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin_model extends CI_Model
-{
+{   private $_table = "tb_registrasi";
     public function getUserRoleById($role_id)
     {
         return $this->db->get_where('tb_role', ['id' => $role_id])->row_array();
