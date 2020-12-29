@@ -25,5 +25,14 @@ class Laporan extends CI_Controller
 		$this->load->view('laporan/laphasilkonsul', $data);
 		$this->load->view('templateLAP/footer');
 		$this->load->helper('url');
+    }
+    public function jadwaldokter()
+	{
+        $data['listdokter'] = $this->Dokter_model->tampil_datadokter();
+
+		$this->load->view('templateLAP/header');
+		$this->load->view('laporan/lapjadwaldokter', $data);
+		$this->load->view('templateLAP/footer');
+		$this->load->helper('url');
 	}
 }

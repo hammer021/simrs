@@ -34,6 +34,10 @@
 									<li><a data-action="reload" id="reload"><i class="ft-rotate-cw"></i></a></li>
 									<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
 								</ul>
+								<ul class="list-inline mb-0">
+						<li><a class="btn btn-primary" target ="_blank" href="<?= base_url('Laporan/jadwaldokter') ?>">CETAK</a></li>
+						
+					</ul>
 							</div>
 							<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
