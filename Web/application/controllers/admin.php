@@ -627,10 +627,7 @@ class Admin extends CI_Controller
 	}
 	public function dataadmin($page = "")
 	{
-		$admin['listadmin'] = $this->db->query(" SELECT tb_registrasi.kd_regist, tb_registrasi.name, 
-		tb_registrasi.email, tb_registrasi.alamat, tb_registrasi.no_hp, 
-		tb_registrasi.tgl_lahir, tb_registrasi.tempat_lahir, tb_registrasi.image FROM tb_registrasi WHERE tb_registrasi.kd_role=1")->result();
-
+		$admin['listadmin'] = $this->Admin_model->tampildata();
 		$this->load->view('template/header');
 		$this->load->view('template/sidemenu');
 		$this->load->view('admin/vdataadmin', $admin);
@@ -704,5 +701,77 @@ class Admin extends CI_Controller
 			}
 			echo "<script>window.location='" . site_url('admin/dataadmin') . "';</script>";
 		}
+	}
+	public function update_admin()
+	{
+		
+		$kd_regist = $this->input->post('kd_regist');
+		$nama = $this->input->post('name');
+		$email = $this->input->post('email');
+		$tgl_lahir = $this->input->post('tgl_lahir');
+		$tempat_lahir = $this->input->post('tempat_lahir');
+		$alamat = $this->input->post('alamat');
+		$no_hp = $this->input->post('no_hp');
+		$imgtarget = $this->input->post('image');
+		$file_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+		$target = ('assets/images/admin' . $imgtarget);
+
+		$config['upload_path']		=	'assets/images/dokter';
+		$config['allowed_types']	=	'jpg|png|jpeg';
+		$config['max_size']			=	2048;
+		$config['file_name']		=	'picture-' . date('ymd') . '-' . substr(md5(rand()), 0, 10);
+
+		echo $imgtarget;
+
+		$this->load->library('upload', $config);
+		if (@$_FILES['foto_dokter']['name'] != null) {
+			if ($this->upload->do_upload('foto_dokter')) {
+				if ($imgtarget != null) {
+
+					unlink($target);
+				}
+				//UPDATE tb_registrasi
+				$where = array(
+					'kd_regist' => $kd_regist
+				);
+				$data = array(
+					'name'          => $nama,
+					'email'         => $email,
+					'tgl_lahir'         => $tgl_lahir,
+					'tempat_lahir'         => $tempat_lahir,
+					'alamat'         => $alamat,
+					'image'         => $config['file_name'] . "." . $file_ext,
+					'no_hp'			=> $no_hp
+				);
+				$this->Admin_model->update_data($where, $data, 'tb_registrasi');
+				
+				redirect('admin/dataadmin');
+			}
+		} else {
+			$where = array(
+				'kd_regist' => $kd_regist
+			);
+
+
+			$data = array(
+				'name'          => $nama,
+					'email'         => $email,
+					'tgl_lahir'         => $tgl_lahir,
+					'tempat_lahir'         => $tempat_lahir,
+					'alamat'         => $alamat,
+					
+					'no_hp'			=> $no_hp
+			);
+			$this->Admin_model->update_data($where, $data, 'tb_registrasi');
+			
+
+			redirect('admin/dataadmin');
+		}
+	}
+
+	public function hapusadmin($id)
+	{
+		$this->Admin_model->hapus_data($id);
+		redirect('admin/dataadmin');
 	}
 }
