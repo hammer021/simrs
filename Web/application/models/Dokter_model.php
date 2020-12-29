@@ -54,9 +54,13 @@ class Dokter_model extends CI_Model
   function hapus_data($id){
     return $this->db->delete($this->_table, array("kd_regist" => $id));
   }
+  function hapus_data_jadwalperpraktek($id){
+    return $this->db->delete($this->_tableJadwal, array("no_praktek" => $id));
+  }
   function hapus_data_jadwal($id){
     return $this->db->delete($this->_tableJadwal, array("kd_dok_pol" => $id));
   }
+  
   public function getById($id)
     {
         return $this->db->get_where($this->_tableR, ["kd_regist" => $id])->row();
@@ -81,7 +85,7 @@ class Dokter_model extends CI_Model
     JOIN tb_dokter_poli ON tb_dokter_poli.kd_dok_pol = tb_keluhan.kd_dok_pol 
     LEFT JOIN tb_dokter ON tb_dokter_poli.no_praktek = tb_dokter.no_praktek  
     JOIN tb_pasien ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien 
-    WHERE  tb_konsul.kd_resep IS NULL AND tb_keluhan.status = '3' AND tb_dokter.kd_regist = '$noprktk'")->result_array();
+    WHERE  tb_konsul.kd_resep IS NULL AND tb_keluhan.status = '0' AND tb_dokter.kd_regist = '$noprktk'")->result_array();
 
   }
 

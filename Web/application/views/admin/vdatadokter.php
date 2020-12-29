@@ -77,7 +77,7 @@
 																</div>
 																<div class="modal-footer">
 																	<button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
-																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('Admin/hapusdokter/'. $u->kd_regist); ?>">Hapus</a>
+																	<a id="delete_link" class="btn btn-danger" href="<?php echo base_url('Admin/hapusdokter/'. $u->kd_regist.'/'.$u->no_praktek); ?>">Hapus</a>
 																</div>
 															</div>
 														</div>
