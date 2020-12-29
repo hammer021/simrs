@@ -125,7 +125,7 @@ foreach ($listadmin as $z) {
                     <form method="post" action="<?= base_url('Admin/update_admin') ?>" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" name="kd_regist" value="<?php echo $z->kd_regist ?>">
-                            <label for="exampleInputEmail1">Kode Admin : <h3><?php echo $z->kd_regist ?><h3</label>
+                            <label for="exampleInputEmail1">Kode Admin : <h3><?php echo $z->kd_regist ?></h3></label>
                             <input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $z->kd_regist ?>" name="kd_regist" aria-describedby="emailHelp">
                             </br>
                             <label for="exampleInputEmail1">Nama Admin</label>
