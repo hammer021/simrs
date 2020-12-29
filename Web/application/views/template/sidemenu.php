@@ -25,11 +25,18 @@
           "><a href="<?php echo base_url(); ?>admin/jadwalDokter"><i class="la la-medkit"></i><span class="menu-title" data-i18n="">Jadwal Dokter</span></a>
           </li>
           <li class="
-          <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datadokter' || $_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datapasien' || $_SERVER['REQUEST_URI'] == '/simrs/Web/admin/dataklinik'){ echo 'active has-sub';}else { echo 'nav-item has-sub'; } ?>
+          <?php 
+          $sess = $this->session->userdata("kd_role");
+          if($sess == 1){
+
+          }
+          else if($sess == 0){
+            if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datadokter' || $_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datapasien' || $_SERVER['REQUEST_URI'] == '/simrs/Web/admin/dataklinik'){ echo 'active has-sub';}else { echo 'nav-item has-sub'; } ?>
           "><a href="#"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Data</span></a>
             <ul class="menu-content" style="">
               <li class="
-              <?php if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datadokter'){ echo 'active';}else { }?>
+              <?php 
+              if ($_SERVER['REQUEST_URI'] == '/simrs/Web/admin/datadokter'){ echo 'active';}else { }?>
           "><a class="menu-item" href="<?php echo base_url(); ?>admin/datadokter">Data Dokter</a>
               </li>
               <li class=""><a class="menu-item" href="<?php echo base_url(); ?>admin/datapasien">Data Pasien</a>
@@ -38,7 +45,12 @@
               </li>
               <li class=""><a class="menu-item" href="<?php echo base_url(); ?>admin/datauser">Data User</a>
               </li>
-            </ul>
+            </ul><?php
+          }
+          else{
+
+          }
+          ?>
           </li>
         </ul>
       </div>

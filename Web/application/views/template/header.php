@@ -40,7 +40,7 @@
               <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
               <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#" id="maximize"><i onclick="closeNav()" class="ficon ft-maximize"></i></a></li>
               <?php 
-              if(strpos($_SERVER['REQUEST_URI'], "dashboard") !== false || strpos($_SERVER['REQUEST_URI'], "Profile") !== false){
+              if(strpos($_SERVER['REQUEST_URI'], "dashboard") !== false || strpos($_SERVER['REQUEST_URI'], "Profile") !== false) {
               }else{
               ?>
               <li class="nav-item dropdown navbar-search"><a class="nav-link dropdown-toggle hide" data-toggle="dropdown" href="#"><i class="ficon ft-search"></i></a>
@@ -126,6 +126,7 @@
                 </ul>
               </li>
             </ul>
+           
             <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"  data-bs-toggle="modal" id="cht" data-bs-target="#chat"  data-toggle="dropdown"><i class="ficon ft-mail" id="notip"></i></a>
               </li>
@@ -138,6 +139,12 @@
                       <img src="../assets/images/<?php echo $this->session->userdata("image"); ?>" alt="avatar">
                       <i></i></span></a>
                    <?php } 
+                   else if ($sess=="0"){
+                    ?> <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             
+                    <span class="avatar avatar-online">
+                    <img src="../assets/images/<?php echo $this->session->userdata("image"); ?>" alt="avatar">
+                    <i></i></span></a>
+                 <?php } 
                    else if ($sess=="2"){
                       ?><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             
                       <span class="avatar avatar-online">
@@ -157,6 +164,13 @@
                         alt="avatar"><span class="user-name text-bold-700 ml-1">
                           <?php echo $this->session->userdata("name"); ?></span></span></a>
                    <?php } 
+                  else if ($sess=="0"){
+                    ?> <a class="dropdown-item" href="#">
+                    <span class="avatar avatar-online">
+                      <img src="../assets/images/<?php echo $this->session->userdata("image"); ?>" 
+                      alt="avatar"><span class="user-name text-bold-700 ml-1">
+                        <?php echo $this->session->userdata("name"); ?></span></span></a>
+                 <?php } 
                    else if ($sess=="2"){
                       ?><a class="dropdown-item" href="#">
                       <span class="avatar avatar-online">
@@ -174,11 +188,16 @@
                       ?> <a class="dropdown-item" href="<?php echo base_url('Admin/profileadm')?>">
                       
                    <?php } 
+                   else if ($sess=="0"){
+                    ?> <a class="dropdown-item" href="<?php echo base_url('Admin/profileadm')?>">
+                    
+                 <?php } 
                    else if ($sess=="2"){
                       ?> <a class="dropdown-item" href="<?php echo base_url('Dokter/profiledok')?>">
                    <?php } ?>
                    
                     <i class="ft-user"></i> Edit Profile</a>
+
 
                     <?php
                     $sess = $this->session->userdata("kd_role");
@@ -186,6 +205,10 @@
                       ?> <a class="dropdown-item" href="<?php echo base_url('Profile/changepassadm')?>">
                       
                    <?php } 
+                   else if ($sess=="0"){
+                    ?> <a class="dropdown-item" href="<?php echo base_url('Profile/changepassadm')?>">
+                    
+                 <?php } 
                    else if ($sess=="2"){
                       ?> <a class="dropdown-item" href="<?php echo base_url('Profile/changepassdok')?>">
                    <?php } ?>
@@ -194,6 +217,7 @@
                     
                     
                     
+
                     <div class="dropdown-divider"></div><a class="dropdown-item" href="<?php echo base_url('Auth/logout')?>"><i class="ft-power"></i> Logout</a>
                   </div>
                 </div>
