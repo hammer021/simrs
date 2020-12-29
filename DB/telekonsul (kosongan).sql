@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2020 at 11:24 AM
+-- Generation Time: Dec 29, 2020 at 11:30 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -100,7 +100,7 @@ CREATE TABLE `tb_konsul` (
   `harga_kirim` int(11) DEFAULT NULL,
   `grand_total` int(11) DEFAULT NULL,
   `status_kons` int(1) NOT NULL,
-  `buktikonsul` varchar(255) NOT NULL
+  `buktikonsul` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -178,9 +178,8 @@ CREATE TABLE `tb_registrasi` (
 --
 
 INSERT INTO `tb_registrasi` (`kd_regist`, `name`, `email`, `image`, `password`, `kd_role`, `is_active`, `date_created`, `alamat`, `no_hp`, `tgl_lahir`, `tempat_lahir`) VALUES
-('RGS00000', 'SuperAdmin', 'superadmin@gmail.com', 'picture-201221-e832699b80.jpg', '202cb962ac59075b964b07152d234b70', 0, 1, '2020-12-10 11:36:34', 'BWI', '89693556052', '2020-12-10', 'Banyuwangi'),
-('RGS00001', 'HamAdm', 'admin@gmail.com', 'picture-201221-e832699b80.jpg', '202cb962ac59075b964b07152d234b70', 1, 1, '2020-12-10 11:36:34', 'BWI', '89693556052', '2020-12-10', 'Banyuwangi'),
-('RGS00002', 'Dr.Ham', 'dokter@gmail.com', 'picture-201221-1f41b0d861.jpg', '202cb962ac59075b964b07152d234b70', 2, 1, '2020-12-17 02:32:05', 'bwi', '08989841713', '2020-12-23', 'BWI');
+('RGS00000', 'SuperAdmin', 'superadmin@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 0, 1, '2020-12-10 11:36:34', 'BWI', '89693556052', '2020-12-10', 'Banyuwangi'),
+('RGS00001', 'Admin', 'admin@gmail.com', 'default.jpeg', '202cb962ac59075b964b07152d234b70', 1, 1, '2020-12-10 11:36:34', 'BWI', '89693556052', '2020-12-10', 'Banyuwangi');
 
 -- --------------------------------------------------------
 
