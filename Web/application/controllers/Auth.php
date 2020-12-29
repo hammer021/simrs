@@ -25,6 +25,11 @@ class Auth extends CI_Controller
             $this->_login();
         }
     }
+    public function cek()
+	{
+		$this->load->view('auth/aktivasi');
+		$this->load->helper('url');
+	}
     private function _login()
     {
         $username = $this->input->post('username');

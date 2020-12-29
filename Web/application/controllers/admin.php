@@ -292,11 +292,6 @@ class Admin extends CI_Controller
 		$this->Dokter_model->hapus_data($kd_dok_pol);
 		redirect('admin/jadwalDokter');
 	}
-	public function cek()
-	{
-		$this->load->view('auth/aktivasi');
-		$this->load->helper('url');
-	}
 	public function update_konsul()
 	{
 		$no_rm = $this->input->post('no_rm');

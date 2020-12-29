@@ -8,6 +8,12 @@ class Dokter extends CI_Controller
 		parent::__construct();
 		$this->load->model('Dokter_model');
 		$this->load->model('Resep_model');
+		$params = $this->session->userdata("kd_regist");
+
+		if (!empty($params)) {
+		} else {
+			redirect('auth?pesan=0005');
+		}
 	}
 
 	public function dashboard()

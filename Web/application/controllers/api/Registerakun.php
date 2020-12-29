@@ -278,7 +278,7 @@ class Registerakun extends REST_Controller {
                     'status' => true,
                     'pesan' => 'Akun anda sudah di VERIFIKASI',
                 ];
-                redirect('admin/cek');
+                redirect('auth/cek');
             } else {
                 $response = [
                     'status' => false,
