@@ -53,18 +53,36 @@
                             <?php 
                             foreach ($riwayatp as $rwyt){
                             ?>
-                                <a href="#" class="media border-0">
-                                        <span class="list-group-item-heading"><?= $rwyt['nama_pasien'] ?>
-
+                             <a href="#" class="media border-0">
+                                    <div class="media-left pr-1">
+                                        <span class="avatar avatar-md avatar-online">
+                                            <img class="media-object rounded-circle" 
+                                            src="<?php echo base_url(); ?>./assets/images/pasien/<?= $rwyt['foto'] ?>" 
+                                            alt="Generic placeholder image">
+                                            <i></i>
                                         </span>
+                                    </div>
+                                    <div class="media-body w-100">
+                                        <span class="list-group-item-heading">
+                                       <?= $rwyt['nama_pasien'] ?> 
+                                       <span class="blue-grey lighten-2 font-small-2">( <?= $rwyt['no_rm'] ?> )</span>
+                                        </span>
+                                        
+                                        <ul class="list-unstyled users-list m-0 float-right">
+                                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="" class="avatar avatar-sm pull-up">
+                                            </li>
+                                            
+                                            
+                                        </ul>
                                         <p class="list-group-item-text mb-0">
-                                            <span class="blue-grey lighten-2 font-small-3" style="margin-left:30px;"> <?= $rwyt['no_rm'] ?> </span>
+                                            <span class="blue-grey lighten-2 font-small-3"><?= $rwyt['no_tlp'] ?> </span>
                                         </p>
                                     </div>
                                 </a>
                             <?php 
                             }    
                             ?>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -169,7 +187,7 @@
         <!-- Statistics -->
 
         <!--/ Statistics -->
-    </div>
+        </div>
 </div>
 </div>
 <!-- ////////////////////////////////////////////////////////////////////////////-->
