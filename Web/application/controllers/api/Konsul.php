@@ -384,7 +384,7 @@ class Konsul extends REST_Controller {
 
                     $data = array(
                         'buktikonsul' => $config,
-                        'status' => "2"
+                        'status_kons' => "2"
                         
                     );
                         if ($this->db->update('tb_konsul', $data, ['no_rm' => $no_rm])) {
