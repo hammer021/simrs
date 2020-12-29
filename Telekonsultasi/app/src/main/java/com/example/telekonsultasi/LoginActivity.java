@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar PrgsBar;
     ProgressDialog progressDialog;
     authdata authdataa;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,26 +64,26 @@ public class LoginActivity extends AppCompatActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edtEmail.getText().toString().isEmpty()){
+                if (edtEmail.getText().toString().isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Email Tidak Boleh Kosong", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
-                }else if (edtPassword.getText().toString().isEmpty()){
+                } else if (edtPassword.getText().toString().isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Password Tidak Boleh Kosong", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
-                }else {
+                } else {
                     login();
                 }
             }
         });
 
-        if (authdataa.isLogin() == true){
+        if (authdataa.isLogin() == true) {
             Intent main = new Intent(LoginActivity.this, NavFragment.class);
             startActivity(main);
             finish();
         }
     }
 
-    public void login(){
+    public void login() {
         StringRequest senddata = new StringRequest(Request.Method.POST, ServerApi.URL_LOGIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -91,27 +92,34 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject res = new JSONObject(response);
 
                     JSONObject respon = res.getJSONObject("data");
-                    Toast.makeText(LoginActivity.this, respon.getString("pesan"), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(LoginActivity.this, respon.getString("pesan"), Toast.LENGTH_SHORT).show();
                     JSONObject datalogin = res.getJSONObject("data");
                     Log.e("ser", datalogin.getString("token"));
-                    authdataa.setdatauser(
 
-                            datalogin.getString("kd_regist"),
-                            datalogin.getString("name"),
-                            datalogin.getString("email"),
-                            datalogin.getString("alamat"),
-                            datalogin.getString("no_hp"),
-                            datalogin.getString("token"),
-                            datalogin.getString("is_active"),
-                            datalogin.getString("image")
-                    );
-                    if(datalogin.getString("is_active").equals("1")){
-                        Log.e("ser", "Selamat Datang");
-                        Intent intent = new Intent(LoginActivity.this, NavFragment.class);
-                        startActivity(intent);
-                        finish();
+                    if (datalogin.getString("kd_role").equals("3")) {
+                        if (datalogin.getString("is_active").equals("1")) {
+                            authdataa.setdatauser(
+                                    datalogin.getString("kd_regist"),
+                                    datalogin.getString("name"),
+                                    datalogin.getString("email"),
+                                    datalogin.getString("alamat"),
+                                    datalogin.getString("no_hp"),
+                                    datalogin.getString("token"),
+                                    datalogin.getString("is_active"),
+                                    datalogin.getString("image")
+                            );
+
+                            Intent intent = new Intent(LoginActivity.this, NavFragment.class);
+                            Toast.makeText(LoginActivity.this, "Selamat Datang", Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Mohon Aktifkan Email Verifikasi Anda", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LoginActivity.this, "Aplikasi Hanya Untuk User . Silahkan Login Via Website Simrs Telemedicine" , Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(LoginActivity.this,"Mohon Aktifkan Email Verifikasi Anda", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(LoginActivity.this,"Mohon Aktifkan Email Verifikasi Anda", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Aplikasi Hanya Untuk User . Silahkan Login Via Website Simrs Telemedicine", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     progressDialog.dismiss();
@@ -130,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("email", edtEmail.getText().toString());
                 params.put("password", edtPassword.getText().toString());
+//                params.put("password", edtPassword.getText().toString());
                 return params;
             }
         };

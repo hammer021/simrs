@@ -23,7 +23,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.telekonsultasi.NotificationActivity;
 import com.example.telekonsultasi.R;
+import com.example.telekonsultasi.UploadResepActivity;
 import com.example.telekonsultasi.configfile.ServerApi;
+import com.example.telekonsultasi.configfile.authdata;
 import com.example.telekonsultasi.ui.periksa.PeriksaFragment;
 
 import org.json.JSONArray;
@@ -34,12 +36,16 @@ import java.util.jar.JarException;
 
 public class HomeFragment extends Fragment {
     ImageView notif;
-    TextView pasiendas, keluhandas, obatdas;
-    ConstraintLayout pasien, keluhan, obat;
+    ConstraintLayout keluhan, obat, lapkeluhan, lapobat;
+    TextView txtpasien, txtkeluhan, txtobat;
+    authdata authdataa;
+    String mKdRegist;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activty_home_fragment, container, false);
+        authdataa = new authdata(getContext());
+        mKdRegist = authdataa.getKodeUser();
         //        return super.onCreateView(inflater, container, savedInstanceState);
         notif = v.findViewById(R.id.notifnyahome);
         notif.setOnClickListener(new View.OnClickListener() {
@@ -65,16 +71,20 @@ public class HomeFragment extends Fragment {
                 startActivity(d);
             }
         });
+//        lapkeluhan = v.findViewById(R.id.constrainglaporankeluhan);
+//        lapobat = v.findViewById(R.id.constrainglaporanresep);
 
-        obatdas = v.findViewById(R.id.jmlobat);
-        keluhandas = v.findViewById(R.id.jmlkeluhan);
-        pasiendas = v.findViewById(R.id.jmlpasien);
-        hitung_dashboard();
+        txtpasien = v.findViewById(R.id.jmlpasien);
+        txtkeluhan = v.findViewById(R.id.jmlkeluhan);
+        txtobat = v.findViewById(R.id.jmlobat);
+
+        hitungjumlah();
+
         return v;
-
     }
-    public void hitung_dashboard() {
-        final StringRequest jumlah = new StringRequest(Request.Method.GET, ServerApi.URL_DASHBOARD, new Response.Listener<String>() {
+
+    public void hitungjumlah() {
+        StringRequest jumlah = new StringRequest(Request.Method.GET, ServerApi.URL_DASHBOARD + mKdRegist, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -82,27 +92,27 @@ public class HomeFragment extends Fragment {
                     boolean status = a.getBoolean("status");
                     if (status) {
                         JSONArray data = a.getJSONArray("data");
-                        JSONObject param = data.getJSONObject(0);
+                        JSONObject terakhir = data.getJSONObject(0);
 
-                        String r = param.getString("jumlah_pasien");
-                        String d = param.getString("jumlah_periksa_1");
-                        String k = param.getString("jumlah_obat_1");
+                        String jumlah_pasien = terakhir.getString("jumlah_pasien");
+                        String jumlah_periksa_1 = terakhir.getString("jumlah_periksa_1");
+                        String jumlah_obat_1 = terakhir.getString("jumlah_obat_1");
 
-                        pasiendas.setText(r);
-                        keluhandas.setText(d);
-                        obatdas.setText(k);
+                        txtpasien.setText(jumlah_pasien);
+                        txtkeluhan.setText(jumlah_periksa_1);
+                        txtobat.setText(jumlah_obat_1);
                     } else {
-                        Toast.makeText(getActivity(), "Tidak Ada Data", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Tidak ada data", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                 }
             }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
-                }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+            }
         });
         RequestQueue req = Volley.newRequestQueue(getContext());
         req.add(jumlah);

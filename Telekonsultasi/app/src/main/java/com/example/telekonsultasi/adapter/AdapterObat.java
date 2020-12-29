@@ -21,13 +21,13 @@ public class AdapterObat extends RecyclerView.Adapter<AdapterObat.MyViewHolder> 
     private AdapterPeriksa.OnHistoryClickListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView no_rm, nama_pasien, tgl_kunjungan, harga, status;
+        TextView no_rm, nama_pasien, tgl_kunjungan, grand_total, status;
         public MyViewHolder(View itemView,final AdapterPeriksa.OnHistoryClickListener listener){
             super(itemView);
             no_rm = itemView.findViewById(R.id.kdkonsul);
             nama_pasien = itemView.findViewById(R.id.namapasienobat);
             tgl_kunjungan = itemView.findViewById(R.id.tanggalobat);
-            harga = itemView.findViewById(R.id.biayaobat);
+            grand_total = itemView.findViewById(R.id.biayaobat);
             status = itemView.findViewById(R.id.statusobat);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +62,7 @@ public class AdapterObat extends RecyclerView.Adapter<AdapterObat.MyViewHolder> 
         holder.no_rm.setText(me.getNo_rm());
         holder.nama_pasien.setText(me.getNama_pasien());
         holder.tgl_kunjungan.setText(me.getTgl_kunjungan());
-        holder.harga.setText(me.getHarga());
+        holder.grand_total.setText(me.getGrand_total());
         if (me.getStatus().equals("1")) {
             holder.status.setText("Belum Bayar");
         }

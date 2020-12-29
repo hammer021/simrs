@@ -4,7 +4,7 @@ public class ModalObat {
     private String no_rm;
     private String nama_pasien;
     private String tgl_kunjungan;
-    private String harga;
+    private String grand_total;
     private String status;
 
     public String getNo_rm() {
@@ -31,12 +31,12 @@ public class ModalObat {
         this.tgl_kunjungan = "Tanggal Kunjungan : " + tgl_kunjungan;
     }
 
-    public String getHarga() {
-        return harga;
+    public String getGrand_total() {
+        return grand_total;
     }
 
-    public void setHarga(String harga) {
-        this.harga = "Harga pendaftaran : " + harga;
+    public void setGrand_total(String grand_total) {
+        this.grand_total = "Harga pendaftaran : " + grand_total;
     }
 
     public String getStatus() {

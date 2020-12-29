@@ -351,7 +351,9 @@ class Konsul extends REST_Controller {
                 ->get();
         $query = $a->result_array();
 
-        if(!empty($query)){
+        $output = $this->db->get_where('tb_pasien',  array('kd_regist' => $kd_regist))->result_array();
+        
+        if(!empty($output)){
             $message = [
                 'status' => TRUE,
                 'data'   => $query,
