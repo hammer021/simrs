@@ -101,7 +101,7 @@ class Dokter_model extends CI_Model
           LEFT JOIN tb_dokter ON tb_dokter_poli.no_praktek = tb_dokter.no_praktek  
           JOIN tb_pasien ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien 
           JOIN tb_registrasi ON tb_dokter.kd_regist = tb_registrasi.kd_regist
-      WHERE tb_keluhan.status = '3' AND tb_dokter.kd_regist = '$noprktk' AND tb_keluhan.no_rm='$search'")->result_array();
+      WHERE tb_keluhan.status = '0' AND tb_dokter.kd_regist = '$noprktk' AND tb_keluhan.no_rm='$search'")->result_array();
     }else{
       return $this->db->query("SELECT * FROM chat 
       JOIN tb_konsul ON chat.send_to = tb_konsul.no_rm
@@ -111,7 +111,7 @@ class Dokter_model extends CI_Model
           LEFT JOIN tb_dokter ON tb_dokter_poli.no_praktek = tb_dokter.no_praktek  
           JOIN tb_pasien ON tb_keluhan.kd_pasien = tb_pasien.kd_pasien 
           JOIN tb_registrasi ON tb_dokter.kd_regist = tb_registrasi.kd_regist
-      WHERE tb_keluhan.status = '3' AND tb_dokter.kd_regist = '$noprktk'")->result_array();
+      WHERE tb_keluhan.status = '0' AND tb_dokter.kd_regist = '$noprktk'")->result_array();
     }
 
   }
