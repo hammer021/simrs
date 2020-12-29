@@ -45,6 +45,8 @@
               </li>
               <li class=""><a class="menu-item" href="<?php echo base_url(); ?>admin/datauser">Data User</a>
               </li>
+              <li class=""><a class="menu-item" href="<?php echo base_url(); ?>admin/dataadmin">Data Admin</a>
+              </li>
             </ul><?php
           }
           else{
