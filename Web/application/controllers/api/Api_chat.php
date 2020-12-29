@@ -49,8 +49,8 @@ class Api_chat extends REST_Controller
     public function index_put(){
         $chat_id = $this->put('chat_id');
         $no_rm = $this->put('no_rm');
-        $update_c = $this->db->query('UPDATE chat SET status=1 where chat_id = '.$chat.' order by time asc');
-        $update_k = $this->db->query('UPDATE tb_keluhan SET status=0 where no_rm = '.$no_rm.' order by time asc');
+        $update_c = $this->db->query('UPDATE chat SET status=1 where chat_id = "'.$chat_id.'" order by time asc');
+        $update_k = $this->db->query('UPDATE tb_keluhan SET status=0 where no_rm = "'.$no_rm.'"');
         if($update_c && $update_k){
             $message = [
                 'status' => true,

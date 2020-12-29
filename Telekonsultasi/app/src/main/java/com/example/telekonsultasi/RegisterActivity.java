@@ -3,13 +3,17 @@ package com.example.telekonsultasi;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,16 +30,23 @@ import com.example.telekonsultasi.configfile.ServerApi;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText mFullname, mEmail, mNomor, mAlamat, mTmpLahir, mTglLahir, mPassword;
-    Button mRegisbtn;
+    Button mRegisbtn, btnmati;
     TextView tLogin;
     ProgressDialog progressDialog;
     RequestQueue requestQueue;
     ProgressBar progressBar;
+    CheckBox checkBox;
+
+    final Calendar c = Calendar.getInstance();
+    int mYear = c.get(Calendar.YEAR);
+    int mMonth = c.get(Calendar.MONTH);
+    int mDay = c.get(Calendar.DAY_OF_MONTH);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +63,27 @@ public class RegisterActivity extends AppCompatActivity {
         mTmpLahir = findViewById(R.id.edttempatlahir);
         mTglLahir = findViewById(R.id.edttgllahir);
         mPassword = findViewById(R.id.edtpassword);
+        checkBox = findViewById(R.id.checkterms);
+        mRegisbtn = findViewById(R.id.btnregister);
+        btnmati = findViewById(R.id.btnregistermati);
+
+        mTglLahir.setInputType(InputType.TYPE_NULL);
+        mTglLahir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(RegisterActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+                                mTglLahir.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
 
         tLogin = findViewById(R.id.txtlogin);
         tLogin.setOnClickListener(new View.OnClickListener() {
@@ -62,11 +94,41 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        mRegisbtn = findViewById(R.id.btnregister);
+        mRegisbtn.setVisibility(View.GONE);
+
+        btnmati.setVisibility(View.VISIBLE);
+        btnmati.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(RegisterActivity.this, "Silahkan setujui syarat dan ketentuan", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkBox.isChecked()) {
+                    mRegisbtn.setVisibility(View.VISIBLE);
+                    btnmati.setVisibility(View.GONE);
+                } else {
+                    mRegisbtn.setVisibility(View.GONE);
+                    btnmati.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         mRegisbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserRegistration();
+                if (checkBox.isChecked()) {
+                    mRegisbtn.setVisibility(View.VISIBLE);
+                    UserRegistration();
+                    btnmati.setVisibility(View.GONE);
+
+                } else {
+                    mRegisbtn.setVisibility(View.GONE);
+                    btnmati.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
@@ -109,6 +171,8 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        progressDialog.setMessage("Loading");
+        progressDialog.show();
         progressBar.setVisibility(View.GONE);
         tLogin.setVisibility(View.GONE);
 
@@ -116,13 +180,14 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        progressDialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             String error = jsonObject.getString("error");
                             String message = jsonObject.getString("message");
 
-                            if (status.equals("200") && error.equals("false")){
+                            if (status.equals("200")&&error.equals("false")){
                                 Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
@@ -138,6 +203,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 tLogin.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
+                            progressDialog.dismiss();
                             e.printStackTrace();
                             progressBar.setVisibility(View.GONE);
                             Intent intent3 = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -150,7 +216,9 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this, "Error! " + error.toString(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        Toast.makeText(RegisterActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(RegisterActivity.this, "Silahkan masukkan data dengan benar dan sesuai Format yang sudah di tentukan!", Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                         tLogin.setVisibility(View.VISIBLE);
                     }

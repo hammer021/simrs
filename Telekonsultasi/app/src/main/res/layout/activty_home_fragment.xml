@@ -45,7 +45,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="500dp"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,6 +60,66 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/constrainglaporankeluhan"-->
+<!--                    android:layout_width="150dp"-->
+<!--                    android:layout_height="110dp"-->
+<!--                    android:layout_marginStart="35dp"-->
+<!--                    android:background="@drawable/lappassel"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+<!--                    <ImageView-->
+<!--                        android:id="@+id/jmlkeluhanselesai"-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:background="@drawable/reports"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:layout_marginBottom="6dp"-->
+<!--                        android:text="Riwayat Konsultasi"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/constrainglaporanresep"-->
+<!--                    android:layout_width="150dp"-->
+<!--                    android:layout_height="110dp"-->
+<!--                    android:layout_marginEnd="35dp"-->
+<!--                    android:background="@drawable/lapobatsel"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent">-->
+<!--                    <ImageView-->
+<!--                        android:id="@+id/jmlresepselesai"-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:background="@drawable/reports"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:layout_marginBottom="6dp"-->
+<!--                        android:text="Riwayat Obat"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayoutpasien"
                     android:layout_width="350dp"
@@ -73,9 +133,9 @@
                         android:id="@+id/jmlpasien"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
+                        android:text="-"
                         android:textColor="@color/putih"
                         android:textSize="50sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -85,14 +145,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="6dp"
                         android:gravity="center"
                         android:text="Jumlah Pasien Terdaftar"
                         android:textColor="@android:color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginBottom="6dp"/>
+                        app:layout_constraintStart_toStartOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -109,7 +168,7 @@
                         android:id="@+id/jmlkeluhan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text="-"
                         android:textSize="50sp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
@@ -146,7 +205,7 @@
                         android:id="@+id/jmlobat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text="-"
                         android:textSize="50sp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
@@ -167,6 +226,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginBottom="8dp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

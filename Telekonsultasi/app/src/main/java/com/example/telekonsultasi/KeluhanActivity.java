@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,12 +13,14 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -46,6 +49,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,6 +84,12 @@ public class KeluhanActivity extends AppCompatActivity {
     private String nama;
     private String kdregistnya = "NAMA";
 
+
+    final Calendar c = Calendar.getInstance();
+    int mYear = c.get(Calendar.YEAR);
+    int mMonth = c.get(Calendar.MONTH);
+    int mDay = c.get(Calendar.DAY_OF_MONTH);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +112,25 @@ public class KeluhanActivity extends AppCompatActivity {
         }
     });
 
+    txttanggal.setInputType(InputType.TYPE_NULL);
+    txttanggal.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(KeluhanActivity.this,
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                                txttanggal.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+    });
+
+        txtjeniskelamin.setInputType(InputType.TYPE_NULL);
         txtjeniskelamin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,34 +153,36 @@ public class KeluhanActivity extends AppCompatActivity {
             }
         });
 
-        simpanperiksa.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            periksa();
-        }
-    });
+        txtstatuskawin.setInputType(InputType.TYPE_NULL);
+        txtstatuskawin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(KeluhanActivity.this);
+                builder.setTitle("Pilih Status Perkawinan");
 
-//        txtstatuskawin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(KeluhanActivity.this);
-//                builder.setTitle("Pilih Status Perkawinan");
-//
-//                // buat array list
-//                final String[] options2 = {"Belum Kawin", "Kawin"};
-//
-//                //Pass array list di Alert dialog
-//                builder.setItems(options2, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        txtjeniskelamin.setText(options2[which]);
-//                    }
-//                });
-//                // buat dan tampilkan alert dialog
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
-//            }
-//        });
+                // buat array list
+                final String[] options2 = {"Belum Kawin", "Kawin"};
+
+                //Pass array list di Alert dialog
+                builder.setItems(options2, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        txtstatuskawin.setText(options2[which]);
+                    }
+                });
+                // buat dan tampilkan alert dialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+
+        simpanperiksa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                periksa();
+            }
+        });
 
         imageView7.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +198,7 @@ public class KeluhanActivity extends AppCompatActivity {
         intent.setAction(intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, IMG_REQUEST);
     }
+
 
     private void initWidgetId() {
         txtkoderegist = findViewById(R.id.kdregistgawean);

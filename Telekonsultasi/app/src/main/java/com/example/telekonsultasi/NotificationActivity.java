@@ -114,7 +114,7 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     private void loadResep(){
-        StringRequest resep = new StringRequest(Request.Method.GET, ServerApi.URL_GETPERIKSA, new Response.Listener<String>() {
+        StringRequest resep = new StringRequest(Request.Method.GET, ServerApi.URL_GETRESEP + mKdRegist, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -128,8 +128,8 @@ public class NotificationActivity extends AppCompatActivity {
                         modalObat.setNama_pasien(datanya.getString("nama_pasien"));
                         modalObat.setNo_rm(datanya.getString("no_rm"));
                         modalObat.setTgl_kunjungan(datanya.getString("tgl_kunjungan"));
-                        modalObat.setHarga(datanya.getString("harga"));
-                        modalObat.setStatus(datanya.getString("status"));
+                        modalObat.setGrand_total(datanya.getString("grand_total"));
+                        modalObat.setStatus(datanya.getString("status_kons"));
                         item2.add(modalObat);
                     }
                     setupListView2();
@@ -157,7 +157,7 @@ public class NotificationActivity extends AppCompatActivity {
             public void onClick(int position) {
                 ModalObat modalObat = item2.get(position);
                 Toast.makeText(NotificationActivity.this, modalObat.getNo_rm(), Toast.LENGTH_LONG).show();
-                    Intent detail = new Intent(NotificationActivity.this, UploadPeriksaActivity.class);
+                    Intent detail = new Intent(NotificationActivity.this, UploadResepActivity.class);
                     detail.putExtra("no_rm", modalObat.getNo_rm());
                     startActivity(detail);
                     finish();
