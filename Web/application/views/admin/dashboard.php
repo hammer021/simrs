@@ -156,16 +156,16 @@
                             </div>
                         </div>';
                     }else{
-
+                        $naik = ($analisis1['jumlah']-$analisis2['jumlah'])/$analisis1['jumlah']*100 ;
                         if($analisis2['jumlah'] < $analisis1['jumlah']){
-                            $persen = ($analisis2['jumlah']-$analisis1['jumlah'])/$analisis2['jumlah']*100 ;
+                            $turun = ($analisis2['jumlah']-$analisis1['jumlah'])/$analisis2['jumlah']*100 ;
                    
                                 echo '<div class="col-xl-4 col-lg-6 col-md-12">
                                     <div class="card pull-up height-200" style="background-image: linear-gradient(to right, #F35050, #D68B8B)">
                                         <div class="card-body">
                                             <h4 class="card-title" style="color:white">Analisis</h4>
                                             <p class="card-text text-center" style="color:white;margin-top:30px;font-size:40px ">
-                                                '.$persen.'%
+                                                '.$turun.'%
                                             </p>
                                             <p class="card-text pasien">Pasien Berkurang</p>
                                         </div>
@@ -173,22 +173,33 @@
                                 </div>
                             </div>
                         </div>';
-                        }else{
-                            $persen = ($analisis1['jumlah']-$analisis2['jumlah'])/$analisis1['jumlah']*100 ;
-
+                        }elseif($naik == 0){
+                            echo '<div class="col-xl-4 col-lg-6 col-md-12">
+                            <div class="card pull-up height-200" style="background-image: linear-gradient(to right, #0066cc 0%, #6699ff 100%);">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="color:white">Analisis</h4>
+                                    <p class="card-text text-center" style="color:white;margin-top:50px;font-size:15px ">
+                                        Pasien Stabil
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+                            }else{
                                 echo '<div class="col-xl-4 col-lg-6 col-md-12">
-                                            <div class="card pull-up height-200" style="background-image: linear-gradient(to right, #2ebd28, #86e882)">
-                                                <div class="card-body">
-                                                    <h4 class="card-title" style="color:white">Analisis</h4>
-                                                    <p class="card-text text-center" style="color:white;margin-top:30px;font-size:40px ">
-                                                        '.$persen.'%?>
-                                                    </p>
-                                                    <p class="card-text pasien">Pasien Bertambah</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="card pull-up height-200" style="background-image: linear-gradient(to right, #2ebd28, #86e882)">
+                                    <div class="card-body">
+                                        <h4 class="card-title" style="color:white">Analisis</h4>
+                                        <p class="card-text text-center" style="color:white;margin-top:30px;font-size:40px ">
+                                            '.$naik.'%
+                                        </p>
+                                        <p class="card-text pasien">Pasien Bertambah</p>
                                     </div>
-                                </div>';
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
                             }
                         } ?> 
 

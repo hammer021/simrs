@@ -19,15 +19,14 @@ class Api_chat extends REST_Controller
         $hari = $this->Chat_m->getHari();
         $query = $this->Chat_m->getDataPasien($sana,$hari);
 
-        $pesan = $this->Chat_m->getPesanApi($sana);
-        $data = array_merge($pesan, $query);    
+        $pesan = $this->Chat_m->getPesanApi($sana);    
 
         if(!empty($query)){
-
+            foreach($query as $q){ $indo_h = $q['hari'] = $this->Chat_m->getHari($q['hari']); }
             if(!empty($pesan)){
                 $message = [
                     'status' => true,
-                    'data_chat' => $query
+                    'data_chat' => $q
                 ];
                 //$this->db->query('UPDATE chat SET status=1 where (send_by ="'.$sini.'" or send_to ="'.$sini.'") and (send_by ="'.$sana.'" or send_to ="'.$sana.'") order by time asc');
             }else{
@@ -48,6 +47,20 @@ class Api_chat extends REST_Controller
 
     public function index_put(){
         $chat_id = $this->put('chat_id');
-        $this->db->query('UPDATE chat SET status=1 where chat_id = '.$chat.' order by time asc');
+        $no_rm = $this->put('no_rm');
+        $update_c = $this->db->query('UPDATE chat SET status=1 where chat_id = '.$chat.' order by time asc');
+        $update_k = $this->db->query('UPDATE tb_konsul SET status_kons=0 where no_rm = '.$no_rm.' order by time asc');
+        if($update_c && $update_k){
+            $message = [
+                'status' => true,
+                'pesan' => "Berhasil"
+            ];
+        }else{
+            $message = [
+                'status' => false,
+                'pesan' => "Yha Error!"
+            ]
+        }
+        $this->response($message, 200);
     }
 }

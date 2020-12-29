@@ -69,6 +69,9 @@ class Chat_m extends CI_Model {
 		tb_registrasi.name, 
 		tb_registrasi.image,
 		tb_registrasi.no_hp,
+		dayname(tb_keluhan.jadwal_konsul) as hari,
+		tb_dokter_poli.startwaktu,
+		tb_dokter_poli.endwaktu,
 		tb_poli.klinik,
         chat.chat_id,
         chat.send_to,
@@ -109,6 +112,9 @@ class Chat_m extends CI_Model {
 			tb_registrasi.name, 
 			tb_registrasi.image,
 			tb_registrasi.no_hp,
+			dayname(tb_keluhan.jadwal_konsul) as hari,
+			tb_dokter_poli.startwaktu,
+			tb_dokter_poli.endwaktu,
 			tb_poli.klinik,
 			chat.chat_id,
 			chat.send_to,
@@ -142,7 +148,7 @@ class Chat_m extends CI_Model {
 
 	}
 	
-	public function gethari()
+	public function gethari($date ="")
 	{	
 		$daftar_hari = array(
 			'Sunday' => 'minggu',
@@ -153,8 +159,9 @@ class Chat_m extends CI_Model {
 			'Friday' => 'jumat',
 			'Saturday' => 'sabtu'
 		   );
-
-		   $date= date('Y-m-d');
+		   if($date=""){
+			$date= date('Y-m-d');
+		   }
 		   $namahari = date('l', strtotime($date));
 		   return $daftar_hari[$namahari];;
     }

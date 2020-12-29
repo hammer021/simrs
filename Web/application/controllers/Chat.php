@@ -218,7 +218,7 @@ class Chat extends CI_Controller
         function notifikasi(){
             $saia = $this->session->userdata("kd_regist");
             
-                $query = $this->db->query('select count(chat_id) as banyak from chat where (send_by ="'.$saia.'" or send_to ="'.$saia.'") and status = 0');
+                $query = $this->db->query('select count(chat_id) as banyak from chat where (send_by ="'.$saia.'" or send_to ="'.$saia.'") and send_to NOT LIKE "%KONS%" and status = 0');
                 $query1 = $query->row();
                 if($query1->banyak > 0){
                     echo '<span class="text-center notif"><div style="margin-top:4px;" class="hai align-middle">'.$query1->banyak.'</div></span>';
