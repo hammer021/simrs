@@ -98,7 +98,7 @@
                 <div class="col-xl-4 col-lg-3 col-md-6">
                     <div class="card pull-up ecom-card-1 bg-white">
                         <div class="card-content ecom-card2 height-50">
-                            <h5 class="text-muted danger position-absolute p-1">Progress Stats</h5>
+                            <h5 class="text-muted danger position-absolute p-1">Status Proses</h5>
                             <div class="card">
                                 <center>
                                     <img src="<?= base_url("assets/images/pasien.jpg") ?>" style="width:16%" class="card-img-top">
