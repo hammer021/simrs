@@ -558,10 +558,11 @@ class Admin extends CI_Controller
 		}
 	}
 	
-	public function hapusdokter($id)
+	public function hapusdokter($id,$no_praktek)
 	{
 		$this->Dokter_model->hapus_data($id);
 		$this->Dokter_model->hapus_data2($id);
+		$this->Dokter_model->hapus_data_jadwalperpraktek($no_praktek);
 		redirect('admin/datadokter');
 	}
 
@@ -569,6 +570,7 @@ class Admin extends CI_Controller
 	{
 		$this->Konsul_model->hapus_data($id);
 		$this->Konsul_model->hapus_data2($id);
+		
 
 		redirect('admin/pemeriksaan');
 	}
