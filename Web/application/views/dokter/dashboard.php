@@ -42,14 +42,19 @@
                                 <ul class="list-inline mb-0">
                                     <li>
                                         <a data-action="reload">
-                                            <i class="ft-rotate-cw"></i>
+                                            <i class="ft-rotate-cw" id="reload"></i>
                                         </a>
                                     </li>
                                 </ul>
+                                <script>
+                                    $('#reload').click(function(event){ 
+                                        $("#pasien").load(location.href + " #pasien");
+                                    }); 
+                                </script>
                             </div>
                         </div>
                         <div class="card-content">
-                            <div id="recent-buyers" class="media-list">
+                            <div id="pasien" class="media-list">
                             <?php 
                             foreach ($riwayatp as $rwyt){
                             ?>
@@ -92,7 +97,7 @@
                             <h5 class="text-muted danger position-absolute p-1">Progress Stats</h5>
                             <div class="card">
                                 <center>
-                                    <img src="<?= base_url("assets/images/pasien.jpg") ?>" style="width: 30%" class="card-img-top">
+                                    <img src="<?= base_url("assets/images/pasien.jpg") ?>" style="width: 16%" class="card-img-top">
                                     <div class="card-body">
                                         <?php foreach ($totpasien as $row) {  ?>
                                             <h5 class="card-title font-weight-bold"><?= $row['jmlpasien'] ?></h5>
@@ -111,7 +116,7 @@
                             <h5 class="text-muted danger position-absolute p-1">Progress Stats</h5>
                             <div class="card">
                                 <center>
-                                    <img src="<?= base_url("assets/images/dokter.jpg") ?>" style="width: 38%" class="card-img-top">
+                                    <img src="<?= base_url("assets/images/dokter.jpg") ?>" style="width: 20%" class="card-img-top">
                                     <div class="card-body">
                                         <?php foreach ($totdokter as $row) {  ?>
                                             <h5 class="card-title font-weight-bold"><?= $row['jmldokter'] ?></h5>

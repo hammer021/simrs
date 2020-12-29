@@ -193,7 +193,6 @@ class Profile extends CI_Controller
         $email = $this->input->post('email');
         $alamat = $this->input->post('alamat');
         $no_praktek = $this->input->post('no_praktek');
-        $jadwal_praktek = $this->input->post('jadwal_praktek');
         $no_hp = $this->input->post('no_hp');
         $tempat_lahir = $this->input->post('tempat_lahir');
         $tgl_lahir = $this->input->post('tgl_lahir');
@@ -231,8 +230,7 @@ class Profile extends CI_Controller
 				$this->Dokter_model->update_data($where, $data, 'tb_registrasi');
 				//UPDATE tb_dokter
 				$data2 = array(
-                    'no_praktek'          => $no_praktek,
-                    'jadwal_praktek'         => $jadwal_praktek
+                    'no_praktek'          => $no_praktek
                     );
                     $this->Dokter_model->update_data($where, $data2, 'tb_dokter');
                 redirect('Dokter/dashboard');
@@ -255,8 +253,7 @@ class Profile extends CI_Controller
             $this->Dokter_model->update_data($where, $data, 'tb_registrasi');
             //UPDATE tb_dokter
 				$data2 = array(
-                    'no_praktek'          => $no_praktek,
-                    'jadwal_praktek'         => $jadwal_praktek
+                    'no_praktek'          => $no_praktek
                     );
                     $this->Dokter_model->update_data($where, $data2, 'tb_dokter');
             redirect('Dokter/dashboard');

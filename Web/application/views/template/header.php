@@ -40,7 +40,7 @@
               <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
               <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#" id="maximize"><i onclick="closeNav()" class="ficon ft-maximize"></i></a></li>
               <?php 
-              if(strpos($_SERVER['REQUEST_URI'], "dashboard") !== false){
+              if(strpos($_SERVER['REQUEST_URI'], "dashboard") !== false || strpos($_SERVER['REQUEST_URI'], "Profile") !== false){
               }else{
               ?>
               <li class="nav-item dropdown navbar-search"><a class="nav-link dropdown-toggle hide" data-toggle="dropdown" href="#"><i class="ficon ft-search"></i></a>
@@ -126,13 +126,6 @@
                 </ul>
               </li>
             </ul>
-            <ul class="nav navbar-nav float-right">         
-              <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language"></span></a>
-                <div class="dropdown-menu" aria-labelledby="dropdown-flag">
-                  <div class="arrow_box"><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i> English</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> Chinese</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-ru"></i> Russian</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Spanish</a></div>
-                </div>
-              </li>
-            </ul>
             <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"  data-bs-toggle="modal" id="cht" data-bs-target="#chat"  data-toggle="dropdown"><i class="ficon ft-mail" id="notip"></i></a>
               </li>
@@ -186,7 +179,6 @@
                    <?php } ?>
                    
                     <i class="ft-user"></i> Edit Profile</a>
-                    <a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a>
 
                     <?php
                     $sess = $this->session->userdata("kd_role");
@@ -202,8 +194,6 @@
                     
                     
                     
-                    
-                    <a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
                     <div class="dropdown-divider"></div><a class="dropdown-item" href="<?php echo base_url('Auth/logout')?>"><i class="ft-power"></i> Logout</a>
                   </div>
                 </div>

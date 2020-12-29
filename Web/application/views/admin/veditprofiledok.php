@@ -32,6 +32,7 @@
 			</div>
 			<div class="card-content collapse show">
 				<div class="body">
+				<div class="container">
 					<?php 
 					foreach ($profile as $prof):
 					?>
@@ -49,11 +50,6 @@
 						<div class="form-group">
 						<label for="no_praktek">No Praktek :</label><br>
 							<input class="form-control" type="text" id="no_praktek" name = "no_praktek" value="<?php echo $prof->no_praktek ?>">
-						</div>
-
-						<div class="form-group">
-						<label for="jadwal_praktek">Jadwal Praktek :</label><br>
-							<input class="form-control" type="text" id="jadwal_praktek" name = "jadwal_praktek" value="<?php echo $prof->jadwal_praktek ?>">
 						</div>
 
 						<div class="form-group">
@@ -89,6 +85,7 @@
 							<button type="submit" class="btn btn-danger">Save</button>
 					</form>
 					<?php endforeach;?>
+				</div>
 				</div>
 			</div>
 		</div>
