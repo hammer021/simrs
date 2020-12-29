@@ -25,7 +25,9 @@
 					<div class="card">
 						<div class="card-header">
 						<a href="#"><button style="float:left;margin-bottom:10px;" type="button" data-target="#tambah" data-toggle="modal" class="btn btn-primary">Tambah Jadwal Dokter</button></a>
-							<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+						
+						<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+							
 							<div class="heading-elements">
 								<ul class="list-inline mb-0">
 									<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -33,6 +35,17 @@
 									<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
 								</ul>
 							</div>
+							<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Pilih Poli
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" name="poli" id="poli">
+						<?php foreach ($listklinik as $poli):?>
+						<a class="dropdown-item" href="<?= base_url('Admin/filterjadwal/'.$poli->kd_poli) ?>"><?= $poli->klinik ?></a>
+						<?php endforeach;?>
+					</div>
+					
+				</div>
 						</div>
 						<script>
 							$('#reload').click(function(event){ 
@@ -40,8 +53,8 @@
 							}); 
 						</script>
 						<div class="card-content collapse show">
-							<!-- <p><span class="text-bold-600"><button class="btn btn-primary" data-toggle="modal" data-target="#tambah"><i class="fa fa-plus"></i> Tambah Data Dokter</button></span></p> -->
-							<br>
+							
+						<br>
 							<div class="table-responsive">
 								<table class="table" id="table">
 									<thead class="thead-dark" align="center">

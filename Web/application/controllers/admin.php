@@ -140,6 +140,30 @@ class Admin extends CI_Controller
 		$this->load->view('template/footer');
 		$this->load->helper('url');
 	}
+	public function filterjadwal($page = "")
+	{
+		$isi = $this->input->post('dokter');
+		if ($page == "dokter"  && !empty($isi)) {
+			$dokter['listdokter'] = $this->Dokter_model->tampils($isi);
+		} else {
+			if (empty($page)) {
+				$dokter['listdokter'] = $this->Dokter_model->tampil_datadokter();
+				$dokter['listdokter1'] = $this->Dokter_model->tampil_datadokter1();
+				$dokter['listklinik'] = $this->Klinik_model->tampil_dataklinik()->result();
+			}else {
+	
+				$dokter['listdokter'] = $this->Dokter_model->filter_datadokter($page);
+				$dokter['listdokter1'] = $this->Dokter_model->tampil_datadokter1();
+				$dokter['listklinik'] = $this->Klinik_model->tampil_dataklinik()->result();
+			}
+		}
+		
+		$this->load->view('template/header');
+		$this->load->view('template/sidemenu');
+		$this->load->view('admin/vjadwalDokter', $dokter);
+		$this->load->view('template/footer');
+		$this->load->helper('url');
+	}
 	public function datadokter($page = "")
 	{
 		$isi = $this->input->post('dokter');
