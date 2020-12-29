@@ -110,8 +110,10 @@
 									?></td>
 							<td>
 							<?php $sts = $kons['status_kons'];
-									if ($sts == 0){?>
-										<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
+							$sessionn = $this->session->userdata("kd_role");
+									if ($sts == 0){
+									if($sessionn == 0){?>
+									<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
 													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
@@ -130,12 +132,17 @@
 															</div>
 														</div>
 													</div>
+									<?php }
+									else{
+									}?>
+										
 													
 													<button type="button" data-target="#<?php echo $kons['kd_konsul'] ?>" data-toggle="modal" class="la la-edit"></button>
 							<?php
 											
 									}
-									else if($sts == 1){?>
+									else if($sts == 1){
+										if($sessionn == 0){?>
 										<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
 													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
@@ -155,12 +162,16 @@
 															</div>
 														</div>
 													</div>
+											<?php }
+											else{
+									}?>
+										
 													<button type="button" data-target="#view<?php echo $kons['kd_konsul'] ?>" data-toggle="modal" class="la la-eye"></button>
 													
 							<?php
 									}
-									else if($sts == 2){?>
-										<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
+									else if($sts == 2){if($sessionn == 0){?>
+									<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
 													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
@@ -180,11 +191,15 @@
 														</div>
 													</div>
 													
+										<?php }
+										else{
+									}?>
+										
 													<button type="button" data-target="#acc<?php echo $kons['kd_konsul'] ?>" data-toggle="modal" class="la la-edit"></button>
 							<?php
 									}
-									else if($sts == 3){?>
-										<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
+									else if($sts == 3){if($sessionn == 0){?>
+									<a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="la la-trash-o"></button></a>&nbsp;
 													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
@@ -203,6 +218,10 @@
 															</div>
 														</div>
 													</div>
+										<?php }
+										else{
+										}?>
+										
 													<button type="button" data-target="#view<?php echo $kons['kd_konsul'] ?>" data-toggle="modal" class="la la-eye"></button>
 							<?php
 									}
