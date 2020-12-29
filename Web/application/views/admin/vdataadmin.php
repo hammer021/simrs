@@ -48,8 +48,11 @@
                                             <th>No</th>
                                             <th>Kode Admin</th>
                                             <th>Nama Admin</th>
+                                            <th>Tempat Lahir</th>
+                                            <th>Tanggal Lahir</th>
                                             <th>Email</th>
                                             <th>Nomor HP Admin</th>
+                                            <th>Alamat</th>
                                             <th>Foto</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -64,9 +67,12 @@
                                                 <td><?php echo $no++ ?></td>
                                                 <td><?php echo $z->kd_regist ?></td>
                                                 <td><?php echo $z->name ?></td>
+                                                <td><?php echo $z->tempat_lahir ?></td>
+                                                <td><?php echo $z->tgl_lahir ?></td>
                                                 <td><?php echo $z->email ?></td>
                                                 <td><?php echo $z->no_hp ?></td>
-                                                <td><img src="<?php echo base_url("assets/images/admin/" . $z->image) ?>" width="100px" height="100px"></td>
+                                                <td><?php echo $z->alamat ?></td>
+                                                <td><img src="<?php echo base_url("assets/images/admin/" . $z->image) ?>" width="300px" height="100px"></td>
                                                 <td><a href="" data-toggle="modal" data-target="#hapusModal<?= $z->kd_regist ?>"><button type="button" class="la la-trash-o"></button></a>&nbsp;
                                                     <div class="modal fade" id="hapusModal<?= $z->kd_regist ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
@@ -124,9 +130,10 @@ foreach ($listadmin as $z) {
                 <div class="modal-body">
                     <form method="post" action="<?= base_url('Admin/update_admin') ?>" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Kode Admin : <h3><?php echo $z->kd_regist ?></h3></label>
+                            <input type="hidden" name="kd_regist" value="<?php echo $z->kd_regist ?>">
+                            <label for="exampleInputEmail1">Kode Admin</label>
                             <input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $z->kd_regist ?>" name="kd_regist" aria-describedby="emailHelp">
-                                </br>
+                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $z->kd_regist ?>" name="kd_regist" aria-describedby="emailHelp">
                             <label for="exampleInputEmail1">Nama Admin</label>
                             <input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $z->name ?>" name="name" aria-describedby="emailHelp">
                         </div>
