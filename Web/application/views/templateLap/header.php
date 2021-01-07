@@ -33,14 +33,30 @@
   body {
       padding-top: 20px;
       padding-bottom: 40px;
-      font-size: 0.7em;
       margin: 27mm 16mm 27mm 16mm;
       width: 29.7cm;
         height: 21cm;
      
   }
+  html body{
+    background-color:white;
+  }
 </style>
   </head>
-  <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">
+  <div class="row">
+  <div class="col-12">
+  <img src="<?= base_url('theme-assets/images/logo/logo-rsj.png')?>" width="10%" style="margin-bottom:-90px">
+  <b><h1 class="text-center">RUMAH SAKIT JIWA DR. RADJIMAN W. LAWANG</h1></b>
+  <p class="text-center"> Jl. A Yani, Krajan Utara, Sumber Porong, Kec. Lawang, Malang, Jawa Timur 65208
+  <br>
+  Telp: (0341) 426015, 429067 Fax: (0341) 423785
+  <br>
+  Laman: www.rsjlawang.com Surat Elektronik: rsjlawang@yahoo.com
+  </pw>
+  </div>
+  </div>
+  <hr style="border-top: 1px solid rgba(0, 0, 0, 0.7);">
+  <body>
+  
 
     

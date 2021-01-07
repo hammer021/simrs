@@ -1,16 +1,9 @@
        <!-- HEADER KOP -->
     <!-- ------------------------------------------------------------------------------------------- -->
-	
-		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">Jadwal Dokter</h4>
-				
-			</div>
-			
-			<div class="card-content collapse show">
-				<div class="table-responsive">
+	<div style="margin-top:70px">
+	   		<h3 class="text-center" style="margin:50px 0px;"> JADWAL DOKTER </h3>
 					<table class="table" id="table">
-						<thead class="thead-dark">
+						<thead>
 							<tr>
 											<th>No</th>
 											<th>No Praktek</th>
@@ -82,9 +75,5 @@
 							<?php endforeach; ?>
 						</tbody>
 					</table>
-				</div>
-			</div>
-		</div>
-	
 
 	

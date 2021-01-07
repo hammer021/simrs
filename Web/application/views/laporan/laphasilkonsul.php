@@ -1,16 +1,11 @@
        <!-- HEADER KOP -->
+	   
     <!-- ------------------------------------------------------------------------------------------- -->
 	
-		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">Hasil Konsultasi</h4>
-				
-			</div>
-			
-			<div class="card-content collapse show">
-				<div class="table-responsive">
+		<div style="margin-top:70px">
+	   		<h3 class="text-center" style="margin:50px 0px;"> HASIL KONSULTASI </h3>
 					<table class="table" id="table">
-						<thead class="thead-dark">
+						<thead>
 							<tr>
 								<th scope="col">No</th>
 								<th scope="col">No Rekam Medis</th>
@@ -65,9 +60,7 @@
 							<?php } ?>
 						</tbody>
 					</table>
-				</div>
-			</div>
-		</div>
+					</div>
 	
 
 	
