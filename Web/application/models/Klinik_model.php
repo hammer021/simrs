@@ -4,7 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Klinik_model extends CI_Model
 {
 	private $_table = "tb_poli";
-	public $klinik;
+    public $klinik;
+    public $harga_poli;
 	public function rules()
     {
         return [
@@ -12,7 +13,12 @@ class Klinik_model extends CI_Model
 
             ['field' => 'klinik',
             'label' => 'klinik',
-            'rules' => 'required']
+            'rules' => 'required'],
+
+            ['field' => 'harga_poli',
+            'label' => 'harga_poli',
+            'rules' => 'numeric']
+            
 
         ];
     }
@@ -23,6 +29,7 @@ class Klinik_model extends CI_Model
         $post = $this->input->post();
         $this->kd_poli = $this->buat_kode();
         $this->klinik = $post["klinik"];
+        $this->harga_poli = $post["harga_poli"];
         
         return $this->db->insert($this->_table, $this);
 

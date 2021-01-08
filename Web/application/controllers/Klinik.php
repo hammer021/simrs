@@ -36,9 +36,11 @@ class Klinik extends CI_Controller
     public function updatedata(){
 
         $kd_poli = $this->input->post('kd_poli');
-
+        $nama_poli = $this->input->post('klinik');
+        $harga = $this->input->post('harga_poli');
         $data = array(
-            'klinik' => $this->input->post('klinik')
+            'klinik' => $nama_poli,
+            'harga_poli' => $harga
         );
 
         if($this->Klinik_model->updatedataklinik($kd_poli, $data)){

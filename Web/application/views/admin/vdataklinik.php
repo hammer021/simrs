@@ -47,6 +47,7 @@
 											<th>No</th>
 											<th>Kode Klinik</th>
 											<th>Nama Klinik</th>
+											<th>Harga Konsul</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
@@ -61,6 +62,7 @@
 												<td><?php echo $no++ ?></td>
 												<td><?php echo $a->kd_poli ?></td>
 												<td><?php echo $a->klinik ?></td>
+												<td><?php echo $a->harga_poli ?></td>
 
 												<td><a href="" data-toggle="modal" data-target="#hapusModal<?= $a->kd_poli ?>"><button type="button" class="la la-trash-o"></button></a>&nbsp;
 													<div class="modal fade" id="hapusModal<?= $a->kd_poli ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,9 +120,11 @@ foreach ($listklinik as $a) {
 						<div class="form-group">
 							<label for="exampleInputEmail1">Kode Klinik</label>
 							<input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $a->kd_poli ?>" name="kd_poli" aria-describedby="emailHelp">
-							<input type="" class="form-control" id="exampleInputEmail1" value="<?php echo $a->kd_poli ?>" name="kd_poli" aria-describedby="emailHelp">
+							<input disabled type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $a->kd_poli ?>" name="kd_poli" aria-describedby="emailHelp">
 							<label for="exampleInputEmail1">Klinik</label>
 							<input type="text" class="form-control" id="exampleInputEmail1" value="<?php echo $a->klinik ?>" name="klinik" aria-describedby="emailHelp">
+							<label for="exampleInputEmail1">Harga Konsul</label>
+							<input type="number" class="form-control" id="exampleInputEmail1" value="<?php echo $a->harga_poli ?>" name="harga_poli" aria-describedby="emailHelp">
 						</div>
 
 						<div class="modal-footer">
@@ -153,7 +157,10 @@ foreach ($listklinik as $a) {
 						<label for="exampleInputEmail1">Klinik</label>
 						<input type="text" class="form-control" id="exampleInputEmail1" name="klinik" aria-describedby="emailHelp">
 					</div>
-
+					<div class="form-group">
+						<label for="exampleInputEmail1">Harga Konsul</label>
+						<input type="number" class="form-control" id="exampleInputEmail1" name="harga_poli" aria-describedby="emailHelp">
+					</div>
 					</br>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
