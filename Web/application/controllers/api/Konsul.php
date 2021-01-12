@@ -26,12 +26,12 @@ class Konsul extends REST_Controller {
     function index_get()
     {
         $l = $this->get('kd_regist');
-        $a = $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan, harga')    
+        $a = $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan, harga, foto')    
                 ->from('tb_pasien')
                     ->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
                     ->group_start()
                         ->where('kd_regist', $l)
-                        ->where('status = 1 OR status = 3')
+                        ->where('status = 1 OR status = 2')
                     ->group_end()
                 ->get();
         $query = $a->result_array();
@@ -55,7 +55,7 @@ class Konsul extends REST_Controller {
     function pasienselesai_get()
     {
         $l = $this->get('kd_regist');
-        $a = $this->db->select('no_rm, nama_pasien, tgl_kunjungan')    
+        $a = $this->db->select('no_rm, nama_pasien, tgl_kunjungan, tgl_lahir, foto')    
                 ->from('tb_pasien')
                     ->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
                     ->group_start()

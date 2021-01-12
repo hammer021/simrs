@@ -11,6 +11,35 @@ class Api_chat extends REST_Controller
         $this->load->database();
         $this->load->model('Chat_m');
     }
+
+    function index_get()
+    {
+        $l = $this->get('kd_regist');
+        $a = $this->db->select('no_rm, nama_pasien, status, keluhan, tgl_kunjungan, harga, foto')    
+                ->from('tb_pasien')
+                    ->join('tb_keluhan', 'tb_keluhan.kd_pasien = tb_pasien.kd_pasien')
+                    ->group_start()
+                        ->where('kd_regist', $l)
+                        ->where('status = 3')
+                    ->group_end()
+                ->get();
+        $query = $a->result_array();
+
+        $output = $this->db->get_where('tb_pasien',  array('kd_regist' => $l))->result_array();
+            if(!empty($output)){
+            $message = [
+                'status' => TRUE,
+                'data'   => $query,
+            ];
+            $this->response($message, REST_Controller::HTTP_OK);
+        }else{
+            $message = [
+                'status' => FALSE,
+                'message' => "No Rm tidak ditemukan"
+            ];
+            $this->response($message, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
     
     public function index_post(){
         $sini = "";
