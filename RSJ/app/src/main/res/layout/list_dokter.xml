@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:layout_height="275dp"
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardviewDokter"
+    app:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/foto_dokter"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerInside"
+            android:background="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/nama_dokter"
+            android:textSize="13sp"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="Nama Dokter"
+            android:gravity="center"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/no_praktek_dokter"
+            android:textSize="13sp"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="No Praktek"
+            android:gravity="center"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/poli_dokter"
+            android:textSize="13sp"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="Poli Umum"
+            android:gravity="center"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

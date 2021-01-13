@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/abuabuputih"
+    tools:context=".activity.UploadPembayaranPeriksaActivity"
+    android:id="@+id/uploadpembayaranperiksa">
+
+    <TextView
+        android:id="@+id/text_norm_uploadperiksa"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/white"
+        android:fontFamily="@font/nexa_light"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="-"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_norm_uploadperiksa">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/segoe_ui"
+                android:text="Nama Pasien"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_nama_uploadperiksa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoe_ui"
+                android:text="-"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="Tanggal Kunjungan"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/segoe_ui"
+                android:layout_marginTop="7dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <TextView
+                android:id="@+id/text_tglkunjungan_uploadperiksa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoe_ui"
+                android:text="-"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_nama_uploadperiksa" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="Keluhan Pasien"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/segoe_ui"
+                android:layout_marginTop="7dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+            <TextView
+                android:id="@+id/text_keluhan_uploadperiksa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoe_ui"
+                android:text="-"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_tglkunjungan_uploadperiksa" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="Harga biaya periksa"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/segoe_ui"
+                android:layout_marginTop="7dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <TextView
+                android:id="@+id/text_harga_uploadperiksa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoe_ui_italic"
+                android:text="-"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_keluhan_uploadperiksa" />
+
+            <TextView
+                android:id="@+id/textviewbiasa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="65dp"
+                android:fontFamily="@font/segoe_ui"
+                android:text="Silahkan tranfser pada rekening berikut"
+                android:gravity="center"
+                android:textColor="@color/bg_splash"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+            <TextView
+                android:id="@+id/textviewbiasa2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:text="2000123456 (BCA) - a.n RSJ LAWANG"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textviewbiasa" />
+
+            <ImageView
+                android:id="@+id/text_pathfoto_uploadperiksa"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/abuabuputih"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textviewbiasa2"/>
+
+            <Button
+                android:id="@+id/btn_upload_uploadperiksa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Bukti"
+                app:layout_constraintBottom_toBottomOf="@+id/text_pathfoto_uploadperiksa"
+                app:layout_constraintEnd_toEndOf="@+id/text_pathfoto_uploadperiksa"
+                app:layout_constraintStart_toStartOf="@+id/text_pathfoto_uploadperiksa"
+                app:layout_constraintTop_toTopOf="@+id/text_pathfoto_uploadperiksa" />
+
+            <Button
+                android:id="@+id/btn_simpan_uploadperiksa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stylebutton"
+                android:text="Lanjutkan Pembayaran"
+                android:textAllCaps="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/putih"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_pathfoto_uploadperiksa" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
