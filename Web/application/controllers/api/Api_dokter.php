@@ -15,7 +15,8 @@ class Api_Dokter extends REST_Controller {
     }
 
     public function dokter_get(){
-        $a = $this->db->select('tb_dokter_poli.senin,tb_dokter_poli.selasa,tb_dokter_poli.rabu,tb_dokter_poli.kamis,tb_dokter_poli.jumat,tb_dokter_poli.sabtu,tb_dokter_poli.minggu,tb_dokter_poli.no_praktek,tb_registrasi.name,tb_registrasi.image, tb_registrasi.no_hp')    
+        $a = $this->db->select('tb_dokter_poli.senin,tb_dokter_poli.selasa,tb_dokter_poli.rabu,tb_dokter_poli.kamis,tb_dokter_poli.jumat,tb_dokter_poli.sabtu,tb_dokter_poli.minggu,
+        tb_dokter_poli.no_praktek,tb_registrasi.name,tb_registrasi.image, tb_poli.klinik')    
                 ->from('tb_dokter_poli')
                     ->join('tb_dokter', 'tb_dokter_poli.no_praktek = tb_dokter.no_praktek')
                     ->join('tb_registrasi', 'tb_dokter.kd_regist = tb_registrasi.kd_regist')
