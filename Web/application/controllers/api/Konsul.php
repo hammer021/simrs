@@ -480,4 +480,53 @@ class Konsul extends REST_Controller {
             $this->response($message, REST_Controller::HTTP_NOT_FOUND);
         }
     }
+
+    function riwayat_get(){
+        $this->load->model('Konsul_model');
+        $kd_regist = $this->get('kd_regist');
+
+        $query = $this->Konsul_model->konsulfilter('',$kd_regist,'');
+
+        if(empty($kd_regist)){
+            $message = [
+                'status' => false,
+                'message' => 'No Rm Kosong' 
+            ];
+        }elseif(empty($query)){
+            $message = [
+                'status' => false,
+                'message' => 'Riwayat Tidak Ditemukan'
+            ];
+        }else{
+            $message = [
+                'status' => true,
+                'message' => $query
+            ];
+        }
+        $this->response($message, REST_Controller::HTTP_OK);
+    }
+    function riwayat_post(){
+        $this->load->model('Konsul_model');
+        $norm = $this->post('norm');
+
+        $query = $this->Konsul_model->konsulfilter('','',$norm);
+
+        if(empty($norm)){
+            $message = [
+                'status' => false,
+                'message' => 'No Rm Kosong' 
+            ];
+        }elseif(empty($query)){
+            $message = [
+                'status' => false,
+                'message' => 'Riwayat Tidak Ditemukan'
+            ];
+        }else{
+            $message = [
+                'status' => true,
+                'message' => $query
+            ];
+        }
+        $this->response($message, REST_Controller::HTTP_OK);
+    }
 }
