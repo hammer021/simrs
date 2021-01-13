@@ -16,6 +16,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RSJ Lawang"
+        android:fontFamily="@font/nexa_light"
+        android:textSize="24sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="18dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/Banner"
         android:layout_width="match_parent"
