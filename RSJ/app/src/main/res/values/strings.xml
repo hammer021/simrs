@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RSJ</string>
+    <string name="text_1">MOHON UNTUK MEMBACA SELURUH SYARAT DAN KETENTUAN PENGGUNAAN SERTA KEBIJAKAN PRIVASI YANG TERLAMPIR DENGAN CERMAT DAN SAKSAMA SEBELUM MENGGUNAKAN SETIAP FITUR DAN/ATAU LAYANAN YANG TERSEDIA DALAM PLATFORM.</string>
+    <string name="text_2">Syarat dan Ketentuan Penggunaan (“Ketentuan Penggunaan”) ini merupakan suatu perjanjian sah terkait tata cara dan persyaratan penggunaan fitur dan/atau layanan (“Layanan”) Platform Telemedicine (“Platform”) antara Pengguna (“Anda”) dengan pengelola Platform, yaitu developer team Polije, Dengan mengunduh dan/atau memasang dan/atau menggunakan Platform dan/atau menikmati Layanan Kami, Anda setuju bahwa Anda telah membaca, memahami, mengetahui, menerima, dan menyetujui seluruh informasi, syarat-syarat, dan ketentuan-ketentuan penggunaan Platform yang terdapat dalam Ketentuan Penggunaan ini. </string>
+    <string name="text_3">Apabila Anda tidak setuju terhadap salah satu, sebagian, atau seluruh isi yang tertuang dalam Ketentuan Penggunaan dan Kebijakan Privasi ini, silakan untuk menghapus Platform dalam perangkat elektronik Anda dan/atau tidak mengakses Platform dan/atau tidak menggunakan Layanan Kami. Mohon untuk dapat diperhatikan pula bahwa Ketentuan Penggunaan dan Kebijakan Privasi dapat diperbarui dari waktu ke waktu.</string>
+    <string name="text_4">RSJ</string>
+
+
 </resources>

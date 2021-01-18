@@ -232,7 +232,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_toEndOf="@+id/ic_dokter"
                         android:fontFamily="@font/segoe_ui"
-                        android:text="List Jadwal Dokter" />
+                        android:text="List Dokter" />
 
                     <ImageView
                         android:layout_width="wrap_content"

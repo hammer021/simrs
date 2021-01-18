@@ -85,7 +85,7 @@ public class InboxFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Data tidak ada", Toast.LENGTH_LONG).show();
             }
         });
         requestQueue.add(stringRequest);
@@ -101,7 +101,6 @@ public class InboxFragment extends Fragment {
             @Override
             public void onClick(int position) {
                 ModelInbox modelInbox = item.get(position);
-                Toast.makeText(getActivity(), modelInbox.getNo_rm(), Toast.LENGTH_LONG).show();
                 Intent detail = new Intent(getActivity(), ViedoConferenceActivity.class);
                 detail.putExtra("no_rm", modelInbox.getNo_rm());
                 startActivity(detail);

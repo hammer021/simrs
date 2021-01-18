@@ -92,7 +92,7 @@ public class PasienTerdaftarActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PasienTerdaftarActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(PasienTerdaftarActivity.this, "Tidak ada data", Toast.LENGTH_LONG).show();
             }
         });
         requestQueue.add(stringRequest);

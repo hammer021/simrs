@@ -49,7 +49,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="60dp">
 
             <TextView
                 android:id="@+id/textView4"
@@ -298,7 +298,7 @@
                 android:id="@+id/textView99"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="80dp"
                 android:fontFamily="@font/segoe_ui"
                 android:text="Sudah punya Akun?"
                 android:textColor="@android:color/black"
@@ -306,7 +306,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.44"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_daftar" />
+                app:layout_constraintTop_toBottomOf="@+id/checkterms_daftar" />
 
             <TextView
                 android:id="@+id/text_login_daftar"

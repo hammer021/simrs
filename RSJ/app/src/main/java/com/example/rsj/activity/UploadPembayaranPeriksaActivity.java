@@ -282,6 +282,9 @@ public class UploadPembayaranPeriksaActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     String message = jsonObject.getString("message");
                     Toast.makeText(UploadPembayaranPeriksaActivity.this, message, Toast.LENGTH_LONG).show();
+                    Intent abcd = new Intent(UploadPembayaranPeriksaActivity.this, PembayaranPeriksaActivity.class);
+                    startActivity(abcd);
+                    finish();
                 } catch (JSONException e) {
                     progressDialog.dismiss();
                     Toast.makeText(UploadPembayaranPeriksaActivity.this, e.toString(), Toast.LENGTH_LONG).show();

@@ -68,7 +68,7 @@ public class PembayaranPeriksaActivity extends AppCompatActivity {
                         modelPembayaranPeriksa.setTgl_kunjungan(datanya.getString("tgl_kunjungan"));
                         modelPembayaranPeriksa.setHarga(datanya.getString("harga"));
                         modelPembayaranPeriksa.setStatus(datanya.getString("status"));
-                        modelPembayaranPeriksa.setStatus(datanya.getString("foto"));
+                        modelPembayaranPeriksa.setFoto(datanya.getString("foto"));
                         item.add(modelPembayaranPeriksa);
                     }
                     setupListView();
@@ -79,7 +79,7 @@ public class PembayaranPeriksaActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PembayaranPeriksaActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(PembayaranPeriksaActivity.this, "Tidak ada data", Toast.LENGTH_LONG).show();
             }
         });
         requestQueue.add(stringRequest);
@@ -95,7 +95,7 @@ public class PembayaranPeriksaActivity extends AppCompatActivity {
             @Override
             public void onClick(int position) {
                 ModelPembayaranPeriksa modelPembayaranPeriksa = item.get(position);
-                Toast.makeText(PembayaranPeriksaActivity.this, modelPembayaranPeriksa.getNo_rm(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(PembayaranPeriksaActivity.this, modelPembayaranPeriksa.getNo_rm(), Toast.LENGTH_LONG).show();
                 if (modelPembayaranPeriksa.getStatus().equals("1")) {
                     Intent detail = new Intent(PembayaranPeriksaActivity.this, UploadPembayaranPeriksaActivity.class);
                     detail.putExtra("no_rm", modelPembayaranPeriksa.getNo_rm());

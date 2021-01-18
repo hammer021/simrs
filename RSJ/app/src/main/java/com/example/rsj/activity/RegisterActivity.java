@@ -1,11 +1,19 @@
 package com.example.rsj.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.text.InputType;
 import android.view.View;
@@ -45,6 +53,9 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressBar progressBar;
     CheckBox checkBox;
 
+    String linksyaratketentuan;
+    private static final int PERMISSION_STORAGE_CODE = 1000;
+
     final Calendar c = Calendar.getInstance();
     int mYear = c.get(Calendar.YEAR);
     int mMonth = c.get(Calendar.MONTH);
@@ -72,13 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
         checkBox = findViewById(R.id.checkterms_daftar);
         edtTerms = findViewById(R.id.txtterms_daftar);
 
-        edtTerms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent syarat = new Intent(RegisterActivity.this, SyaratKetentuanActivity.class);
-                startActivity(syarat);
-            }
-        });
+        linksyaratketentuan = ServerApi.URL_FILESYARAT;
 
         edtLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +148,57 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        edtTerms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent syarat = new Intent(RegisterActivity.this, SyaratKetentuanActivity.class);
+//                startActivity(syarat);
+                Toast.makeText(RegisterActivity.this, "Downloading file...", Toast.LENGTH_LONG).show();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                            PackageManager.PERMISSION_DENIED){
+                        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                        requestPermissions(permissions, PERMISSION_STORAGE_CODE);
+                    } else {
+                        startDownloading();
+                        Toast.makeText(RegisterActivity.this, "Download Berhasil", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    startDownloading();
+                    Toast.makeText(RegisterActivity.this, "Download Berhasil", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void startDownloading(){
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(linksyaratketentuan));
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI
+                | DownloadManager.Request.NETWORK_MOBILE);
+        request.setTitle("Syarat dan Ketentuan");
+        request.setDescription("Downloading file...");
+
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Syarat dan Ketentuan.pdf");
+
+        DownloadManager manager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+        manager.enqueue(request);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case PERMISSION_STORAGE_CODE:{
+                if (grantResults.length > 0 && grantResults[0] ==
+                PackageManager.PERMISSION_DENIED) {
+                    startDownloading();
+                } else {
+                    Toast.makeText(this, "Permintaan ditolak", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 
     public void UserRegistration() {
@@ -254,4 +310,6 @@ public class RegisterActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
+
 }

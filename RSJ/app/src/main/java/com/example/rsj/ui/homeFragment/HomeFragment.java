@@ -42,9 +42,9 @@ public class HomeFragment extends Fragment {
     CardView cardViewDokter, cardRiwayatperiksa, cardPeriksa;
     CarouselView carouselView;
     int[] sampleImgae = {
-            R.drawable.player1,
-            R.drawable.player2,
-            R.drawable.player3
+            R.drawable.tentangrsj,
+            R.drawable.tentangrsj,
+            R.drawable.tentangrsj
     };
 
     LinearLayout linear1, linear2, linear3;

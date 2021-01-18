@@ -79,7 +79,7 @@ public class PembayaranObatActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PembayaranObatActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(PembayaranObatActivity.this, "Tidak ada data", Toast.LENGTH_LONG).show();
             }
         });
         requestQueue.add(stringRequest);

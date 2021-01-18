@@ -39,7 +39,7 @@ public class ModelPembayaranObat {
     }
 
     public void setHarga(String harga) {
-        this.harga = "Harga pendaftaran : " + harga;
+        this.harga = harga;
     }
 
     public String getStatus() {
