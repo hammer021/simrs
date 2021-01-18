@@ -45,6 +45,7 @@ class Api_Dokter extends REST_Controller {
                 ->from('tb_dokter_poli')
                     ->join('tb_dokter', 'tb_dokter_poli.no_praktek = tb_dokter.no_praktek')
                     ->join('tb_registrasi', 'tb_dokter.kd_regist = tb_registrasi.kd_regist')
+                    ->join('tb_poli', 'tb_dokter_poli.kd_poli = tb_poli.kd_poli')
                     ->group_start()
                         ->where('tb_dokter_poli.no_praktek', $l)
                     ->group_end()

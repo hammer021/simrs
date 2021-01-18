@@ -500,14 +500,14 @@ class Konsul extends REST_Controller {
         }else{
             $message = [
                 'status' => true,
-                'message' => $query
+                'data' => $query
             ];
         }
         $this->response($message, REST_Controller::HTTP_OK);
     }
     function riwayat_post(){
         $this->load->model('Konsul_model');
-        $norm = $this->post('norm');
+        $norm = $this->post('no_rm');
 
         $query = $this->Konsul_model->konsulfilter('','',$norm);
 
@@ -524,7 +524,7 @@ class Konsul extends REST_Controller {
         }else{
             $message = [
                 'status' => true,
-                'message' => $query
+                'data' => $query
             ];
         }
         $this->response($message, REST_Controller::HTTP_OK);
