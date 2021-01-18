@@ -127,12 +127,12 @@ class Admin extends CI_Controller
 			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
 		} else if ($page == "4") {
 			$page = "0";
-			$data['konsul'] = $this->Konsul_model->konsulfilter($page);
+			$data['konsul'] = $this->Konsul_model->konsulfilter1($page);
 			$data['listdokter'] = $this->Dokter_model->tampil_datadokter();
 			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
 		} else {
 
-			$data['konsul'] = $this->Konsul_model->konsulfilter($page);
+			$data['konsul'] = $this->Konsul_model->konsulfilter1($page);
 			$data['listdokter'] = $this->Dokter_model->tampil_datadokter();
 			$data['linkkonsul'] = $this->Konsul_model->linkkonsul();
 		}
