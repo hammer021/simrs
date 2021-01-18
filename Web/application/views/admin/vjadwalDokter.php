@@ -25,9 +25,6 @@
 					<div class="card">
 						<div class="card-header">
 						<a href="#"><button style="float:left;margin-bottom:10px;" type="button" data-target="#tambah" data-toggle="modal" class="btn btn-primary">Tambah Jadwal Dokter</button></a>
-						
-						<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-							
 							<div class="heading-elements">
 								<ul class="list-inline mb-0">
 									<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -39,7 +36,7 @@
 						
 					</ul>
 							</div>
-							<div class="dropdown">
+							
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Pilih Poli
 					</button>
@@ -49,7 +46,7 @@
 						<?php endforeach;?>
 					</div>
 					
-				</div>
+
 						</div>
 						<script>
 							$('#reload').click(function(event){ 

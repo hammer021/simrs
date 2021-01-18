@@ -144,10 +144,10 @@ function openNav() {
             
         	
 		$(document).ready(function(){
-            $('#chat').on('shown.bs.modal', function () {
+            $('.modal').on('shown.bs.modal', function () {
                 closeNav();
             });
-            $('#chat').on('hidden.bs.modal', function () {
+            $('.modal').on('hidden.bs.modal', function () {
                 openNav();
             });
             $('#er001').modal('show');
